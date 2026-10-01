@@ -51,7 +51,6 @@ img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit;cursor:pointer}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
-/* Grid background — industrial blueprint */
 body::before{
   content:'';
   position:fixed;inset:0;
@@ -64,9 +63,7 @@ body::before{
 }
 body > *{position:relative;z-index:1}
 
-/* Typography */
 h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.02em;line-height:1}
-
 .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.05em}
 
 /* ============================================================ */
@@ -107,7 +104,7 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 /* ============================================================ */
-/* NAV — WITH BEIJING SKYLINE BACKGROUND */
+/* NAV */
 /* ============================================================ */
 .nav{
   background:rgba(11,15,20,.72);
@@ -130,7 +127,7 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   background-image:url('back.jpeg');
   background-size:cover;
   background-position:center 30%;
-  opacity:.55;
+  opacity:.45;
   z-index:0;
   pointer-events:none;
 }
@@ -138,30 +135,32 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(90deg, rgba(11,15,20,.88) 0%, rgba(11,15,20,.55) 45%, rgba(11,15,20,.82) 100%);
+  background:linear-gradient(90deg, rgba(11,15,20,.88) 0%, rgba(11,15,20,.6) 45%, rgba(11,15,20,.82) 100%);
   z-index:1;
   pointer-events:none;
 }
 .nav > *{position:relative;z-index:2}
 
 .nav-brand{display:flex;align-items:center;gap:12px}
+
+/* LEFT LOGO — smaller with TIGHT yellow box */
 .nav-brand-logo{
-  height:56px;
+  height:44px;
   width:auto;
   display:block;
-  background:none;
-  padding:0;
-  margin:0;
+  background:var(--yellow);
+  padding:2px 6px;
   border:none;
-  border-radius:0;
+  border-radius:2px;
   object-fit:contain;
   filter:drop-shadow(0 2px 10px rgba(0,0,0,.55));
+  flex-shrink:0;
 }
 .nav-brand-text{
   display:flex;
   flex-direction:column;
   line-height:1;
-  margin-left:2px;
+  margin-left:4px;
 }
 .nav-brand-title{
   font-family:'Bebas Neue',sans-serif;
@@ -174,20 +173,23 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   white-space:nowrap;
 }
 .nav-brand-title em{color:var(--yellow);font-style:normal}
+
+/* RIGHT LOGO — BIGGER machine icon */
 .nav-brand-machine{
-  height:30px;
+  height:46px;
   width:auto;
-  margin-left:10px;
+  margin-left:12px;
   display:inline-block;
   vertical-align:middle;
   object-fit:contain;
-  opacity:.95;
+  opacity:1;
   transition:.3s;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.45)) brightness(1.1);
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)) brightness(1.15) contrast(1.1);
   mix-blend-mode:screen;
-  transform:translateY(-1px);
+  transform:translateY(-2px);
 }
-.nav-brand:hover .nav-brand-machine{opacity:1;transform:translateY(-1px) scale(1.05)}
+.nav-brand:hover .nav-brand-machine{transform:translateY(-2px) scale(1.05)}
+
 .nav-brand-sub{
   font-family:'IBM Plex Mono',monospace;
   font-size:9px;
@@ -239,7 +241,7 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 @keyframes pageFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ============================================================ */
-/* HERO */
+/* HERO — back.jpeg on LEFT side only */
 /* ============================================================ */
 .hero{
   position:relative;
@@ -250,44 +252,6 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   display:flex;
   align-items:center;
 }
-.hero-bg{
-  position:absolute;inset:0;
-  background-image:url('back.jpeg');
-  background-size:cover;
-  background-position:center;
-  filter:brightness(.28) saturate(.6);
-  z-index:0;
-  animation:heroZoom 30s ease-in-out infinite alternate;
-}
-@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.06)}}
-.hero-bg::after{
-  content:'';position:absolute;inset:0;
-  background:
-    linear-gradient(100deg, rgba(11,15,20,.97) 0%, rgba(20,27,36,.94) 45%, rgba(30,40,54,.86) 75%, rgba(11,15,20,.92) 100%),
-    repeating-linear-gradient(0deg, transparent 0 39px, rgba(245,179,1,.03) 39px 40px),
-    repeating-linear-gradient(90deg, transparent 0 39px, rgba(245,179,1,.03) 39px 40px);
-}
-.hero-frame{
-  position:absolute;
-  inset:24px;
-  border:1px solid rgba(245,179,1,.25);
-  pointer-events:none;
-  z-index:2;
-}
-.hero-frame::before,
-.hero-frame::after{
-  content:'';position:absolute;
-  width:24px;height:24px;
-  border:2px solid var(--yellow);
-}
-.hero-frame::before{top:-2px;left:-2px;border-right:none;border-bottom:none}
-.hero-frame::after{bottom:-2px;right:-2px;border-left:none;border-top:none}
-.hero-corner-tr,.hero-corner-bl{
-  position:absolute;width:24px;height:24px;border:2px solid var(--yellow);z-index:2;
-}
-.hero-corner-tr{top:22px;right:22px;border-left:none;border-bottom:none}
-.hero-corner-bl{bottom:22px;left:22px;border-right:none;border-top:none}
-
 .hero-content{
   position:relative;z-index:3;
   max-width:1440px;
@@ -299,6 +263,33 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   align-items:center;
   padding:0 20px;
 }
+
+/* LEFT SIDE — back.jpeg background */
+.hero-left{
+  position:relative;
+  padding:40px 40px 40px 0;
+}
+.hero-left::before{
+  content:'';
+  position:absolute;
+  inset:-20px -20px -20px -40px;
+  background-image:url('back.jpeg');
+  background-size:cover;
+  background-position:center;
+  opacity:.35;
+  z-index:-1;
+  border-radius:2px;
+  filter:brightness(.5) saturate(.7);
+}
+.hero-left::after{
+  content:'';
+  position:absolute;
+  inset:-20px -20px -20px -40px;
+  background:linear-gradient(100deg, rgba(11,15,20,.92) 0%, rgba(11,15,20,.75) 60%, rgba(11,15,20,.5) 100%);
+  z-index:-1;
+  border-radius:2px;
+}
+
 .hero-tag{
   display:inline-flex;align-items:center;gap:10px;
   font-family:'IBM Plex Mono',monospace;
@@ -325,13 +316,14 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   color:var(--white);
   margin-bottom:24px;
   letter-spacing:.005em;
-  text-shadow:0 4px 30px rgba(0,0,0,.6);
+  text-shadow:0 4px 30px rgba(0,0,0,.8);
 }
-.hero h1 .accent{color:var(--yellow);display:block}
+.hero h1 .accent{color:var(--yellow);display:block;text-shadow:0 4px 30px rgba(0,0,0,.8)}
 .hero h1 .outline{
   -webkit-text-stroke:1.5px var(--steel-8);
   color:transparent;
   display:block;
+  text-shadow:none;
 }
 .hero-sub{
   font-family:'IBM Plex Mono',monospace;
@@ -344,10 +336,11 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 .hero-sub .sep{color:var(--steel-4)}
 .hero-desc{
   font-size:15px;
-  color:var(--steel-7);
+  color:var(--steel-8);
   line-height:1.85;
   max-width:540px;
   margin-bottom:36px;
+  text-shadow:0 2px 12px rgba(0,0,0,.7);
 }
 .hero-desc strong{color:var(--yellow);font-weight:600}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
@@ -380,7 +373,7 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   box-shadow:0 12px 32px rgba(245,179,1,.45);
 }
 .btn-ghost{
-  background:rgba(255,255,255,.03);
+  background:rgba(255,255,255,.05);
   color:var(--steel-8);
   border:1px solid var(--line-2);
 }
@@ -989,7 +982,7 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 .cta-band-actions{display:flex;gap:12px;flex-wrap:wrap}
 
 /* ============================================================ */
-/* PAGE HEADER (interior) */
+/* PAGE HEADER */
 /* ============================================================ */
 .page-header{
   background:var(--steel-1);
@@ -1598,7 +1591,7 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 .admin-dot:hover{background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
 
 /* ============================================================ */
-/* FLOATING BUTTONS */
+/* FLOATING */
 /* ============================================================ */
 .float-btn{
   position:fixed;
@@ -1630,7 +1623,6 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 .float-top.show{opacity:1;pointer-events:auto}
 .float-top:hover{background:var(--yellow);color:var(--steel-0)}
 
-/* Toast */
 .toast{
   position:fixed;
   bottom:24px;left:50%;
@@ -1682,8 +1674,8 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 @media(max-width:768px){
   .topbar{display:none}
   .nav{padding:0 16px;height:64px}
-  .nav-brand-logo{height:42px}
-  .nav-brand-machine{height:22px;margin-left:6px}
+  .nav-brand-logo{height:34px;padding:2px 5px}
+  .nav-brand-machine{height:30px;margin-left:8px}
   .nav-brand-title{font-size:1.05rem}
   .nav-brand-sub{display:none}
   .nav-links{
@@ -1707,11 +1699,11 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   .menu-toggle{display:flex;z-index:1002}
 
   .hero{padding:40px 16px 50px}
+  .hero-left{padding:30px 25px 30px 0}
   .hero h1{font-size:clamp(2rem,10vw,3.4rem)}
   .hero-sub{font-size:10px}
   .hero-desc{font-size:13px;margin-bottom:28px}
   .btn{padding:14px 22px;font-size:10px}
-  .hero-frame{inset:12px}
   .hero-visual-frame{inset:-8px}
   .hero-visual-tag{left:16px}
 
@@ -1735,7 +1727,6 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   .timeline{grid-template-columns:1fr}
 
   .process-grid{grid-template-columns:1fr 1fr}
-
   .cta-band{padding:32px 22px}
 
   .page-header{padding:50px 16px 40px}
@@ -1812,11 +1803,6 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-frame"></div>
-    <div class="hero-corner-tr"></div>
-    <div class="hero-corner-bl"></div>
-
     <div class="hero-content">
       <div class="hero-left">
         <div class="hero-tag"><span class="status-dot"></span> Authorized Commission Agent · Est. 1993</div>
@@ -2254,7 +2240,7 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
 </div>
 
 <!-- ============================================================ -->
-<!-- ADMIN (hidden) -->
+<!-- ADMIN -->
 <!-- ============================================================ -->
 <div class="page" id="page-admin">
   <div class="page-header">
@@ -2316,16 +2302,13 @@ h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.
   </div>
 </footer>
 
-<!-- ============ FLOATING BUTTONS ============ -->
+<!-- ============ FLOATING ============ -->
 <a class="float-btn float-wa" href="https://wa.me/8613439872786" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 <button class="float-btn float-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* ============================================================ */
-/* DATA */
-/* ============================================================ */
 const DEFAULT_MACHINES = [
   {id:1,name:"CAT M320 Wheel Excavator",cat:"Excavators",price:98000,priceStr:"$98,000",img:"p1.jfif",desc:"High-performance wheel excavator for construction projects.",specs:"Engine: CAT C7.1 · Power: 165HP · Weight: 20.5T",available:true},
   {id:2,name:"CAT 950 GC Wheel Loader",cat:"Wheel Loaders",price:135000,priceStr:"$135,000",img:"p2.jfif",desc:"Reliable wheel loader for heavy-duty material handling.",specs:"Engine: CAT C7.1 · Power: 200HP · Bucket: 3.0m³",available:true},
@@ -2370,9 +2353,6 @@ async function loadMachines(){
   MACHINES = [...DEFAULT_MACHINES];
 }
 
-/* ============================================================ */
-/* NAVIGATION */
-/* ============================================================ */
 function go(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const t = document.getElementById('page-'+page);
@@ -2390,9 +2370,6 @@ function go(page){
 
 function filterAndGo(cat){ activeFilter = cat; go('machines'); }
 
-/* ============================================================ */
-/* RENDER HOME */
-/* ============================================================ */
 function renderHome(){
   const cg = document.getElementById('catGrid');
   if(cg){
@@ -2437,9 +2414,6 @@ function renderHome(){
   }
 }
 
-/* ============================================================ */
-/* RENDER MACHINES */
-/* ============================================================ */
 function renderMachines(){
   const grid = document.getElementById('machinesGrid');
   const fl = document.getElementById('filterList');
@@ -2485,9 +2459,6 @@ function renderMachines(){
 
 function setFilter(c){ activeFilter = c; renderMachines(); }
 
-/* ============================================================ */
-/* MACHINE DETAIL */
-/* ============================================================ */
 function openMachine(id){
   const m = MACHINES.find(x=>x.id===id);
   if(!m) return;
@@ -2521,9 +2492,6 @@ function inquireNow(id){
   window.open('https://wa.me/8613439872786?text=' + msg, '_blank');
 }
 
-/* ============================================================ */
-/* GALLERY */
-/* ============================================================ */
 function renderGallery(){
   const grid = document.getElementById('galleryGrid');
   if(!grid) return;
@@ -2543,9 +2511,6 @@ function renderGallery(){
   }).join('');
 }
 
-/* ============================================================ */
-/* CONTACT */
-/* ============================================================ */
 async function submitContact(e){
   e.preventDefault();
   const form = e.target;
@@ -2579,16 +2544,10 @@ async function submitContact(e){
   return false;
 }
 
-/* ============================================================ */
-/* MOBILE MENU */
-/* ============================================================ */
 document.getElementById('menuToggle').addEventListener('click', ()=>{
   document.getElementById('navLinks').classList.toggle('open');
 });
 
-/* ============================================================ */
-/* SCROLL EFFECTS */
-/* ============================================================ */
 window.addEventListener('scroll', ()=>{
   const bt = document.getElementById('backTop');
   if(bt) bt.classList.toggle('show', window.scrollY > 500);
@@ -2600,18 +2559,12 @@ const io = new IntersectionObserver((entries)=>{
   });
 }, {threshold: 0.1, rootMargin: '0px 0px -60px 0px'});
 
-/* ============================================================ */
-/* INIT */
-/* ============================================================ */
 async function init(){
   await loadMachines();
   renderHome();
   renderMachines();
   renderGallery();
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-  console.log('%cPEKIN-PAK INTERNATIONAL%c\nHeavy Machinery · Since 1993',
-    'font-size:20px;color:#F5B301;font-weight:700;font-family:Bebas Neue;',
-    'font-size:11px;color:#8A98A6;font-family:monospace;');
 }
 
 document.addEventListener('DOMContentLoaded', init);
