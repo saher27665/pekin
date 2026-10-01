@@ -1,0 +1,2591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>PEKIN-PAK-INTERNATIONAL LLC — Global Machinery & Trading</title>
+<meta name="description" content="PEKIN-PAK-INTERNATIONAL LLC — Import Export & General Traders Commission Agent." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+/* ============================================================
+   PEKIN-PAK — SINGLE PAGE APP
+   ============================================================ */
+:root {
+  --green: #0A2E1A;
+  --green-dark: #061C10;
+  --green-light: #1A4A2A;
+  --gold: #D4C5A0;
+  --gold-light: #E5D9B8;
+  --cream: #F5F0E8;
+  --cream-2: #EFE7DA;
+  --beige: #E8DCC8;
+  --ink: #1A1A1A;
+  --ink-soft: #4A5568;
+  --white: #FFFFFF;
+  --font-serif-en: 'Cormorant Garamond', serif;
+  --font-serif-cn: 'Noto Serif SC', serif;
+  --font-calligraphy: 'Ma Shan Zheng', cursive;
+  --font-sans: 'Inter', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-slow: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+  font-weight: 300;
+}
+img { max-width: 100%; display: block; height: auto; }
+a { text-decoration: none; color: inherit; cursor: pointer; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.container-wide { max-width: 1680px; margin: 0 auto; padding: 0 72px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* ============================================================ */
+/* LANGUAGE OVERLAY */
+/* ============================================================ */
+.lang-overlay {
+  position: fixed; inset: 0; z-index: 99999;
+  background: linear-gradient(135deg, #061C10 0%, #0A2E1A 50%, #1A4A2A 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 1; visibility: visible;
+  transition: opacity 0.8s var(--ease), visibility 0.8s var(--ease);
+  overflow: hidden;
+}
+.lang-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.lang-overlay::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 40 Q20 25 35 30 Q45 15 60 25 Q75 15 85 30 Q100 25 110 40' fill='none' stroke='%23D4C5A0' stroke-width='1' opacity='0.15'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 120px 60px;
+  opacity: 0.6; pointer-events: none;
+}
+.lang-overlay-inner { position: relative; z-index: 1; text-align: center; max-width: 600px; width: 100%; }
+.lang-overlay-logo {
+  width: 100px; height: 100px; margin: 0 auto 28px;
+  background: var(--cream); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid var(--gold);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); position: relative;
+  animation: fadeInScale 1s var(--ease) 0.1s both;
+  padding: 16px;
+}
+.lang-overlay-logo img { width: 100%; height: 100%; object-fit: contain; }
+.lang-overlay-logo::after {
+  content: ''; position: absolute; inset: -8px;
+  border: 1px solid rgba(212, 197, 160, 0.5); border-radius: 50%;
+}
+.lang-overlay-title {
+  font-family: var(--font-serif-en); font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 500; color: var(--cream); letter-spacing: 0.15em;
+  margin-bottom: 14px; animation: fadeIn 1s var(--ease) 0.3s both;
+}
+.lang-overlay-subtitle {
+  font-family: var(--font-serif-en); font-size: 0.8rem;
+  letter-spacing: 0.45em; color: var(--gold-light); text-transform: uppercase;
+  margin-bottom: 60px; animation: fadeIn 1s var(--ease) 0.5s both;
+}
+.lang-overlay-question {
+  font-family: var(--font-serif-en); font-size: 0.95rem;
+  color: rgba(245, 240, 232, 0.7); margin-bottom: 32px; letter-spacing: 0.15em;
+  animation: fadeIn 1s var(--ease) 0.6s both;
+}
+.lang-options {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  animation: fadeIn 1s var(--ease) 0.8s both;
+}
+.lang-option {
+  padding: 32px 20px; background: rgba(245, 240, 232, 0.08);
+  border: 2px solid rgba(212, 197, 160, 0.4); border-radius: 8px;
+  color: var(--cream); transition: all 0.5s var(--ease);
+  backdrop-filter: blur(8px); cursor: pointer;
+  position: relative; overflow: hidden;
+}
+.lang-option::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  opacity: 0; transition: opacity 0.5s var(--ease);
+}
+.lang-option:hover {
+  border-color: var(--gold); transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+.lang-option:hover::before { opacity: 0.15; }
+.lang-option-cn {
+  font-family: var(--font-serif-en); font-size: 1.6rem; font-weight: 500;
+  color: var(--cream); letter-spacing: 0.1em; margin-bottom: 8px;
+  display: block; position: relative; z-index: 1;
+}
+.lang-option-en {
+  font-family: var(--font-serif-en); font-size: 0.85rem; font-style: italic;
+  color: var(--gold-light); letter-spacing: 0.1em;
+  display: block; position: relative; z-index: 1;
+}
+.lang-option:hover .lang-option-cn { color: var(--gold-light); }
+.lang-overlay-footer {
+  margin-top: 60px; font-family: var(--font-serif-en);
+  font-size: 0.7rem; letter-spacing: 0.3em;
+  color: rgba(245, 240, 232, 0.4); text-transform: uppercase;
+  animation: fadeIn 1s var(--ease) 1s both;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+/* ============================================================ */
+/* HEADER */
+/* ============================================================ */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 22px 0; transition: all 0.7s var(--ease);
+}
+.header.transparent { background: transparent; }
+.header.solid {
+  background: rgba(245, 240, 232, 0.97);
+  backdrop-filter: blur(20px);
+  padding: 14px 0;
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 4px 24px rgba(10, 46, 26, 0.08);
+}
+.header-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; gap: 40px;
+}
+.logo { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+.logo-img-main {
+  height: 32px; width: auto; display: block; flex-shrink: 0;
+  background: #edebe6; padding: 4px 12px; border-radius: 6px;
+  transition: all 0.7s var(--ease);
+}
+.logo-img-short {
+  height: 38px; width: auto; display: block; flex-shrink: 0;
+  transition: all 0.7s var(--ease); opacity: 0.95;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.15; gap: 2px; }
+.logo-cn {
+  font-family: var(--font-serif-en); font-size: 0.9rem; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--cream);
+  transition: color 0.7s var(--ease); text-transform: uppercase;
+  white-space: nowrap;
+}
+.logo-cn .logo-accent { color: var(--gold); }
+.logo-en {
+  font-size: 0.55rem; letter-spacing: 0.28em;
+  color: rgba(245, 240, 232, 0.55);
+  transition: color 0.7s var(--ease); text-transform: uppercase;
+  white-space: nowrap;
+}
+.header.solid .logo-cn { color: var(--green); }
+.header.solid .logo-cn .logo-accent { color: #B8944D; }
+.header.solid .logo-en { color: #8B7D52; }
+
+.nav { display: flex; gap: 36px; align-items: center; }
+.nav a {
+  font-family: var(--font-serif-en); font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.18em; color: rgba(245, 240, 232, 0.9);
+  position: relative; padding: 6px 0;
+  transition: color 0.5s var(--ease); text-transform: uppercase; cursor: pointer;
+}
+.nav a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width 0.5s var(--ease);
+}
+.nav a:hover::after { width: 100%; }
+.nav a:hover { color: var(--gold-light); }
+.nav a.active { color: var(--gold-light); }
+.nav a.active::after { width: 100%; }
+.header.solid .nav a { color: var(--ink); }
+.header.solid .nav a:hover { color: var(--green); }
+.header.solid .nav a.active { color: var(--green); }
+
+.header-tools { display: flex; gap: 22px; align-items: center; }
+.tool-link {
+  font-family: var(--font-serif-en); font-size: 0.72rem;
+  letter-spacing: 0.18em; color: rgba(245, 240, 232, 0.85);
+  transition: color 0.5s var(--ease); text-transform: uppercase;
+}
+.tool-link:hover { color: var(--gold-light); }
+.header.solid .tool-link { color: var(--ink); }
+.header.solid .tool-link:hover { color: var(--green); }
+.lang-toggle {
+  padding: 8px 18px; border: 1px solid var(--gold);
+  border-radius: 999px; font-size: 0.62rem;
+  letter-spacing: 0.2em; color: var(--cream);
+  transition: all 0.5s var(--ease);
+  background: transparent; font-weight: 500;
+}
+.lang-toggle:hover { background: var(--gold); color: var(--green-dark); }
+.header.solid .lang-toggle { color: var(--green); }
+.header.solid .lang-toggle:hover { background: var(--green); color: var(--cream); }
+.menu-toggle { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+.menu-toggle span { width: 22px; height: 2px; background: var(--cream); transition: all 0.5s var(--ease); }
+.header.solid .menu-toggle span { background: var(--green); }
+
+/* ============================================================ */
+/* PAGE SYSTEM */
+/* ============================================================ */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.6s var(--ease); }
+
+/* ============================================================ */
+/* HERO */
+/* ============================================================ */
+.hero {
+  position: relative; min-height: 100vh;
+  background: var(--ink); overflow: hidden;
+  display: flex; align-items: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('back.jpeg');
+  background-size: cover; background-position: center;
+  filter: brightness(0.72) saturate(0.95);
+}
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(10, 46, 26, 0.30) 0%, transparent 55%),
+    radial-gradient(circle at 85% 70%, rgba(6, 28, 16, 0.45) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(6, 28, 16, 0.20), rgba(6, 28, 16, 0.68));
+}
+.hero-pattern {
+  position: absolute; inset: 0; opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 20 L80 50 L50 80 L20 50 Z' fill='none' stroke='%23D4C5A0' stroke-width='0.5'/%3E%3C/svg%3E");
+}
+.hero-content {
+  position: relative; z-index: 2; width: 100%;
+  max-width: 1680px; margin: 0 auto;
+  padding: 160px 72px 100px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: center; min-height: 100vh;
+}
+.hero-left { color: var(--cream); }
+.hero-badge-top {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 26px; background: rgba(10, 46, 26, 0.6);
+  backdrop-filter: blur(8px); border: 1px solid var(--gold);
+  border-radius: 999px; font-family: var(--font-serif-en);
+  font-size: 0.78rem; letter-spacing: 0.22em; color: var(--gold-light);
+  margin-bottom: 40px; animation: fadeIn 1.2s var(--ease) 0.2s both;
+  text-transform: uppercase;
+}
+.hero-badge-top::before { content: '❖'; color: var(--gold); }
+.hero-vertical {
+  display: flex; flex-direction: column; gap: 20px;
+  margin-bottom: 40px; animation: fadeIn 1.4s var(--ease) 0.3s both;
+}
+.hero-cn-text {
+  display: block;
+  font-family: var(--font-serif-en);
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  font-weight: 300; font-style: italic; letter-spacing: 0.04em;
+  color: var(--cream); line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  white-space: nowrap; margin-bottom: 8px;
+}
+.hero-en-text {
+  display: none; font-family: var(--font-serif-en);
+  font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300;
+  font-style: italic; letter-spacing: 0.05em; color: var(--cream);
+  line-height: 1.15; text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+body.lang-en .hero-cn-text { display: none; }
+body.lang-en .hero-en-text { display: block; }
+.hero-en-title {
+  font-family: var(--font-serif-en);
+  font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 300;
+  font-style: italic; letter-spacing: 0.03em; color: var(--gold-light);
+  line-height: 1.15; margin-bottom: 28px;
+  animation: fadeIn 1.2s var(--ease) 0.8s both;
+}
+.hero-en-title span { display: block; }
+.hero-en-title .uppercase {
+  font-style: normal; font-size: 0.68rem; letter-spacing: 0.4em;
+  color: rgba(245, 240, 232, 0.6); margin-top: 14px;
+  font-weight: 400; text-transform: uppercase;
+}
+.hero-quote {
+  font-family: var(--font-serif-en); font-size: 0.98rem;
+  color: rgba(245, 240, 232, 0.85); line-height: 2;
+  max-width: 440px; border-left: 2px solid var(--gold);
+  padding-left: 24px; margin-bottom: 44px;
+  animation: fadeIn 1.2s var(--ease) 1.2s both;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 18px;
+  padding: 16px 36px; background: var(--green); color: var(--cream);
+  font-family: var(--font-serif-en); font-size: 0.85rem;
+  letter-spacing: 0.2em; border: 1px solid var(--gold);
+  border-radius: 4px; transition: all 0.5s var(--ease);
+  animation: fadeIn 1.2s var(--ease) 1.5s both;
+  box-shadow: 0 12px 30px rgba(10, 46, 26, 0.4);
+  text-transform: uppercase; cursor: pointer;
+}
+.hero-cta:hover {
+  background: var(--green-dark); transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(10, 46, 26, 0.5); gap: 24px;
+}
+.hero-cta .arrow { font-family: var(--font-serif-en); font-size: 1.2rem; }
+.hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
+.hero-art {
+  position: relative; width: 100%; max-width: 580px;
+  aspect-ratio: 4/5; animation: fadeInScale 1.6s var(--ease) 0.6s both;
+}
+.hero-art-frame {
+  position: absolute; inset: 0; border: 2px solid var(--gold);
+  padding: 20px; border-radius: 4px;
+  background: rgba(10, 46, 26, 0.35);
+  backdrop-filter: blur(4px);
+}
+.hero-art-frame::before,
+.hero-art-frame::after {
+  content: ''; position: absolute; width: 40px; height: 40px;
+  border: 2px solid var(--gold);
+}
+.hero-art-frame::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.hero-art-frame::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+.hero-art-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.95) saturate(1); border-radius: 2px;
+  background: var(--cream);
+}
+.hero-art-seal {
+  position: absolute; bottom: 40px; right: 40px;
+  width: 90px; height: 90px;
+  background: var(--green); color: var(--cream);
+  font-family: var(--font-serif-en); font-size: 0.78rem;
+  display: flex; align-items: center; justify-content: center;
+  writing-mode: vertical-rl; letter-spacing: 0.15em;
+  line-height: 1.2; padding: 12px; border-radius: 3px; z-index: 3;
+  animation: fadeIn 1.2s var(--ease) 1.8s both;
+  box-shadow: 0 12px 30px rgba(10, 46, 26, 0.5);
+  border: 2px solid var(--gold); text-transform: uppercase;
+}
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 72px; z-index: 3;
+  display: flex; align-items: center; gap: 18px;
+  color: var(--gold); font-family: var(--font-serif-en);
+  font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+  animation: fadeIn 1.2s var(--ease) 2s both;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+.scroll-line {
+  width: 70px; height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  position: relative; overflow: hidden;
+}
+.scroll-line::after {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%; background: var(--gold-light);
+  animation: scrollMove 3s ease-in-out infinite;
+}
+@keyframes scrollMove { 0% { left: -100%; } 50% { left: 100%; } 100% { left: 100%; } }
+
+/* ============================================================ */
+/* PAGE HEADER (interior pages) */
+/* ============================================================ */
+.page-header {
+  background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+  color: var(--cream); padding: 180px 40px 100px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.page-header::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 40 Q20 25 35 30 Q45 15 60 25 Q75 15 85 30 Q100 25 110 40' fill='none' stroke='%23D4C5A0' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+.page-header h1 {
+  font-family: var(--font-serif-en);
+  font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 500;
+  letter-spacing: 0.08em; margin-bottom: 14px;
+}
+.page-header h1 em { font-style: italic; color: var(--gold-light); }
+.page-header p {
+  font-size: 0.95rem; color: rgba(245, 240, 232, 0.8); line-height: 2;
+  max-width: 600px; margin: 0 auto;
+}
+
+/* ============================================================ */
+/* INTRO (Home) */
+/* ============================================================ */
+.intro { background: var(--cream); padding: 160px 0; position: relative; overflow: hidden; }
+.intro::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 40 Q20 25 35 30 Q45 15 60 25 Q75 15 85 30 Q100 25 110 40' fill='none' stroke='%23D4C5A0' stroke-width='1' opacity='0.25'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 120px 60px;
+  opacity: 0.5; pointer-events: none;
+}
+.intro .container-wide {
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 100px;
+  align-items: center; position: relative; z-index: 1;
+}
+.intro-bg-cn {
+  position: absolute; top: 50%; left: -80px;
+  transform: translateY(-50%); font-family: var(--font-calligraphy);
+  font-size: clamp(20rem, 38vw, 42rem); color: var(--green);
+  opacity: 0.05; line-height: 0.9; pointer-events: none;
+}
+.intro-content { position: relative; z-index: 2; padding-left: 60px; }
+.intro-label {
+  display: inline-block; font-family: var(--font-serif-en);
+  font-size: 0.8rem; letter-spacing: 0.35em; color: var(--green);
+  margin-bottom: 28px; padding: 8px 20px;
+  border: 1px solid var(--gold); border-radius: 999px;
+  background: rgba(212, 197, 160, 0.08); text-transform: uppercase;
+}
+.intro-title {
+  font-family: var(--font-serif-en);
+  font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 400;
+  color: var(--green); line-height: 1.15;
+  letter-spacing: 0.03em; margin-bottom: 36px;
+}
+.intro-title .en-line {
+  display: block; font-family: var(--font-serif-en);
+  font-style: italic; font-weight: 300; font-size: 0.5em;
+  color: var(--gold); margin-top: 20px;
+}
+.intro-text {
+  font-size: 0.98rem; color: var(--ink-soft);
+  line-height: 2.2; max-width: 640px; margin-bottom: 56px;
+}
+.intro-pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  padding-top: 40px; border-top: 2px solid var(--gold); max-width: 640px;
+}
+.intro-pillar-cn {
+  font-family: var(--font-serif-en); font-size: 1.4rem;
+  font-weight: 600; color: var(--green); letter-spacing: 0.08em;
+  margin-bottom: 12px; line-height: 1; text-transform: uppercase;
+}
+.intro-pillar-en {
+  font-size: 0.62rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--gold); font-weight: 600;
+}
+
+/* ============================================================ */
+/* PANELS */
+/* ============================================================ */
+.panels { background: var(--cream-2); padding: 160px 0; position: relative; overflow: hidden; }
+.panels::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect x='10' y='10' width='60' height='60' fill='none' stroke='%230A2E1A' stroke-width='0.5' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.panels .container-wide { position: relative; z-index: 1; }
+.panels-head { text-align: center; margin-bottom: 80px; }
+.panels-head-label {
+  font-family: var(--font-serif-en); font-size: 0.8rem;
+  letter-spacing: 0.35em; color: var(--green);
+  margin-bottom: 24px; padding: 8px 24px;
+  border: 1px solid var(--gold); border-radius: 999px;
+  display: inline-block; background: rgba(212, 197, 160, 0.08);
+  text-transform: uppercase;
+}
+.panels-head-title {
+  font-family: var(--font-serif-en);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 500;
+  color: var(--green); letter-spacing: 0.08em;
+}
+.panels-head-title .en {
+  display: block; font-family: var(--font-serif-en);
+  font-style: italic; font-size: 0.5em;
+  color: var(--gold); margin-top: 16px;
+}
+.panels-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; height: 640px;
+  border: 2px solid var(--gold); border-radius: 4px; overflow: hidden;
+}
+.panel {
+  position: relative; overflow: hidden;
+  border-right: 1px solid var(--gold);
+  cursor: pointer; background: var(--ink);
+}
+.panel:last-child { border-right: none; }
+.panel-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.5) saturate(0.85);
+  transition: var(--ease);
+}
+.panel:hover .panel-img { filter: brightness(0.7) saturate(0.95); transform: scale(1.06); }
+.panel-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(6, 28, 16, 0.9) 0%, rgba(6, 28, 16, 0.3) 50%, rgba(6, 28, 16, 0.5) 100%);
+  padding: 40px 32px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: var(--cream);
+}
+.panel-num {
+  font-family: var(--font-serif-en); font-size: 0.8rem;
+  color: var(--gold-light); letter-spacing: 0.3em; font-weight: 600;
+}
+.panel-cn {
+  font-family: var(--font-serif-en); font-size: 1.3rem;
+  font-weight: 500; letter-spacing: 0.05em;
+  color: var(--cream); line-height: 1.3; margin-bottom: 14px;
+}
+.panel-en {
+  font-family: var(--font-serif-en); font-style: italic;
+  font-size: 0.82rem; color: var(--gold-light); margin-bottom: 14px;
+}
+.panel-desc {
+  font-size: 0.8rem; color: rgba(245, 240, 232, 0.8);
+  line-height: 1.85; max-height: 0; overflow: hidden;
+  opacity: 0; transition: var(--ease);
+}
+.panel:hover .panel-desc { max-height: 200px; opacity: 1; margin-top: 14px; }
+
+/* ============================================================ */
+/* FEATURED / SECTION HEADINGS */
+/* ============================================================ */
+.featured { background: var(--cream); padding: 160px 0; position: relative; overflow: hidden; }
+.featured::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 40 Q20 25 35 30 Q45 15 60 25 Q75 15 85 30 Q100 25 110 40' fill='none' stroke='%23D4C5A0' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.featured .container-wide { position: relative; z-index: 1; }
+.featured-head {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; margin-bottom: 80px;
+  padding-bottom: 32px; border-bottom: 2px solid var(--gold);
+  flex-wrap: wrap; gap: 24px;
+}
+.featured-head-title {
+  font-family: var(--font-serif-en);
+  font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500;
+  color: var(--green); letter-spacing: 0.08em; line-height: 1.1;
+}
+.featured-head-title .en {
+  display: block; font-family: var(--font-serif-en);
+  font-style: italic; font-size: 0.45em;
+  color: var(--gold); margin-top: 12px;
+}
+.featured-head-link {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--font-serif-en); font-size: 0.85rem;
+  letter-spacing: 0.2em; color: var(--green); font-weight: 600;
+  border-bottom: 2px solid var(--gold); padding-bottom: 6px;
+  transition: var(--ease); text-transform: uppercase; cursor: pointer;
+}
+.featured-head-link:hover { gap: 20px; color: var(--green-dark); border-color: var(--green); }
+.featured-head-link .arrow { font-family: var(--font-serif-en); font-size: 1.2rem; }
+
+.featured-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.featured-card {
+  background: var(--white); border-radius: 4px;
+  overflow: hidden; box-shadow: 0 10px 40px rgba(10, 46, 26, 0.08);
+  transition: var(--ease); cursor: pointer;
+  border: 1px solid rgba(212, 197, 160, 0.3);
+  position: relative; display: block;
+}
+.featured-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(10, 46, 26, 0.15);
+  border-color: var(--gold);
+}
+.featured-card-img {
+  aspect-ratio: 4/3; overflow: hidden;
+  background: var(--cream); position: relative;
+}
+.featured-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.8s var(--ease-slow);
+}
+.featured-card:hover .featured-card-img img { transform: scale(1.06); }
+.featured-card-seal {
+  position: absolute; top: 20px; right: 20px;
+  padding: 6px 14px; background: var(--green);
+  color: var(--cream); font-family: var(--font-serif-en);
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  border-radius: 3px; font-weight: 600;
+  text-transform: uppercase; border: 1px solid var(--gold);
+  z-index: 2;
+}
+.featured-card-seal.sold { background: var(--ink); }
+.featured-card-body { padding: 28px 26px 32px; }
+.featured-card-cat {
+  font-family: var(--font-serif-en); font-size: 0.65rem;
+  letter-spacing: 0.3em; color: var(--gold);
+  text-transform: uppercase; font-weight: 600;
+  margin-bottom: 12px;
+}
+.featured-card-title {
+  font-family: var(--font-serif-en); font-size: 1.4rem;
+  font-weight: 500; color: var(--green);
+  letter-spacing: 0.02em; margin-bottom: 10px;
+  line-height: 1.2;
+}
+.featured-card-desc {
+  font-size: 0.85rem; color: var(--ink-soft);
+  line-height: 1.75; margin-bottom: 22px;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+  min-height: 44px;
+}
+.featured-card-footer {
+  display: flex; justify-content: space-between;
+  align-items: center; padding-top: 20px;
+  border-top: 1px solid rgba(212, 197, 160, 0.4);
+}
+.featured-card-price {
+  font-family: var(--font-serif-en); font-size: 1.3rem;
+  font-weight: 600; color: var(--green);
+}
+.featured-card-link {
+  font-family: var(--font-serif-en); font-size: 0.7rem;
+  letter-spacing: 0.2em; color: var(--gold);
+  text-transform: uppercase; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: var(--ease);
+}
+.featured-card:hover .featured-card-link { color: var(--green); gap: 12px; }
+
+/* ============================================================ */
+/* HERITAGE */
+/* ============================================================ */
+.heritage {
+  background: var(--green); padding: 180px 0;
+  position: relative; overflow: hidden; color: var(--cream);
+}
+.heritage::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 40 Q20 25 35 30 Q45 15 60 25 Q75 15 85 30 Q100 25 110 40' fill='none' stroke='%23D4C5A0' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.heritage .container-wide { position: relative; z-index: 1; }
+.heritage-head {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+  align-items: end; margin-bottom: 100px;
+  padding-bottom: 40px; border-bottom: 1px solid rgba(212, 197, 160, 0.4);
+}
+.heritage-head-label {
+  font-family: var(--font-serif-en); font-size: 0.8rem;
+  letter-spacing: 0.35em; color: var(--gold-light);
+  margin-bottom: 24px; text-transform: uppercase;
+}
+.heritage-head-title {
+  font-family: var(--font-serif-en);
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 500;
+  color: var(--cream); letter-spacing: 0.05em; line-height: 1.15;
+}
+.heritage-head-desc {
+  font-size: 0.95rem; color: rgba(245, 240, 232, 0.8); line-height: 2.1;
+}
+.heritage-timeline {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; position: relative;
+}
+.heritage-timeline::before {
+  content: ''; position: absolute; top: 36px;
+  left: 4%; right: 4%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold), var(--gold), transparent);
+}
+.timeline-node { text-align: center; position: relative; }
+.timeline-dot {
+  width: 72px; height: 72px; margin: 0 auto 28px;
+  border-radius: 50%; background: var(--cream);
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif-en); font-size: 1rem;
+  font-weight: 700; color: var(--green);
+  position: relative; z-index: 1;
+  box-shadow: 0 8px 24px rgba(6, 28, 16, 0.3);
+}
+.timeline-year {
+  font-family: var(--font-serif-en); font-size: 1.5rem;
+  color: var(--gold-light); font-weight: 600; margin-bottom: 10px;
+}
+.timeline-cn {
+  font-family: var(--font-serif-en); font-size: 0.95rem;
+  color: var(--cream); letter-spacing: 0.1em;
+  margin-bottom: 6px; font-weight: 500;
+}
+.timeline-en {
+  font-size: 0.62rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(245, 240, 232, 0.55);
+}
+
+/* ============================================================ */
+/* CTA STRIP */
+/* ============================================================ */
+.cta-strip {
+  background: var(--ink); padding: 120px 0;
+  position: relative; overflow: hidden; text-align: center;
+}
+.cta-strip::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 40 Q20 25 35 30 Q45 15 60 25 Q75 15 85 30 Q100 25 110 40' fill='none' stroke='%23D4C5A0' stroke-width='1' opacity='0.15'/%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+.cta-strip .container-wide { position: relative; z-index: 1; }
+.cta-strip-label {
+  font-family: var(--font-serif-en); font-size: 0.8rem;
+  letter-spacing: 0.4em; color: var(--gold); margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.cta-strip-title {
+  font-family: var(--font-serif-en);
+  font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300;
+  color: var(--cream); letter-spacing: 0.05em;
+  line-height: 1.15; margin-bottom: 44px;
+}
+.cta-strip-title em { font-style: italic; color: var(--gold-light); }
+.cta-strip-btn {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 18px 42px; background: var(--green); color: var(--cream);
+  font-family: var(--font-serif-en); font-size: 0.85rem;
+  letter-spacing: 0.25em; border: 1px solid var(--gold);
+  border-radius: 4px; transition: all 0.5s var(--ease);
+  text-transform: uppercase; font-weight: 500; cursor: pointer;
+  box-shadow: 0 12px 30px rgba(10, 46, 26, 0.4);
+}
+.cta-strip-btn:hover {
+  background: var(--green-dark); transform: translateY(-2px);
+  box-shadow: 0 20px 50px rgba(10, 46, 26, 0.6); gap: 22px;
+}
+
+/* ============================================================ */
+/* ABOUT PAGE */
+/* ============================================================ */
+.about-section-wrap { background: var(--cream); padding: 100px 0; }
+.about-section-wrap .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.about-block {
+  background: var(--white); border-radius: 8px; padding: 50px 46px;
+  box-shadow: 0 5px 25px rgba(10, 46, 26, 0.06); margin-bottom: 40px;
+}
+.about-block h2 {
+  font-family: var(--font-serif-en); font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--green); margin-bottom: 8px; font-weight: 500;
+}
+.about-block h2 em { font-style: italic; color: var(--gold); }
+.about-block .underline {
+  width: 60px; height: 3px; background: var(--gold);
+  margin: 10px 0 26px; border-radius: 3px;
+}
+.about-block p {
+  font-size: 0.95rem; line-height: 2; color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.about-block .highlight-box {
+  background: var(--green); color: var(--cream);
+  padding: 22px 26px; border-radius: 8px;
+  border-left: 4px solid var(--gold); margin-top: 24px;
+  font-family: var(--font-serif-en); font-style: italic;
+  font-size: 1rem; line-height: 1.7;
+}
+.about-timeline {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; margin-top: 30px;
+}
+.about-timeline-item {
+  background: var(--cream); border-radius: 10px; padding: 26px 18px;
+  text-align: center; border: 1px solid rgba(212, 197, 160, 0.4);
+  transition: var(--ease);
+}
+.about-timeline-item:hover {
+  transform: translateY(-4px); border-color: var(--gold);
+  box-shadow: 0 10px 30px rgba(10, 46, 26, 0.08);
+}
+.about-timeline-item .year {
+  font-family: var(--font-serif-en); font-size: 1.6rem;
+  color: var(--gold); font-weight: 700; margin-bottom: 8px;
+}
+.about-timeline-item .city {
+  font-family: var(--font-serif-en); font-size: 0.95rem;
+  color: var(--green); font-weight: 500; margin-bottom: 4px;
+}
+.about-timeline-item .lbl {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.about-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 30px; background: var(--white); border-radius: 8px;
+  padding: 50px 40px; box-shadow: 0 5px 25px rgba(10, 46, 26, 0.06);
+}
+.about-stat .num {
+  font-family: var(--font-serif-en); font-size: 2.6rem;
+  font-weight: 700; color: var(--gold); line-height: 1;
+}
+.about-stat .lbl {
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-soft); margin-top: 8px;
+}
+
+/* ============================================================ */
+/* MACHINES PAGE */
+/* ============================================================ */
+.machines-section { background: var(--cream); padding: 100px 0; }
+.machines-section .container-wide { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+.filter-bar {
+  background: var(--white); padding: 20px; border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(10, 46, 26, 0.06);
+  margin-bottom: 40px; display: flex; flex-direction: column; gap: 12px;
+}
+@media (min-width: 700px) { .filter-bar { flex-direction: row; } }
+.filter-bar input, .filter-bar select {
+  padding: 12px 20px; border: 2px solid var(--beige);
+  border-radius: 50px; font-size: 0.88rem; outline: none;
+  transition: 0.3s; font-family: inherit; background: var(--cream);
+}
+.filter-bar input { flex: 1; }
+.filter-bar input:focus, .filter-bar select:focus {
+  border-color: var(--gold); background: var(--white);
+  box-shadow: 0 0 0 3px rgba(212, 197, 160, 0.25);
+}
+.machines-grid {
+  display: grid; grid-template-columns: 1fr; gap: 26px;
+}
+@media (min-width: 700px) { .machines-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .machines-grid { grid-template-columns: repeat(3, 1fr); } }
+.machine-card {
+  background: var(--white); border-radius: 10px; overflow: hidden;
+  box-shadow: 0 6px 24px rgba(10, 46, 26, 0.08);
+  transition: var(--ease); border: 1px solid rgba(212, 197, 160, 0.3);
+  cursor: pointer;
+}
+.machine-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(10, 46, 26, 0.14);
+  border-color: var(--gold);
+}
+.machine-card-img {
+  aspect-ratio: 4/3; overflow: hidden; background: var(--cream);
+  position: relative;
+}
+.machine-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.6s var(--ease-slow);
+}
+.machine-card:hover .machine-card-img img { transform: scale(1.06); }
+.machine-card-seal {
+  position: absolute; top: 16px; right: 16px;
+  padding: 5px 12px; background: var(--green); color: var(--cream);
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 600; border-radius: 3px; border: 1px solid var(--gold);
+}
+.machine-card-seal.sold { background: var(--ink); }
+.machine-card-body { padding: 24px 24px 28px; }
+.machine-card-cat {
+  font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 10px;
+}
+.machine-card-title {
+  font-family: var(--font-serif-en); font-size: 1.3rem;
+  font-weight: 500; color: var(--green); margin-bottom: 8px;
+  line-height: 1.2;
+}
+.machine-card-desc {
+  font-size: 0.85rem; color: var(--ink-soft); line-height: 1.7;
+  margin-bottom: 18px; min-height: 42px;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.machine-card-price {
+  font-family: var(--font-serif-en); font-size: 1.25rem;
+  font-weight: 600; color: var(--green);
+  padding-top: 16px; border-top: 1px solid rgba(212, 197, 160, 0.4);
+}
+
+/* ============================================================ */
+/* MACHINE DETAIL PAGE */
+/* ============================================================ */
+.detail-section { background: var(--cream); padding: 100px 0; }
+.detail-section .container-wide { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.back-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 30px; color: var(--green);
+  font-family: var(--font-serif-en); font-size: 0.85rem;
+  letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600;
+  cursor: pointer; transition: var(--ease);
+}
+.back-link:hover { color: var(--gold); gap: 12px; }
+.detail-card {
+  background: var(--white); border-radius: 12px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(10, 46, 26, 0.12);
+  display: grid; grid-template-columns: 1fr; gap: 0;
+}
+@media (min-width: 900px) { .detail-card { grid-template-columns: 1fr 1fr; } }
+.detail-card-img {
+  background: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  min-height: 400px; overflow: hidden;
+}
+.detail-card-img img {
+  width: 100%; height: 100%; object-fit: cover; min-height: 400px;
+}
+.detail-card-info { padding: 50px 46px; }
+.detail-card-info .cat {
+  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 14px;
+}
+.detail-card-info h1 {
+  font-family: var(--font-serif-en); font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--green); font-weight: 500; margin-bottom: 12px;
+  line-height: 1.15;
+}
+.detail-card-info .price {
+  font-family: var(--font-serif-en); font-size: 2rem;
+  font-weight: 700; color: var(--green); margin-bottom: 16px;
+}
+.detail-card-info .status {
+  display: inline-block; padding: 5px 18px; border-radius: 30px;
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.15em; margin-bottom: 28px;
+}
+.detail-card-info .status.available { background: #D4EDDA; color: #155724; }
+.detail-card-info .status.sold { background: #F8D7DA; color: #721C24; }
+.detail-card-info .specs {
+  background: var(--cream); padding: 20px 22px; border-radius: 8px;
+  margin-bottom: 22px; font-size: 0.88rem; line-height: 1.8;
+  border-left: 4px solid var(--gold);
+}
+.detail-card-info .desc {
+  font-size: 0.95rem; color: var(--ink-soft); line-height: 1.9;
+  margin-bottom: 30px;
+}
+.enquiry-box {
+  background: var(--cream); padding: 30px 28px; border-radius: 10px;
+  margin-top: 30px; border-top: 3px solid var(--green);
+}
+.enquiry-box h4 {
+  font-family: var(--font-serif-en); font-size: 1.15rem;
+  color: var(--green); margin-bottom: 20px; font-weight: 600;
+}
+.enquiry-box .form-group { margin-bottom: 14px; }
+.enquiry-box input, .enquiry-box textarea {
+  width: 100%; padding: 12px 16px; border: 2px solid var(--beige);
+  border-radius: 8px; font-size: 0.88rem; outline: none;
+  transition: 0.3s; font-family: inherit; background: var(--white);
+}
+.enquiry-box input:focus, .enquiry-box textarea:focus {
+  border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212, 197, 160, 0.25);
+}
+.enquiry-box textarea { min-height: 90px; resize: vertical; }
+.btn-enquire {
+  background: var(--green); color: var(--cream);
+  padding: 14px 36px; border: 1px solid var(--gold);
+  border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: var(--ease); width: 100%;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.btn-enquire:hover {
+  background: var(--green-dark); transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(10, 46, 26, 0.3);
+}
+.btn-enquire:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ============================================================ */
+/* CONTACT PAGE */
+/* ============================================================ */
+.contact-section { background: var(--cream); padding: 100px 0; }
+.contact-section .container-wide { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr; gap: 40px;
+}
+@media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+.contact-info h2 {
+  font-family: var(--font-serif-en); font-size: 2rem;
+  color: var(--green); margin-bottom: 16px; font-weight: 500;
+}
+.contact-info h2 em { font-style: italic; color: var(--gold); }
+.contact-info > p {
+  font-size: 0.95rem; color: var(--ink-soft); line-height: 2;
+  margin-bottom: 32px;
+}
+.info-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 22px; background: var(--white);
+  border-radius: 10px; margin-bottom: 14px;
+  border-left: 3px solid transparent;
+  box-shadow: 0 2px 12px rgba(10, 46, 26, 0.05);
+  transition: var(--ease);
+}
+.info-item:hover {
+  border-left-color: var(--gold); transform: translateX(6px);
+  box-shadow: 0 6px 22px rgba(10, 46, 26, 0.1);
+}
+.info-item i {
+  font-size: 1.3rem; color: var(--green);
+  width: 40px; text-align: center; margin-top: 3px; flex-shrink: 0;
+}
+.info-item .text h4 {
+  font-size: 0.88rem; color: var(--green);
+  margin-bottom: 4px; font-weight: 600;
+}
+.info-item .text p {
+  font-size: 0.85rem; color: var(--ink-soft);
+  margin: 2px 0; line-height: 1.6;
+}
+.contact-form-box {
+  background: var(--white); padding: 44px 40px; border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(10, 46, 26, 0.08);
+  border-top: 4px solid var(--green);
+}
+.contact-form-box h2 {
+  font-family: var(--font-serif-en); font-size: 1.6rem;
+  color: var(--green); margin-bottom: 24px; font-weight: 500;
+}
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block; font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--green);
+  font-weight: 600; margin-bottom: 6px;
+}
+.form-group input, .form-group textarea {
+  width: 100%; padding: 12px 16px; border: 2px solid var(--beige);
+  border-radius: 8px; font-size: 0.9rem; outline: none;
+  transition: 0.3s; font-family: inherit; background: var(--cream);
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--gold); background: var(--white);
+  box-shadow: 0 0 0 3px rgba(212, 197, 160, 0.25);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.btn-send {
+  background: var(--green); color: var(--cream);
+  padding: 15px 36px; border: 1px solid var(--gold);
+  border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: var(--ease); width: 100%;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.btn-send:hover {
+  background: var(--green-dark); transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(10, 46, 26, 0.3);
+}
+.btn-send:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.msg {
+  padding: 12px 16px; border-radius: 8px; margin-top: 12px;
+  display: none; font-size: 0.88rem;
+}
+.msg.success { display: block; background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+.msg.error { display: block; background: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
+
+.map-section {
+  margin-top: 50px; background: var(--white); border-radius: 10px;
+  overflow: hidden; box-shadow: 0 5px 30px rgba(10, 46, 26, 0.08);
+}
+.map-section iframe { width: 100%; height: 340px; border: none; display: block; }
+.map-section .map-address {
+  padding: 18px 24px; background: var(--green); color: var(--cream);
+  text-align: center; font-size: 0.85rem; letter-spacing: 0.05em;
+}
+.map-section .map-address i { color: var(--gold); margin-right: 8px; }
+
+/* ============================================================ */
+/* ADMIN */
+/* ============================================================ */
+.admin-login-wrap {
+  min-height: 100vh; display: flex; align-items: center;
+  justify-content: center; padding: 100px 20px 60px;
+  background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+}
+.admin-login-box {
+  background: var(--white); padding: 46px 40px; border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  max-width: 420px; width: 100%; text-align: center;
+}
+.admin-login-box .lock-icon {
+  font-size: 2.6rem; color: var(--gold); margin-bottom: 12px;
+}
+.admin-login-box h2 {
+  font-family: var(--font-serif-en); font-size: 1.6rem;
+  color: var(--green); margin-bottom: 6px; font-weight: 600;
+}
+.admin-login-box > p {
+  color: var(--ink-soft); font-size: 0.88rem; margin-bottom: 26px;
+}
+.admin-login-box .form-group { text-align: left; }
+.admin-login-box .btn-login {
+  background: var(--green); color: var(--cream);
+  padding: 14px 36px; border-radius: 50px; font-size: 0.9rem;
+  font-weight: 700; cursor: pointer; transition: var(--ease);
+  width: 100%; letter-spacing: 0.15em; text-transform: uppercase;
+  margin-top: 8px;
+}
+.admin-login-box .btn-login:hover {
+  background: var(--green-light); transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(10, 46, 26, 0.3);
+}
+.admin-login-box .error-msg {
+  color: #DC3545; font-size: 0.88rem; margin-top: 12px; display: none;
+}
+.admin-login-box .error-msg.show { display: block; }
+.admin-hint {
+  margin-top: 14px; font-size: 0.72rem;
+  color: #888; letter-spacing: 0.05em;
+}
+
+.admin-panel { background: var(--cream); min-height: 100vh; padding: 120px 0 60px; }
+.admin-container { display: flex; max-width: 1400px; margin: 0 auto; padding: 0 30px; gap: 30px; }
+@media (max-width: 900px) { .admin-container { flex-direction: column; } }
+.admin-sidebar {
+  width: 240px; flex-shrink: 0; background: var(--white);
+  border-radius: 12px; padding: 26px 0; height: fit-content;
+  box-shadow: 0 4px 20px rgba(10, 46, 26, 0.06);
+}
+@media (max-width: 900px) { .admin-sidebar { width: 100%; } }
+.admin-sidebar .admin-title {
+  text-align: center; font-family: var(--font-serif-en);
+  font-size: 1.1rem; font-weight: 700; color: var(--green);
+  padding: 0 20px 20px; border-bottom: 1px solid var(--beige);
+  margin-bottom: 12px;
+}
+.admin-sidebar .admin-title i { color: var(--gold); }
+.admin-sidebar a {
+  display: block; padding: 12px 26px; color: var(--ink-soft);
+  font-size: 0.88rem; font-weight: 500; cursor: pointer;
+  transition: var(--ease); border-left: 3px solid transparent;
+}
+.admin-sidebar a:hover { background: var(--cream); color: var(--green); }
+.admin-sidebar a.active {
+  background: var(--cream); color: var(--green);
+  border-left-color: var(--gold); font-weight: 600;
+}
+.admin-sidebar a i { width: 22px; margin-right: 10px; }
+.admin-sidebar .logout-link { color: #DC3545; margin-top: 12px; }
+.admin-sidebar .logout-link:hover { background: #F8D7DA; color: #C82333; }
+
+.admin-main { flex: 1; min-width: 0; }
+.admin-main h2 {
+  font-family: var(--font-serif-en); font-size: 1.8rem;
+  color: var(--green); margin-bottom: 6px; font-weight: 600;
+}
+.admin-main .subtitle {
+  color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 30px;
+}
+.admin-stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px; margin-bottom: 34px;
+}
+.admin-stat-card {
+  background: var(--white); padding: 26px; border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(10, 46, 26, 0.05);
+  border-left: 5px solid var(--gold);
+}
+.admin-stat-card .number {
+  font-family: var(--font-serif-en); font-size: 2.4rem;
+  font-weight: 700; color: var(--green); line-height: 1;
+}
+.admin-stat-card .label {
+  color: var(--ink-soft); font-size: 0.82rem;
+  margin-top: 8px; letter-spacing: 0.05em;
+}
+.admin-stat-card.green { border-left-color: #28a745; }
+.admin-stat-card.red { border-left-color: #dc3545; }
+.admin-table-wrap {
+  background: var(--white); border-radius: 12px; padding: 20px;
+  box-shadow: 0 2px 12px rgba(10, 46, 26, 0.05); overflow-x: auto;
+}
+.admin-table-wrap table { width: 100%; border-collapse: collapse; }
+.admin-table-wrap th {
+  text-align: left; padding: 12px 14px; background: var(--cream);
+  color: var(--green); font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.admin-table-wrap td {
+  padding: 12px 14px; border-bottom: 1px solid var(--beige);
+  font-size: 0.85rem;
+}
+.admin-table-wrap td .status {
+  display: inline-block; padding: 3px 12px; border-radius: 20px;
+  font-size: 0.7rem; font-weight: 600;
+}
+.admin-table-wrap td .status.available { background: #D4EDDA; color: #155724; }
+.admin-table-wrap td .status.sold { background: #F8D7DA; color: #721C24; }
+.admin-table-wrap td .machine-img {
+  width: 56px; height: 40px; object-fit: cover; border-radius: 6px;
+}
+.btn-edit {
+  background: var(--gold); color: var(--green-dark);
+  border: none; padding: 6px 12px; border-radius: 6px;
+  cursor: pointer; margin-right: 4px; font-weight: 600;
+  font-size: 0.75rem; transition: var(--ease);
+}
+.btn-edit:hover { background: var(--gold-light); }
+.btn-delete {
+  background: #DC3545; color: #FFF; border: none;
+  padding: 6px 12px; border-radius: 6px; cursor: pointer;
+  font-size: 0.75rem; transition: var(--ease);
+}
+.btn-delete:hover { background: #C82333; }
+.admin-form-box {
+  background: var(--white); border-radius: 12px; padding: 34px;
+  box-shadow: 0 2px 12px rgba(10, 46, 26, 0.05); max-width: 620px;
+}
+.btn-submit-admin {
+  background: var(--gold); color: var(--green-dark);
+  padding: 14px 40px; border: none; border-radius: 50px;
+  font-size: 0.9rem; font-weight: 700; cursor: pointer;
+  transition: var(--ease); letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.btn-submit-admin:hover {
+  background: var(--gold-light); transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(212, 197, 160, 0.4);
+}
+.hidden { display: none !important; }
+
+/* ============================================================ */
+/* FOOTER */
+/* ============================================================ */
+.footer {
+  background: var(--green-dark); color: var(--cream);
+  padding: 90px 0 40px; position: relative; overflow: hidden;
+}
+.footer::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 40 Q20 25 35 30 Q45 15 60 25 Q75 15 85 30 Q100 25 110 40' fill='none' stroke='%23D4C5A0' stroke-width='1' opacity='0.15'/%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+.footer .container-wide { position: relative; z-index: 1; }
+.footer-hero {
+  text-align: center; padding-bottom: 56px;
+  border-bottom: 1px solid rgba(212, 197, 160, 0.3); margin-bottom: 56px;
+}
+.footer-cn {
+  font-family: var(--font-serif-en);
+  font-size: clamp(1.6rem, 4vw, 2.6rem); color: var(--cream);
+  line-height: 1; margin-bottom: 18px; letter-spacing: 0.15em;
+  font-weight: 500;
+}
+.footer-en {
+  font-family: var(--font-serif-en); font-size: 0.78rem;
+  letter-spacing: 0.4em; color: var(--gold-light);
+  margin-bottom: 14px; font-weight: 500; text-transform: uppercase;
+}
+.footer-tagline {
+  font-family: var(--font-serif-en); font-style: italic;
+  font-size: 0.88rem; color: rgba(245, 240, 232, 0.55);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 40px; padding-bottom: 56px;
+}
+.footer-brand p {
+  font-size: 0.82rem; color: rgba(245, 240, 232, 0.6);
+  line-height: 1.9; margin-bottom: 8px;
+}
+.footer-brand .footer-slogan {
+  font-family: var(--font-serif-en); color: var(--gold-light);
+  letter-spacing: 0.1em; margin-top: 20px;
+  font-size: 0.95rem; font-style: italic;
+}
+.footer-col h5 {
+  font-family: var(--font-serif-en); font-size: 0.78rem;
+  color: var(--gold-light); letter-spacing: 0.25em;
+  margin-bottom: 22px; font-weight: 600; text-transform: uppercase;
+}
+.footer-col a, .footer-col p {
+  display: block; font-size: 0.82rem;
+  color: rgba(245, 240, 232, 0.6);
+  margin-bottom: 10px; transition: var(--ease); cursor: pointer;
+}
+.footer-col a:hover { color: var(--gold-light); padding-left: 4px; }
+.footer-bottom {
+  border-top: 1px solid rgba(212, 197, 160, 0.3);
+  padding-top: 28px;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 16px;
+  font-family: var(--font-serif-en); font-size: 0.72rem;
+  letter-spacing: 0.1em; color: rgba(245, 240, 232, 0.5);
+}
+.admin-dot {
+  display: inline-block; width: 6px; height: 6px;
+  background: rgba(212, 197, 160, 0.25); border-radius: 50%;
+  margin-left: 8px; cursor: pointer; transition: var(--ease);
+  vertical-align: middle;
+}
+.admin-dot:hover { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+
+/* ============================================================ */
+/* TOAST */
+/* ============================================================ */
+.toast {
+  position: fixed; bottom: 30px; right: 30px;
+  background: var(--green); color: var(--cream);
+  padding: 15px 25px; border-radius: 10px;
+  font-size: 0.85rem; font-weight: 600;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  display: none; z-index: 9999; max-width: 340px;
+}
+.toast.show { display: block; animation: slideUp 0.3s ease; }
+.toast.error { background: #DC3545; }
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================================================ */
+/* REVEAL */
+/* ============================================================ */
+.reveal {
+  opacity: 0; transform: translateY(50px);
+  transition: opacity 1.4s var(--ease), transform 1.4s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================ */
+/* RESPONSIVE */
+/* ============================================================ */
+@media (max-width: 1200px) {
+  .container-wide { padding: 0 40px; }
+  .header-inner { padding: 0 40px; }
+  .hero-content { grid-template-columns: 1fr; gap: 60px; padding: 130px 40px 80px; }
+  .hero-cn-text { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+  .hero-right { max-width: 500px; margin: 0 auto; }
+  .intro .container-wide { grid-template-columns: 1fr; gap: 50px; }
+  .intro-content { padding-left: 0; }
+  .intro-bg-cn { font-size: 24rem; left: -100px; }
+  .panels-grid { grid-template-columns: repeat(2, 1fr); height: auto; }
+  .panel { min-height: 400px; border-right: none; border-bottom: 1px solid var(--gold); }
+  .featured-grid { grid-template-columns: repeat(2, 1fr); }
+  .heritage-head { grid-template-columns: 1fr; gap: 40px; }
+  .heritage-timeline { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+  .heritage-timeline::before { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .about-timeline { grid-template-columns: repeat(2, 1fr); }
+  .about-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .container-wide { padding: 0 20px; }
+  .header { padding: 14px 0; }
+  .header-inner { padding: 0 20px; gap: 12px; }
+  .logo { gap: 10px; }
+  .logo-img-main { height: 32px; padding: 3px 8px; }
+  .logo-img-short { height: 26px; }
+  .logo-cn { font-size: 0.7rem; letter-spacing: 0.06em; }
+  .logo-en { font-size: 0.42rem; letter-spacing: 0.15em; }
+  .nav {
+    position: fixed; top: 0; right: -100%;
+    width: 85%; height: 100vh;
+    background: var(--cream); flex-direction: column;
+    padding: 110px 40px; gap: 30px;
+    transition: right 0.6s var(--ease); z-index: 999;
+    border-left: 2px solid var(--gold);
+    align-items: flex-start;
+    box-shadow: -20px 0 40px rgba(10, 46, 26, 0.2);
+  }
+  .nav.open { right: 0; }
+  .nav a { color: var(--green) !important; font-size: 1rem; }
+  .menu-toggle { display: flex; z-index: 1001; }
+  .header-tools .tool-link:not(.lang-toggle) { display: none; }
+  .lang-toggle { padding: 6px 14px; font-size: 0.58rem; }
+
+  .hero-content { padding: 110px 20px 70px; gap: 40px; }
+  .hero-badge-top { font-size: 0.65rem; padding: 8px 18px; letter-spacing: 0.15em; }
+  .hero-cn-text { font-size: clamp(1.6rem, 7vw, 2.2rem); margin-bottom: 20px; white-space: normal; }
+  .hero-en-title { font-size: 1.1rem; }
+  .hero-quote { font-size: 0.86rem; padding-left: 16px; margin-bottom: 32px; }
+  .hero-cta { padding: 14px 28px; font-size: 0.75rem; }
+  .hero-art { max-width: 340px; }
+  .hero-art-seal { width: 68px; height: 68px; font-size: 0.68rem; bottom: 24px; right: 24px; }
+  .hero-scroll { left: 20px; font-size: 0.65rem; }
+
+  .intro { padding: 100px 0; }
+  .intro-title { font-size: 1.8rem; }
+  .intro-text { font-size: 0.9rem; }
+  .intro-pillars { grid-template-columns: 1fr; gap: 28px; padding-top: 32px; }
+  .intro-pillar-cn { font-size: 1.2rem; }
+
+  .panels { padding: 100px 0; }
+  .panels-grid { grid-template-columns: 1fr; }
+  .panel { min-height: 380px; }
+  .panel-cn { font-size: 1.15rem; }
+
+  .featured { padding: 100px 0; }
+  .featured-head { margin-bottom: 50px; }
+  .featured-grid { grid-template-columns: 1fr; gap: 30px; }
+  .featured-card-title { font-size: 1.2rem; }
+
+  .heritage { padding: 100px 0; }
+  .heritage-head-title { font-size: 1.9rem; }
+  .heritage-timeline { grid-template-columns: 1fr; gap: 40px; }
+  .timeline-node { display: flex; align-items: center; gap: 24px; text-align: left; }
+  .timeline-dot { margin: 0; flex-shrink: 0; width: 60px; height: 60px; font-size: 0.9rem; }
+
+  .cta-strip { padding: 80px 0; }
+  .cta-strip-title { font-size: 1.8rem; }
+  .cta-strip-btn { padding: 16px 32px; font-size: 0.78rem; }
+
+  .page-header { padding: 130px 20px 70px; }
+  .page-header h1 { font-size: 1.8rem; }
+
+  .about-section-wrap { padding: 60px 0; }
+  .about-block { padding: 30px 22px; }
+  .about-block h2 { font-size: 1.4rem; }
+  .about-timeline { grid-template-columns: 1fr; }
+  .about-stats { grid-template-columns: 1fr 1fr; padding: 30px 24px; gap: 24px; }
+
+  .machines-section { padding: 60px 0; }
+  .machines-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  .detail-card-info { padding: 30px 22px; }
+  .detail-card-img { min-height: 260px; }
+
+  .contact-section { padding: 60px 0; }
+  .contact-form-box { padding: 30px 22px; }
+
+  .admin-panel { padding: 100px 0 40px; }
+  .admin-container { padding: 0 16px; gap: 20px; }
+  .admin-form-box { padding: 24px 20px; }
+
+  .footer { padding: 70px 0 30px; }
+  .footer-cn { font-size: 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .lang-overlay-logo { width: 80px; height: 80px; padding: 12px; }
+  .lang-options { grid-template-columns: 1fr; gap: 14px; }
+  .lang-option { padding: 26px 18px; }
+  .lang-option-cn { font-size: 1.4rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-content { padding: 100px 16px 60px; }
+  .hero-cn-text { font-size: clamp(1.4rem, 8vw, 1.9rem); }
+  .hero-en-title .uppercase { font-size: 0.58rem; letter-spacing: 0.3em; }
+  .logo { gap: 8px; }
+  .logo-img-main { height: 28px; padding: 2px 7px; }
+  .logo-img-short { height: 22px; }
+  .logo-cn { font-size: 0.6rem; letter-spacing: 0.05em; }
+  .logo-en { display: none; }
+  .about-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ LANGUAGE OVERLAY ============ -->
+<div class="lang-overlay" id="langOverlay">
+  <div class="lang-overlay-inner">
+    <div class="lang-overlay-logo">
+      <img src="logo-short.png" alt="PK Logo" onerror="this.parentElement.textContent='PK'" />
+    </div>
+    <div class="lang-overlay-title">PEKIN-PAK-INTERNATIONAL</div>
+    <div class="lang-overlay-subtitle">LLC · SINCE 1993</div>
+    <div class="lang-overlay-question">Please select your language · 请选择您的语言</div>
+    <div class="lang-options">
+      <button class="lang-option" data-lang="en">
+        <span class="lang-option-cn">English</span>
+        <span class="lang-option-en">英文</span>
+      </button>
+      <button class="lang-option" data-lang="zh">
+        <span class="lang-option-cn">中文</span>
+        <span class="lang-option-en">Chinese</span>
+      </button>
+    </div>
+    <div class="lang-overlay-footer">Sialkot · Beijing · Dubai · Est. 1993</div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="header transparent" id="header">
+  <div class="header-inner">
+    <a class="logo" onclick="go('home')">
+      <img src="logo-main.png" alt="PK Logo" class="logo-img-main" onerror="this.style.display='none'" />
+      <div class="logo-text">
+        <span class="logo-cn">PEKIN-PAK-<span class="logo-accent">INTERNATIONAL</span> LLC</span>
+        <span class="logo-en">| Beijing Office</span>
+      </div>
+      <img src="logo-short.png" alt="Short Logo" class="logo-img-short" onerror="this.style.display='none'" />
+    </a>
+    <nav class="nav" id="nav">
+      <a data-page="home" data-en="Home" data-zh="首页" onclick="go('home')">Home</a>
+      <a data-page="about" data-en="About" data-zh="关于" onclick="go('about')">About</a>
+      <a data-page="machines" data-en="Machines" data-zh="设备" onclick="go('machines')">Machines</a>
+      <a data-page="contact" data-en="Contact" data-zh="联系" onclick="go('contact')">Contact</a>
+    </nav>
+    <div class="header-tools">
+      <a class="tool-link" data-en="Get Quote" data-zh="报价" onclick="go('contact')">Get Quote</a>
+      <button class="lang-toggle" id="langBtn">中文 / EN</button>
+      <button class="menu-toggle" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- PAGE: HOME -->
+<!-- ============================================================ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge-top" data-en="Import Export & General Traders Commission Agent" data-zh="进出口贸易及一般贸易代理">Import Export & General Traders Commission Agent</div>
+        <h1 class="hero-vertical">
+          <span class="hero-cn-text">PEKIN-PAK</span>
+          <span class="hero-en-text">Pekin Pak International</span>
+        </h1>
+        <div class="hero-en-title">
+          <span>PEKIN-PAK-INTERNATIONAL LLC</span>
+          <span class="uppercase">Global Machinery · Trading · Since 1993</span>
+        </div>
+        <p class="hero-quote" data-en="Over three decades connecting global manufacturers with buyers. Construction & mining machinery from Sialkot, Beijing, Dubai." data-zh="三十余载连接全球制造商与买家。来自锡亚尔科特、北京、迪拜的建筑与采矿机械设备。">Over three decades connecting global manufacturers with buyers. Construction & mining machinery from Sialkot, Beijing, Dubai.</p>
+        <a class="hero-cta" onclick="go('machines')">
+          <span data-en="Explore Machines" data-zh="浏览设备">Explore Machines</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="hero-right">
+        <div class="hero-art">
+          <div class="hero-art-frame">
+            <img class="hero-art-img" src="p3.jfif" alt="Construction machinery" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=85'" />
+          </div>
+          <div class="hero-art-seal" data-en="Est. 1993" data-zh="1993">Est. 1993</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span data-en="Scroll" data-zh="向下滚动">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="container-wide">
+      <div class="intro-bg-cn">商</div>
+      <div class="intro-content reveal">
+        <span class="intro-label" data-en="Our Philosophy" data-zh="品牌哲学">Our Philosophy</span>
+        <h2 class="intro-title">
+          <span data-en="Connecting Worlds" data-zh="连接世界">Connecting Worlds</span>
+          <span class="en-line">Through Machinery & Trust</span>
+        </h2>
+        <p class="intro-text" data-en="PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a legacy spanning over three decades. From our headquarters in Sialkot, Pakistan — the city renowned globally for manufacturing — we connect global manufacturers with buyers across Asia, the Middle East, and beyond." data-zh="巴基斯坦皮金巴克国际有限公司是一家卓越的进出口贸易及一般贸易代理公司，拥有超过三十年的历史。从位于巴基斯坦锡亚尔科特的总部——这座以制造业闻名全球的城市——我们连接全球制造商与亚洲、中东及其他地区的买家。">PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a legacy spanning over three decades.</p>
+        <div class="intro-pillars">
+          <div class="intro-pillar">
+            <div class="intro-pillar-cn" data-en="Machinery" data-zh="机械">Machinery</div>
+            <div class="intro-pillar-en">Construction & Mining</div>
+          </div>
+          <div class="intro-pillar">
+            <div class="intro-pillar-cn" data-en="Trading" data-zh="贸易">Trading</div>
+            <div class="intro-pillar-en">Import · Export</div>
+          </div>
+          <div class="intro-pillar">
+            <div class="intro-pillar-cn" data-en="Global" data-zh="全球">Global</div>
+            <div class="intro-pillar-en">3 Continents</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panels">
+    <div class="container-wide">
+      <div class="panels-head reveal">
+        <div class="panels-head-label">Core Services</div>
+        <h2 class="panels-head-title">
+          <span data-en="What We Offer" data-zh="我们的服务">What We Offer</span>
+          <span class="en">Machine Categories</span>
+        </h2>
+      </div>
+      <div class="panels-grid reveal">
+        <div class="panel">
+          <img class="panel-img" src="p1.jfif" alt="Excavators" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1000&q=85'" />
+          <div class="panel-overlay">
+            <div class="panel-num">01</div>
+            <div class="panel-content">
+              <div class="panel-cn" data-en="Excavators" data-zh="挖掘机">Excavators</div>
+              <div class="panel-en">Wheel & Tracked</div>
+              <p class="panel-desc" data-en="High-performance wheel and tracked excavators for construction and trenching." data-zh="用于建筑和挖沟的高性能轮式和履带式挖掘机。">High-performance wheel and tracked excavators for construction and trenching.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <img class="panel-img" src="p2.jfif" alt="Wheel Loaders" onerror="this.src='https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1000&q=85'" />
+          <div class="panel-overlay">
+            <div class="panel-num">02</div>
+            <div class="panel-content">
+              <div class="panel-cn" data-en="Wheel Loaders" data-zh="轮式装载机">Wheel Loaders</div>
+              <div class="panel-en">Heavy-Duty Handling</div>
+              <p class="panel-desc" data-en="Reliable wheel loaders for heavy-duty material handling and large-scale operations." data-zh="用于重型物料搬运和大规模作业的可靠轮式装载机。">Reliable wheel loaders for heavy-duty material handling and large-scale operations.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <img class="panel-img" src="p3.jfif" alt="Hydraulic Excavators" onerror="this.src='https://images.unsplash.com/photo-1621951826745-2f6b2d8c1f40?w=1000&q=85'" />
+          <div class="panel-overlay">
+            <div class="panel-num">03</div>
+            <div class="panel-content">
+              <div class="panel-cn" data-en="Hydraulic Excavators" data-zh="液压挖掘机">Hydraulic Excavators</div>
+              <div class="panel-en">Versatile Digging</div>
+              <p class="panel-desc" data-en="Versatile hydraulic excavators for digging, trenching and general earthmoving." data-zh="用于挖掘、挖沟和一般土方作业的多功能液压挖掘机。">Versatile hydraulic excavators for digging, trenching and general earthmoving.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <img class="panel-img" src="p4.jfif" alt="Tracked Dozers" onerror="this.src='https://images.unsplash.com/photo-1591981411195-0c1a0b8f8f3e?w=1000&q=85'" />
+          <div class="panel-overlay">
+            <div class="panel-num">04</div>
+            <div class="panel-content">
+              <div class="panel-cn" data-en="Tracked Dozers" data-zh="履带推土机">Tracked Dozers</div>
+              <div class="panel-en">Major Earthmoving</div>
+              <p class="panel-desc" data-en="Large tracked dozers for major earthmoving and site preparation projects." data-zh="用于大型土方和场地准备项目的大型履带推土机。">Large tracked dozers for major earthmoving and site preparation projects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="container-wide">
+      <div class="featured-head reveal">
+        <h2 class="featured-head-title">
+          <span data-en="Featured Machines" data-zh="精选设备">Featured Machines</span>
+          <span class="en">From our current inventory</span>
+        </h2>
+        <a class="featured-head-link" onclick="go('machines')">
+          <span data-en="View All" data-zh="查看全部">View All</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="featured-grid" id="featuredGrid">
+        <div style="grid-column: 1/-1; text-align:center; padding:60px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--gold);"></i>
+          <p style="margin-top:16px; color:var(--ink-soft);">Loading...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="heritage">
+    <div class="container-wide">
+      <div class="heritage-head reveal">
+        <div>
+          <div class="heritage-head-label">Heritage · Our Journey</div>
+          <h2 class="heritage-head-title" data-en="Three Decades of Trust" data-zh="三十载信任">Three Decades of Trust</h2>
+        </div>
+        <p class="heritage-head-desc" data-en="From a single office in Sialkot to a global network spanning three continents. Our journey is built on quality, integrity, and long-lasting partnerships." data-zh="从锡亚尔科特的一间办公室到横跨三大洲的全球网络。我们的旅程建立在质量、诚信和长久合作伙伴关系之上。">From a single office in Sialkot to a global network spanning three continents.</p>
+      </div>
+      <div class="heritage-timeline">
+        <div class="timeline-node reveal">
+          <div class="timeline-dot">I</div>
+          <div class="timeline-year">1993</div>
+          <div class="timeline-cn" data-en="Sialkot, Pakistan" data-zh="锡亚尔科特，巴基斯坦">Sialkot, Pakistan</div>
+          <div class="timeline-en">Headquarters</div>
+        </div>
+        <div class="timeline-node reveal">
+          <div class="timeline-dot">II</div>
+          <div class="timeline-year">2007</div>
+          <div class="timeline-cn" data-en="Beijing, China" data-zh="中国北京">Beijing, China</div>
+          <div class="timeline-en">Representative Office</div>
+        </div>
+        <div class="timeline-node reveal">
+          <div class="timeline-dot">III</div>
+          <div class="timeline-year">2008</div>
+          <div class="timeline-cn" data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</div>
+          <div class="timeline-en">Middle East Hub</div>
+        </div>
+        <div class="timeline-node reveal">
+          <div class="timeline-dot">IV</div>
+          <div class="timeline-year">2024</div>
+          <div class="timeline-cn" data-en="Global Presence" data-zh="全球覆盖">Global Presence</div>
+          <div class="timeline-en">Three Continents</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="container-wide">
+      <div class="cta-strip-label" data-en="Ready to start?" data-zh="准备开始？">Ready to start?</div>
+      <h2 class="cta-strip-title reveal">
+        <span data-en="Let's find your" data-zh="让我们为您寻找">Let's find your</span> <em data-en="next machine." data-zh="下一台设备。">next machine.</em>
+      </h2>
+      <a class="cta-strip-btn" onclick="go('contact')">
+        <span data-en="Get in Touch" data-zh="联系我们">Get in Touch</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: ABOUT -->
+<!-- ============================================================ -->
+<div class="page" id="page-about">
+  <section class="page-header">
+    <div class="page-header-inner">
+      <h1><span data-en="About" data-zh="关于">About</span> <em data-en="Us" data-zh="我们">Us</em></h1>
+      <p data-en="Our Journey from Sialkot, Pakistan to Beijing & Dubai" data-zh="我们从巴基斯坦锡亚尔科特到北京和迪拜的旅程">Our Journey from Sialkot, Pakistan to Beijing & Dubai</p>
+    </div>
+  </section>
+  <div class="about-section-wrap">
+    <div class="container">
+      <div class="about-block reveal">
+        <h2><span data-en="Who We" data-zh="我们">Who We</span> <em data-en="Are" data-zh="是谁">Are</em></h2>
+        <div class="underline"></div>
+        <p data-en="PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades. Our corporate headquarters is located in Sialkot, Pakistan — a city renowned globally for its excellence in manufacturing and export. From this foundation of quality and craftsmanship, we have expanded our operations to Beijing, China (2007) and Dubai, UAE (2008), establishing a truly global presence." data-zh="巴基斯坦皮金巴克国际有限公司是一家卓越的进出口贸易及一般贸易代理公司，拥有超过三十年的悠久历史。我们的公司总部位于巴基斯坦锡亚尔科特——这座城市以卓越的制造业和出口业享誉全球。基于这一品质和工艺的基础，我们将业务扩展到中国北京（2007年）和阿联酋迪拜（2008年），建立了真正的全球业务网络。">PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades.</p>
+        <p data-en="As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world. Our core expertise lies in construction and mining machinery, ensuring that our clients receive the highest quality equipment for their projects." data-zh="作为一家值得信赖的佣金代理和一般贸易商，我们专注于连接全球制造商与世界各地的买家。我们的核心专长在于建筑和采矿机械设备，确保我们的客户为其项目获得最高质量的设备。">As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world.</p>
+        <div class="highlight-box" data-en="Our mission is to empower construction and mining projects with world-class machinery and unparalleled support across the globe." data-zh="我们的使命是为全球建筑和采矿项目提供世界一流的机械和无与伦比的支持。">Our mission is to empower construction and mining projects with world-class machinery and unparalleled support across the globe.</div>
+      </div>
+
+      <div class="about-block reveal">
+        <h2><span data-en="Our" data-zh="我们的">Our</span> <em data-en="Journey" data-zh="历程">Journey</em></h2>
+        <div class="underline"></div>
+        <p data-en="Established in Sialkot, Pakistan in 1993 with a vision to bridge the gap between manufacturers and global markets. Sialkot, known as the 'City of Export,' provided the perfect foundation for our operations." data-zh="1993年在巴基斯坦锡亚尔科特成立，愿景是连接制造商与全球市场。锡亚尔科特被誉为'出口之城'，为我们的运营提供了完美的基础。">Established in Sialkot, Pakistan in 1993 with a vision to bridge the gap between manufacturers and global markets.</p>
+        <div class="about-timeline">
+          <div class="about-timeline-item">
+            <div class="year">1993</div>
+            <div class="city" data-en="Sialkot, Pakistan" data-zh="锡亚尔科特，巴基斯坦">Sialkot, Pakistan</div>
+            <div class="lbl" data-en="Headquarters" data-zh="总部">Headquarters</div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="year">2007</div>
+            <div class="city" data-en="Beijing, China" data-zh="中国北京">Beijing, China</div>
+            <div class="lbl" data-en="Rep. Office" data-zh="代表处">Rep. Office</div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="year">2008</div>
+            <div class="city" data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</div>
+            <div class="lbl" data-en="Middle East Hub" data-zh="中东枢纽">Middle East Hub</div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="year">2024</div>
+            <div class="city" data-en="Global" data-zh="全球">Global</div>
+            <div class="lbl" data-en="3 Continents" data-zh="三大洲">3 Continents</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-block reveal">
+        <h2><span data-en="Our" data-zh="我们的">Our</span> <em data-en="Offices" data-zh="办事处">Offices</em></h2>
+        <div class="underline"></div>
+        <p><strong>📍 <span data-en="Head Office:" data-zh="总部：">Head Office:</span></strong> <span data-en="Sialkot, Pakistan — The heart of our manufacturing and export operations." data-zh="巴基斯坦锡亚尔科特 — 我们制造和出口业务的核心。">Sialkot, Pakistan — The heart of our manufacturing and export operations.</span></p>
+        <p><strong>📍 <span data-en="China Office:" data-zh="中国办事处：">China Office:</span></strong> 北京市朝阳区康家沟145号锦裕写字楼A座一层A113号</p>
+        <p><strong>📍 <span data-en="Middle East Hub:" data-zh="中东枢纽：">Middle East Hub:</span></strong> <span data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</span></p>
+      </div>
+
+      <div class="about-block reveal">
+        <h2><span data-en="Our Core" data-zh="我们的核心">Our Core</span> <em data-en="Values" data-zh="价值观">Values</em></h2>
+        <div class="underline"></div>
+        <div class="about-timeline">
+          <div class="about-timeline-item">
+            <div class="year">🏆</div>
+            <div class="city" data-en="Excellence" data-zh="卓越">Excellence</div>
+            <div class="lbl" data-en="Quality first" data-zh="质量第一">Quality first</div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="year">🤝</div>
+            <div class="city" data-en="Integrity" data-zh="诚信">Integrity</div>
+            <div class="lbl" data-en="Honest dealings" data-zh="诚信交易">Honest dealings</div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="year">🌍</div>
+            <div class="city" data-en="Global Vision" data-zh="全球视野">Global Vision</div>
+            <div class="lbl" data-en="Worldwide reach" data-zh="全球覆盖">Worldwide reach</div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="year">💡</div>
+            <div class="city" data-en="Innovation" data-zh="创新">Innovation</div>
+            <div class="lbl" data-en="Continuous improvement" data-zh="持续改进">Continuous improvement</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-stats reveal">
+        <div class="about-stat"><div class="num">30+</div><div class="lbl" data-en="Years of Excellence" data-zh="卓越经验">Years of Excellence</div></div>
+        <div class="about-stat"><div class="num">3</div><div class="lbl" data-en="Global Offices" data-zh="全球办事处">Global Offices</div></div>
+        <div class="about-stat"><div class="num">50+</div><div class="lbl" data-en="Satisfied Clients" data-zh="满意的客户">Satisfied Clients</div></div>
+        <div class="about-stat"><div class="num">24/7</div><div class="lbl" data-en="Dedicated Support" data-zh="全天候支持">Dedicated Support</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: MACHINES -->
+<!-- ============================================================ -->
+<div class="page" id="page-machines">
+  <section class="page-header">
+    <div class="page-header-inner">
+      <h1>🚜 <span data-en="Our" data-zh="我们的">Our</span> <em data-en="Machines" data-zh="设备">Machines</em></h1>
+      <p data-en="Browse our collection of high-quality construction equipment" data-zh="浏览我们高品质的建筑设备系列">Browse our collection of high-quality construction equipment</p>
+    </div>
+  </section>
+  <section class="machines-section">
+    <div class="container-wide">
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="🔍 Search by model, category..." />
+        <select id="filterStatus">
+          <option value="all" data-en="All Machines" data-zh="所有设备">All Machines</option>
+          <option value="available" data-en="Available Only" data-zh="仅可用">Available Only</option>
+          <option value="sold" data-en="Sold Only" data-zh="仅已售">Sold Only</option>
+        </select>
+      </div>
+      <div class="machines-grid" id="allMachines">
+        <div style="text-align:center; padding:60px; grid-column:1/-1;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--gold);"></i>
+          <p style="margin-top:12px; color:var(--ink-soft);">Loading...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: MACHINE DETAIL -->
+<!-- ============================================================ -->
+<div class="page" id="page-machine-detail">
+  <section class="detail-section">
+    <div class="container-wide">
+      <a class="back-link" onclick="go('machines')">
+        ← <span data-en="Back to Machines" data-zh="返回设备列表">Back to Machines</span>
+      </a>
+      <div id="detailContainer"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: CONTACT -->
+<!-- ============================================================ -->
+<div class="page" id="page-contact">
+  <section class="page-header">
+    <div class="page-header-inner">
+      <h1><span data-en="Contact" data-zh="联系">Contact</span> <em data-en="Us" data-zh="我们">Us</em></h1>
+      <p data-en="Get in touch with us for any inquiries" data-zh="如有任何疑问，请与我们联系">Get in touch with us for any inquiries</p>
+    </div>
+  </section>
+  <section class="contact-section">
+    <div class="container-wide">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <h2><span data-en="Get In" data-zh="与我们">Get In</span> <em data-en="Touch" data-zh="联系">Touch</em></h2>
+          <p data-en="We'd love to hear from you. Reach out to us anytime." data-zh="我们很乐意听到您的意见。随时与我们联系。">We'd love to hear from you. Reach out to us anytime.</p>
+
+          <div class="info-item">
+            <i class="fas fa-building"></i>
+            <div class="text">
+              <h4 data-en="Office Address" data-zh="办公地址">Office Address</h4>
+              <p>北京市朝阳区康家沟145号锦裕写字楼A座一层A113号</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <div class="text">
+              <h4 data-en="Office Phone" data-zh="办公电话">Office Phone</h4>
+              <p>+86-10-65910786</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-mobile-alt"></i>
+            <div class="text">
+              <h4 data-en="Mobile / WhatsApp / Wechat" data-zh="手机 / WhatsApp / 微信">Mobile / WhatsApp / Wechat</h4>
+              <p>0086-13439872786</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div class="text">
+              <h4 data-en="Email" data-zh="电子邮件">Email</h4>
+              <p>pipilgroup.cn@hotmail.com</p>
+              <p>pipigroup.cn@hotmail.com</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <div class="text">
+              <h4 data-en="Office Hours" data-zh="办公时间">Office Hours</h4>
+              <p data-en="Monday - Friday: 9:00 AM - 6:00 PM" data-zh="周一至周五：上午9:00 - 下午6:00">Monday - Friday: 9:00 AM - 6:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-box reveal">
+          <h2 data-en="Send Us a Message" data-zh="给我们发送消息">Send Us a Message</h2>
+          <form id="contactForm" onsubmit="return sendEmail(event)">
+            <div class="form-group">
+              <label data-en="Your Name *" data-zh="您的姓名 *">Your Name *</label>
+              <input type="text" id="name" required />
+            </div>
+            <div class="form-group">
+              <label data-en="Email Address *" data-zh="电子邮件地址 *">Email Address *</label>
+              <input type="email" id="email" required />
+            </div>
+            <div class="form-group">
+              <label data-en="Phone Number" data-zh="电话号码">Phone Number</label>
+              <input type="text" id="phone" />
+            </div>
+            <div class="form-group">
+              <label data-en="Subject" data-zh="主题">Subject</label>
+              <input type="text" id="subject" />
+            </div>
+            <div class="form-group">
+              <label data-en="Message *" data-zh="消息 *">Message *</label>
+              <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="btn-send" id="sendBtn" data-en="Send Message" data-zh="发送消息">Send Message</button>
+            <div id="msgBox" class="msg"></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="map-section reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d116.5!3d39.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDU0JzAwLjAiTiAxMTbCsDMwJzAwLjAiRQ!5e0!3m2!1sen!2s!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+        <div class="map-address">
+          <i class="fas fa-map-marker-alt"></i>
+          北京市朝阳区康家沟145号锦裕写字楼A座一层A113号, Beijing, China
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: ADMIN -->
+<!-- ============================================================ -->
+<div class="page" id="page-admin">
+  <!-- LOGIN -->
+  <div class="admin-login-wrap" id="loginPage">
+    <div class="admin-login-box">
+      <div class="lock-icon">🔐</div>
+      <h2>Admin Login</h2>
+      <p>Enter your credentials to access the admin panel</p>
+      <form onsubmit="return handleLogin(event)">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="loginUsername" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" required />
+        </div>
+        <div class="error-msg" id="loginError">❌ Invalid username or password.</div>
+        <button type="submit" class="btn-login">🔑 Login</button>
+      </form>
+      <p class="admin-hint">Default: admin / pakistan123</p>
+    </div>
+  </div>
+
+  <!-- PANEL -->
+  <div class="admin-panel hidden" id="adminPanel">
+    <div class="admin-container">
+      <aside class="admin-sidebar">
+        <div class="admin-title"><i class="fas fa-crown"></i> Admin</div>
+        <a id="adm-dashboard" onclick="showAdminSection('dashboard')" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a>
+        <a id="adm-machines" onclick="showAdminSection('machines')"><i class="fas fa-list"></i> All Machines</a>
+        <a id="adm-add" onclick="showAdminSection('add')"><i class="fas fa-plus-circle"></i> Add Machine</a>
+        <a class="logout-link" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </aside>
+      <div class="admin-main">
+        <div id="adm-section-dashboard">
+          <h2>📊 Dashboard</h2>
+          <p class="subtitle">Overview of your machine inventory</p>
+          <div class="admin-stats-grid">
+            <div class="admin-stat-card"><div class="number" id="totalCount">0</div><div class="label">Total Machines</div></div>
+            <div class="admin-stat-card green"><div class="number" id="availableCount">0</div><div class="label">✅ Available</div></div>
+            <div class="admin-stat-card red"><div class="number" id="soldCount">0</div><div class="label">❌ Sold</div></div>
+          </div>
+        </div>
+        <div id="adm-section-machines" class="hidden">
+          <h2>📋 All Machines</h2>
+          <p class="subtitle">Manage your machine inventory</p>
+          <div class="admin-table-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Image</th><th>Model</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="machineTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="adm-section-add" class="hidden">
+          <h2>➕ Add New Machine</h2>
+          <p class="subtitle">Add a new machine to your inventory</p>
+          <div class="admin-form-box">
+            <form onsubmit="return handleAddMachine(event)">
+              <div class="form-group"><label>Model Name *</label><input type="text" id="addModel" required /></div>
+              <div class="form-group"><label>Category *</label><input type="text" id="addCategory" required /></div>
+              <div class="form-group"><label>Price</label><input type="text" id="addPrice" /></div>
+              <div class="form-group"><label>Specifications</label><input type="text" id="addSpecs" /></div>
+              <div class="form-group"><label>Description</label><textarea id="addDesc"></textarea></div>
+              <div class="form-group"><label>Image Path</label><input type="text" id="addImage" placeholder="images/cat-320d.jpg" /></div>
+              <div class="form-group">
+                <label>Status</label>
+                <select id="addStatus"><option value="true">✅ Available</option><option value="false">❌ Sold</option></select>
+              </div>
+              <button type="submit" class="btn-submit-admin">➕ Add Machine</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER (shared) -->
+<!-- ============================================================ -->
+<footer class="footer">
+  <div class="container-wide">
+    <div class="footer-hero">
+      <div class="footer-cn">PEKIN-PAK-INTERNATIONAL</div>
+      <div class="footer-en">Global Machinery & Trading · LLC</div>
+      <div class="footer-tagline" data-en="Sialkot · Beijing · Dubai · Since 1993" data-zh="锡亚尔科特 · 北京 · 迪拜 · 自1993年">Sialkot · Beijing · Dubai · Since 1993</div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p data-en="PEKIN-PAK-INTERNATIONAL LLC" data-zh="巴基斯坦皮金巴克国际有限公司">PEKIN-PAK-INTERNATIONAL LLC</p>
+        <p data-en="Import Export & General Traders Commission Agent" data-zh="进出口贸易及一般贸易代理">Import Export & General Traders Commission Agent</p>
+        <p class="footer-slogan" data-en="Connecting Worlds Through Machinery" data-zh="以机械连接世界">Connecting Worlds Through Machinery</p>
+      </div>
+      <div class="footer-col">
+        <h5 data-en="Explore" data-zh="探索">Explore</h5>
+        <a onclick="go('home')" data-en="Home" data-zh="首页">Home</a>
+        <a onclick="go('about')" data-en="About" data-zh="关于">About</a>
+        <a onclick="go('machines')" data-en="Machines" data-zh="设备">Machines</a>
+        <a onclick="go('contact')" data-en="Contact" data-zh="联系">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-en="Machines" data-zh="设备">Machines</h5>
+        <a onclick="go('machines')" data-en="Excavators" data-zh="挖掘机">Excavators</a>
+        <a onclick="go('machines')" data-en="Wheel Loaders" data-zh="轮式装载机">Wheel Loaders</a>
+        <a onclick="go('machines')" data-en="Dozers" data-zh="推土机">Dozers</a>
+        <a onclick="go('contact')" data-en="Wholesale" data-zh="批发">Wholesale</a>
+      </div>
+      <div class="footer-col">
+        <h5 data-en="Contact" data-zh="联系">Contact</h5>
+        <p>+86-10-65910786</p>
+        <p>+86-13439872786</p>
+        <p>pipigroup.cn@hotmail.com</p>
+        <p data-en="Beijing · China" data-zh="中国 · 北京">Beijing · China</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 PEKIN-PAK-INTERNATIONAL LLC · <span data-en="All Rights Reserved" data-zh="版权所有">All Rights Reserved</span></div>
+      <div>
+        <span data-en="Sialkot · Beijing · Dubai" data-zh="锡亚尔科特 · 北京 · 迪拜">Sialkot · Beijing · Dubai</span>
+        <span class="admin-dot" onclick="go('admin')" title="Admin"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  const body = document.body;
+  const langBtn = document.getElementById('langBtn');
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('nav');
+  const header = document.getElementById('header');
+  const langOverlay = document.getElementById('langOverlay');
+
+  /* ============ EMAILJS ============ */
+  const EMAILJS_PUBLIC_KEY = 'd0piOzrwIHQaXiYch';
+  const EMAILJS_SERVICE_ID = 'service_j7pyv4j';
+  const EMAILJS_TEMPLATE_ID = 'template_f6mgqdn';
+  const EMAILJS_TO_EMAIL = 'pipigroup.cn@hotmail.com';
+  if (window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  /* ============ STATE ============ */
+  let currentLang = localStorage.getItem('pp-lang') || 'en';
+  let allMachines = [];
+  let adminMachines = [];
+
+  /* ============ TOAST ============ */
+  let toastTimer;
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.classList.remove('show'); }, 3200);
+  }
+
+  /* ============ LANGUAGE ============ */
+  function setLanguage(lang) {
+    currentLang = lang;
+    if (lang === 'en') { body.classList.add('lang-en'); document.documentElement.lang = 'en'; }
+    else { body.classList.remove('lang-en'); document.documentElement.lang = 'zh-CN'; }
+    document.querySelectorAll('[data-en][data-zh]').forEach((el) => {
+      const zh = el.getAttribute('data-zh');
+      const en = el.getAttribute('data-en');
+      el.textContent = lang === 'en' ? en : zh;
+    });
+    localStorage.setItem('pp-lang', lang);
+  }
+
+  // Init lang on load
+  const savedLang = localStorage.getItem('pp-lang');
+  if (savedLang) {
+    setLanguage(savedLang);
+    langOverlay.style.display = 'none';
+  } else {
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.querySelectorAll('.lang-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      setLanguage(lang);
+      langOverlay.classList.add('hidden');
+      document.body.style.overflow = '';
+      setTimeout(() => { langOverlay.style.display = 'none'; }, 800);
+    });
+  });
+
+  langBtn.addEventListener('click', () => {
+    setLanguage(currentLang === 'en' ? 'zh' : 'en');
+  });
+
+  /* ============ NAVIGATION ============ */
+  function go(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + page);
+    if (target) target.classList.add('active');
+    document.querySelectorAll('.nav a').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === page);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (page === 'machines') renderMachines(allMachines);
+    if (page === 'admin') checkAdminLogin();
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }, 80);
+  }
+  window.go = go;
+
+  /* ============ MOBILE MENU ============ */
+  menuBtn.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    menuBtn.classList.toggle('open');
+  });
+
+  /* ============ HEADER SCROLL ============ */
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 80) {
+      header.classList.add('solid'); header.classList.remove('transparent');
+    } else {
+      header.classList.remove('solid'); header.classList.add('transparent');
+    }
+  });
+
+  /* ============ REVEAL ============ */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -80px 0px' });
+
+  /* ============ LOAD MACHINES FROM JSON ============ */
+  async function loadMachinesFromJSON() {
+    try {
+      const timestamp = Date.now();
+      const random = Math.random().toString(36).substring(7);
+      const res = await fetch(`machines.json?v=${timestamp}&r=${random}`);
+      if (!res.ok) throw new Error('Not found');
+      return await res.json();
+    } catch (e) {
+      return [
+        { id: 1, model: "CAT M320", category: "Wheel Excavator", price: "$98,000", image: "p1.jfif", desc: "High-performance wheel excavator.", available: true, specs: "Engine: CAT C7.1, 165HP" },
+        { id: 2, model: "CAT 950 GC", category: "Wheel Loader", price: "$135,000", image: "p2.jfif", desc: "Reliable wheel loader.", available: true, specs: "CAT C7.1, 200HP" },
+        { id: 3, model: "CAT 320D", category: "Hydraulic Excavator", price: "$112,000", image: "p3.jfif", desc: "Versatile hydraulic excavator.", available: true, specs: "CAT C7.1, 180HP" }
+      ];
+    }
+  }
+
+  /* ============ FEATURED (Home) ============ */
+  async function loadFeatured() {
+    const grid = document.getElementById('featuredGrid');
+    if (!grid) return;
+    const machines = await loadMachinesFromJSON();
+    allMachines = machines;
+    const featured = machines.slice(0, 3);
+
+    grid.innerHTML = featured.map(m => {
+      const sealEN = m.available ? 'In Stock' : 'Sold';
+      const sealZH = m.available ? '现货' : '已售';
+      const sealText = currentLang === 'en' ? sealEN : sealZH;
+      const sealClass = m.available ? '' : 'sold';
+      return `
+        <a class="featured-card" onclick="openMachineDetail(${m.id})">
+          <div class="featured-card-img">
+            <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=85'" />
+            <div class="featured-card-seal ${sealClass}" data-en="${sealEN}" data-zh="${sealZH}">${sealText}</div>
+          </div>
+          <div class="featured-card-body">
+            <div class="featured-card-cat" data-en="${m.category}" data-zh="${m.category}">${m.category}</div>
+            <h3 class="featured-card-title" data-en="${m.model}" data-zh="${m.model}">${m.model}</h3>
+            <p class="featured-card-desc" data-en="${m.desc || ''}" data-zh="${m.desc || ''}">${m.desc || ''}</p>
+            <div class="featured-card-footer">
+              <div class="featured-card-price">${m.price}</div>
+              <div class="featured-card-link">
+                <span data-en="View" data-zh="查看">View</span>
+                <span class="arrow">→</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+    setLanguage(currentLang);
+  }
+
+  /* ============ MACHINES GRID ============ */
+  function renderMachines(machines) {
+    const grid = document.getElementById('allMachines');
+    if (!grid) return;
+    if (!machines || machines.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--ink-soft);">
+        <i class="fas fa-tractor" style="font-size:2.5rem; color:var(--gold);"></i>
+        <p style="margin-top:14px;">No machines found.</p>
+      </div>`;
+      return;
+    }
+    grid.innerHTML = machines.map(m => {
+      const sealEN = m.available ? 'Available' : 'Sold';
+      const sealZH = m.available ? '可用' : '已售';
+      const sealText = currentLang === 'en' ? sealEN : sealZH;
+      const sealClass = m.available ? '' : 'sold';
+      return `
+        <div class="machine-card" onclick="openMachineDetail(${m.id})">
+          <div class="machine-card-img">
+            <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=85'" />
+            <div class="machine-card-seal ${sealClass}" data-en="${sealEN}" data-zh="${sealZH}">${sealText}</div>
+          </div>
+          <div class="machine-card-body">
+            <div class="machine-card-cat" data-en="${m.category}" data-zh="${m.category}">${m.category}</div>
+            <h3 class="machine-card-title" data-en="${m.model}" data-zh="${m.model}">${m.model}</h3>
+            <p class="machine-card-desc" data-en="${m.desc || ''}" data-zh="${m.desc || ''}">${m.desc || ''}</p>
+            <div class="machine-card-price">${m.price}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    setLanguage(currentLang);
+  }
+
+  function filterMachines() {
+    const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const status = document.getElementById('filterStatus')?.value || 'all';
+    let filtered = allMachines;
+    if (search) filtered = filtered.filter(m =>
+      m.model.toLowerCase().includes(search) ||
+      m.category.toLowerCase().includes(search)
+    );
+    if (status === 'available') filtered = filtered.filter(m => m.available === true);
+    else if (status === 'sold') filtered = filtered.filter(m => m.available === false);
+    renderMachines(filtered);
+  }
+
+  /* ============ MACHINE DETAIL ============ */
+  async function openMachineDetail(id) {
+    if (!allMachines || allMachines.length === 0) {
+      allMachines = await loadMachinesFromJSON();
+    }
+    const m = allMachines.find(x => x.id === id);
+    const container = document.getElementById('detailContainer');
+    if (!container) return;
+    if (!m) {
+      container.innerHTML = `<div style="text-align:center; padding:80px 20px;">
+        <i class="fas fa-tractor" style="font-size:3rem; color:var(--gold);"></i>
+        <h2 style="font-family:var(--font-serif-en); color:var(--green); margin:16px 0 8px;">Machine Not Found</h2>
+        <p style="color:var(--ink-soft);">The machine you're looking for doesn't exist.</p>
+      </div>`;
+      go('machine-detail');
+      return;
+    }
+    const statusEN = m.available ? 'Available' : 'Sold';
+    const statusZH = m.available ? '可用' : '已售';
+    const statusText = currentLang === 'en' ? statusEN : statusZH;
+    const statusClass = m.available ? 'available' : 'sold';
+
+    container.innerHTML = `
+      <div class="detail-card">
+        <div class="detail-card-img">
+          <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=85'" />
+        </div>
+        <div class="detail-card-info">
+          <div class="cat" data-en="${m.category}" data-zh="${m.category}">${m.category}</div>
+          <h1 data-en="${m.model}" data-zh="${m.model}">${m.model}</h1>
+          <div class="price">${m.price}</div>
+          <span class="status ${statusClass}" data-en="${statusEN}" data-zh="${statusZH}">${statusText}</span>
+          <div class="specs">
+            <strong>⚙️ <span data-en="Specifications:" data-zh="规格：">Specifications:</span></strong><br/>
+            ${m.specs || 'N/A'}
+          </div>
+          <p class="desc" data-en="${m.desc || ''}" data-zh="${m.desc || ''}">${m.desc || ''}</p>
+
+          <div class="enquiry-box">
+            <h4>📧 <span data-en="Enquire About This Machine" data-zh="咨询此设备">Enquire About This Machine</span></h4>
+            <form onsubmit="return sendEnquiry(event, '${m.model}')">
+              <div class="form-group"><input type="text" id="enqName" required data-en="Your Name" data-zh="您的姓名" placeholder="Your Name" /></div>
+              <div class="form-group"><input type="email" id="enqEmail" required placeholder="Your Email" /></div>
+              <div class="form-group"><input type="text" id="enqPhone" placeholder="Your Phone" /></div>
+              <div class="form-group"><textarea id="enqMessage" required placeholder="Your Message">I am interested in ${m.model}</textarea></div>
+              <button type="submit" class="btn-enquire" id="enqBtn"><span data-en="Send Enquiry" data-zh="发送咨询">Send Enquiry</span></button>
+              <div id="enqMsg" class="msg"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    `;
+    go('machine-detail');
+  }
+  window.openMachineDetail = openMachineDetail;
+
+  /* ============ CONTACT FORM ============ */
+  window.sendEmail = function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const subject = document.getElementById('subject').value.trim() || 'PEKIN-PAK Inquiry';
+    const message = document.getElementById('message').value.trim();
+    const btn = document.getElementById('sendBtn');
+    const box = document.getElementById('msgBox');
+    if (!name || !email || !message) {
+      box.className = 'msg error'; box.textContent = '⚠️ Please fill in all required fields!';
+      return false;
+    }
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = 'Sending...';
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: EMAILJS_TO_EMAIL, name, email,
+      phone: phone || 'N/A', subject, message,
+      time: new Date().toLocaleString(), reply_to: email
+    }).then(() => {
+      box.className = 'msg success';
+      box.textContent = '✅ Message sent! We will contact you soon.';
+      document.getElementById('contactForm').reset();
+      btn.disabled = false; btn.textContent = orig;
+      setTimeout(() => { box.className = 'msg'; }, 5000);
+    }).catch(() => {
+      box.className = 'msg error';
+      box.textContent = '❌ Failed. Please email us at pipigroup.cn@hotmail.com';
+      btn.disabled = false; btn.textContent = orig;
+    });
+    return false;
+  };
+
+  /* ============ ENQUIRY ============ */
+  window.sendEnquiry = function(e, machineName) {
+    e.preventDefault();
+    const name = document.getElementById('enqName').value.trim();
+    const email = document.getElementById('enqEmail').value.trim();
+    const phone = document.getElementById('enqPhone').value.trim();
+    const message = document.getElementById('enqMessage').value.trim();
+    const btn = document.getElementById('enqBtn');
+    const box = document.getElementById('enqMsg');
+    if (!name || !email || !message) {
+      box.className = 'msg error'; box.textContent = '⚠️ Please fill required fields!';
+      return false;
+    }
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = 'Sending...';
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: EMAILJS_TO_EMAIL, name, email,
+      phone: phone || 'N/A',
+      subject: 'Machine Enquiry: ' + machineName,
+      message: message + '\n\nMachine: ' + machineName,
+      time: new Date().toLocaleString(), reply_to: email
+    }).then(() => {
+      box.className = 'msg success';
+      box.textContent = '✅ Enquiry sent! We will contact you soon.';
+      document.getElementById('enqMessage').value = 'I am interested in ' + machineName;
+      btn.disabled = false; btn.textContent = orig;
+      setTimeout(() => { box.className = 'msg'; }, 5000);
+    }).catch(() => {
+      box.className = 'msg error';
+      box.textContent = '❌ Failed. Please try again.';
+      btn.disabled = false; btn.textContent = orig;
+    });
+    return false;
+  };
+
+  /* ============ ADMIN ============ */
+  const ADMIN_USER = 'admin';
+  const ADMIN_PASS = 'pakistan123';
+
+  function checkAdminLogin() {
+    const isIn = sessionStorage.getItem('adminLoggedIn');
+    if (isIn === 'true') {
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('adminPanel').classList.remove('hidden');
+      refreshAdminData();
+    } else {
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('adminPanel').classList.add('hidden');
+    }
+  }
+
+  window.handleLogin = function(e) {
+    e.preventDefault();
+    const u = document.getElementById('loginUsername').value.trim();
+    const p = document.getElementById('loginPassword').value.trim();
+    const err = document.getElementById('loginError');
+    if (u === ADMIN_USER && p === ADMIN_PASS) {
+      err.classList.remove('show');
+      sessionStorage.setItem('adminLoggedIn', 'true');
+      checkAdminLogin();
+    } else {
+      err.classList.add('show');
+      document.getElementById('loginPassword').value = '';
+    }
+    return false;
+  };
+
+  window.handleLogout = function() {
+    if (confirm('⚠️ Logout?')) {
+      sessionStorage.removeItem('adminLoggedIn');
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('adminPanel').classList.add('hidden');
+      document.getElementById('loginUsername').value = '';
+      document.getElementById('loginPassword').value = '';
+    }
+  };
+
+  window.showAdminSection = function(section) {
+    document.querySelectorAll('#adm-section-dashboard, #adm-section-machines, #adm-section-add').forEach(el => el.classList.add('hidden'));
+    document.getElementById('adm-section-' + section).classList.remove('hidden');
+    document.querySelectorAll('.admin-sidebar a').forEach(a => a.classList.remove('active'));
+    const link = document.getElementById('adm-' + section);
+    if (link) link.classList.add('active');
+    if (section === 'dashboard') updateAdminStats();
+    if (section === 'machines') renderAdminTable();
+  };
+
+  async function refreshAdminData() {
+    adminMachines = await loadMachinesFromJSON();
+    updateAdminStats();
+    renderAdminTable();
+  }
+
+  function updateAdminStats() {
+    document.getElementById('totalCount').textContent = adminMachines.length;
+    document.getElementById('availableCount').textContent = adminMachines.filter(m => m.available).length;
+    document.getElementById('soldCount').textContent = adminMachines.filter(m => !m.available).length;
+  }
+
+  function renderAdminTable() {
+    const tb = document.getElementById('machineTableBody');
+    if (!tb) return;
+    if (adminMachines.length === 0) {
+      tb.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--ink-soft);">No machines.</td></tr>`;
+      return;
+    }
+    tb.innerHTML = adminMachines.map((m, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td><img src="${m.image}" class="machine-img" onerror="this.src='https://via.placeholder.com/60x40/0A2E1A/D4C5A0?text=IMG'" /></td>
+        <td><strong>${m.model}</strong></td>
+        <td>${m.category}</td>
+        <td>${m.price}</td>
+        <td><span class="status ${m.available ? 'available' : 'sold'}">${m.available ? '✅ Available' : '❌ Sold'}</span></td>
+        <td>
+          <button class="btn-edit" onclick="editMachine(${m.id})">✏️</button>
+          <button class="btn-delete" onclick="deleteMachine(${m.id})">🗑️</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  window.deleteMachine = function(id) {
+    if (!confirm('⚠️ Delete this machine?')) return;
+    adminMachines = adminMachines.filter(m => m.id !== id);
+    updateJSONFile(adminMachines);
+    refreshAdminData();
+    showToast('✅ Deleted!');
+  };
+
+  window.editMachine = function(id) {
+    const m = adminMachines.find(x => x.id === id);
+    if (!m) return;
+    const newModel = prompt('✏️ Edit Model:', m.model);
+    if (newModel !== null && newModel.trim() !== '') m.model = newModel.trim();
+    const newCat = prompt('✏️ Edit Category:', m.category);
+    if (newCat !== null && newCat.trim() !== '') m.category = newCat.trim();
+    const newPrice = prompt('✏️ Edit Price:', m.price);
+    if (newPrice !== null && newPrice.trim() !== '') m.price = newPrice.trim();
+    const newImg = prompt('🖼️ Edit Image Path:', m.image);
+    if (newImg !== null && newImg.trim() !== '') m.image = newImg.trim();
+    const newStatus = confirm('🔄 Available? OK = Yes, Cancel = Sold');
+    m.available = newStatus;
+    updateJSONFile(adminMachines);
+    refreshAdminData();
+    showToast('✅ Updated!');
+  };
+
+  window.handleAddMachine = function(e) {
+    e.preventDefault();
+    const model = document.getElementById('addModel').value.trim();
+    const cat = document.getElementById('addCategory').value.trim();
+    if (!model || !cat) { showToast('⚠️ Model & Category required!', true); return false; }
+    const newId = adminMachines.length > 0 ? Math.max(...adminMachines.map(m => m.id)) + 1 : 1;
+    adminMachines.push({
+      id: newId, model, category: cat,
+      price: document.getElementById('addPrice').value.trim() || 'Price on Request',
+      specs: document.getElementById('addSpecs').value.trim() || 'N/A',
+      desc: document.getElementById('addDesc').value.trim() || 'No description available.',
+      image: document.getElementById('addImage').value.trim() || 'images/machine' + newId + '.jpg',
+      available: document.getElementById('addStatus').value === 'true'
+    });
+    updateJSONFile(adminMachines);
+    document.querySelector('#adm-section-add form').reset();
+    refreshAdminData();
+    showAdminSection('machines');
+    showToast('✅ Machine added!');
+    return false;
+  };
+
+  function updateJSONFile(data) {
+    localStorage.setItem('machinesData', JSON.stringify(data));
+    const jsonStr = JSON.stringify(data, null, 4);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'machines.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('📥 Downloading machines.json — replace your file.');
+  }
+
+  /* ============ INIT ============ */
+  async function init() {
+    setLanguage(currentLang);
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    await loadFeatured();
+    // Preload machines for later navigation
+    if (allMachines.length === 0) allMachines = await loadMachinesFromJSON();
+    // Search/filter listeners (exist in machines page)
+    document.getElementById('searchInput')?.addEventListener('input', filterMachines);
+    document.getElementById('filterStatus')?.addEventListener('change', filterMachines);
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+
+  console.log('%cPEKIN-PAK-INTERNATIONAL LLC%c\nSingle Page App · Since 1993',
+    'font-size: 20px; color: #0A2E1A; font-weight: 600;',
+    'font-size: 12px; color: #D4C5A0;');
+})();
+</script>
+</body>
+</html>
