@@ -186,7 +186,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   box-shadow: 0 4px 30px rgba(176, 140, 56, 0.25);
 }
 
-/* Top contact strip — dark for contrast */
 .header-strip {
   background: linear-gradient(180deg, #061A10, #0B2B1B);
   color: var(--cream);
@@ -229,7 +228,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   50% { opacity: 0.3; }
 }
 
-/* Main header bar */
 .header-main {
   padding: 12px 32px;
   display: flex; justify-content: space-between;
@@ -238,19 +236,16 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .header.scrolled .header-main { padding: 8px 32px; }
 
-/* ✅ Logo block — [logo-short] → Company Name → [logo-main] */
+/* ✅ Logo block — [logo-short] → Company Name + tagline → [logo-main] */
 .logo-block {
   display: flex; align-items: center; gap: 12px;
   flex-shrink: 0; cursor: pointer;
 }
-
-/* Short logo — start mein, chota */
 .logo-short-mark {
   height: 26px;
   width: auto;
   display: flex; align-items: center;
   background: transparent;
-  border: none;
   padding: 0;
   transition: all 0.4s var(--ease);
   flex-shrink: 0;
@@ -264,10 +259,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   display: block;
 }
 
-/* Text block — company name */
 .logo-text-block {
   display: flex; flex-direction: column;
-  line-height: 1.1; gap: 1px;
+  line-height: 1.1; gap: 2px;
 }
 
 .lt-main {
@@ -289,18 +283,17 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.24em;
-  color: rgba(6, 26, 16, 0.65);
+  color: rgba(6, 26, 16, 0.7);
   text-transform: uppercase;
   white-space: nowrap;
+  font-weight: 600;
 }
 
-/* Machine logo — company name ke baad, chota */
 .logo-machine-mark {
   height: 42px;
   width: auto;
   display: flex; align-items: center;
   background: transparent;
-  border: none;
   padding: 0;
   transition: all 0.4s var(--ease);
   flex-shrink: 0;
@@ -314,7 +307,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   display: block;
 }
 
-/* Navigation */
 .nav-main {
   display: flex; gap: 6px; align-items: center;
 }
@@ -816,6 +808,43 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   background-repeat: repeat; background-size: 140px 70px;
   pointer-events: none;
 }
+
+/* ✅ Willow pattern background for Our Range section */
+.section.range-bg {
+  background-color: var(--cream);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.section.range-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('willow.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+.section.range-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(250, 247, 242, 0.7) 0%,
+    rgba(250, 247, 242, 0.35) 50%,
+    rgba(250, 247, 242, 0.7) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.section.range-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
 .section-head {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 40px; margin-bottom: 60px; align-items: end;
@@ -1234,169 +1263,254 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 
 /* ============================================================
-   ABOUT FEATURE
+   ABOUT PAGE STYLES
    ============================================================ */
-.about-feature {
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 32px;
+}
+.about-block {
+  background: #FFFFFF;
+  border-radius: 15px;
+  padding: 40px 36px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 32px;
+}
+.about-block h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 6px;
+}
+.about-block h2 .highlight { color: var(--gold); }
+.about-block .underline {
+  width: 60px; height: 4px;
+  background: var(--gold);
+  margin: 8px 0 22px;
+  border-radius: 4px;
+}
+.about-block p {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: #2D3748;
+  margin-bottom: 14px;
+}
+.about-block .highlight-box {
+  background: var(--forest);
+  color: #FFFFFF;
+  padding: 18px 22px;
+  border-radius: 12px;
+  border-left: 4px solid var(--gold);
+  margin-top: 18px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.about-block .highlight-box i { color: var(--gold-bright); margin-right: 8px; }
+
+.about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1fr;
+  gap: 32px;
   align-items: center;
 }
-.about-img-wrap {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-  aspect-ratio: 4/5;
+@media (min-width: 768px) {
+  .about-grid { grid-template-columns: 1fr 1fr; }
 }
-.about-img-wrap img {
+.about-grid .about-image {
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  background: var(--cream-2);
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-grid .about-image img {
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: all 1.5s var(--ease-slow);
+  display: block;
 }
-.about-img-wrap:hover img { transform: scale(1.05); }
-.about-img-wrap::after {
-  content: ''; position: absolute; inset: 0;
-  border: 1px solid rgba(201, 169, 89, 0.3);
-  border-radius: 24px;
-  pointer-events: none;
-}
-.about-year-badge {
-  position: absolute;
-  bottom: -20px; right: -20px;
-  width: 130px; height: 130px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
-  color: var(--forest-deep);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  box-shadow: var(--shadow-xl);
-  border: 4px solid var(--cream);
-  transform: rotate(-6deg);
-  z-index: 2;
-}
-.about-year-badge .yb-num {
+.about-grid .info h2 {
   font-family: var(--font-display);
-  font-size: 1.9rem; font-weight: 700; line-height: 1;
-}
-.about-year-badge .yb-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.5rem; letter-spacing: 0.2em;
-  text-transform: uppercase; margin-top: 4px;
-  font-weight: 600;
-}
-.about-content .label {
-  font-family: var(--font-mono);
-  font-size: 0.6rem; letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--jade);
-  margin-bottom: 18px;
-  display: flex; align-items: center; gap: 12px;
-}
-.about-content .label::before {
-  content: ''; width: 28px; height: 1px; background: var(--gold);
-}
-.about-content h2 {
-  font-size: clamp(1.6rem, 3vw, 2.6rem);
-  line-height: 1.1; margin-bottom: 20px;
+  font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+  font-weight: 700;
   color: var(--forest);
+  margin-bottom: 12px;
 }
-.about-content h2 em {
-  font-style: italic;
-  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.about-content p {
-  font-size: 0.9rem; color: var(--ink-soft);
-  line-height: 1.9; margin-bottom: 18px;
-}
-.about-features {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin: 26px 0;
-}
-.about-feature-item {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.82rem;
-  color: var(--ink);
-  font-weight: 500;
-}
-.about-feature-item i {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--cream), var(--cream-2));
-  color: var(--jade);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.72rem;
-  border: 1px solid var(--line-gold);
-  flex-shrink: 0;
+.about-grid .info h2 .highlight { color: var(--gold); }
+.about-grid .info p {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: #2D3748;
+  margin-bottom: 12px;
 }
 
-/* ============================================================
-   CTA SECTION
-   ============================================================ */
-.cta-full {
-  position: relative;
-  background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
-  border-radius: 26px;
-  overflow: hidden;
-  padding: 70px 60px;
-  color: var(--cream);
+.about-timeline-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 40px;
-  align-items: center;
-  border: 1px solid rgba(201, 169, 89, 0.25);
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 20px;
 }
-.cta-full::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 20 L80 50 L50 80 L20 50 Z' fill='none' stroke='%23C9A959' stroke-width='0.5' opacity='0.08'/%3E%3C/svg%3E");
-  pointer-events: none;
+@media (min-width: 600px) {
+  .about-timeline-grid { grid-template-columns: repeat(2, 1fr); }
 }
-.cta-full::after {
-  content: ''; position: absolute;
-  top: -100px; right: -100px;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(201, 169, 89, 0.18), transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
+@media (min-width: 900px) {
+  .about-timeline-grid { grid-template-columns: repeat(4, 1fr); }
 }
-.cta-full-content {
-  position: relative; z-index: 2;
+.about-timeline-item {
+  background: #F8F6F2;
+  border-radius: 12px;
+  padding: 22px 18px;
+  text-align: center;
+  border: 1px solid #E8E0D6;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 }
-.cta-full .cta-label {
-  font-family: var(--font-mono);
-  font-size: 0.6rem; letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold-bright);
-  margin-bottom: 16px;
+.about-timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--forest));
+  transform: scaleX(0);
+  transition: 0.4s;
 }
-.cta-full h2 {
+.about-timeline-item:hover::before { transform: scaleX(1); }
+.about-timeline-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--gold);
+}
+.about-timeline-item .year {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+.about-timeline-item .title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin: 4px 0 2px;
+}
+.about-timeline-item .desc {
+  font-size: 0.8rem;
+  color: #4A5568;
+}
+
+.offices-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 10px;
+}
+@media (min-width: 600px) {
+  .offices-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.office-card {
+  background: #F8F6F2;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #E8E0D6;
+  transition: 0.3s;
+}
+.office-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
+}
+.office-card .flag { font-size: 2rem; }
+.office-card .city {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin: 4px 0 2px;
+}
+.office-card .year {
+  font-size: 0.85rem;
+  color: var(--gold);
   font-weight: 600;
-  line-height: 1.05;
-  color: var(--cream);
-  margin-bottom: 18px;
 }
-.cta-full h2 em { font-style: italic; color: var(--gold-bright); }
-.cta-full p {
-  font-size: 0.9rem;
-  color: rgba(250, 247, 242, 0.85);
-  line-height: 1.7;
-  max-width: 480px;
-  margin-bottom: 28px;
+.office-card .address {
+  font-size: 0.75rem;
+  color: #4A5568;
+  margin-top: 4px;
 }
-.cta-actions {
-  position: relative; z-index: 2;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+@media (min-width: 600px) {
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .values-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.value-card {
+  background: #F8F6F2;
+  border-radius: 12px;
+  padding: 22px 18px;
+  text-align: center;
+  border: 1px solid #E8E0D6;
+  transition: 0.3s;
+}
+.value-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+.value-card .icon { font-size: 2rem; }
+.value-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin: 10px 0 6px;
+}
+.value-card p {
+  font-size: 0.82rem;
+  color: #4A5568;
+  line-height: 1.6;
+}
+
+.about-stats-section {
+  background: #FFFFFF;
+  padding: 50px 32px;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 32px;
+}
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+@media (min-width: 600px) {
+  .about-stats-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.about-stat-item .number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+.about-stat-item .label {
+  color: #2D3748;
+  font-weight: 600;
+  margin-top: 8px;
+  font-size: 0.85rem;
 }
 
 /* ============================================================
@@ -1981,7 +2095,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .h-scroll-track { padding: 0 40px; }
   .spec-dashboard { grid-template-columns: 1fr; }
   .spec-img { min-height: 320px; }
-  .about-feature { grid-template-columns: 1fr; gap: 50px; }
   .cta-full { grid-template-columns: 1fr; padding: 50px 40px; }
   .cta-actions { justify-content: flex-start; }
   .stats-rail { grid-template-columns: repeat(2, 1fr); }
@@ -1989,6 +2102,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .stat-col:nth-child(1), .stat-col:nth-child(2) { border-bottom: 1px dashed var(--line); }
   .counter-inner { grid-template-columns: repeat(2, 1fr); }
   .counter-item:nth-child(2) { border-right: none; }
+  .about-container { padding: 40px 24px; }
 
   .lt-main { font-size: 1rem; }
   .logo-short-mark { height: 24px; }
@@ -1996,7 +2110,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 
 /* ============================================================
-   MOBILE — CLEAN HEADER FIX
+   MOBILE
    ============================================================ */
 @media (max-width: 900px) {
   .header-strip { padding: 6px 14px; font-size: 0.5rem; }
@@ -2005,7 +2119,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .header-strip-right .header-strip-tag { display: none; }
   .header-strip-left a { font-size: 0.5rem; }
 
-  /* ✅ Mobile header — clean layout, no overlap */
   .header-main {
     padding: 8px 12px;
     gap: 8px;
@@ -2014,62 +2127,58 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   }
   .header.scrolled .header-main { padding: 6px 12px; }
 
-  /* Logo block — compact */
+  /* ✅ Mobile — company name FULL 2 lines */
   .logo-block {
     display: flex;
     align-items: center;
     gap: 6px;
     flex: 1;
     min-width: 0;
-    overflow: hidden;
   }
-
-  /* Short logo — small */
   .logo-short-mark {
-    height: 20px;
+    height: 22px;
     flex-shrink: 0;
     margin-right: 2px;
   }
-
-  /* Company name — chota aur truncate */
   .logo-text-block {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    overflow: hidden;
-    flex: 0 1 auto;
+    flex: 1;
     line-height: 1.05;
     gap: 0;
   }
   .lt-main {
     font-family: var(--font-display);
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0;
     gap: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
     line-height: 1.1;
     max-width: 100%;
     display: block;
   }
   .lt-main em {
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     color: var(--gold-deep);
+    font-style: italic;
   }
   .lt-sub {
-    display: none;
+    display: block;
+    font-size: 0.42rem;
+    letter-spacing: 0.14em;
+    color: rgba(6, 26, 16, 0.75);
+    font-weight: 700;
+    white-space: nowrap;
   }
-
-  /* Machine logo — small */
   .logo-machine-mark {
-    height: 22px;
+    height: 24px;
     flex-shrink: 0;
     margin-left: 2px;
   }
 
-  /* Nav — hidden, moves to drawer */
   .nav-main {
     position: fixed;
     top: 0; right: -100%;
@@ -2093,7 +2202,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     border-radius: 10px;
   }
 
-  /* Header tools — compact */
   .header-tools {
     display: flex;
     gap: 6px;
@@ -2112,9 +2220,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   }
   .header-tools .cta-quote span { display: none; }
   .header-tools .cta-quote i { font-size: 0.72rem; }
-  .header-tools .cta-quote::after {
-    content: '';
-  }
+  .header-tools .cta-quote::after { content: ''; }
 
   .menu-toggle {
     display: flex;
@@ -2126,7 +2232,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .menu-toggle.open span:nth-child(2) { opacity: 0; }
   .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-  /* Hero */
   .hero { padding-top: 90px; min-height: auto; }
   .hero-inner { grid-template-columns: 1fr; gap: 50px; padding: 30px 20px 60px; }
   .hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
@@ -2182,12 +2287,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .stat-col:nth-child(3), .stat-col:nth-child(4) { border-bottom: none; }
   .stat-col .sc-val { font-size: 1.9rem; }
 
-  .about-feature { grid-template-columns: 1fr; gap: 40px; }
-  .about-content h2 { font-size: 1.5rem; }
-  .about-year-badge { width: 100px; height: 100px; bottom: -12px; right: -8px; }
-  .about-year-badge .yb-num { font-size: 1.4rem; }
-  .about-features { grid-template-columns: 1fr; gap: 8px; }
-
   .cta-full { padding: 40px 24px; }
   .cta-full h2 { font-size: 1.6rem; }
 
@@ -2204,6 +2303,20 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .footer::before { font-size: 8rem; bottom: -30px; right: -10px; }
   .footer-top { grid-template-columns: 1fr; gap: 26px; padding-bottom: 30px; }
   .footer-bottom { flex-direction: column; text-align: center; gap: 8px; font-size: 0.5rem; }
+
+  /* About page mobile */
+  .about-container { padding: 30px 16px; }
+  .about-block { padding: 26px 20px; border-radius: 12px; margin-bottom: 22px; }
+  .about-block h2 { font-size: 1.3rem; }
+  .about-block p { font-size: 0.85rem; line-height: 1.8; }
+  .about-grid { grid-template-columns: 1fr; gap: 22px; }
+  .about-grid .info h2 { font-size: 1.3rem; }
+  .about-timeline-item .year { font-size: 1.5rem; }
+  .offices-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  .about-stats-section { padding: 30px 18px; }
+  .about-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .about-stat-item .number { font-size: 1.8rem; }
 }
 
 @media (max-width: 560px) {
@@ -2227,11 +2340,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
   /* Extra small — header ultra compact */
   .header-main { padding: 7px 10px; gap: 6px; }
-  .logo-block { gap: 5px; }
+  .logo-block { gap: 4px; }
   .logo-short-mark { height: 18px; }
   .logo-machine-mark { height: 20px; }
-  .lt-main { font-size: 0.56rem; letter-spacing: 0; }
-  .lt-main em { font-size: 0.56rem; }
+  .lt-main { font-size: 0.62rem; letter-spacing: 0; line-height: 1.1; }
+  .lt-main em { font-size: 0.62rem; }
+  .lt-sub { font-size: 0.36rem; letter-spacing: 0.12em; }
   .header-tools .lang-btn { padding: 5px 8px; font-size: 0.45rem; }
   .header-tools .cta-quote { padding: 6px 10px; }
   .header-tools .cta-quote i { font-size: 0.65rem; }
@@ -2267,9 +2381,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </div>
 </div>
 
-<!-- ============ HEADER — YELLOW/GOLD ============ -->
+<!-- ============ HEADER ============ -->
 <header class="header" id="header">
-  <!-- Top contact strip -->
   <div class="header-strip">
     <div class="header-strip-left">
       <a href="tel:+861065910786"><i class="fas fa-phone"></i> +86-10-65910786</a>
@@ -2281,15 +2394,14 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </div>
 
-  <!-- Main header -->
   <div class="header-main">
-    <!-- Logo block — [logo-short] → Company Name → [logo-main] -->
     <div class="logo-block" onclick="go('home')">
       <div class="logo-short-mark">
         <img src="logo-main.png" alt="PK" onerror="this.style.display='none'">
       </div>
       <div class="logo-text-block">
-        <span class="lt-main">PEKIN-PAK-INTL <em>LLC</em></span>
+        <span class="lt-main">PEKIN-PAK-INTERNATIONAL <em>LLC</em></span>
+        <span class="lt-sub" data-en="Global Machinery · Trading · Since 1993" data-zh="全球机械 · 贸易 · 始于1993">Global Machinery · Trading · Since 1993</span>
       </div>
       <div class="logo-machine-mark">
         <img src="logo-short.png" alt="PEKIN-PAK" onerror="this.style.display='none'">
@@ -2419,7 +2531,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </div>
 
-  <section class="section">
+  <!-- ✅ Range section with willow.jpg pattern background -->
+  <section class="section range-bg">
     <div class="section-inner">
       <div class="section-head reveal">
         <div>
@@ -2571,105 +2684,157 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </section>
 
-  <section class="section cream">
-    <div class="section-inner">
-      <div class="about-feature reveal">
-        <div class="about-img-wrap">
-          <img src="p1.jfif" alt="Workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80'">
-          <div class="about-year-badge">
-            <div class="yb-num">1993</div>
-            <div class="yb-lbl" data-en="Est." data-zh="成立">Est.</div>
-          </div>
+  <div class="about-container">
+
+    <!-- Section 1: Who We Are -->
+    <div class="about-block reveal">
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="about.jfif" alt="PEKIN-PAK-INTERNATIONAL LLC" onerror="this.parentElement.innerHTML='<div style=&quot;padding:40px;text-align:center;color:var(--gold);&quot;><i class=&quot;fas fa-building&quot; style=&quot;font-size:3rem;&quot;></i><p style=&quot;margin-top:12px;font-size:0.8rem;color:#999;&quot;>Company Image</p></div>'">
         </div>
-        <div class="about-content">
-          <div class="label" data-en="Who We Are" data-zh="我们是谁">Who We Are</div>
-          <h2 data-en="Built on trust. Delivered worldwide." data-zh="以信任建造。全球交付。">Built on trust. <em>Delivered worldwide.</em></h2>
-          <p data-en="PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades. Our corporate headquarters is located in Sialkot, Pakistan." data-zh="巴基斯坦皮金巴克国际有限公司是一家卓越的进出口贸易及一般贸易代理公司，拥有超过三十年的悠久历史。我们的公司总部位于巴基斯坦锡亚尔科特。">PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades. Our corporate headquarters is located in Sialkot, Pakistan.</p>
-          <p data-en="As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world." data-zh="作为一家值得信赖的佣金代理和一般贸易商，我们专注于连接全球制造商与世界各地的买家。">As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world.</p>
-          <div class="about-features">
-            <div class="about-feature-item"><i class="fas fa-map-marker-alt"></i> <span data-en="Sialkot, Pakistan" data-zh="巴基斯坦锡亚尔科特">Sialkot, Pakistan</span></div>
-            <div class="about-feature-item"><i class="fas fa-calendar"></i> <span data-en="Since 1993" data-zh="自1993年">Since 1993</span></div>
-            <div class="about-feature-item"><i class="fas fa-globe"></i> <span data-en="3 Global Offices" data-zh="3个全球办事处">3 Global Offices</span></div>
-            <div class="about-feature-item"><i class="fas fa-medal"></i> <span data-en="Quality Focus" data-zh="质量优先">Quality Focus</span></div>
+        <div class="info">
+          <h2 data-en="Who We Are" data-zh="我们是谁">Who We <span class="highlight" data-en="Are" data-zh="是谁">Are</span></h2>
+          <p data-en="PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades. Our corporate headquarters is located in Sialkot, Pakistan — a city renowned globally for its excellence in manufacturing and export. From this foundation of quality and craftsmanship, we have expanded our operations to Beijing, China (2007) and Dubai, UAE (2008), establishing a truly global presence." data-zh="巴基斯坦皮金巴克国际有限公司是一家卓越的进出口贸易及一般贸易代理公司，拥有超过三十年的悠久历史。我们的公司总部位于巴基斯坦锡亚尔科特——这座城市以卓越的制造业和出口业享誉全球。基于这一品质和工艺的基础，我们将业务扩展到中国北京（2007年）和阿联酋迪拜（2008年），建立了真正的全球业务网络。">PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades. Our corporate headquarters is located in Sialkot, Pakistan — a city renowned globally for its excellence in manufacturing and export. From this foundation of quality and craftsmanship, we have expanded our operations to Beijing, China (2007) and Dubai, UAE (2008), establishing a truly global presence.</p>
+          <p data-en="As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world. Our core expertise lies in construction and mining machinery, ensuring that our clients receive the highest quality equipment for their projects." data-zh="作为一家值得信赖的佣金代理和一般贸易商，我们专注于连接全球制造商与世界各地的买家。我们的核心专长在于建筑和采矿机械设备，确保我们的客户为其项目获得最高质量的设备。">As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world. Our core expertise lies in construction and mining machinery, ensuring that our clients receive the highest quality equipment for their projects.</p>
+          <div class="highlight-box">
+            <i class="fas fa-quote-left"></i>
+            <span data-en="Our mission is to empower construction and mining projects with world-class machinery and unparalleled support across the globe." data-zh="我们的使命是为全球建筑和采矿项目提供世界一流的机械和无与伦比的支持。">Our mission is to empower construction and mining projects with world-class machinery and unparalleled support across the globe.</span>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-head center reveal">
-        <div>
-          <div class="label" data-en="Our Journey" data-zh="我们的历程">Our Journey</div>
-          <h2 data-en="Milestones that shaped us." data-zh="塑造我们的里程碑。">Milestones that <em>shaped us.</em></h2>
+    <!-- Section 2: Our Journey -->
+    <div class="about-block reveal">
+      <h2 data-en="Our Journey" data-zh="我们的历程">Our <span class="highlight" data-en="Journey" data-zh="历程">Journey</span></h2>
+      <div class="underline"></div>
+
+      <p data-en="PEKIN-PAK-INTERNATIONAL LLC was established in Sialkot, Pakistan in 1993 with a vision to bridge the gap between manufacturers and global markets. Sialkot, known as the 'City of Export,' provided the perfect foundation for our operations with its rich industrial heritage and skilled workforce." data-zh="巴基斯坦皮金巴克国际有限公司于1993年在巴基斯坦锡亚尔科特成立，愿景是连接制造商与全球市场。锡亚尔科特被誉为'出口之城'，凭借其丰富的工业传统和熟练的劳动力，为我们的运营提供了完美的基础。">PEKIN-PAK-INTERNATIONAL LLC was established in Sialkot, Pakistan in 1993 with a vision to bridge the gap between manufacturers and global markets. Sialkot, known as the 'City of Export,' provided the perfect foundation for our operations with its rich industrial heritage and skilled workforce.</p>
+
+      <p data-en="In 2007, we took a significant step forward by establishing our Beijing Representative Office in the heart of China's capital. This strategic expansion allowed us to tap into the world's largest manufacturing hub and strengthen our presence in the Asian market." data-zh="2007年，我们在中国首都的中心建立了北京代表处，迈出了重要的一步。这一战略性的扩张使我们能够进入世界最大的制造业中心，并加强我们在亚洲市场的地位。">In 2007, we took a significant step forward by establishing our Beijing Representative Office in the heart of China's capital. This strategic expansion allowed us to tap into the world's largest manufacturing hub and strengthen our presence in the Asian market.</p>
+
+      <p data-en="The following year, in 2008, we extended our reach to Dubai, UAE, positioning ourselves at the crossroads of global trade and commerce. Dubai's strategic location made it the ideal gateway to the Middle East, Africa, and beyond." data-zh="次年，2008年，我们将业务扩展到阿联酋迪拜，将我们定位在全球贸易和商业的十字路口。迪拜的战略位置使其成为通往中东、非洲及其他地区的理想门户。">The following year, in 2008, we extended our reach to Dubai, UAE, positioning ourselves at the crossroads of global trade and commerce. Dubai's strategic location made it the ideal gateway to the Middle East, Africa, and beyond.</p>
+
+      <div class="about-timeline-grid">
+        <div class="about-timeline-item">
+          <div class="year">1993</div>
+          <div class="title">🇵🇰 <span data-en="Sialkot, Pakistan" data-zh="锡亚尔科特，巴基斯坦">Sialkot, Pakistan</span></div>
+          <div class="desc" data-en="Mother Company Established" data-zh="母公司成立">Mother Company Established</div>
         </div>
-      </div>
-      <div class="stats-rail reveal">
-        <div class="stat-col">
-          <div class="sc-num">/ 01</div>
-          <div class="sc-val">1993</div>
-          <div class="sc-lbl" data-en="Sialkot, Pakistan" data-zh="锡亚尔科特，巴基斯坦">Sialkot, Pakistan</div>
-          <div class="sc-desc" data-en="Headquarters established." data-zh="总部成立。">Headquarters established.</div>
+        <div class="about-timeline-item">
+          <div class="year">2007</div>
+          <div class="title">🇨🇳 <span data-en="Beijing, China" data-zh="中国北京">Beijing, China</span></div>
+          <div class="desc" data-en="Beijing Representative Office" data-zh="北京代表处">Beijing Representative Office</div>
         </div>
-        <div class="stat-col">
-          <div class="sc-num">/ 02</div>
-          <div class="sc-val">2007</div>
-          <div class="sc-lbl" data-en="Beijing, China" data-zh="中国北京">Beijing, China</div>
-          <div class="sc-desc" data-en="Representative office opened." data-zh="代表处成立。">Representative office opened.</div>
+        <div class="about-timeline-item">
+          <div class="year">2008</div>
+          <div class="title">🇦🇪 <span data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</span></div>
+          <div class="desc" data-en="Dubai Office Established" data-zh="迪拜办事处成立">Dubai Office Established</div>
         </div>
-        <div class="stat-col">
-          <div class="sc-num">/ 03</div>
-          <div class="sc-val">2008</div>
-          <div class="sc-lbl" data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</div>
-          <div class="sc-desc" data-en="Middle East hub launched." data-zh="中东枢纽启动。">Middle East hub launched.</div>
-        </div>
-        <div class="stat-col">
-          <div class="sc-num">/ 04</div>
-          <div class="sc-val">2024</div>
-          <div class="sc-lbl" data-en="Global Reach" data-zh="全球覆盖">Global Reach</div>
-          <div class="sc-desc" data-en="3 continents, 50+ models." data-zh="3大洲，50+型号。">3 continents, 50+ models.</div>
+        <div class="about-timeline-item">
+          <div class="year">2024</div>
+          <div class="title">🌍 <span data-en="Global Presence" data-zh="全球覆盖">Global Presence</span></div>
+          <div class="desc" data-en="Serving 3 Continents" data-zh="服务三大洲">Serving 3 Continents</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section cream">
-    <div class="section-inner">
-      <div class="section-head center reveal">
-        <div>
-          <div class="label" data-en="Our Values" data-zh="我们的价值观">Our Values</div>
-          <h2 data-en="What we stand for." data-zh="我们的立场。">What we <em>stand for.</em></h2>
+    <!-- Section 3: Our Offices -->
+    <div class="about-block reveal">
+      <h2 data-en="Our Offices" data-zh="我们的办事处">Our <span class="highlight" data-en="Offices" data-zh="办事处">Offices</span></h2>
+      <div class="underline"></div>
+
+      <div class="offices-grid">
+        <div class="office-card">
+          <div class="flag">🇵🇰</div>
+          <div class="city" data-en="Sialkot, Pakistan" data-zh="锡亚尔科特，巴基斯坦">Sialkot, Pakistan</div>
+          <div class="year">Est. 1993</div>
+          <div class="address" data-en="Head Office" data-zh="总部">Head Office</div>
         </div>
-      </div>
-      <div class="stats-rail reveal" style="grid-template-columns:repeat(4,1fr)">
-        <div class="stat-col">
-          <div class="sc-num">/ 01</div>
-          <div class="sc-val"><i class="fas fa-trophy" style="color:var(--gold);font-size:1.8rem"></i></div>
-          <div class="sc-lbl" data-en="Excellence" data-zh="卓越">Excellence</div>
-          <div class="sc-desc" data-en="Quality first. Every machine inspected." data-zh="质量第一。每台设备均经检验。">Quality first. Every machine inspected.</div>
+        <div class="office-card">
+          <div class="flag">🇨🇳</div>
+          <div class="city" data-en="Beijing, China" data-zh="中国北京">Beijing, China</div>
+          <div class="year">Est. 2007</div>
+          <div class="address">朝阳区康家沟145号</div>
         </div>
-        <div class="stat-col">
-          <div class="sc-num">/ 02</div>
-          <div class="sc-val"><i class="fas fa-handshake" style="color:var(--jade);font-size:1.8rem"></i></div>
-          <div class="sc-lbl" data-en="Integrity" data-zh="诚信">Integrity</div>
-          <div class="sc-desc" data-en="Honest dealings. No hidden charges." data-zh="诚信交易。没有隐藏费用。">Honest dealings. No hidden charges.</div>
-        </div>
-        <div class="stat-col">
-          <div class="sc-num">/ 03</div>
-          <div class="sc-val"><i class="fas fa-globe" style="color:var(--gold);font-size:1.8rem"></i></div>
-          <div class="sc-lbl" data-en="Global Vision" data-zh="全球视野">Global Vision</div>
-          <div class="sc-desc" data-en="Worldwide reach across continents." data-zh="遍布各大洲的全球覆盖。">Worldwide reach across continents.</div>
-        </div>
-        <div class="stat-col">
-          <div class="sc-num">/ 04</div>
-          <div class="sc-val"><i class="fas fa-lightbulb" style="color:var(--jade);font-size:1.8rem"></i></div>
-          <div class="sc-lbl" data-en="Innovation" data-zh="创新">Innovation</div>
-          <div class="sc-desc" data-en="Continuous improvement always." data-zh="始终持续改进。">Continuous improvement always.</div>
+        <div class="office-card">
+          <div class="flag">🇦🇪</div>
+          <div class="city" data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</div>
+          <div class="year">Est. 2008</div>
+          <div class="address" data-en="Middle East Hub" data-zh="中东枢纽">Middle East Hub</div>
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- Section 4: Our Values -->
+    <div class="about-block reveal">
+      <h2 data-en="Our Core Values" data-zh="我们的核心价值观">Our Core <span class="highlight" data-en="Values" data-zh="价值观">Values</span></h2>
+      <div class="underline"></div>
+
+      <p data-en="At PEKIN-PAK-INTERNATIONAL LLC, our values define who we are and how we do business. These principles guide every decision we make and every relationship we build." data-zh="在巴基斯坦皮金巴克国际有限公司，我们的价值观定义了我们的身份和我们的经营方式。这些原则指导着我们做出的每一个决定和建立的每一段关系。">At PEKIN-PAK-INTERNATIONAL LLC, our values define who we are and how we do business. These principles guide every decision we make and every relationship we build.</p>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="icon">🏆</div>
+          <h4 data-en="Excellence" data-zh="卓越">Excellence</h4>
+          <p data-en="We strive for excellence in everything we do, from sourcing to delivery." data-zh="我们在所做的每一件事上都追求卓越，从采购到交付。">We strive for excellence in everything we do, from sourcing to delivery.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">🤝</div>
+          <h4 data-en="Integrity" data-zh="诚信">Integrity</h4>
+          <p data-en="We conduct our business with honesty, transparency, and ethical practices." data-zh="我们以诚实、透明和道德的方式开展业务。">We conduct our business with honesty, transparency, and ethical practices.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">🌍</div>
+          <h4 data-en="Global Vision" data-zh="全球视野">Global Vision</h4>
+          <p data-en="We think globally, connecting markets and creating opportunities worldwide." data-zh="我们放眼全球，连接市场，在世界各地创造机遇。">We think globally, connecting markets and creating opportunities worldwide.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">💡</div>
+          <h4 data-en="Innovation" data-zh="创新">Innovation</h4>
+          <p data-en="We embrace innovation and continuously seek better ways to serve our clients." data-zh="我们拥抱创新，不断寻求更好的方式为客户服务。">We embrace innovation and continuously seek better ways to serve our clients.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Why Choose Us -->
+    <div class="about-block reveal">
+      <h2 data-en="Why Choose Us" data-zh="为什么选择我们">Why <span class="highlight" data-en="Choose" data-zh="选择">Choose</span> Us</h2>
+      <div class="underline"></div>
+
+      <p data-en="With over 30 years of experience in the industry, PEKIN-PAK-INTERNATIONAL LLC has established itself as a trusted partner for businesses worldwide. Our deep understanding of international trade, combined with our extensive network of manufacturers and suppliers, enables us to deliver exceptional value to our clients." data-zh="凭借30多年的行业经验，巴基斯坦皮金巴克国际有限公司已将自己定位为全球企业值得信赖的合作伙伴。我们对国际贸易的深刻理解，加上我们广泛的制造商和供应商网络，使我们能够为客户提供卓越的价值。">With over 30 years of experience in the industry, PEKIN-PAK-INTERNATIONAL LLC has established itself as a trusted partner for businesses worldwide. Our deep understanding of international trade, combined with our extensive network of manufacturers and suppliers, enables us to deliver exceptional value to our clients.</p>
+
+      <p data-en="Whether you are looking for high-quality construction machinery, reliable mining equipment, or expert trading services, we have the expertise and resources to meet your needs. Our team of experienced professionals is dedicated to providing personalized solutions that drive success for your business." data-zh="无论您是在寻找高品质的建筑机械、可靠的采矿设备，还是专业的贸易服务，我们都有专业知识和资源来满足您的需求。我们经验丰富的专业团队致力于提供个性化的解决方案，助力您的业务取得成功。">Whether you are looking for high-quality construction machinery, reliable mining equipment, or expert trading services, we have the expertise and resources to meet your needs. Our team of experienced professionals is dedicated to providing personalized solutions that drive success for your business.</p>
+
+      <div class="highlight-box">
+        <i class="fas fa-quote-left"></i>
+        <span data-en='"We don\'t just trade products — we build lasting partnerships based on trust, quality, and mutual success."' data-zh='"我们不仅仅是交易产品 — 我们基于信任、质量和共同成功建立持久的合作伙伴关系。"'>"We don't just trade products — we build lasting partnerships based on trust, quality, and mutual success."</span>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="about-stats-section reveal">
+      <div class="about-stats-grid">
+        <div class="about-stat-item">
+          <div class="number">30+</div>
+          <div class="label" data-en="Years of Excellence" data-zh="卓越经验">Years of Excellence</div>
+        </div>
+        <div class="about-stat-item">
+          <div class="number">3</div>
+          <div class="label" data-en="Global Offices" data-zh="全球办事处">Global Offices</div>
+        </div>
+        <div class="about-stat-item">
+          <div class="number">50+</div>
+          <div class="label" data-en="Satisfied Clients" data-zh="满意的客户">Satisfied Clients</div>
+        </div>
+        <div class="about-stat-item">
+          <div class="number">24/7</div>
+          <div class="label" data-en="Dedicated Support" data-zh="全天候支持">Dedicated Support</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <!-- ============================================================ -->
