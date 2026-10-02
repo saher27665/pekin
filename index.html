@@ -11,9 +11,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="icon" type="image/png" href="logo-short.png">
 <style>
-/* ============================================================
-   PEKIN-PAK — GLOBAL MACHINERY
-   ============================================================ */
 :root {
   --forest: #0B2B1B;
   --forest-deep: #061A10;
@@ -71,9 +68,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   transition: width 0.1s;
 }
 
-/* ============================================================
-   LANGUAGE OVERLAY
-   ============================================================ */
+/* LANGUAGE OVERLAY */
 .lang-overlay {
   position: fixed; inset: 0; z-index: 99999;
   background: linear-gradient(135deg, var(--forest-deep) 0%, var(--forest) 50%, var(--forest-mid) 100%);
@@ -173,9 +168,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fadeInScale { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
-/* ============================================================
-   HEADER
-   ============================================================ */
+/* HEADER */
 .header {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 1000;
@@ -209,9 +202,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .header-strip-left a:hover { color: var(--gold-bright); }
 .header-strip-left i { color: var(--gold); font-size: 0.62rem; }
-.header-strip-right {
-  display: flex; gap: 14px; align-items: center;
-}
+.header-strip-right { display: flex; gap: 14px; align-items: center; }
 .header-strip-tag {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--gold-bright);
@@ -240,7 +231,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .logo-short-mark {
   height: 26px; width: auto;
   display: flex; align-items: center;
-  background: transparent; padding: 0;
+  padding: 0;
   transition: all 0.4s var(--ease);
   flex-shrink: 0;
   filter: drop-shadow(0 1px 3px rgba(11, 43, 27, 0.25));
@@ -274,7 +265,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .logo-machine-mark {
   height: 42px; width: auto;
   display: flex; align-items: center;
-  background: transparent; padding: 0;
+  padding: 0;
   transition: all 0.4s var(--ease);
   flex-shrink: 0;
   filter: drop-shadow(0 1px 3px rgba(11, 43, 27, 0.25));
@@ -346,15 +337,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   transition: all 0.35s var(--ease);
 }
 
-/* ============================================================
-   PAGE SYSTEM
-   ============================================================ */
+/* PAGE SYSTEM */
 .page { display: none; }
 .page.active { display: block; animation: fadeIn 0.5s var(--ease); }
 
-/* ============================================================
-   HERO
-   ============================================================ */
+/* HERO */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -462,7 +449,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   margin-bottom: 38px;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }
-.hero p.hero-text strong { color: #FFF; font-weight: 600; }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
@@ -546,10 +532,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   border-radius: 18px;
   overflow: hidden;
   background: var(--forest);
-  box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(201, 169, 89, 0.25),
-    0 0 0 8px rgba(201, 169, 89, 0.06);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(201, 169, 89, 0.25), 0 0 0 8px rgba(201, 169, 89, 0.06);
   transition: all 0.7s var(--ease);
   cursor: pointer;
   transform-style: preserve-3d;
@@ -641,9 +624,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 @keyframes scrollMove { 0% { left: -100%; } 50% { left: 100%; } 100% { left: 100%; } }
 
-/* ============================================================
-   COUNTER STRIP
-   ============================================================ */
+/* COUNTER STRIP */
 .counter-strip {
   background: linear-gradient(90deg, var(--forest-deep), var(--forest-mid) 50%, var(--forest-deep));
   border-top: 1px solid rgba(201, 169, 89, 0.5);
@@ -703,18 +684,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   margin-top: 4px;
 }
 
-/* ============================================================
-   SECTIONS
-   ============================================================ */
+/* SECTIONS */
 .section { padding: 100px 60px; position: relative; }
 .section-inner { max-width: 1300px; margin: 0 auto; }
 .section.cream { background: linear-gradient(180deg, var(--ivory), var(--cream-2)); }
-.section.dark {
-  background: linear-gradient(135deg, var(--forest-deep), var(--forest) 58%, var(--forest-mid));
-  color: var(--cream);
-}
 
-/* ✅ WILLOW PATTERN — Range section */
+/* WILLOW PATTERN — Range section */
 .section.range-bg {
   background-color: var(--cream);
   position: relative;
@@ -785,9 +760,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ============================================================
-   HORIZONTAL SCROLL
-   ============================================================ */
+/* HORIZONTAL SCROLL */
 .h-scroll-outer {
   position: relative;
   overflow-x: auto;
@@ -897,9 +870,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .h-scroll-hint i { color: var(--gold); }
 
-/* ============================================================
-   SPEC DASHBOARD
-   ============================================================ */
+/* SPEC DASHBOARD */
 .spec-dashboard {
   background: var(--forest-deep);
   border-radius: 26px;
@@ -1001,9 +972,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   color: var(--cream);
 }
 
-/* ============================================================
-   TIMELINE
-   ============================================================ */
+/* TIMELINE */
 .timeline { position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0; }
 .timeline::before {
   content: '';
@@ -1062,9 +1031,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .tl-item:nth-child(odd) .tl-node { grid-column: 2; }
 .tl-item .tl-spacer { grid-column: 1; }
 
-/* ============================================================
-   ABOUT FEATURE
-   ============================================================ */
+/* ABOUT FEATURE (Home) */
 .about-feature {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1163,9 +1130,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   flex-shrink: 0;
 }
 
-/* ============================================================
-   CTA SECTION
-   ============================================================ */
+/* CTA SECTION */
 .cta-full {
   position: relative;
   background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
@@ -1224,9 +1189,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   justify-content: flex-end;
 }
 
-/* ============================================================
-   ABOUT PAGE — CUSTOM STYLES
-   ============================================================ */
+/* ABOUT PAGE */
 .about-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -1473,9 +1436,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-size: 0.85rem;
 }
 
-/* ============================================================
-   PAGE HEADER
-   ============================================================ */
+/* PAGE HEADER */
 .page-head {
   padding: 160px 60px 80px;
   position: relative;
@@ -1539,9 +1500,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   line-height: 1.75;
 }
 
-/* ============================================================
-   MACHINE CARDS
-   ============================================================ */
+/* MACHINE CARDS */
 .machines-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1626,9 +1585,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   border-top: 1px solid rgba(201, 169, 89, 0.3);
 }
 
-/* ============================================================
-   MACHINE DETAIL
-   ============================================================ */
+/* MACHINE DETAIL */
 .detail-card {
   background: var(--ivory);
   border-radius: 22px;
@@ -1759,9 +1716,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .btn-enquire:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-/* ============================================================
-   CONTACT
-   ============================================================ */
+/* CONTACT */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1895,9 +1850,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .msg.success { display: block; background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
 .msg.error { display: block; background: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* FOOTER */
 .footer {
   background: linear-gradient(135deg, var(--forest-deep), #041208 58%, var(--forest-mid));
   color: var(--cream);
@@ -1978,9 +1931,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   position: relative; z-index: 2;
 }
 
-/* ============================================================
-   BACK TO TOP + TOAST
-   ============================================================ */
+/* BACK TO TOP */
 .back-top {
   position: fixed;
   bottom: 24px; right: 24px;
@@ -1998,6 +1949,52 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .back-top.show { opacity: 1; pointer-events: auto; }
 .back-top:hover { transform: translateY(-4px); background: var(--gold); color: var(--forest-deep); }
+
+/* ✅ MUSIC BUTTON */
+.music-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  z-index: 9998;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--forest), var(--forest-mid));
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 30px rgba(11, 43, 27, 0.35);
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  border: 1px solid rgba(201, 169, 89, 0.4);
+}
+.music-btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 15px 40px rgba(11, 43, 27, 0.5);
+}
+.music-btn.playing {
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color: var(--forest-deep);
+  border-color: var(--gold-bright);
+  animation: musicPulse 2s ease-in-out infinite;
+}
+.music-btn i {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+@keyframes musicPulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(201, 169, 89, 0.5), 0 0 0 0 rgba(201, 169, 89, 0.5);
+  }
+  50% {
+    box-shadow: 0 10px 30px rgba(201, 169, 89, 0.6), 0 0 0 12px rgba(201, 169, 89, 0);
+  }
+}
+
+/* TOAST */
 .toast {
   position: fixed;
   bottom: 24px; left: 50%;
@@ -2017,9 +2014,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 .toast.err { background: #DC3545; border-color: #DC3545; }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* RESPONSIVE */
 @media (max-width: 1200px) {
   .hero-inner { padding: 40px 40px 80px; gap: 40px; }
   .hero-scroll { left: 40px; }
@@ -2204,6 +2199,14 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .about-stats-section { padding: 30px 18px; }
   .about-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
   .about-stat-item .number { font-size: 1.8rem; }
+
+  .music-btn {
+    bottom: 76px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 560px) {
@@ -2237,6 +2240,20 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .header-tools .cta-quote i { font-size: 0.65rem; }
   .menu-toggle { padding: 5px; }
   .menu-toggle span { width: 18px; }
+
+  .music-btn {
+    bottom: 70px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    font-size: 0.9rem;
+  }
+  .back-top {
+    width: 40px;
+    height: 40px;
+    bottom: 20px;
+    right: 12px;
+  }
 }
 </style>
 </head>
@@ -2413,7 +2430,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </div>
 
-  <!-- RANGE with willow.jpg pattern -->
   <section class="section range-bg">
     <div class="section-inner">
       <div class="section-head reveal">
@@ -2867,6 +2883,17 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <i class="fas fa-arrow-up"></i>
 </button>
+
+<!-- ✅ AUDIO -->
+<audio id="bgMusic" loop preload="auto" playsinline>
+  <source src="music11.mpeg" type="audio/mpeg">
+</audio>
+
+<!-- ✅ MUSIC BUTTON -->
+<button class="music-btn" id="musicBtn" onclick="event.stopPropagation();window.toggleMusic()" title="Music ON — Click to turn OFF" aria-label="Toggle Music">
+  <i class="fas fa-volume-up" id="musicIcon"></i>
+</button>
+
 <div class="toast" id="toast"></div>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -3271,6 +3298,110 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     return false;
   };
 
+  /* ============================================================
+     MUSIC
+     ============================================================ */
+  let bgMusic, musicBtn, musicIcon;
+  let musicStarted = false;
+
+  function updateMusicIcon() {
+    if (!bgMusic || !musicIcon) return;
+    if (bgMusic.paused) {
+      musicIcon.className = 'fas fa-volume-mute';
+      if (musicBtn) {
+        musicBtn.classList.remove('playing');
+        musicBtn.title = 'Music OFF — Click to turn ON';
+      }
+    } else {
+      musicIcon.className = 'fas fa-volume-up';
+      if (musicBtn) {
+        musicBtn.classList.add('playing');
+        musicBtn.title = 'Music ON — Click to turn OFF';
+      }
+    }
+  }
+
+  function playMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.15;
+    const p = bgMusic.play();
+    if (p && p.then) {
+      p.then(() => {
+        musicStarted = true;
+        updateMusicIcon();
+        try { localStorage.setItem('pp-music', 'on'); } catch(e) {}
+        removeMusicListeners();
+      }).catch(err => {
+        console.log('Autoplay blocked, waiting for user interaction:', err);
+      });
+    }
+  }
+
+  function toggleMusic() {
+    if (!bgMusic) return;
+    if (bgMusic.paused) {
+      playMusic();
+      showToast('🎵 Music ON');
+    } else {
+      bgMusic.pause();
+      updateMusicIcon();
+      try { localStorage.setItem('pp-music', 'off'); } catch(e) {}
+      showToast('🔇 Music OFF');
+    }
+  }
+
+  function onUserInteraction() {
+    if (musicStarted) { removeMusicListeners(); return; }
+    let pref = 'on';
+    try { pref = localStorage.getItem('pp-music') || 'on'; } catch(e) {}
+    if (pref === 'off') { removeMusicListeners(); return; }
+    playMusic();
+  }
+
+  function removeMusicListeners() {
+    document.removeEventListener('click', onUserInteraction);
+    document.removeEventListener('touchstart', onUserInteraction);
+    document.removeEventListener('keydown', onUserInteraction);
+    document.removeEventListener('scroll', onUserInteraction);
+    document.removeEventListener('mousemove', onUserInteraction);
+    document.removeEventListener('pointerdown', onUserInteraction);
+  }
+
+  function initMusic() {
+    bgMusic = document.getElementById('bgMusic');
+    musicBtn = document.getElementById('musicBtn');
+    musicIcon = document.getElementById('musicIcon');
+    if (!bgMusic) return;
+
+    let pref = 'on';
+    try { pref = localStorage.getItem('pp-music') || 'on'; } catch(e) {}
+
+    if (pref === 'off') {
+      updateMusicIcon();
+      return;
+    }
+
+    bgMusic.volume = 0.15;
+    const p = bgMusic.play();
+    if (p && p.then) {
+      p.then(() => {
+        musicStarted = true;
+        updateMusicIcon();
+      }).catch(() => {
+        console.log('Autoplay blocked. Music will start on first interaction.');
+        document.addEventListener('click', onUserInteraction, { passive: true });
+        document.addEventListener('touchstart', onUserInteraction, { passive: true });
+        document.addEventListener('keydown', onUserInteraction, { passive: true });
+        document.addEventListener('scroll', onUserInteraction, { passive: true });
+        document.addEventListener('mousemove', onUserInteraction, { passive: true });
+        document.addEventListener('pointerdown', onUserInteraction, { passive: true });
+      });
+    }
+    updateMusicIcon();
+  }
+
+  window.toggleMusic = toggleMusic;
+
   async function init() {
     setLanguage(currentLang);
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
@@ -3278,6 +3409,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     allMachines = await loadMachinesFromJSON();
     await renderSpecDashboard();
     animateCounters();
+    initMusic();
   }
 
   document.addEventListener('DOMContentLoaded', init);
