@@ -238,7 +238,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .header.scrolled .header-main { padding: 8px 32px; }
 
-/* ✅ Logo block — [logo-short (small)] → Company Name → [logo-main (small)] */
+/* ✅ Logo block — [logo-short] → Company Name → [logo-main] */
 .logo-block {
   display: flex; align-items: center; gap: 12px;
   flex-shrink: 0; cursor: pointer;
@@ -424,17 +424,18 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .hero-bg::after {
   content: ''; position: absolute; inset: 0;
   background:
-    /* Left side dark — text readable */
     linear-gradient(100deg,
       rgba(6, 26, 16, 0.88) 0%,
       rgba(6, 26, 16, 0.72) 30%,
       rgba(6, 26, 16, 0.35) 55%,
       rgba(6, 26, 16, 0.15) 75%,
       rgba(6, 26, 16, 0.35) 100%),
-    /* Subtle radial glow top-right */
     radial-gradient(ellipse at 85% 40%, rgba(201, 169, 89, 0.12) 0%, transparent 55%);
 }
- 
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
 .hero-grid-lines {
   position: absolute; inset: 0; opacity: 0.06;
   background-image:
@@ -1990,37 +1991,85 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .counter-item:nth-child(2) { border-right: none; }
 
   .lt-main { font-size: 1rem; }
-  .logo-short-mark { height: 26px; }
-  .logo-machine-mark { height: 26px; }
+  .logo-short-mark { height: 24px; }
+  .logo-machine-mark { height: 38px; }
 }
 
+/* ============================================================
+   MOBILE — CLEAN HEADER FIX
+   ============================================================ */
 @media (max-width: 900px) {
-  .header-strip { padding: 6px 16px; font-size: 0.52rem; }
-  .header-strip-left { gap: 12px; }
+  .header-strip { padding: 6px 14px; font-size: 0.5rem; }
+  .header-strip-left { gap: 10px; }
   .header-strip-left a:not(:first-child) { display: none; }
   .header-strip-right .header-strip-tag { display: none; }
-  .header-main { padding: 10px 16px; gap: 10px; }
-  .header.scrolled .header-main { padding: 8px 16px; }
+  .header-strip-left a { font-size: 0.5rem; }
 
-  /* ✅ Mobile logo — both logos visible + company name */
-  .logo-block { gap: 8px; flex: 1; min-width: 0; }
-  .logo-short-mark { height: 24px; }
-  .logo-machine-mark { height: 24px; }
-  .logo-text-block { display: flex; }
-  .lt-main {
-    font-size: 0.68rem;
-    letter-spacing: 0.01em;
-    gap: 5px;
-    white-space: normal;
-    line-height: 1.1;
+  /* ✅ Mobile header — clean layout, no overlap */
+  .header-main {
+    padding: 8px 12px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    align-items: center;
   }
-  .lt-main em { font-size: 0.68rem; }
-  .lt-sub {
-    font-size: 0.4rem;
-    letter-spacing: 0.14em;
+  .header.scrolled .header-main { padding: 6px 12px; }
+
+  /* Logo block — compact */
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  /* Short logo — small */
+  .logo-short-mark {
+    height: 20px;
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+
+  /* Company name — chota aur truncate */
+  .logo-text-block {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    flex: 0 1 auto;
+    line-height: 1.05;
+    gap: 0;
+  }
+  .lt-main {
+    font-family: var(--font-display);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    gap: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.1;
+    max-width: 100%;
     display: block;
   }
+  .lt-main em {
+    font-size: 0.62rem;
+    color: var(--gold-deep);
+  }
+  .lt-sub {
+    display: none;
+  }
 
+  /* Machine logo — small */
+  .logo-machine-mark {
+    height: 22px;
+    flex-shrink: 0;
+    margin-left: 2px;
+  }
+
+  /* Nav — hidden, moves to drawer */
   .nav-main {
     position: fixed;
     top: 0; right: -100%;
@@ -2043,16 +2092,42 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     text-align: left;
     border-radius: 10px;
   }
-  .menu-toggle { display: flex; z-index: 1001; }
-  .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-  .menu-toggle.open span:nth-child(2) { opacity: 0; }
-  .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-  .header-tools .cta-quote { padding: 8px 14px; font-size: 0.52rem; }
-  .header-tools .lang-btn { padding: 7px 10px; font-size: 0.5rem; }
-  .header-tools .cta-quote span { display: none; }
-  .header-tools .cta-quote::after { content: 'Quote'; font-size: 0.5rem; }
 
-  .hero { padding-top: 100px; min-height: auto; }
+  /* Header tools — compact */
+  .header-tools {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .header-tools .lang-btn {
+    padding: 6px 10px;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+  .header-tools .cta-quote {
+    padding: 8px 12px;
+    font-size: 0.5rem;
+    gap: 4px;
+  }
+  .header-tools .cta-quote span { display: none; }
+  .header-tools .cta-quote i { font-size: 0.72rem; }
+  .header-tools .cta-quote::after {
+    content: '';
+  }
+
+  .menu-toggle {
+    display: flex;
+    padding: 6px;
+    flex-shrink: 0;
+  }
+  .menu-toggle span { width: 20px; height: 2px; }
+  .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* Hero */
+  .hero { padding-top: 90px; min-height: auto; }
   .hero-inner { grid-template-columns: 1fr; gap: 50px; padding: 30px 20px 60px; }
   .hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
   .hero-scroll { display: none; }
@@ -2116,7 +2191,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .cta-full { padding: 40px 24px; }
   .cta-full h2 { font-size: 1.6rem; }
 
-  .page-head { padding: 130px 20px 60px; min-height: 300px; }
+  .page-head { padding: 120px 20px 60px; min-height: 280px; }
   .page-head h1 { font-size: 1.6rem; }
   .page-head p { font-size: 0.85rem; }
 
@@ -2150,12 +2225,18 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .h-cat-card h3 { font-size: 1.1rem; }
   .stat-col .sc-val { font-size: 1.6rem; }
 
-  /* Extra small — even smaller logos */
-  .logo-short-mark { height: 20px; }
+  /* Extra small — header ultra compact */
+  .header-main { padding: 7px 10px; gap: 6px; }
+  .logo-block { gap: 5px; }
+  .logo-short-mark { height: 18px; }
   .logo-machine-mark { height: 20px; }
-  .lt-main { font-size: 0.58rem; gap: 4px; }
-  .lt-main em { font-size: 0.58rem; }
-  .lt-sub { font-size: 0.34rem; letter-spacing: 0.12em; }
+  .lt-main { font-size: 0.56rem; letter-spacing: 0; }
+  .lt-main em { font-size: 0.56rem; }
+  .header-tools .lang-btn { padding: 5px 8px; font-size: 0.45rem; }
+  .header-tools .cta-quote { padding: 6px 10px; }
+  .header-tools .cta-quote i { font-size: 0.65rem; }
+  .menu-toggle { padding: 5px; }
+  .menu-toggle span { width: 18px; }
 }
 </style>
 </head>
@@ -2202,18 +2283,14 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
   <!-- Main header -->
   <div class="header-main">
-    <!-- ✅ Logo block — [logo-short] → Company Name → [logo-main] -->
+    <!-- Logo block — [logo-short] → Company Name → [logo-main] -->
     <div class="logo-block" onclick="go('home')">
-      <!-- Short logo — start mein, chota -->
       <div class="logo-short-mark">
         <img src="logo-main.png" alt="PK" onerror="this.style.display='none'">
       </div>
-      <!-- Company name -->
       <div class="logo-text-block">
-        <span class="lt-main">PEKIN-PAK-INTERNATIONAL <em>LLC</em></span>
-        <span class="lt-sub" data-en="Global Machinery · Trading · Since 1993" data-zh="全球机械 · 贸易 · 始于1993">Global Machinery · Trading · Since 1993</span>
+        <span class="lt-main">PEKIN-PAK-INTL <em>LLC</em></span>
       </div>
-      <!-- Machine logo — company name ke baad, chota -->
       <div class="logo-machine-mark">
         <img src="logo-short.png" alt="PEKIN-PAK" onerror="this.style.display='none'">
       </div>
