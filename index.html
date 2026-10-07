@@ -199,6 +199,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   color: rgba(250, 247, 242, 0.85);
   transition: color 0.3s;
   display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
 }
 .header-strip-left a:hover { color: var(--gold-bright); }
 .header-strip-left i { color: var(--gold); font-size: 0.62rem; }
@@ -206,6 +207,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .header-strip-tag {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--gold-bright);
+  font-family: var(--font-mono);
 }
 .header-strip-tag::before {
   content: '●';
@@ -564,7 +566,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   text-transform: none;
   color: var(--cream);
 }
-.stack-card-label span { color: var(--gold-bright); font-size: 0.55rem; }
+.stack-card-label span { color: var(--gold-bright); font-size: 0.55rem; font-family: var(--font-mono); font-weight: 700; }
 .stack-card.c1 { width: 58%; height: 62%; top: 0; left: 0; transform: translateZ(60px); z-index: 4; animation: float1 6s ease-in-out infinite; }
 .stack-card.c2 { width: 52%; height: 52%; top: 10%; right: 0; transform: translateZ(20px); z-index: 3; animation: float2 7s ease-in-out infinite; }
 .stack-card.c3 { width: 50%; height: 48%; bottom: 0; left: 8%; transform: translateZ(-20px); z-index: 2; animation: float3 8s ease-in-out infinite; }
@@ -680,6 +682,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   line-height: 1;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 20px rgba(201, 169, 89, 0.4);
+  font-variant-numeric: tabular-nums;
 }
 .counter-num .suffix {
   font-family: 'JetBrains Mono', monospace;
@@ -697,6 +700,48 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   margin-top: 6px;
   font-weight: 500;
 }
+
+/* ============================================
+   GLOBAL NUMBER FONT — JetBrains Mono
+   (sab numbers ka font Counter Strip jaisa)
+   ============================================ */
+.about-stat-item .number,
+.about-stat-item .label,
+.about-timeline-item .year,
+.about-year-badge .yb-num,
+.spec-row .sr-val,
+.machine-card-price,
+.detail-card-info .price,
+.tl-node,
+.h-cat-num,
+.machine-card-seal,
+.detail-card-info .status,
+.info-item .text p,
+.footer-col p {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-stat-item .number,
+.about-timeline-item .year,
+.about-year-badge .yb-num,
+.machine-card-price,
+.detail-card-info .price,
+.tl-node,
+.h-cat-num,
+.stack-card-label span,
+.machine-card-seal,
+.detail-card-info .status {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.info-item .text p,
+.footer-col p {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
 /* SECTIONS */
 .section { padding: 100px 60px; position: relative; }
 .section-inner { max-width: 1300px; margin: 0 auto; }
