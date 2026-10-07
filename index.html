@@ -629,7 +629,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   background: linear-gradient(90deg, var(--forest-deep), var(--forest-mid) 50%, var(--forest-deep));
   border-top: 1px solid rgba(201, 169, 89, 0.5);
   border-bottom: 1px solid rgba(201, 169, 89, 0.5);
-  padding: 32px 0;
+  padding: 36px 0;
   position: relative;
   overflow: hidden;
 }
@@ -647,47 +647,125 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   position: relative; z-index: 2;
 }
 .counter-item {
-  display: flex; align-items: center; gap: 20px;
-  padding: 8px 20px;
-  border-right: 1px solid rgba(201, 169, 89, 0.2);
+  display: flex; align-items: center; gap: 22px;
+  padding: 12px 24px;
+  border-right: 1px solid rgba(201, 169, 89, 0.25);
+  transition: all 0.4s var(--ease);
 }
 .counter-item:last-child { border-right: none; }
+.counter-item:hover { transform: translateY(-3px); }
 .counter-icon {
-  width: 56px; height: 56px;
+  width: 58px; height: 58px;
   border-radius: 50%;
   background: rgba(201, 169, 89, 0.12);
   border: 1px solid rgba(201, 169, 89, 0.35);
   color: var(--gold-bright);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
   transition: all 0.4s var(--ease);
 }
 .counter-item:hover .counter-icon {
   background: linear-gradient(135deg, var(--gold-bright), var(--gold));
   color: var(--forest-deep);
-  transform: rotate(-6deg) scale(1.08);
+  transform: rotate(-6deg) scale(1.1);
+  box-shadow: 0 10px 30px rgba(201, 169, 89, 0.4);
 }
-.counter-content { display: flex; flex-direction: column; gap: 2px; }
+.counter-content { display: flex; flex-direction: column; gap: 4px; }
 .counter-num {
-  font-family: var(--font-display);
-  font-size: 1.9rem; font-weight: 700;
-  color: var(--gold-bright);
-  line-height: 1; letter-spacing: -0.02em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 20px rgba(201, 169, 89, 0.4);
 }
-.counter-num .suffix { font-size: 1.2rem; color: var(--jade-light); font-style: italic; }
+.counter-num .suffix {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--gold-bright);
+  margin-left: 2px;
+}
 .counter-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.55rem; letter-spacing: 0.22em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(250, 247, 242, 0.6);
-  margin-top: 4px;
+  margin-top: 6px;
+  font-weight: 500;
 }
-
 /* SECTIONS */
 .section { padding: 100px 60px; position: relative; }
 .section-inner { max-width: 1300px; margin: 0 auto; }
 .section.cream { background: linear-gradient(180deg, var(--ivory), var(--cream-2)); }
+
+/* HOW IT WORKS — with buildings background */
+.section.how-bg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--cream);
+}
+.section.how-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('back.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.9) saturate(1.1) contrast(1.05);
+  z-index: 0;
+}
+.section.how-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(6, 26, 16, 0.85) 0%,
+      rgba(6, 26, 16, 0.78) 50%,
+      rgba(6, 26, 16, 0.88) 100%),
+    radial-gradient(ellipse at 50% 30%, rgba(201, 169, 89, 0.12), transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+.section.how-bg > * {
+  position: relative;
+  z-index: 2;
+}
+.section.how-bg .section-head h2 {
+  color: var(--cream);
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+.section.how-bg .section-head h2 em {
+  color: var(--gold-bright);
+  font-style: italic;
+}
+.section.how-bg .section-head .label {
+  color: var(--gold-bright);
+}
+.section.how-bg .section-head .label::before,
+.section.how-bg .section-head .label::after {
+  background: var(--gold-bright);
+}
+.section.how-bg .tl-content {
+  background: rgba(255, 253, 248, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 169, 89, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+.section.how-bg .tl-content:hover {
+  border-color: var(--gold-bright);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--gold);
+}
+.section.how-bg .tl-node {
+  border-color: var(--cream);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(201, 169, 89, 0.45);
+}
 
 /* WILLOW PATTERN — Range section */
 .section.range-bg {
@@ -2140,10 +2218,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
   .counter-strip { padding: 24px 0; }
   .counter-inner { grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 20px; }
-  .counter-item { padding: 6px 10px; border-right: none; }
-  .counter-icon { width: 44px; height: 44px; font-size: 0.95rem; }
-  .counter-num { font-size: 1.5rem; }
-  .counter-lbl { font-size: 0.48rem; }
+  .counter-item { padding: 8px 12px; border-right: none; }
+  .counter-icon { width: 48px; height: 48px; font-size: 1rem; }
+  .counter-num { font-size: 1.7rem; }
+  .counter-num .suffix { font-size: 1.1rem; }
+  .counter-lbl { font-size: 0.5rem; }
 
   .h-scroll-track { padding: 0 20px; gap: 16px; }
   .h-cat-card { width: 280px; height: 400px; }
@@ -2464,7 +2543,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </section>
 
-  <section class="section">
+  <!-- HOW IT WORKS — with buildings background -->
+  <section class="section how-bg">
     <div class="section-inner">
       <div class="section-head center reveal">
         <div>
