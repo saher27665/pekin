@@ -702,6 +702,44 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .section-inner { max-width: 1300px; margin: 0 auto; }
 .section.cream { background: linear-gradient(180deg, var(--ivory), var(--cream-2)); }
 
+/* ============================================
+   OUR STORY SECTION — with willow background
+   ============================================ */
+.section.story-bg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--cream);
+}
+.section.story-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('villo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.30;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+.section.story-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(250, 247, 242, 0.75) 0%,
+    rgba(250, 247, 242, 0.4) 50%,
+    rgba(250, 247, 242, 0.75) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.section.story-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
 /* HOW IT WORKS — with buildings background */
 .section.how-bg {
   position: relative;
@@ -778,11 +816,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('willow.jpg');
+  background-image: url('villo.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.15;
+  opacity: 0.30;
   mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 0;
@@ -1208,7 +1246,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   flex-shrink: 0;
 }
 
-/* CTA SECTION */
+/* ============================================
+   CTA SECTION — with s.jpg background
+   ============================================ */
 .cta-full {
   position: relative;
   background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
@@ -1221,21 +1261,34 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   gap: 40px;
   align-items: center;
   border: 1px solid rgba(201, 169, 89, 0.25);
+  isolation: isolate;
 }
 .cta-full::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 20 L80 50 L50 80 L20 50 Z' fill='none' stroke='%23C9A959' stroke-width='0.5' opacity='0.08'/%3E%3C/svg%3E");
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('s.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+  z-index: 0;
   pointer-events: none;
 }
 .cta-full::after {
-  content: ''; position: absolute;
-  top: -100px; right: -100px;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(201, 169, 89, 0.18), transparent 70%);
-  border-radius: 50%;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg,
+      rgba(6, 26, 16, 0.88) 0%,
+      rgba(20, 64, 42, 0.78) 55%,
+      rgba(6, 26, 16, 0.9) 100%),
+    radial-gradient(circle at 90% 10%, rgba(201, 169, 89, 0.18), transparent 60%);
+  z-index: 1;
   pointer-events: none;
 }
-.cta-full-content { position: relative; z-index: 2; }
+.cta-full-content { position: relative; z-index: 3; }
 .cta-full .cta-label {
   font-family: var(--font-mono);
   font-size: 0.6rem; letter-spacing: 0.3em;
@@ -1250,17 +1303,19 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   line-height: 1.05;
   color: var(--cream);
   margin-bottom: 18px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
 }
 .cta-full h2 em { font-style: italic; color: var(--gold-bright); }
 .cta-full p {
   font-size: 0.9rem;
-  color: rgba(250, 247, 242, 0.85);
+  color: rgba(250, 247, 242, 0.9);
   line-height: 1.7;
   max-width: 480px;
   margin-bottom: 28px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 .cta-actions {
-  position: relative; z-index: 2;
+  position: relative; z-index: 3;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -2597,7 +2652,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </section>
 
-  <section class="section cream">
+  <!-- OUR STORY — with willow background -->
+  <section class="section story-bg">
     <div class="section-inner">
       <div class="about-feature reveal">
         <div class="about-img-wrap">
