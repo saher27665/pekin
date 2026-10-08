@@ -48,5 +48,125 @@
         "specs": "Engine: CAT C15, Power: 305HP, Blade Capacity: 8.5m³",
         "desc": "Large dozer for major earthmoving projects.",
         "available": true
+    },
+    {
+        "id": 6,
+        "model": "CAT 950G II",
+        "category": "Wheel Loader",
+        "price": "$145,000",
+        "image": "p5.jfif",
+        "specs": "Engine: CAT 3126B, Power: 197HP, Bucket: 3.1m³, Weight: 17.2T",
+        "desc": "Heavy-duty wheel loader for construction, quarrying, and material handling projects.",
+        "available": true
+    },
+    {
+        "id": 7,
+        "model": "CAT 962G",
+        "category": "Wheel Loader",
+        "price": "$158,000",
+        "image": "p6.jfif",
+        "specs": "Engine: CAT 3126B, Power: 207HP, Bucket: 3.3m³, Weight: 18.5T",
+        "desc": "Rugged wheel loader designed for demanding material handling and aggregates work.",
+        "available": true
+    },
+    {
+        "id": 8,
+        "model": "CAT 320D",
+        "category": "Hydraulic Excavator",
+        "price": "$112,000",
+        "image": "p7.jfif",
+        "specs": "Engine: CAT C6.4, Power: 138HP, Weight: 20.5T, Bucket: 1.0m³",
+        "desc": "Versatile hydraulic excavator for digging, trenching, and general construction.",
+        "available": true
+    },
+    {
+        "id": 9,
+        "model": "CAT 320GX",
+        "category": "Hydraulic Excavator",
+        "price": "$128,000",
+        "image": "p8.jfif",
+        "specs": "Engine: CAT C4.4, Power: 145HP, Weight: 21.5T, Bucket: 1.2m³",
+        "desc": "Fuel-efficient next-generation excavator for earthmoving and site preparation.",
+        "available": true
+    },
+    {
+        "id": 10,
+        "model": "CAT D6R XL",
+        "category": "Tracked Dozer",
+        "price": "$185,000",
+        "image": "p10.jpg",
+        "specs": "Engine: CAT 3306, Power: 185HP, Blade: 4.3m³, Weight: 20.5T",
+        "desc": "Reliable tracked dozer for medium to large earthmoving and site prep projects.",
+        "available": true
+    },
+    {
+        "id": 11,
+        "model": "CAT D8R",
+        "category": "Tracked Dozer",
+        "price": "$265,000",
+        "image": "p11.jfif",
+        "specs": "Engine: CAT 3406, Power: 305HP, Blade: 8.7m³, Weight: 37.5T",
+        "desc": "Powerful tracked dozer built for heavy earthmoving, mining, and large construction work.",
+        "available": true
+    },
+    {
+        "id": 12,
+        "model": "CAT 140H",
+        "category": "Motor Grader",
+        "price": "$175,000",
+        "image": "p9.jfif",
+        "specs": "Engine: CAT 3306, Power: 165HP, Blade Width: 3.7m, Weight: 15.5T",
+        "desc": "Precision motor grader for road construction, leveling, and site grading.",
+        "available": true
+    },
+    {
+        "id": 13,
+        "model": "CAT 140G",
+        "category": "Motor Grader",
+        "price": "$155,000",
+        "image": "p12.jfif",
+        "specs": "Engine: CAT 3306, Power: 150HP, Blade Width: 3.7m, Weight: 14.8T",
+        "desc": "Classic motor grader — an industry standard for road maintenance and fine grading.",
+        "available": true
+    },
+    {
+        "id": 14,
+        "model": "CAT 450",
+        "category": "Backhoe Loader",
+        "price": "$115,000",
+        "image": "p13.jfif",
+        "specs": "Engine: CAT C3.6, Power: 145HP, Dig Depth: 17 ft, Weight: 29,321 lb",
+        "desc": "Powerful and versatile backhoe loader for demanding construction, utility, and trenching jobs.",
+        "available": true
+    },
+    {
+        "id": 15,
+        "model": "CAT CS11 GC",
+        "category": "Road Roller",
+        "price": "$125,000",
+        "image": "p14.jfif",
+        "specs": "Engine: CAT C4.4, Power: 111HP, Weight: 10.8T, Drum Width: 2.13m",
+        "desc": "Medium-size vibratory soil compactor for road construction and foundation work.",
+        "available": true
+    },
+    {
+        "id": 16,
+        "model": "CAT 428",
+        "category": "Backhoe Loader",
+        "price": "$85,000",
+        "image": "p15.jfif",
+        "specs": "Engine: CAT C3.6, Power: 74HP, Dig Depth: 15.7 ft, Weight: 17,600 lb",
+        "desc": "Balanced and reliable backhoe loader — a popular choice for general construction work.",
+        "available": true
+    },
+    {
+        "id": 17,
+        "model": "CAT CP44B",
+        "category": "Road Roller",
+        "price": "$98,000",
+        "image": "p16.jfif",
+        "specs": "Engine: CAT C3.6, Power: 100HP, Weight: 7.5T, Padfoot Drum",
+        "desc": "Padfoot vibratory soil compactor for cohesive soils and heavy-duty compaction.",
+        "available": true
     }
 ]
