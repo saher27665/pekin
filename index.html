@@ -3248,72 +3248,80 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   }
 
   function playClickSound(type) {
-    const ctx = getAudioCtx();
-    if (!ctx) return;
-    const now = ctx.currentTime;
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  const now = ctx.currentTime;
 
-    // Deep warm bell notes — F4-A4 range (meditation bowl character)
-    let freq = 349.23;      // F4 - deep warm
-    let vol = 0.05;
-    let dur = 0.75;
+  // Warm harp notes — different per click type
+  let freq = 523.25;      // C5 - warm, cozy
+  let vol = 0.055;
+  let dur = 0.55;
 
-    if (type === 'filter') { freq = 440.00; vol = 0.055; dur = 0.80; }   // A4
-    else if (type === 'nav') { freq = 349.23; vol = 0.05; dur = 0.75; }  // F4
-    else if (type === 'card') { freq = 293.66; vol = 0.055; dur = 0.85; }// D4 - deepest
-    else if (type === 'button') { freq = 392.00; vol = 0.05; dur = 0.78; }// G4
+  if (type === 'filter') { freq = 659.25; vol = 0.06; dur = 0.60; }   // E5
+  else if (type === 'nav') { freq = 523.25; vol = 0.055; dur = 0.55; } // C5
+  else if (type === 'card') { freq = 440.00; vol = 0.06; dur = 0.65; } // A4 - warmest
+  else if (type === 'button') { freq = 587.33; vol = 0.055; dur = 0.58; } // D5
 
-    // Main singing bowl tone — deep, warm
-    const osc1 = ctx.createOscillator();
-    const gain1 = ctx.createGain();
-    osc1.type = 'sine';
-    osc1.frequency.setValueAtTime(freq, now);
-    gain1.gain.setValueAtTime(0, now);
-    gain1.gain.linearRampToValueAtTime(vol, now + 0.03);
-    gain1.gain.exponentialRampToValueAtTime(0.0001, now + dur);
-    osc1.connect(gain1);
-    gain1.connect(ctx.destination);
-    osc1.start(now);
-    osc1.stop(now + dur + 0.05);
+  // ============================================
+  // Main harp tone — soft attack, long decay
+  // ============================================
+  const osc1 = ctx.createOscillator();
+  const gain1 = ctx.createGain();
+  osc1.type = 'sine';
+  osc1.frequency.setValueAtTime(freq, now);
+  gain1.gain.setValueAtTime(0, now);
+  gain1.gain.linearRampToValueAtTime(vol, now + 0.02);
+  gain1.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+  osc1.connect(gain1);
+  gain1.connect(ctx.destination);
+  osc1.start(now);
+  osc1.stop(now + dur + 0.05);
 
-    // Warm harmonic — perfect fifth above
-    const osc2 = ctx.createOscillator();
-    const gain2 = ctx.createGain();
-    osc2.type = 'sine';
-    osc2.frequency.setValueAtTime(freq * 1.5, now);
-    gain2.gain.setValueAtTime(0, now);
-    gain2.gain.linearRampToValueAtTime(vol * 0.55, now + 0.04);
-    gain2.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.85);
-    osc2.connect(gain2);
-    gain2.connect(ctx.destination);
-    osc2.start(now);
-    osc2.stop(now + dur * 0.85 + 0.05);
+  // ============================================
+  // Harmonic — soft fifth above (warmth)
+  // ============================================
+  const osc2 = ctx.createOscillator();
+  const gain2 = ctx.createGain();
+  osc2.type = 'sine';
+  osc2.frequency.setValueAtTime(freq * 1.5, now);
+  gain2.gain.setValueAtTime(0, now);
+  gain2.gain.linearRampToValueAtTime(vol * 0.45, now + 0.025);
+  gain2.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.8);
+  osc2.connect(gain2);
+  gain2.connect(ctx.destination);
+  osc2.start(now);
+  osc2.stop(now + dur * 0.8 + 0.05);
 
-    // Deep sub harmonic — richness
-    const osc3 = ctx.createOscillator();
-    const gain3 = ctx.createGain();
-    osc3.type = 'sine';
-    osc3.frequency.setValueAtTime(freq * 0.5, now);
-    gain3.gain.setValueAtTime(0, now);
-    gain3.gain.linearRampToValueAtTime(vol * 0.35, now + 0.05);
-    gain3.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.9);
-    osc3.connect(gain3);
-    gain3.connect(ctx.destination);
-    osc3.start(now);
-    osc3.stop(now + dur * 0.9 + 0.05);
+  // ============================================
+  // Harmonic — soft octave (sparkle)
+  // ============================================
+  const osc3 = ctx.createOscillator();
+  const gain3 = ctx.createGain();
+  osc3.type = 'sine';
+  osc3.frequency.setValueAtTime(freq * 2, now);
+  gain3.gain.setValueAtTime(0, now);
+  gain3.gain.linearRampToValueAtTime(vol * 0.30, now + 0.03);
+  gain3.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.6);
+  osc3.connect(gain3);
+  gain3.connect(ctx.destination);
+  osc3.start(now);
+  osc3.stop(now + dur * 0.6 + 0.05);
 
-    // Soft shimmer — octave
-    const osc4 = ctx.createOscillator();
-    const gain4 = ctx.createGain();
-    osc4.type = 'sine';
-    osc4.frequency.setValueAtTime(freq * 2, now);
-    gain4.gain.setValueAtTime(0, now);
-    gain4.gain.linearRampToValueAtTime(vol * 0.20, now + 0.04);
-    gain4.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.5);
-    osc4.connect(gain4);
-    gain4.connect(ctx.destination);
-    osc4.start(now);
-    osc4.stop(now + dur * 0.5 + 0.05);
-  }
+  // ============================================
+  // Very soft high harmonic — airiness
+  // ============================================
+  const osc4 = ctx.createOscillator();
+  const gain4 = ctx.createGain();
+  osc4.type = 'sine';
+  osc4.frequency.setValueAtTime(freq * 3.5, now);
+  gain4.gain.setValueAtTime(0, now);
+  gain4.gain.linearRampToValueAtTime(vol * 0.10, now + 0.04);
+  gain4.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.4);
+  osc4.connect(gain4);
+  gain4.connect(ctx.destination);
+  osc4.start(now);
+  osc4.stop(now + dur * 0.4 + 0.05);
+}
   window.playClickSound = playClickSound;
 
   /* Global click listener — plays sound for any click on interactive elements */
