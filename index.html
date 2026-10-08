@@ -701,10 +701,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-weight: 500;
 }
 
-/* ============================================
-   GLOBAL NUMBER FONT — JetBrains Mono
-   (sab numbers ka font Counter Strip jaisa)
-   ============================================ */
+/* GLOBAL NUMBER FONT */
 .about-stat-item .number,
 .about-stat-item .label,
 .about-timeline-item .year,
@@ -721,7 +718,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-family: 'JetBrains Mono', monospace;
   font-variant-numeric: tabular-nums;
 }
-
 .about-stat-item .number,
 .about-timeline-item .year,
 .about-year-badge .yb-num,
@@ -735,7 +731,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-weight: 700;
   letter-spacing: -0.02em;
 }
-
 .info-item .text p,
 .footer-col p {
   font-weight: 500;
@@ -747,9 +742,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .section-inner { max-width: 1300px; margin: 0 auto; }
 .section.cream { background: linear-gradient(180deg, var(--ivory), var(--cream-2)); }
 
-/* ============================================
-   OUR STORY SECTION — with willow background
-   ============================================ */
+/* OUR STORY — willow bg */
 .section.story-bg {
   position: relative;
   isolation: isolate;
@@ -785,7 +778,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   z-index: 2;
 }
 
-/* HOW IT WORKS — with buildings background */
+/* HOW IT WORKS */
 .section.how-bg {
   position: relative;
   isolation: isolate;
@@ -850,7 +843,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(201, 169, 89, 0.45);
 }
 
-/* WILLOW PATTERN — Range section */
+/* RANGE — willow bg */
 .section.range-bg {
   background-color: var(--cream);
   position: relative;
@@ -1030,6 +1023,95 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   margin-top: 20px;
 }
 .h-scroll-hint i { color: var(--gold); }
+
+/* MACHINE CATEGORY FILTER */
+.machines-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+  justify-content: center;
+  align-items: center;
+}
+.machines-filter .filter-btn {
+  padding: 12px 24px;
+  background: var(--ivory);
+  border: 1.5px solid rgba(201, 169, 89, 0.4);
+  border-radius: 60px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--forest);
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.machines-filter .filter-btn i {
+  color: var(--gold);
+  font-size: 0.75rem;
+  transition: all 0.3s var(--ease);
+}
+.machines-filter .filter-btn:hover {
+  background: var(--forest);
+  color: var(--gold-bright);
+  border-color: var(--forest);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(11, 43, 27, 0.25);
+}
+.machines-filter .filter-btn:hover i {
+  color: var(--gold-bright);
+  transform: rotate(-8deg) scale(1.1);
+}
+.machines-filter .filter-btn.active {
+  background: var(--forest-deep);
+  color: var(--gold-bright);
+  border-color: var(--forest-deep);
+  box-shadow: 0 10px 26px rgba(11, 43, 27, 0.35);
+}
+.machines-filter .filter-btn.active i {
+  color: var(--gold-bright);
+}
+.machines-filter .filter-btn .filter-count {
+  font-size: 0.58rem;
+  padding: 2px 7px;
+  background: rgba(201, 169, 89, 0.2);
+  color: var(--gold-deep);
+  border-radius: 30px;
+  font-weight: 700;
+  margin-left: 4px;
+}
+.machines-filter .filter-btn.active .filter-count {
+  background: rgba(224, 200, 120, 0.25);
+  color: var(--gold-bright);
+}
+.machines-filter .filter-btn:hover .filter-count {
+  background: rgba(224, 200, 120, 0.25);
+  color: var(--gold-bright);
+}
+
+.machines-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-soft);
+}
+.machines-empty i {
+  font-size: 2.5rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: block;
+}
+.machines-empty p {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+}
 
 /* SPEC DASHBOARD */
 .spec-dashboard {
@@ -1291,9 +1373,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   flex-shrink: 0;
 }
 
-/* ============================================
-   CTA SECTION — with s.jpg background
-   ============================================ */
+/* CTA SECTION */
 .cta-full {
   position: relative;
   background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
@@ -1695,6 +1775,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   display: flex;
   flex-direction: column;
   position: relative;
+  animation: cardIn 0.5s var(--ease) both;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 .machine-card:hover {
   transform: translateY(-8px);
@@ -2028,9 +2113,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .msg.success { display: block; background: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
 .msg.error { display: block; background: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
 
-/* ============================================
-   FOOTER — with footer.jpg background
-   ============================================ */
+/* FOOTER */
 .footer {
   position: relative;
   background: linear-gradient(135deg, var(--forest-deep), #041208 58%, var(--forest-mid));
@@ -2047,7 +2130,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
   z-index: 0;
   pointer-events: none;
   mix-blend-mode: luminosity;
@@ -2142,7 +2224,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .back-top.show { opacity: 1; pointer-events: auto; }
 .back-top:hover { transform: translateY(-4px); background: var(--gold); color: var(--forest-deep); }
 
-/* ✅ MUSIC BUTTON */
+/* MUSIC BUTTON */
 .music-btn {
   position: fixed;
   bottom: 80px;
@@ -2375,6 +2457,10 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .detail-card-info { padding: 30px 22px; }
   .contact-form-box { padding: 30px 22px; }
 
+  .machines-filter { gap: 8px; margin-bottom: 30px; }
+  .machines-filter .filter-btn { padding: 9px 16px; font-size: 0.58rem; letter-spacing: 0.1em; }
+  .machines-filter .filter-btn .filter-count { font-size: 0.5rem; padding: 2px 5px; }
+
   .footer { padding: 50px 20px 80px; }
   .footer-top { grid-template-columns: 1fr; gap: 26px; padding-bottom: 30px; }
   .footer-bottom { flex-direction: column; text-align: center; gap: 8px; font-size: 0.5rem; }
@@ -2419,6 +2505,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .h-cat-card { width: 240px; height: 360px; }
   .h-cat-card h3 { font-size: 1.1rem; }
   .stat-col .sc-val { font-size: 1.6rem; }
+
+  .machines-filter .filter-btn { padding: 8px 14px; font-size: 0.55rem; }
 
   .header-main { padding: 7px 10px; gap: 6px; }
   .logo-block { gap: 4px; }
@@ -2656,7 +2744,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </section>
 
-  <!-- HOW IT WORKS — with buildings background -->
   <section class="section how-bg">
     <div class="section-inner">
       <div class="section-head center reveal">
@@ -2710,7 +2797,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </section>
 
-  <!-- OUR STORY — with willow background -->
   <section class="section story-bg">
     <div class="section-inner">
       <div class="about-feature reveal">
@@ -2925,6 +3011,49 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
   <section class="section">
     <div class="section-inner">
+      <div class="machines-filter" id="machinesFilter">
+        <button class="filter-btn active" data-filter="all">
+          <i class="fas fa-th-large"></i>
+          <span data-en="All Machines" data-zh="全部设备">All Machines</span>
+          <span class="filter-count" id="count-all">0</span>
+        </button>
+        <button class="filter-btn" data-filter="Excavators">
+          <i class="fas fa-digging"></i>
+          <span data-en="Excavators" data-zh="挖掘机">Excavators</span>
+          <span class="filter-count" id="count-Excavators">0</span>
+        </button>
+        <button class="filter-btn" data-filter="Wheel Loaders">
+          <i class="fas fa-tractor"></i>
+          <span data-en="Wheel Loaders" data-zh="轮式装载机">Wheel Loaders</span>
+          <span class="filter-count" id="count-WheelLoaders">0</span>
+        </button>
+        <button class="filter-btn" data-filter="Hydraulic Excavators">
+          <i class="fas fa-truck-monster"></i>
+          <span data-en="Hydraulic Excavators" data-zh="液压挖掘机">Hydraulic Excavators</span>
+          <span class="filter-count" id="count-HydraulicExcavators">0</span>
+        </button>
+        <button class="filter-btn" data-filter="Tracked Dozers">
+          <i class="fas fa-bullseye"></i>
+          <span data-en="Tracked Dozers" data-zh="履带推土机">Tracked Dozers</span>
+          <span class="filter-count" id="count-TrackedDozers">0</span>
+        </button>
+        <button class="filter-btn" data-filter="Motor Graders">
+          <i class="fas fa-road"></i>
+          <span data-en="Motor Graders" data-zh="平地机">Motor Graders</span>
+          <span class="filter-count" id="count-MotorGraders">0</span>
+        </button>
+        <button class="filter-btn" data-filter="Backhoe Loaders">
+          <i class="fas fa-toolbox"></i>
+          <span data-en="Backhoe Loaders" data-zh="反铲装载机">Backhoe Loaders</span>
+          <span class="filter-count" id="count-BackhoeLoaders">0</span>
+        </button>
+        <button class="filter-btn" data-filter="Road Rollers">
+          <i class="fas fa-compact-disc"></i>
+          <span data-en="Road Rollers" data-zh="压路机">Road Rollers</span>
+          <span class="filter-count" id="count-RoadRollers">0</span>
+        </button>
+      </div>
+
       <div class="machines-grid" id="allMachines">
         <div style="text-align:center; padding:60px; grid-column:1/-1;">
           <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--gold);"></i>
@@ -3078,12 +3207,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   <i class="fas fa-arrow-up"></i>
 </button>
 
-<!-- ✅ AUDIO -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop preload="auto" playsinline>
   <source src="music11.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ✅ MUSIC BUTTON -->
+<!-- MUSIC BUTTON -->
 <button class="music-btn" id="musicBtn" onclick="event.stopPropagation();window.toggleMusic()" title="Music ON — Click to turn OFF" aria-label="Toggle Music">
   <i class="fas fa-volume-up" id="musicIcon"></i>
 </button>
@@ -3096,12 +3225,107 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   'use strict';
   let currentLang = 'en';
   let allMachines = [];
+  let currentFilter = 'all';
 
   const EMAILJS_PUBLIC_KEY = 'd0piOzrwIHQaXiYch';
   const EMAILJS_SERVICE_ID = 'service_j7pyv4j';
   const EMAILJS_TEMPLATE_ID = 'template_f6mgqdn';
   const EMAILJS_TO_EMAIL = 'pipigroup.cn@hotmail.com';
   if (window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  /* ============================================================
+     CLICK SOUND — Warm, Deep, Beautiful (Singing Bowl)
+     ============================================================ */
+  let audioCtx = null;
+  function getAudioCtx() {
+    if (!audioCtx) {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      } catch(e) { return null; }
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  function playClickSound(type) {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    // Deep warm bell notes — F4-A4 range (meditation bowl character)
+    let freq = 349.23;      // F4 - deep warm
+    let vol = 0.05;
+    let dur = 0.75;
+
+    if (type === 'filter') { freq = 440.00; vol = 0.055; dur = 0.80; }   // A4
+    else if (type === 'nav') { freq = 349.23; vol = 0.05; dur = 0.75; }  // F4
+    else if (type === 'card') { freq = 293.66; vol = 0.055; dur = 0.85; }// D4 - deepest
+    else if (type === 'button') { freq = 392.00; vol = 0.05; dur = 0.78; }// G4
+
+    // Main singing bowl tone — deep, warm
+    const osc1 = ctx.createOscillator();
+    const gain1 = ctx.createGain();
+    osc1.type = 'sine';
+    osc1.frequency.setValueAtTime(freq, now);
+    gain1.gain.setValueAtTime(0, now);
+    gain1.gain.linearRampToValueAtTime(vol, now + 0.03);
+    gain1.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+    osc1.connect(gain1);
+    gain1.connect(ctx.destination);
+    osc1.start(now);
+    osc1.stop(now + dur + 0.05);
+
+    // Warm harmonic — perfect fifth above
+    const osc2 = ctx.createOscillator();
+    const gain2 = ctx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(freq * 1.5, now);
+    gain2.gain.setValueAtTime(0, now);
+    gain2.gain.linearRampToValueAtTime(vol * 0.55, now + 0.04);
+    gain2.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.85);
+    osc2.connect(gain2);
+    gain2.connect(ctx.destination);
+    osc2.start(now);
+    osc2.stop(now + dur * 0.85 + 0.05);
+
+    // Deep sub harmonic — richness
+    const osc3 = ctx.createOscillator();
+    const gain3 = ctx.createGain();
+    osc3.type = 'sine';
+    osc3.frequency.setValueAtTime(freq * 0.5, now);
+    gain3.gain.setValueAtTime(0, now);
+    gain3.gain.linearRampToValueAtTime(vol * 0.35, now + 0.05);
+    gain3.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.9);
+    osc3.connect(gain3);
+    gain3.connect(ctx.destination);
+    osc3.start(now);
+    osc3.stop(now + dur * 0.9 + 0.05);
+
+    // Soft shimmer — octave
+    const osc4 = ctx.createOscillator();
+    const gain4 = ctx.createGain();
+    osc4.type = 'sine';
+    osc4.frequency.setValueAtTime(freq * 2, now);
+    gain4.gain.setValueAtTime(0, now);
+    gain4.gain.linearRampToValueAtTime(vol * 0.20, now + 0.04);
+    gain4.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.5);
+    osc4.connect(gain4);
+    gain4.connect(ctx.destination);
+    osc4.start(now);
+    osc4.stop(now + dur * 0.5 + 0.05);
+  }
+  window.playClickSound = playClickSound;
+
+  /* Global click listener — plays sound for any click on interactive elements */
+  document.addEventListener('click', function(e) {
+    const target = e.target.closest('button, a, .machine-card, .h-cat-card, .filter-btn, .stack-card, .lang-option, .nav-main a, .info-item');
+    if (!target) return;
+    let type = 'button';
+    if (target.classList.contains('filter-btn')) type = 'filter';
+    else if (target.classList.contains('machine-card') || target.classList.contains('stack-card') || target.classList.contains('h-cat-card')) type = 'card';
+    else if (target.tagName === 'A' || target.classList.contains('nav-main')) type = 'nav';
+    playClickSound(type);
+  }, true);
 
   let toastTimer;
   function showToast(msg, isError) {
@@ -3132,6 +3356,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       el.textContent = lang === 'en' ? en : zh;
     });
     localStorage.setItem('pp-lang', lang);
+    updateFilterCounts();
   }
 
   const savedLang = localStorage.getItem('pp-lang');
@@ -3150,6 +3375,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       langOverlay.classList.add('hidden');
       document.body.style.overflow = '';
       setTimeout(() => { langOverlay.style.display = 'none'; }, 800);
+      // Start music on language selection (user interaction)
+      setTimeout(() => { tryStartMusic(); }, 400);
     });
   });
 
@@ -3169,7 +3396,13 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     const mb = document.getElementById('menuBtn');
     if (mb) mb.classList.remove('open');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (page === 'machines') renderMachines(allMachines);
+    if (page === 'machines') {
+      currentFilter = 'all';
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === 'all');
+      });
+      renderMachines(allMachines);
+    }
     if (page === 'home') {
       renderCatScroll();
       renderSpecDashboard();
@@ -3336,23 +3569,84 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     setLanguage(currentLang);
   }
 
+  function matchCategory(machineCat, filter) {
+    if (filter === 'all') return true;
+    if (!machineCat) return false;
+    const mc = machineCat.toLowerCase();
+    const f = filter.toLowerCase();
+    if (f === 'excavators') return mc.includes('excavator');
+    if (f === 'hydraulic excavators') return mc.includes('hydraulic') && mc.includes('excavator');
+    if (f === 'wheel loaders') return mc.includes('wheel loader') || mc.includes('wheel loader');
+    if (f === 'tracked dozers') return mc.includes('dozer') || mc.includes('d6') || mc.includes('d8');
+    if (f === 'motor graders') return mc.includes('grader') || mc.includes('140');
+    if (f === 'backhoe loaders') return mc.includes('backhoe');
+    if (f === 'road rollers') return mc.includes('roller') || mc.includes('compactor');
+    return mc.includes(f);
+  }
+
+  function updateFilterCounts() {
+    if (!allMachines || allMachines.length === 0) return;
+    const cats = {
+      'all': allMachines.length,
+      'Excavators': 0,
+      'Wheel Loaders': 0,
+      'Hydraulic Excavators': 0,
+      'Tracked Dozers': 0,
+      'Motor Graders': 0,
+      'Backhoe Loaders': 0,
+      'Road Rollers': 0
+    };
+    allMachines.forEach(m => {
+      if (matchCategory(m.category, 'Excavators')) cats['Excavators']++;
+      if (matchCategory(m.category, 'Wheel Loaders')) cats['Wheel Loaders']++;
+      if (matchCategory(m.category, 'Hydraulic Excavators')) cats['Hydraulic Excavators']++;
+      if (matchCategory(m.category, 'Tracked Dozers')) cats['Tracked Dozers']++;
+      if (matchCategory(m.category, 'Motor Graders')) cats['Motor Graders']++;
+      if (matchCategory(m.category, 'Backhoe Loaders')) cats['Backhoe Loaders']++;
+      if (matchCategory(m.category, 'Road Rollers')) cats['Road Rollers']++;
+    });
+    const setCount = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    };
+    setCount('count-all', cats['all']);
+    setCount('count-Excavators', cats['Excavators']);
+    setCount('count-WheelLoaders', cats['Wheel Loaders']);
+    setCount('count-HydraulicExcavators', cats['Hydraulic Excavators']);
+    setCount('count-TrackedDozers', cats['Tracked Dozers']);
+    setCount('count-MotorGraders', cats['Motor Graders']);
+    setCount('count-BackhoeLoaders', cats['Backhoe Loaders']);
+    setCount('count-RoadRollers', cats['Road Rollers']);
+  }
+
   function renderMachines(machines) {
     const grid = document.getElementById('allMachines');
     if (!grid) return;
     if (!machines || machines.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--ink-soft);">
-        <i class="fas fa-tractor" style="font-size:2.5rem; color:var(--gold);"></i>
-        <p style="margin-top:14px;">No machines found.</p>
+      grid.innerHTML = `<div class="machines-empty">
+        <i class="fas fa-tractor"></i>
+        <p>No machines found.</p>
       </div>`;
       return;
     }
-    grid.innerHTML = machines.map(m => {
+
+    const filtered = machines.filter(m => matchCategory(m.category, currentFilter));
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="machines-empty">
+        <i class="fas fa-search"></i>
+        <p>${currentLang === 'en' ? 'No machines in this category yet.' : '此类别中还没有机器。'}</p>
+      </div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map((m, i) => {
       const sealEN = m.available ? 'Available' : 'Sold';
       const sealZH = m.available ? '可用' : '已售';
       const sealText = currentLang === 'en' ? sealEN : sealZH;
       const sealClass = m.available ? '' : 'sold';
       return `
-        <div class="machine-card" onclick="openMachineDetail(${m.id})">
+        <div class="machine-card" onclick="openMachineDetail(${m.id})" style="animation-delay:${i * 0.06}s">
           <div class="machine-card-img">
             <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=85'">
             <div class="machine-card-seal ${sealClass}">${sealText}</div>
@@ -3368,6 +3662,21 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     }).join('');
     setLanguage(currentLang);
   }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMachines(allMachines);
+      const grid = document.getElementById('allMachines');
+      if (grid) {
+        const y = grid.getBoundingClientRect().top + window.pageYOffset - 140;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
 
   async function openMachineDetail(id) {
     if (!allMachines || allMachines.length === 0) {
@@ -3493,10 +3802,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   };
 
   /* ============================================================
-     MUSIC
+     MUSIC — FIXED AUTOPLAY
      ============================================================ */
   let bgMusic, musicBtn, musicIcon;
   let musicStarted = false;
+  let musicAttempted = false;
 
   function updateMusicIcon() {
     if (!bgMusic || !musicIcon) return;
@@ -3515,8 +3825,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     }
   }
 
-  function playMusic() {
+  function tryStartMusic() {
     if (!bgMusic) return;
+    if (musicStarted && !bgMusic.paused) return;
+    let pref = 'on';
+    try { pref = localStorage.getItem('pp-music') || 'on'; } catch(e) {}
+    if (pref === 'off') { updateMusicIcon(); return; }
     bgMusic.volume = 0.15;
     const p = bgMusic.play();
     if (p && p.then) {
@@ -3524,9 +3838,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
         musicStarted = true;
         updateMusicIcon();
         try { localStorage.setItem('pp-music', 'on'); } catch(e) {}
-        removeMusicListeners();
       }).catch(err => {
-        console.log('Autoplay blocked, waiting for user interaction:', err);
+        console.log('Autoplay blocked:', err);
       });
     }
   }
@@ -3534,8 +3847,18 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   function toggleMusic() {
     if (!bgMusic) return;
     if (bgMusic.paused) {
-      playMusic();
-      showToast('🎵 Music ON');
+      bgMusic.volume = 0.15;
+      const p = bgMusic.play();
+      if (p && p.then) {
+        p.then(() => {
+          musicStarted = true;
+          updateMusicIcon();
+          try { localStorage.setItem('pp-music', 'on'); } catch(e) {}
+          showToast('🎵 Music ON');
+        }).catch(() => {
+          showToast('❌ Could not play music', true);
+        });
+      }
     } else {
       bgMusic.pause();
       updateMusicIcon();
@@ -3544,22 +3867,18 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     }
   }
 
-  function onUserInteraction() {
-    if (musicStarted) { removeMusicListeners(); return; }
-    let pref = 'on';
-    try { pref = localStorage.getItem('pp-music') || 'on'; } catch(e) {}
-    if (pref === 'off') { removeMusicListeners(); return; }
-    playMusic();
+  /* Auto start music on first user interaction — ANY click/touch/key/scroll */
+  function firstUserGesture() {
+    if (musicAttempted) return;
+    musicAttempted = true;
+    tryStartMusic();
   }
 
-  function removeMusicListeners() {
-    document.removeEventListener('click', onUserInteraction);
-    document.removeEventListener('touchstart', onUserInteraction);
-    document.removeEventListener('keydown', onUserInteraction);
-    document.removeEventListener('scroll', onUserInteraction);
-    document.removeEventListener('mousemove', onUserInteraction);
-    document.removeEventListener('pointerdown', onUserInteraction);
-  }
+  document.addEventListener('click', firstUserGesture, { once: false, passive: true });
+  document.addEventListener('touchstart', firstUserGesture, { once: false, passive: true });
+  document.addEventListener('keydown', firstUserGesture, { once: false, passive: true });
+  document.addEventListener('pointerdown', firstUserGesture, { once: false, passive: true });
+  document.addEventListener('scroll', firstUserGesture, { once: false, passive: true });
 
   function initMusic() {
     bgMusic = document.getElementById('bgMusic');
@@ -3575,6 +3894,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       return;
     }
 
+    // Try to play immediately (works if user previously interacted with site)
     bgMusic.volume = 0.15;
     const p = bgMusic.play();
     if (p && p.then) {
@@ -3582,13 +3902,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
         musicStarted = true;
         updateMusicIcon();
       }).catch(() => {
-        console.log('Autoplay blocked. Music will start on first interaction.');
-        document.addEventListener('click', onUserInteraction, { passive: true });
-        document.addEventListener('touchstart', onUserInteraction, { passive: true });
-        document.addEventListener('keydown', onUserInteraction, { passive: true });
-        document.addEventListener('scroll', onUserInteraction, { passive: true });
-        document.addEventListener('mousemove', onUserInteraction, { passive: true });
-        document.addEventListener('pointerdown', onUserInteraction, { passive: true });
+        console.log('Autoplay blocked — will start on first interaction');
       });
     }
     updateMusicIcon();
@@ -3602,6 +3916,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     renderCatScroll();
     allMachines = await loadMachinesFromJSON();
     await renderSpecDashboard();
+    updateFilterCounts();
     animateCounters();
     initMusic();
   }
