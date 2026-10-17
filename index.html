@@ -1854,7 +1854,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .btn-enquire:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 /* ============================================
-   CONTACT SECTION (UPDATED AS PER IMAGE 2)
+   CONTACT SECTION
    ============================================ */
 .contact-grid {
   display: grid; grid-template-columns: 1fr;
@@ -1939,7 +1939,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   color: rgba(250, 247, 242, 0.92);
 }
 
-/* ✅ CONTACT FORM — WHITE BACKGROUND (IMAGE 2 STYLE) + DARK GREEN HOVER */
 .contact-form-box {
   position: relative;
   background: #FFFFFF;
@@ -1973,7 +1972,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   background: #FFFFFF !important;
   border: 1px solid #D1D5DB !important;
   border-radius: 8px !important;
-  color: #FFFFFF !important;
+  color: #1A1F1C !important;
   font-family: var(--font-body);
   font-size: 0.9rem;
   outline: none;
@@ -1984,13 +1983,13 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   color: #9CA3AF;
 }
 
-/* ✅ DARK GREEN HOVER & FOCUS EFFECT */
 .contact-form-box .form-group input:hover,
 .contact-form-box .form-group input:focus,
 .contact-form-box .form-group textarea:hover,
 .contact-form-box .form-group textarea:focus {
-  border-color: #0e6037 !important; /* Dark Green */
-  background-color: #044524  !important; /* Light green tint */
+  border-color: #0e6037 !important;
+  background-color: #044524 !important;
+  color: #FFFFFF !important;
   box-shadow: 0 0 0 3px rgba(13, 94, 53, 0.1) !important;
 }
 
@@ -2014,6 +2013,248 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   background: #14402A !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(11, 43, 27, 0.3);
+}
+
+/* ============================================
+   MACHINES NEEDED PAGE STYLES
+   ============================================ */
+.needed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 26px;
+}
+
+.needed-card {
+  background: var(--ivory);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.45s var(--ease);
+  border: 1px solid rgba(201, 169, 89, 0.2);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: cardIn 0.5s var(--ease) both;
+}
+
+.needed-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl), 0 0 40px rgba(201, 169, 89, 0.35);
+  border-color: var(--gold);
+}
+
+.needed-card-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--cream-2);
+  position: relative;
+}
+
+.needed-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 1s var(--ease-slow);
+}
+
+.needed-card:hover .needed-card-img img {
+  transform: scale(1.06);
+}
+
+.needed-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(6, 26, 16, 0.6) 100%);
+}
+
+.needed-card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color: var(--forest-deep);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(201, 169, 89, 0.4);
+}
+
+.needed-card-body {
+  padding: 24px 24px 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.needed-card-cat {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.needed-card-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 10px;
+  line-height: 1.15;
+}
+
+.needed-card-desc {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.needed-card-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.needed-card-specs span {
+  padding: 5px 12px;
+  background: var(--cream-2);
+  border-radius: 30px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(201, 169, 89, 0.2);
+}
+
+.needed-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(201, 169, 89, 0.3);
+}
+
+.needed-card-qty {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+
+.needed-card-qty strong {
+  color: var(--forest);
+  font-size: 0.95rem;
+}
+
+.needed-card-btn {
+  padding: 10px 20px;
+  background: var(--forest);
+  color: var(--cream);
+  border: 1px solid var(--gold);
+  border-radius: 60px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.needed-card-btn:hover {
+  background: var(--gold);
+  color: var(--forest-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 169, 89, 0.4);
+}
+
+.needed-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--ink-soft);
+}
+
+.needed-empty i {
+  font-size: 3rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+  opacity: 0.6;
+}
+
+.needed-empty h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--forest);
+  margin-bottom: 8px;
+}
+
+.needed-empty p {
+  font-size: 0.85rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Needed Page CTA */
+.needed-cta {
+  background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
+  border-radius: 22px;
+  padding: 48px 40px;
+  margin-top: 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(201, 169, 89, 0.3);
+}
+
+.needed-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201, 169, 89, 0.15), transparent 60%);
+  pointer-events: none;
+}
+
+.needed-cta h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--cream);
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.needed-cta h3 em {
+  color: var(--gold-bright);
+  font-style: italic;
+}
+
+.needed-cta p {
+  color: rgba(250, 247, 242, 0.8);
+  font-size: 0.9rem;
+  max-width: 500px;
+  margin: 0 auto 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.needed-cta .btn-gold {
+  position: relative;
+  z-index: 2;
 }
 
 /* FOOTER */
@@ -2329,6 +2570,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .page-head p { font-size: 0.85rem; }
 
   .machines-grid { grid-template-columns: 1fr; gap: 18px; }
+  .needed-grid { grid-template-columns: 1fr; gap: 18px; }
+  .needed-cta { padding: 32px 24px; }
+  .needed-cta h3 { font-size: 1.3rem; }
   .detail-card-info { padding: 30px 22px; }
   .contact-form-box { padding: 30px 22px; }
 
@@ -2464,6 +2708,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       <a data-page="home" data-en="Home" data-zh="首页" onclick="go('home')">Home</a>
       <a data-page="about" data-en="About" data-zh="关于" onclick="go('about')">About</a>
       <a data-page="machines" data-en="Machines" data-zh="设备" onclick="go('machines')">Machines</a>
+      <a data-page="needed" data-en="Needed Machines" data-zh="需求" onclick="go('needed')">Needed</a>
       <a data-page="contact" data-en="Contact" data-zh="联系" onclick="go('contact')">Contact</a>
     </nav>
 
@@ -2931,6 +3176,46 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </section>
 </div>
 
+<!-- MACHINES NEEDED PAGE -->
+<div class="page" id="page-needed">
+  <section class="page-head">
+    <div class="ph-bg" style="background-image:url('back.jpeg')"></div>
+    <div class="page-head-inner">
+      <div class="crumbs" data-en="Home / Machines Needed" data-zh="首页 / 需求设备">Home / <span data-en="Machines Needed" data-zh="需求设备">Machines Needed</span></div>
+      <h1 data-en="Machines We Need" data-zh="我们需要设备">Machines We <em>Need</em></h1>
+      <p data-en="Current equipment requirements — if you have these machines, we want to hear from you." data-zh="当前设备需求——如果您有这些设备，我们很乐意与您联系。">Current equipment requirements — if you have these machines, we want to hear from you.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <div>
+          <div class="label" data-en="Current Requirements" data-zh="当前需求">Current Requirements</div>
+          <h2 data-en="Equipment we are actively sourcing." data-zh="我们正在积极采购的设备。">Equipment we are <em>actively sourcing.</em></h2>
+        </div>
+        <p class="desc" data-en="Have any of these machines? Contact us with details and photos for a fast, fair offer." data-zh="拥有这些设备中的任何一台？请联系我们并提供详细信息和照片，以获得快速、公平的报价。">Have any of these machines? Contact us with details and photos for a fast, fair offer.</p>
+      </div>
+
+      <div class="needed-grid" id="neededGrid">
+        <div style="text-align:center; padding:60px; grid-column:1/-1;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--gold);"></i>
+          <p style="margin-top:12px; color:var(--ink-soft);">Loading...</p>
+        </div>
+      </div>
+
+      <div class="needed-cta reveal">
+        <h3 data-en="Have a machine to offer?" data-zh="有设备要提供？">Have a machine to <em>offer?</em></h3>
+        <p data-en="Send us photos, specs, and your asking price. We respond to every serious inquiry within 24 hours." data-zh="发送照片、规格和您的要价。我们会在24小时内回复每一个认真的咨询。">Send us photos, specs, and your asking price. We respond to every serious inquiry within 24 hours.</p>
+        <button class="btn btn-gold" onclick="go('contact')">
+          <span data-en="Contact Our Team" data-zh="联系我们的团队">Contact Our Team</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- MACHINE DETAIL -->
 <div class="page" id="page-machine-detail">
   <section class="section" style="padding-top:160px">
@@ -3046,6 +3331,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
         <a onclick="go('home')" data-en="Home" data-zh="首页">Home</a>
         <a onclick="go('about')" data-en="About" data-zh="关于">About</a>
         <a onclick="go('machines')" data-en="Machines" data-zh="设备">Machines</a>
+        <a onclick="go('needed')" data-en="Needed" data-zh="需求">Needed</a>
         <a onclick="go('contact')" data-en="Contact" data-zh="联系">Contact</a>
       </div>
       <div class="footer-col">
@@ -3108,18 +3394,17 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     if (pref === 'off') soundEnabled = false;
   } catch(e) {}
 
-  // Sounds Mapping
   const SOUND_FILES = {
-    ui: 'm1.mp4',        // Tabs, Nav, Form fields
-    photo: 'm2.mp4',     // Photo cards (Machine & Stack cards)
-    slide: 'm3.mp4'      // Slides (Drag to explore)
+    ui: 'm1.mp4',
+    photo: 'm2.mp4',
+    slide: 'm3.mp4'
   };
 
   const audioCache = {};
   Object.keys(SOUND_FILES).forEach(key => {
     const audio = new Audio(SOUND_FILES[key]);
     audio.preload = 'auto';
-    audio.volume = 0.10; // Volume bohot kam (10%)
+    audio.volume = 0.5;
     audioCache[key] = audio;
   });
 
@@ -3141,14 +3426,10 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   };
   window.Sounds = Sounds;
 
-  /* ============================================================
-     🔊 AUDIO UNLOCK — Pehli hover/click pe silent unlock
-     ============================================================ */
   let audioUnlocked = false;
   function unlockAudio() {
     if (audioUnlocked) return;
     audioUnlocked = true;
-    // Play all sounds silently to unlock them
     Object.keys(audioCache).forEach(key => {
       try {
         const test = audioCache[key].cloneNode();
@@ -3164,91 +3445,45 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     });
   }
 
-  // Unlock on first interaction (hover or click)
+  document.addEventListener('mousemove', unlockAudio, { once: true, passive: true });
   document.addEventListener('mouseover', unlockAudio, { once: true, passive: true });
-  document.addEventListener('click', unlockAudio, { once: true, passive: true });
-  document.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
-  document.addEventListener('keydown', unlockAudio, { once: true, passive: true });
-  document.addEventListener('pointerdown', unlockAudio, { once: true, passive: true });
-  document.addEventListener('scroll', unlockAudio, { once: true, passive: true });
 
-  /* ============================================================
-     🔊 SOUND DISPATCHER — HOVER BASED
-     ============================================================ */
   let lastSoundTime = 0;
   document.addEventListener('mouseover', function(e) {
     const now = Date.now();
-    if (now - lastSoundTime < 350) return; // Throttle to prevent rapid sounds
+    if (now - lastSoundTime < 350) return;
     const t = e.target;
 
-    // 1. NAV TABS (Home, About, Machines, Contact)
-    const navLink = t.closest('.nav-main a');
-    if (navLink) {
-      if (navLink.classList.contains('active')) return;
-      lastSoundTime = now;
-      unlockAudio();
-      Sounds.ui(); // m1.mp4
-      return;
-    }
-
-    // 2. FILTER TABS (All Machines, Excavators, etc.)
-    const filterBtn = t.closest('.filter-btn');
-    if (filterBtn) {
-      if (filterBtn.classList.contains('active')) return;
-      lastSoundTime = now;
-      unlockAudio();
-      Sounds.ui(); // m1.mp4
-      return;
-    }
-
-    // 3. FORM FIELDS (Send Us a Message)
-    const formInput = t.closest('.contact-form-box input, .contact-form-box textarea');
-    if (formInput) {
-      lastSoundTime = now;
-      unlockAudio();
-      Sounds.ui(); // m1.mp4
-      return;
-    }
-
-    // 4. SLIDES ("Drag to explore" - h-cat-card)
-    const slideCard = t.closest('.h-cat-card');
-    if (slideCard) {
-      lastSoundTime = now;
-      unlockAudio();
-      Sounds.slide(); // m3.mp4
-      return;
-    }
-
-    // 5. PHOTO CARDS (Machine cards + stack cards)
-    const photoCard = t.closest('.machine-card, .stack-card');
+    const photoCard = t.closest('.machine-card, .stack-card, .needed-card');
     if (photoCard) {
       lastSoundTime = now;
       unlockAudio();
-      Sounds.photo(); // m2.mp4
+      Sounds.photo();
+      return;
+    }
+
+    const clickable = t.closest('a, button, .btn, .btn-gold, .btn-outline, .btn-primary, .filter-btn, .cta-quote, .lang-btn, .lang-option, .h-cat-cta, .back-top, .music-btn, .footer-col a, .nav-main a, .contact-form-box input, .contact-form-box textarea, .enquiry-box input, .enquiry-box textarea, .btn-enquire, .btn-send, .needed-card-btn');
+    if (clickable) {
+      if (clickable.classList.contains('active')) return;
+      lastSoundTime = now;
+      unlockAudio();
+      Sounds.ui();
       return;
     }
   }, { passive: true });
 
-  /* ============================================================
-     DRAG SOUND FOR EXPLORE MACHINES (Drag to explore)
-     ============================================================ */
   const hOuter = document.getElementById('hScrollOuter');
   if (hOuter) {
     let isDown = false, startX, scrollLeft;
-    
     hOuter.addEventListener('mousedown', (e) => {
       isDown = true;
       startX = e.pageX - hOuter.offsetLeft;
       scrollLeft = hOuter.scrollLeft;
-      
-      // Play sound only on drag start
       unlockAudio();
-      Sounds.slide(); // m3.mp4
+      Sounds.slide();
     });
-    
     hOuter.addEventListener('mouseleave', () => { isDown = false; });
     hOuter.addEventListener('mouseup', () => { isDown = false; });
-    
     hOuter.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
@@ -3257,9 +3492,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     });
   }
 
-  /* ============================================================
-     UI FUNCTIONS
-     ============================================================ */
   let toastTimer;
   function showToast(msg, isError) {
     const t = document.getElementById('toast');
@@ -3328,6 +3560,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     const mb = document.getElementById('menuBtn');
     if (mb) mb.classList.remove('open');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
     if (page === 'machines') {
       currentFilter = 'all';
       document.querySelectorAll('.filter-btn').forEach(b => {
@@ -3338,6 +3571,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     if (page === 'home') {
       renderCatScroll();
       renderSpecDashboard();
+    }
+    if (page === 'needed') {
+      loadNeededMachines().then(renderNeededMachines);
     }
     setTimeout(() => {
       document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
@@ -3436,6 +3672,86 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       { id: 3, model: "CAT 320D", category: "Hydraulic Excavator", price: "$112,000", image: "p3.jfif", desc: "Versatile hydraulic excavator for digging and earthmoving.", available: true, specs: "CAT C7.1, 180HP" },
       { id: 4, model: "CAT D6R", category: "Tracked Dozer", price: "$145,000", image: "p4.jfif", desc: "Large tracked dozer for major earthmoving projects.", available: false, specs: "CAT C9, 215HP" }
     ];
+  }
+
+  /* ============================================
+     MACHINES NEEDED — LOADER + RENDERER
+     ============================================ */
+  async function loadNeededMachines() {
+    try {
+      const res = await fetch('machines-needed.json?v=' + Date.now());
+      if (!res.ok) throw new Error('Not found');
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) return data;
+    } catch (e) {}
+
+    // ---- TEMPORARY DUMMY DATA (2 machines) ----
+    return [
+      {
+        id: 1,
+        model: "CAT 336 Excavator",
+        category: "Hydraulic Excavator",
+        desc: "Looking for a well-maintained CAT 336 or equivalent 30-ton class excavator. Must have full service history and under 8,000 hours.",
+        image: "p3.jfif",
+        specs: ["30-ton class", "< 8,000 hrs", "2018 or newer", "Full history"],
+        quantity: 1,
+        budget: "Budget: $85,000 – $110,000",
+        urgency: "Required"
+      },
+      {
+        id: 2,
+        model: "Komatsu D65 Dozer",
+        category: "Tracked Dozer",
+        desc: "Seeking a Komatsu D65 or CAT D6 class tracked dozer for a long-term earthmoving contract in the Gulf region.",
+        image: "p4.jfif",
+        specs: ["D6 class", "< 10,000 hrs", "Gulf-ready", "Ripper included"],
+        quantity: 2,
+        budget: "Budget: $120,000 – $150,000 each",
+        urgency: "Urgent"
+      }
+    ];
+  }
+
+  function renderNeededMachines(machines) {
+    const grid = document.getElementById('neededGrid');
+    if (!grid) return;
+
+    if (!machines || machines.length === 0) {
+      grid.innerHTML = `
+        <div class="needed-empty">
+          <i class="fas fa-inbox"></i>
+          <h3 data-en="No requirements right now" data-zh="目前没有需求">No requirements right now</h3>
+          <p data-en="Check back soon — we update this list regularly as new projects come in." data-zh="请稍后回来查看——随着新项目的开展，我们会定期更新此列表。">Check back soon — we update this list regularly as new projects come in.</p>
+        </div>`;
+      setLanguage(currentLang);
+      return;
+    }
+
+    grid.innerHTML = machines.map((m, i) => {
+      const urgencyText = currentLang === 'en' ? (m.urgency || 'Required') : (m.urgency === 'Urgent' ? '紧急' : '需求');
+      const specsHtml = (m.specs || []).map(s => `<span>${s}</span>`).join('');
+      return `
+        <div class="needed-card" style="animation-delay:${i * 0.08}s">
+          <div class="needed-card-img">
+            <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=85'">
+            <div class="needed-card-badge">${urgencyText}</div>
+          </div>
+          <div class="needed-card-body">
+            <div class="needed-card-cat">${m.category}</div>
+            <h3 class="needed-card-title">${m.model}</h3>
+            <p class="needed-card-desc">${m.desc || ''}</p>
+            <div class="needed-card-specs">${specsHtml}</div>
+            <div class="needed-card-footer">
+              <div class="needed-card-qty">Qty: <strong>${m.quantity || 1}</strong></div>
+              <button class="needed-card-btn" onclick="go('contact')">
+                ${currentLang === 'en' ? 'I Have This' : '我有此设备'} <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    setLanguage(currentLang);
   }
 
   async function renderSpecDashboard() {
