@@ -2046,16 +2046,18 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .needed-card-img {
   aspect-ratio: 16/10;
   overflow: hidden;
-  background: var(--cream-2);
+  background-color: var(--cream-2); /* Khali jagah ke liye background color */
   position: relative;
+  display: flex;             /* Flexbox lagaya */
+  align-items: center;       /* Image ko vertically center karega */
+  justify-content: center;   /* Image ko horizontally center karega */
+  padding: 20px;             /* Tasweer ke charon taraf thora gap taake border se chipke nahi */
 }
 
 .needed-card-img img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Yeh image ko cut hone se bachayega */
-  background-color: var(--cream-2); /* Image ke peeche khali jagah par acha sa color dega */
-  padding: 10px; /* Image aur border ke darmiyan thora gap */
+  object-fit: contain; /* Yeh tasweer ko box ke andar poora fit karega, cut nahi karega */
   transition: all 1s var(--ease-slow);
 }
 
