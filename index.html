@@ -2048,12 +2048,15 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   overflow: hidden;
   background: var(--cream-2);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .needed-card-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Yeh image ko cut hone se bachayega */
   transition: all 1s var(--ease-slow);
 }
 
@@ -2065,7 +2068,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(6, 26, 16, 0.6) 100%);
+  background: linear-gradient(180deg, transparent 70%, rgba(6, 26, 16, 0.3) 100%); /* Dark effect kam kar diya */
 }
 
 .needed-card-badge {
@@ -2288,6 +2291,107 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   background-position: center;
 }
 
+/* ============================================
+   OUR STAFF PAGE STYLES (NEW)
+   ============================================ */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.staff-card {
+  background: var(--ivory);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(201, 169, 89, 0.2);
+  transition: all 0.45s var(--ease);
+  position: relative;
+  animation: cardIn 0.5s var(--ease) both;
+  display: flex;
+  flex-direction: column;
+}
+.staff-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl), 0 0 40px rgba(201, 169, 89, 0.35);
+  border-color: var(--gold);
+}
+.staff-card-header {
+  background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
+  padding: 30px 24px 20px;
+  text-align: center;
+  position: relative;
+}
+.staff-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 40px;
+  background: var(--ivory);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.staff-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--forest-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 700;
+  margin: 0 auto 12px;
+  border: 3px solid var(--cream);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.staff-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.staff-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+.staff-card-body {
+  padding: 26px 24px;
+  text-align: center;
+  flex: 1;
+}
+.staff-contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  transition: all 0.3s var(--ease);
+}
+.staff-contact-item i {
+  color: var(--gold);
+  font-size: 0.9rem;
+  width: 20px;
+}
+.staff-contact-item a {
+  color: var(--ink-soft);
+  transition: color 0.3s;
+}
+.staff-contact-item a:hover {
+  color: var(--forest);
+  text-decoration: underline;
+}
+.staff-email-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
 /* FOOTER */
 .footer {
@@ -2603,6 +2707,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
   .machines-grid { grid-template-columns: 1fr; gap: 18px; }
   .needed-grid { grid-template-columns: 1fr; gap: 18px; }
+  .staff-grid { grid-template-columns: 1fr; gap: 18px; }
   .needed-cta { padding: 32px 24px; }
   .needed-cta h3 { font-size: 1.3rem; }
   .detail-card-info { padding: 30px 22px; }
@@ -2741,6 +2846,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       <a data-page="about" data-en="About" data-zh="关于" onclick="go('about')">About</a>
       <a data-page="machines" data-en="Machines" data-zh="设备" onclick="go('machines')">Machines</a>
       <a data-page="needed" data-en="Needed Machines" data-zh="需求" onclick="go('needed')">Needed</a>
+      <a data-page="staff" data-en="Our Staff" data-zh="团队" onclick="go('staff')">Staff</a>
       <a data-page="contact" data-en="Contact" data-zh="联系" onclick="go('contact')">Contact</a>
     </nav>
 
@@ -3248,6 +3354,55 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </section>
 </div>
 
+<!-- OUR STAFF PAGE -->
+<div class="page" id="page-staff">
+  <section class="page-head">
+    <div class="ph-bg" style="background-image:url('back.jpeg')"></div>
+    <div class="page-head-inner">
+      <div class="crumbs" data-en="Home / Our Staff" data-zh="首页 / 团队">Home / <span data-en="Our Staff" data-zh="团队">Our Staff</span></div>
+      <h1 data-en="Our Team" data-zh="我们的团队">Our <em>Team</em></h1>
+      <p data-en="Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC." data-zh="认识巴基斯坦皮金巴克国际有限公司背后的专业人士。">Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-head center reveal">
+        <div>
+          <div class="label" data-en="Key Personnel" data-zh="核心人员">Key Personnel</div>
+          <h2 data-en="Dedicated professionals." data-zh="敬业专业人士。">Dedicated <em>professionals.</em></h2>
+        </div>
+      </div>
+
+      <div class="staff-grid">
+        <!-- Staff Member 1 (Real Data) -->
+        <div class="staff-card reveal">
+          <div class="staff-card-header">
+            <div class="staff-avatar">MR</div>
+            <h3 class="staff-name">Mr. MS. RANA</h3>
+            <div class="staff-role">Chief Representative</div>
+          </div>
+          <div class="staff-card-body">
+            <div class="staff-contact-item">
+              <i class="fas fa-mobile-alt"></i>
+              <a href="tel:+8613051909786">+86-13051909786</a>
+            </div>
+            <div class="staff-contact-item">
+              <i class="fas fa-envelope"></i>
+              <div class="staff-email-list">
+                <a href="mailto:pipigroup.cn@hotmail.com">pipigroup.cn@hotmail.com</a>
+                <a href="mailto:ppillcgroup.cn@hotmail.com">ppillcgroup.cn@hotmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- MACHINE DETAIL -->
 <div class="page" id="page-machine-detail">
   <section class="section" style="padding-top:160px">
@@ -3364,6 +3519,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
         <a onclick="go('about')" data-en="About" data-zh="关于">About</a>
         <a onclick="go('machines')" data-en="Machines" data-zh="设备">Machines</a>
         <a onclick="go('needed')" data-en="Needed" data-zh="需求">Needed</a>
+        <a onclick="go('staff')" data-en="Our Staff" data-zh="团队">Our Staff</a>
         <a onclick="go('contact')" data-en="Contact" data-zh="联系">Contact</a>
       </div>
       <div class="footer-col">
