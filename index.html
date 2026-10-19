@@ -2211,7 +2211,10 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
 /* Needed Page CTA */
 .needed-cta {
-  background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
+  background-image: linear-gradient(rgba(6, 26, 16, 0.85), rgba(6, 26, 16, 0.85)), url('need-back.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 22px;
   padding: 48px 40px;
   margin-top: 50px;
@@ -2221,12 +2224,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   border: 1px solid rgba(201, 169, 89, 0.3);
 }
 
+/* Overlay ko hata dein kyunki image ab direct background mein hai */
 .needed-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(201, 169, 89, 0.15), transparent 60%);
-  pointer-events: none;
+  display: none;
 }
 
 .needed-cta h3 {
@@ -3724,7 +3724,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
         model: "Used Komatsu PC88MR-8 Excavator",
         category: "Mini / Compact Excavator",
         desc: "Looking for a well-maintained used Komatsu PC88MR-8 excavator. Model year 2010–2015 required. Machine must be in good working condition with verifiable service history. Serious sellers only — send photos, hour meter reading, and asking price.",
-        image: "need-back.png", // Yahan image change kar di hai
+        image: "pq.png", // Yahan image change kar di hai
         specs: [
           "Model year 2010–2015",
           "PC88MR-8",
@@ -3741,7 +3741,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
         model: "Caterpillar 318-07 Excavator",
         category: "Hydraulic Excavator",
         desc: "Seeking a Caterpillar 318-07 excavator, model year 2020–2023. Machine must be in excellent condition with low hours and full service records. Any configuration considered — send photos, hour meter reading, and asking price.",
-        image: "need-back.png", // Yahan image change kar di hai
+        image: "np1.png", // Yahan image change kar di hai
         specs: [
           "Model year 2020–2023",
           "CAT 318-07",
