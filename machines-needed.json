@@ -14,6 +14,25 @@
     ],
     "quantity": 1,
     "budget": "Price on request — send your best offer",
-    "urgency": "Required"
+    "urgency": "Required",
+    "yearRange": "2010–2015"
+  },
+  {
+    "id": 2,
+    "model": "Caterpillar 318-07 Excavator",
+    "category": "Hydraulic Excavator",
+    "desc": "Seeking a Caterpillar 318-07 excavator, model year 2020–2023. Machine must be in excellent condition with low hours and full service records. Any configuration considered — send photos, hour meter reading, and asking price.",
+    "image": "np1.png",
+    "specs": [
+      "Model year 2020–2023",
+      "CAT 318-07",
+      "18-ton class",
+      "Excellent condition",
+      "Low hours preferred"
+    ],
+    "quantity": 1,
+    "budget": "Price on request — send your best offer",
+    "urgency": "Required",
+    "yearRange": "2020–2023"
   }
 ]
