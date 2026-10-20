@@ -2048,16 +2048,23 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   overflow: hidden;
   background: var(--cream-2);
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* Flex properties hata dein taake image direct container ko fill kare */
 }
 
 .needed-card-img img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Yeh image ko cut hone se bachayega */
+  object-fit: cover; /* Yeh image ko perfectly card mein fit karega */
   transition: all 1s var(--ease-slow);
+}
+
+/* Dark overlay ko thoda light kar dein taake image clear nazar aaye */
+.needed-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(6, 26, 16, 0.4) 100%); 
+  pointer-events: none;
 }
 
 .needed-card:hover .needed-card-img img {
@@ -2285,11 +2292,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 
 /* Machine Card ke andar same image lagane ke liye */
-.needed-card-img {
-  background-image: url('need-back.png');
-  background-size: cover;
-  background-position: center;
-}
+
 
 /* ============================================
    OUR STAFF PAGE STYLES (LIST STYLE)
@@ -3395,11 +3398,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 <!-- OUR STAFF PAGE -->
 <div class="page" id="page-staff">
   <section class="page-head">
-    <div class="ph-bg" style="background-image:url('staff-bg.png')"></div>
+    <div class="ph-bg" style="background-image:url('back.jpeg')"></div>
     <div class="page-head-inner">
       <div class="crumbs" data-en="Home / Our Staff" data-zh="首页 / 团队">Home / <span data-en="Our Staff" data-zh="团队">Our Staff</span></div>
       <h1 data-en="Our Team" data-zh="我们的团队">Our <em>Team</em></h1>
-      <p data-en="Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC Beijing Representative office." data-zh="认识巴基斯坦皮金巴克国际有限公司背后的专业人士。">Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC.</p>
+      <p data-en="Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC." data-zh="认识巴基斯坦皮金巴克国际有限公司背后的专业人士。">Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC.</p>
     </div>
   </section>
 
