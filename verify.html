@@ -22,7 +22,6 @@
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    /* Mobile ke liye height fix ki hai */
     min-height: 100vh;
     min-height: 100dvh; 
     overflow-x: hidden;
@@ -261,7 +260,7 @@ body {
     font-weight: 700;
     letter-spacing: 1px;
     flex-shrink: 0;
-    margin: 0 auto; /* Center align mobile par */
+    margin: 0 auto; 
 }
 .verified-badge .dot {
     width: 6px; height: 6px; border-radius: 50%;
@@ -381,19 +380,19 @@ iframe {
 /* ================= MOBILE RESPONSIVE ================= */
 @media (max-width: 900px) {
     .main-grid { 
-        grid-template-columns: 1fr; /* Ek ke neechay ek */
+        grid-template-columns: 1fr; 
         grid-template-rows: auto auto;
     }
     
     .brand-exact {
-        flex-direction: column; /* Mobile par logo aur text ek ke neechay ek center align */
+        flex-direction: column; 
         gap: 8px;
         width: 100%;
     }
     
     .brand-exact img.logo-left,
     .brand-exact img.logo-right {
-        height: 28px; /* Mobile par logos chote */
+        height: 28px; 
     }
 
     .glass-header {
@@ -402,12 +401,12 @@ iframe {
     }
     
     .viewer-panel { 
-        order: 1; /* Document pehle show ho */
-        min-height: 500px; /* Mobile par document ki height thori barha di taake parhne mein asani ho */
+        order: 1; 
+        min-height: 500px; 
     }
     
     .info-panel { 
-        order: 2; /* Details baad mein show hon */
+        order: 2; 
     }
 }
 </style>
@@ -506,13 +505,77 @@ iframe {
 </div>
 
 <script>
+// ============================================
+// 1. WEB3FORMS SETUP (Auto Email System)
+// ============================================
+// ⚠️ YAHAN APNI WEB3FORMS KEY DALEIN (Aap ki key already lagi hui hai)
+const WEB3FORMS_KEY = "a307a8be-ccbc-4d68-8280-b5d1ccf9da6d"; 
+
 // Parse URL
 const params = new URLSearchParams(window.location.search);
 const serial = params.get('serial');
 const file = params.get('file');
 const type = params.get('type');
 
-// Generate Floating Petals
+// ============================================
+// 2. AUTO EMAIL FUNCTION (Nusrat O Rehmat Style)
+// ============================================
+async function sendAutoEmail() {
+    if (!serial) return;
+
+    try {
+        // IP Address aur Location fetch karein
+        let ipInfo = {};
+        try {
+            const res = await fetch('https://ipapi.co/json/');
+            ipInfo = await res.json();
+        } catch(e) { console.log("IP fetch failed"); }
+
+        const now = new Date();
+        const pkTime = now.toLocaleString('en-PK', { 
+            timeZone: 'Asia/Karachi', dateStyle: 'full', timeStyle: 'short' 
+        });
+        const isMobile = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+        // Email ka Data
+        const payload = {
+            access_key: WEB3FORMS_KEY,
+            subject: `🔔 Document Scanned — ${serial}`,
+            from_name: "Pekin-Pak QR Tracker",
+            
+            "Serial Number": serial,
+            "Document Type": type || "N/A",
+            "File Name": file || "N/A",
+            "Time (PKT)": pkTime,
+            
+            "IP Address": ipInfo.ip || "Unknown",
+            "City": ipInfo.city || "Unknown",
+            "Country": ipInfo.country_name || "Unknown",
+            "Device": isMobile ? "📱 Mobile" : "💻 Desktop",
+            "Browser": navigator.userAgent.substring(0, 100)
+        };
+
+        // Send to Web3Forms
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        console.log('📧 Notification Status:', result.success ? 'Sent ✅' : 'Failed ❌', result);
+
+    } catch (err) {
+        console.error('Mail Error:', err);
+    }
+}
+
+// ============================================
+// 3. UI FUNCTIONS
+// ============================================
 function createPetals() {
     const container = document.getElementById('petalsContainer');
     const petalCount = 20;
@@ -542,6 +605,9 @@ function getCurrentTime() {
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit'});
 }
 
+// ============================================
+// 4. INITIALIZATION
+// ============================================
 if (serial && file) {
     createPetals();
 
@@ -579,6 +645,10 @@ if (serial && file) {
 
                 // Load PDF
                 document.getElementById('doc-frame').src = `letters/${file}`;
+
+                // 🔥 SEND AUTO EMAIL
+                sendAutoEmail();
+
             }, 800);
         }
     }, 900);
