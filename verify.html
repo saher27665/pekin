@@ -621,6 +621,7 @@ const steps = [
 ];
 
 let step = 0;
+// Yahan time 900ms se barha kar 2000ms (2 seconds) kar diya hai taake gol gol ghoomta hua achi tarah nazar aaye
 const interval = setInterval(() => {
     if (step < steps.length) {
         lText.innerText = steps[step].t;
@@ -649,7 +650,7 @@ const interval = setInterval(() => {
 
         }, 800);
     }
-}, 900);
+}, 2000); // <--- Yahan 2000ms (2 seconds) kar diya hai
 </script>
 
 </body>
