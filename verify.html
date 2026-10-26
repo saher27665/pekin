@@ -495,30 +495,29 @@ iframe {
     </div>
 </div>
 
-<!-- Invalid State -->
-<div class="invalid-screen" id="invalidScreen">
-    <div class="error-card">
-        <i class="fas fa-triangle-exclamation"></i>
-        <h1>Access Denied</h1>
-        <p>Invalid or missing serial number.<br>The requested document could not be verified.</p>
-    </div>
-</div>
-
 <script>
 // ============================================
 // 1. WEB3FORMS SETUP (Auto Email System)
 // ============================================
-// ⚠️ YAHAN APNI WEB3FORMS KEY DALEIN (Aap ki key already lagi hui hai)
 const WEB3FORMS_KEY = "a307a8be-ccbc-4d68-8280-b5d1ccf9da6d"; 
 
-// Parse URL
-const params = new URLSearchParams(window.location.search);
-const serial = params.get('serial');
-const file = params.get('file');
-const type = params.get('type');
+// URL Parameters parse karein
+const urlParams = new URLSearchParams(window.location.search);
+let serial = urlParams.get('serial');
+let file = urlParams.get('file');
+let type = urlParams.get('type');
+
+// Agar URL mein parameters nahi hain, to default test data set karein
+// Taake page hamesha khule aur "Access Denied" na aaye
+if (!serial) {
+    serial = 'PK-TEST-123';
+    file = 'letter-01.pdf';
+    type = 'company-profile';
+    console.warn("URL mein Serial nahi mila, Default Test Data load kiya gaya.");
+}
 
 // ============================================
-// 2. AUTO EMAIL FUNCTION (Nusrat O Rehmat Style)
+// 2. AUTO EMAIL FUNCTION
 // ============================================
 async function sendAutoEmail() {
     if (!serial) return;
@@ -537,7 +536,6 @@ async function sendAutoEmail() {
         });
         const isMobile = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-        // Email ka Data
         const payload = {
             access_key: WEB3FORMS_KEY,
             subject: `🔔 Document Scanned — ${serial}`,
@@ -608,55 +606,50 @@ function getCurrentTime() {
 // ============================================
 // 4. INITIALIZATION
 // ============================================
-if (serial && file) {
-    createPetals();
+// Ab condition hata di hai, page hamesha chalega
+createPetals();
 
-    const loader = document.getElementById('loader');
-    const lText = document.getElementById('loaderText');
-    const lSub = document.getElementById('loaderSub');
-    const mainUI = document.getElementById('mainUI');
+const loader = document.getElementById('loader');
+const lText = document.getElementById('loaderText');
+const lSub = document.getElementById('loaderSub');
+const mainUI = document.getElementById('mainUI');
 
-    const steps = [
-        { t: "Verifying Authenticity", s: "Connecting to Pekin-Pak secure ledger..." },
-        { t: "Decrypting Record", s: "Matching cryptographic signatures..." },
-        { t: "Access Granted", s: "Loading secure document viewer..." }
-    ];
+const steps = [
+    { t: "Verifying Authenticity", s: "Connecting to Pekin-Pak secure ledger..." },
+    { t: "Decrypting Record", s: "Matching cryptographic signatures..." },
+    { t: "Access Granted", s: "Loading secure document viewer..." }
+];
 
-    let step = 0;
-    const interval = setInterval(() => {
-        if (step < steps.length) {
-            lText.innerText = steps[step].t;
-            lSub.innerText = steps[step].s;
-            step++;
-        } else {
-            clearInterval(interval);
-            loader.style.opacity = '0';
-            loader.style.visibility = 'hidden';
-            
-            setTimeout(() => {
-                mainUI.style.display = 'flex';
-                setTimeout(() => mainUI.style.opacity = '1', 100);
+let step = 0;
+const interval = setInterval(() => {
+    if (step < steps.length) {
+        lText.innerText = steps[step].t;
+        lSub.innerText = steps[step].s;
+        step++;
+    } else {
+        clearInterval(interval);
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        
+        setTimeout(() => {
+            mainUI.style.display = 'flex';
+            setTimeout(() => mainUI.style.opacity = '1', 100);
 
-                // Populate Data
-                document.getElementById('v-serial').innerText = serial;
-                document.getElementById('v-type').innerText = formatType(type);
-                document.getElementById('v-time').innerText = getCurrentTime();
-                document.getElementById('v-file').innerText = file;
+            // Populate Data
+            document.getElementById('v-serial').innerText = serial;
+            document.getElementById('v-type').innerText = formatType(type);
+            document.getElementById('v-time').innerText = getCurrentTime();
+            document.getElementById('v-file').innerText = file;
 
-                // Load PDF
-                document.getElementById('doc-frame').src = `letters/${file}`;
+            // Load PDF
+            document.getElementById('doc-frame').src = `letters/${file}`;
 
-                // 🔥 SEND AUTO EMAIL
-                sendAutoEmail();
+            // 🔥 SEND AUTO EMAIL
+            sendAutoEmail();
 
-            }, 800);
-        }
-    }, 900);
-
-} else {
-    document.getElementById('loader').style.display = 'none';
-    document.getElementById('invalidScreen').classList.add('show');
-}
+        }, 800);
+    }
+}, 900);
 </script>
 
 </body>
