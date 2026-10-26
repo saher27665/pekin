@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Authentication | PEKIN-PAK</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --gold: #C9A959;
+    --green-dark: #0B2B1B;
+    --green-light: #1A4D32;
+    --text-dark: #1A1F1C;
+    --text-muted: #5A6B60;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text-dark);
+    background: #e0e5df;
+}
+
+/* ================= SCENIC BACKGROUND & FLOATING PETALS ================= */
+.scenery-bg {
+    position: fixed;
+    inset: 0;
+    background-image: url('back.png'); 
+    background-size: cover;
+    background-position: center;
+    z-index: -3;
+    animation: slowZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+.scenery-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(11, 43, 27, 0.85) 0%, rgba(26, 77, 50, 0.6) 50%, rgba(201, 169, 89, 0.3) 100%);
+    z-index: -2;
+    backdrop-filter: blur(8px) saturate(1.2);
+}
+
+/* Floating Flowers / Petals */
+.petals-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(201,169,89,0.4));
+    border-radius: 50% 50% 50% 0;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    animation: floatPetal linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes floatPetal {
+    0% {
+        transform: translateY(-100px) rotate(0deg) translateX(0);
+        opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% {
+        transform: translateY(105vh) rotate(720deg) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* ================= PREMIUM LOADER (ROTATING GREEN TICK) ================= */
+.loader-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--green-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease, visibility 1s;
+}
+
+.tick-loader {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* Gol ghoomti hui rings */
+.tick-loader::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px dashed rgba(40, 167, 69, 0.5);
+    animation: spin 8s linear infinite;
+}
+
+.tick-loader::after {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+    border: 2px solid rgba(201, 169, 89, 0.6);
+    animation: spinReverse 5s linear infinite;
+}
+
+.tick-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(40, 167, 69, 0.15);
+    border: 2px solid #28A745;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #28A745;
+    box-shadow: 0 0 30px rgba(40, 167, 69, 0.4);
+    animation: pulseTick 2s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes pulseTick {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(40, 167, 69, 0.4); }
+    50% { transform: scale(1.1); box-shadow: 0 0 40px rgba(40, 167, 69, 0.8); }
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes spinReverse { 100% { transform: rotate(-360deg); } }
+
+.loader-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+.loader-sub {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* ================= MAIN UI ================= */
+.main-container {
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    padding: 24px;
+    gap: 20px;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Header (With Real Logos) */
+.glass-header {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-logo-left {
+    height: 40px; /* Left logo (truck) */
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-logo-right {
+    height: 50px; /* Right logo (main) */
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--green-dark);
+    letter-spacing: 0.5px;
+}
+
+.brand-text p {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+.verified-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    border-radius: 50px;
+    color: #1B7A3D;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.verified-badge .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #28A745;
+    box-shadow: 0 0 10px #28A745;
+    animation: blink 1.5s infinite;
+}
+@keyframes blink { 50% { opacity: 0.4; } }
+
+/* Grid */
+.main-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 20px;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Left Panel */
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.info-panel { padding: 30px; overflow-y: auto; }
+
+.seal-area {
+    text-align: center;
+    padding-bottom: 25px;
+    border-bottom: 1px dashed rgba(11, 43, 27, 0.2);
+    margin-bottom: 25px;
+}
+
+.seal-icon {
+    width: 80px; height: 80px;
+    margin: 0 auto 15px;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.05));
+    border: 2px solid #28A745;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    color: #28A745;
+    position: relative;
+}
+.seal-icon::after {
+    content: '';
+    position: absolute; inset: -6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(40, 167, 69, 0.5);
+    animation: spin 15s linear infinite;
+}
+
+.seal-area h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--green-dark);
+    margin-bottom: 6px;
+}
+.seal-area p { font-size: 0.8rem; color: var(--text-muted); }
+
+.data-list { display: flex; flex-direction: column; gap: 12px; }
+.data-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    border-left: 3px solid var(--green-light);
+}
+.data-item .key {
+    font-size: 0.7rem; font-weight: 700; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 1px;
+}
+.data-item .val {
+    font-size: 0.85rem; font-weight: 800; color: var(--green-dark);
+    font-family: monospace;
+}
+.val.highlight { color: var(--gold); }
+
+/* Right Panel (Viewer) */
+.viewer-panel { display: flex; flex-direction: column; }
+.viewer-header {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex; justify-content: space-between; align-items: center;
+}
+.file-name { font-size: 0.85rem; font-weight: 700; color: var(--green-dark); display: flex; align-items: center; gap: 10px; }
+.file-name i { color: #DC3545; font-size: 1.1rem; }
+.tag { font-size: 0.65rem; background: var(--green-dark); color: var(--gold); padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; font-weight: 700; }
+
+.iframe-container { flex: 1; position: relative; background: #fff; }
+iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* Invalid State */
+.invalid-screen { position: fixed; inset: 0; background: rgba(11, 43, 27, 0.9); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 10000; }
+.invalid-screen.show { display: flex; }
+.error-card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 20px;
+    padding: 50px; text-align: center; max-width: 500px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+.error-card i { font-size: 3.5rem; color: #DC3545; margin-bottom: 20px; }
+.error-card h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--green-dark); margin-bottom: 12px; }
+.error-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+@media (max-width: 900px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .info-panel { order: 2; max-height: 300px; }
+    .viewer-panel { order: 1; min-height: 400px; }
+    .brand-logo-left, .brand-logo-right { height: 30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SCENIC BACKGROUND -->
+<div class="scenery-bg"></div>
+<div class="scenery-overlay"></div>
+
+<!-- FLOATING FLOWERS (PETALS) -->
+<div class="petals-container" id="petalsContainer"></div>
+
+<!-- LOADER (ROTATING GREEN TICK) -->
+<div class="loader-screen" id="loader">
+    <div class="tick-loader">
+        <div class="tick-icon"><i class="fas fa-check"></i></div>
+    </div>
+    <div class="loader-text" id="loaderText">Verifying Authenticity</div>
+    <div class="loader-sub" id="loaderSub">Connecting to Pekin-Pak secure ledger</div>
+</div>
+
+<!-- MAIN UI -->
+<div class="main-container" id="mainUI">
+    
+    <!-- Header (With Real Logos) -->
+    <header class="glass-header">
+        <div class="brand">
+            <!-- Left Logo (Truck) -->
+            <img src="logo-main.png" alt="Pekin-Pak Truck" class="brand-logo-left">
+            
+            <div class="brand-text">
+                <h1>PEKIN-PAK <span style="color:var(--gold);">LLC</span></h1>
+                <p>Global Machinery & Trading</p>
+            </div>
+            
+            <!-- Right Logo (Red/Blue) -->
+            <img src="logo-short.png" alt="Pekin-Pak Logo" class="brand-logo-right">
+        </div>
+        <div class="verified-badge">
+            <span class="dot"></span> VERIFIED DOCUMENT
+        </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+        
+        <!-- Left Info -->
+        <div class="glass-panel info-panel">
+            <div class="seal-area">
+                <div class="seal-icon"><i class="fas fa-check-double"></i></div>
+                <h2>Authentic Record</h2>
+                <p>This document is officially issued and verified by Pekin-Pak International.</p>
+            </div>
+
+            <div class="data-list">
+                <div class="data-item">
+                    <span class="key">Serial No.</span>
+                    <span class="val highlight" id="v-serial">—</span>
+                </div>
+                <div class="data-item">
+                    <span class="key">Document Type</span>
+                    <span class="val" id="v-type">—</span>
+                </div>
+                <div class="data-item">
+                    <span class="key">Issuer</span>
+                    <span class="val">Pekin-Pak LLC</span>
+                </div>
+                <div class="data-item">
+                    <span class="key">Verified On</span>
+                    <span class="val" id="v-time">—</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Viewer -->
+        <div class="glass-panel viewer-panel">
+            <div class="viewer-header">
+                <div class="file-name">
+                    <i class="fas fa-file-pdf"></i>
+                    <span id="v-file">document.pdf</span>
+                </div>
+                <div class="tag">SECURE VIEW</div>
+            </div>
+            <div class="iframe-container">
+                <iframe id="doc-frame" src="about:blank"></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Invalid State -->
+<div class="invalid-screen" id="invalidScreen">
+    <div class="error-card">
+        <i class="fas fa-triangle-exclamation"></i>
+        <h1>Access Denied</h1>
+        <p>Invalid or missing serial number.<br>The requested document could not be verified.</p>
+    </div>
+</div>
+
+<script>
+// Parse URL
+const params = new URLSearchParams(window.location.search);
+const serial = params.get('serial');
+const file = params.get('file');
+const type = params.get('type');
+
+// Generate Floating Petals
+function createPetals() {
+    const container = document.getElementById('petalsContainer');
+    const petalCount = 25; // Kitne phool girne hain
+
+    for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        
+        // Random sizes (5px se 15px tak)
+        const size = Math.random() * 10 + 5;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size}px`;
+        
+        // Random position from left
+        petal.style.left = `${Math.random() * 100}vw`;
+        
+        // Random animation duration (10s se 20s)
+        petal.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        
+        // Random delay
+        petal.style.animationDelay = `${Math.random() * 10}s`;
+        
+        container.appendChild(petal);
+    }
+}
+
+function formatType(t) {
+    if (!t) return 'Document';
+    return t.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function getCurrentTime() {
+    const d = new Date();
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit'});
+}
+
+if (serial && file) {
+    // Start Petals
+    createPetals();
+
+    const loader = document.getElementById('loader');
+    const lText = document.getElementById('loaderText');
+    const lSub = document.getElementById('loaderSub');
+    const mainUI = document.getElementById('mainUI');
+
+    const steps = [
+        { t: "Verifying Authenticity", s: "Connecting to Pekin-Pak secure ledger..." },
+        { t: "Decrypting Record", s: "Matching cryptographic signatures..." },
+        { t: "Access Granted", s: "Loading secure document viewer..." }
+    ];
+
+    let step = 0;
+    const interval = setInterval(() => {
+        if (step < steps.length) {
+            lText.innerText = steps[step].t;
+            lSub.innerText = steps[step].s;
+            step++;
+        } else {
+            clearInterval(interval);
+            loader.style.opacity = '0';
+            loader.style.visibility = 'hidden';
+            
+            setTimeout(() => {
+                mainUI.style.display = 'flex';
+                setTimeout(() => mainUI.style.opacity = '1', 100);
+
+                // Populate Data
+                document.getElementById('v-serial').innerText = serial;
+                document.getElementById('v-type').innerText = formatType(type);
+                document.getElementById('v-time').innerText = getCurrentTime();
+                document.getElementById('v-file').innerText = file;
+
+                // Load PDF
+                document.getElementById('doc-frame').src = `letters/${file}`;
+            }, 800);
+        }
+    }, 900);
+
+} else {
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('invalidScreen').classList.add('show');
+}
+</script>
+
+</body>
+</html>
