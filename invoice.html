@@ -230,7 +230,7 @@
             max-width: 80px;
             max-height: 80px;
             object-fit: contain;
-            display: none; 
+            display: none; /* Hidden by default until uploaded */
         }
 
         .inv-brand h1 {
@@ -319,7 +319,7 @@
         .inv-notes { flex: 1; font-size: 12px; color: var(--text-muted); line-height: 1.6; padding-right: 30px; }
         .inv-notes strong { color: var(--secondary); display: block; margin-bottom: 5px; }
 
-        .inv-totals { width: 340px; }
+        .inv-totals { width: 320px; }
         .total-row {
             display: flex;
             justify-content: space-between;
@@ -345,32 +345,9 @@
         }
         .total-row.balance-due span:last-child { color: var(--white); }
 
-        /* Amount in Words CSS */
-        .amount-in-words {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--primary);
-            text-align: right;
-            margin-top: 5px;
-            font-style: italic;
-        }
-
         .inv-footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; }
         .footer-box h4 { font-size: 11px; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; }
         .footer-box p { font-size: 12px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.6; }
-        
-        /* Payment Method Badge */
-        .payment-badge {
-            display: inline-block;
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
 
         .signature-line { margin-top: 30px; border-top: 1px solid var(--secondary); padding-top: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; text-align: center; width: 150px; }
 
@@ -481,6 +458,7 @@ Phone: +92 42 111222333</textarea>
             </div>
         </div>
         
+        <!-- NEW CURRENCY SELECTION FIELD -->
         <div class="row">
             <div class="input-group">
                 <label>Currency</label>
@@ -533,20 +511,7 @@ Phone: +92 42 111222333</textarea>
             </div>
         </div>
 
-        <div class="section-title">Footer Info & Payment Method</div>
-        
-        <div class="input-group">
-            <label>Payment Method</label>
-            <select id="input-payment-method" onchange="updatePreview()" style="cursor: pointer;">
-                <option value="Bank Transfer">Bank Transfer / Online</option>
-                <option value="Cheque">Cheque</option>
-                <option value="Cash">Cash</option>
-                <option value="Credit Card">Credit / Debit Card</option>
-                <option value="Demand Draft">Demand Draft</option>
-                <option value="Easypaisa / JazzCash">Easypaisa / JazzCash</option>
-            </select>
-        </div>
-
+        <div class="section-title">Footer Info</div>
         <div class="input-group">
             <label>Bank Details</label>
             <textarea id="input-bank" rows="3" oninput="updatePreview()">Bank: Meezan Bank Ltd
@@ -662,18 +627,12 @@ IBAN: PK00MEZN0001230102030405</textarea>
                         <span>Balance Due</span>
                         <span id="preview-balance-due">Rs 0.00</span>
                     </div>
-
-                    <!-- Amount in Words -->
-                    <div class="amount-in-words" id="preview-amount-words">
-                        Amount in words...
-                    </div>
                 </div>
             </div>
 
             <div class="inv-footer">
                 <div class="footer-box">
                     <h4>Payment Details</h4>
-                    <div class="payment-badge" id="preview-payment-method">Bank Transfer</div>
                     <p id="preview-bank">Bank details...</p>
                 </div>
                 <div class="footer-box" style="text-align: right;">
@@ -690,6 +649,7 @@ IBAN: PK00MEZN0001230102030405</textarea>
             { title: "Formal Trousers", desc: "Size: 32, Color: Black", qty: 5, rate: 1500 }
         ];
 
+        // Currency Configuration
         const currencies = {
             'PKR': { symbol: 'Rs', text: 'PKR' },
             'USD': { symbol: '$', text: 'USD' },
@@ -711,26 +671,6 @@ IBAN: PK00MEZN0001230102030405</textarea>
             const parts = dateStr.split('-');
             return `${parts[2]}/${parts[1]}/${parts[0]}`;
         };
-
-        // Number to Words Converter
-        function numberToWords(num) {
-            if (num === 0) return 'Zero';
-            const a = ['','One ','Two ','Three ','Four ', 'Five ','Six ','Seven ','Eight ','Nine ','Ten ','Eleven ','Twelve ','Thirteen ','Fourteen ','Fifteen ','Sixteen ','Seventeen ','Eighteen ','Nineteen '];
-            const b = ['', '', 'Twenty','Thirty','Forty','Fifty', 'Sixty','Seventy','Eighty','Ninety'];
-
-            let nStr = num.toString();
-            if (nStr.length > 9) return 'Amount too large';
-            
-            let n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
-            if (!n) return; 
-            let str = '';
-            str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'Crore ' : '';
-            str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'Lakh ' : '';
-            str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'Thousand ' : '';
-            str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'Hundred ' : '';
-            str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only ' : '';
-            return str.trim();
-        }
 
         // Logo Upload Function
         function loadLogo(event) {
@@ -819,9 +759,6 @@ IBAN: PK00MEZN0001230102030405</textarea>
             document.getElementById('preview-date').innerText = formatDate(document.getElementById('input-date').value);
             document.getElementById('preview-due-date').innerText = formatDate(document.getElementById('input-due-date').value);
 
-            // Payment Method Update
-            document.getElementById('preview-payment-method').innerText = document.getElementById('input-payment-method').value;
-
             document.getElementById('preview-notes').innerText = document.getElementById('input-notes').value;
             document.getElementById('preview-bank').innerText = document.getElementById('input-bank').value;
 
@@ -869,22 +806,6 @@ IBAN: PK00MEZN0001230102030405</textarea>
             document.getElementById('preview-tax-amount').innerText = formatMoney(taxAmount);
             document.getElementById('preview-gross-total').innerText = formatMoney(grossTotal);
             document.getElementById('preview-balance-due').innerText = formatMoney(balanceDue);
-
-            // Amount in words update
-            let words = numberToWords(Math.floor(balanceDue));
-            let currencyName = document.getElementById('input-currency').value;
-            if (currencyName === 'PKR') currencyName = 'Rupees';
-            else if (currencyName === 'USD') currencyName = 'Dollars';
-            else if (currencyName === 'AED') currencyName = 'Dirhams';
-            else if (currencyName === 'SAR') currencyName = 'Riyals';
-            else if (currencyName === 'EUR') currencyName = 'Euros';
-            else if (currencyName === 'GBP') currencyName = 'Pounds';
-
-            if (words !== 'Amount too large') {
-                document.getElementById('preview-amount-words').innerText = `Amount in words: ${currencyName} ${words}`;
-            } else {
-                document.getElementById('preview-amount-words').innerText = '';
-            }
 
             // Handling Visibility of Deductions
             if (deduction > 0) {
