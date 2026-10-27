@@ -3,707 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document Authentication | PEKIN-PAK</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<title>Verify Document — Nusrat O Rehmat Traders</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root {
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --gold: #C9A959;
-    --gold-bright: #E0C878;
-    --green-dark: #0B2B1B;
-    --green-light: #1A4D32;
-    --text-dark: #1A1F1C;
-    --text-muted: #5A6B60;
-}
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    min-height: 100vh;
-    min-height: 100dvh; 
-    overflow-x: hidden;
-    color: var(--text-dark);
-    background: #e0e5df;
-}
-
-/* ================= SCENIC BACKGROUND & FLOATING PETALS ================= */
-.scenery-bg {
-    position: fixed;
-    inset: 0;
-    background-image: url('back.png'); 
-    background-size: cover;
-    background-position: center;
-    z-index: -3;
-    animation: slowZoom 30s ease-in-out infinite alternate;
-}
-
-@keyframes slowZoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
-}
-
-.scenery-overlay {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(11, 43, 27, 0.85) 0%, rgba(26, 77, 50, 0.6) 50%, rgba(201, 169, 89, 0.3) 100%);
-    z-index: -2;
-    backdrop-filter: blur(8px) saturate(1.2);
-}
-
-/* Floating Flowers / Petals */
-.petals-container {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.petal {
-    position: absolute;
-    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(201,169,89,0.4));
-    border-radius: 50% 50% 50% 0;
-    box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    animation: floatPetal linear infinite;
-    opacity: 0.7;
-}
-
-@keyframes floatPetal {
-    0% { transform: translateY(-100px) rotate(0deg) translateX(0); opacity: 0; }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
-    100% { transform: translateY(105vh) rotate(720deg) translateX(100px); opacity: 0; }
-}
-
-/* ================= PREMIUM LOADER ================= */
-.loader-screen {
-    position: fixed;
-    inset: 0;
-    background-color: var(--green-dark);
-    background-image: url('need.png');
-    background-size: cover;
-    background-position: center;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1s ease, visibility 1s;
-}
-
-.loader-screen::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(11, 43, 27, 0.7);
-    z-index: 1;
-}
-
-.tick-loader {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    z-index: 2;
-}
-
-.tick-loader::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 4px dashed rgba(40, 167, 69, 0.9);
-    animation: spin 10s linear infinite;
-}
-
-.tick-loader::after {
-    content: '';
-    position: absolute;
-    inset: 15px;
-    border-radius: 50%;
-    border: 3px dashed rgba(201, 169, 89, 0.9);
-    animation: spinReverse 10s linear infinite;
-}
-
-.tick-icon {
-    width: 80px;
-    height: 80px;
-    background: rgba(11, 43, 27, 0.8);
-    border: 2px solid #28A745;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    color: #28A745;
-    box-shadow: 0 0 40px rgba(40, 167, 69, 0.8);
-    animation: pulseTick 1.5s ease-in-out infinite;
-    z-index: 2;
-}
-
-@keyframes pulseTick {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(40, 167, 69, 0.6); }
-    50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(40, 167, 69, 1); }
-}
-@keyframes spin { 100% { transform: rotate(360deg); } }
-@keyframes spinReverse { 100% { transform: rotate(-360deg); } }
-
-.loader-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-style: italic;
-    color: var(--gold);
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    z-index: 2;
-    text-align: center;
-    padding: 0 20px;
-}
-.loader-sub {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    z-index: 2;
-    text-align: center;
-    padding: 0 20px;
-}
-
-/* ================= MAIN UI ================= */
-.main-container {
-    display: none;
-    flex-direction: column;
-    min-height: 100vh;
-    min-height: 100dvh;
-    padding: 16px;
-    gap: 16px;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
-/* Header */
-.glass-header {
-    background: #E5C566;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.brand-exact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    flex: 1;
-}
-
-.brand-exact img.logo-left {
-    height: 35px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.brand-exact img.logo-right {
-    height: 30px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.brand-text {
-    text-align: left;
-    color: var(--green-dark);
-    min-width: 0;
-}
-
-.brand-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1.1;
-    word-break: break-word;
-}
-
-.brand-text p {
-    font-size: 0.65rem;
-    color: var(--green-dark);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-top: 2px;
-    opacity: 0.8;
-}
-
-.verified-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(11, 43, 27, 0.1);
-    border: 1px solid rgba(11, 43, 27, 0.3);
-    border-radius: 50px;
-    color: var(--green-dark);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    flex-shrink: 0;
-    margin: 0 auto; 
-}
-.verified-badge .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green-dark);
-    box-shadow: 0 0 10px var(--green-dark);
-    animation: blink 1.5s infinite;
-}
-@keyframes blink { 50% { opacity: 0.4; } }
-
-/* Grid */
-.main-grid {
-    display: grid;
-    grid-template-columns: 360px 1fr;
-    gap: 16px;
-    flex: 1;
-    min-height: 0;
-}
-
-/* Panels */
-.glass-panel {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.info-panel { padding: 24px; }
-
-.seal-area {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed rgba(11, 43, 27, 0.2);
-    margin-bottom: 20px;
-}
-
-/* Rotating rings around the star */
-.seal-icon {
-    width: 80px; 
-    height: 80px;
-    margin: 0 auto 12px;
-    background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.05));
-    border: 2px solid #28A745;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem;
-    color: #28A745;
-    position: relative;
-    box-shadow: 0 0 20px rgba(40, 167, 69, 0.3); 
-}
-
-.seal-icon::before {
-    content: '';
-    position: absolute;
-    inset: -8px; 
-    border-radius: 50%;
-    border: 2px dashed rgba(40, 167, 69, 0.6); 
-    animation: spin 10s linear infinite;
-}
-
-.seal-icon::after {
-    content: '';
-    position: absolute;
-    inset: -15px; 
-    border-radius: 50%;
-    border: 1px dashed rgba(201, 169, 89, 0.6); 
-    animation: spinReverse 15s linear infinite;
-}
-
-.seal-area h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--green-dark);
-    margin-bottom: 6px;
-    margin-top: 15px; 
-}
-.seal-area p { font-size: 0.75rem; color: var(--text-muted); }
-
-.data-list { display: flex; flex-direction: column; gap: 10px; }
-.data-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 8px;
-    border-left: 3px solid var(--green-light);
-}
-.data-item .key {
-    font-size: 0.65rem; font-weight: 700; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 1px;
-}
-.data-item .val {
-    font-size: 0.8rem; font-weight: 800; color: var(--green-dark);
-    font-family: monospace;
-}
-.val.highlight { color: var(--gold); }
-
-/* Viewer Panel */
-.viewer-panel { display: flex; flex-direction: column; min-height: 400px; }
-.viewer-header {
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.5);
-    border-bottom: 1px solid var(--glass-border);
-    display: flex; justify-content: space-between; align-items: center;
-}
-.file-name { font-size: 0.8rem; font-weight: 700; color: var(--green-dark); display: flex; align-items: center; gap: 8px; word-break: break-all; }
-.file-name i { color: #DC3545; font-size: 1rem; }
-.tag { font-size: 0.6rem; background: var(--green-dark); color: var(--gold); padding: 3px 10px; border-radius: 20px; font-weight: 700; }
-
-/* PDF Container with Watermark */
-.iframe-container { 
-    flex: 1; 
-    position: relative; 
-    background-color: #fff;
-    background-image: url('need.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 300px;
-}
-.iframe-container::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(255, 255, 255, 0.85); 
-    z-index: 1;
-}
-iframe { 
-    width: 100%; 
-    height: 100%; 
-    border: none; 
-    display: block; 
-    position: relative;
-    z-index: 2; 
-}
-
-/* ================= MOBILE RESPONSIVE ================= */
-@media (max-width: 900px) {
-    .main-grid { 
-        grid-template-columns: 1fr; 
-        grid-template-rows: auto auto;
-    }
-
-    /* Header stacks: brand row on top, badge below */
-    .glass-header {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 14px;
-        gap: 10px;
-    }
-
-    /* Keep logo + name + logo on ONE row */
-    .brand-exact {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-        flex-wrap: nowrap;
-    }
-
-    .brand-exact img.logo-left,
-    .brand-exact img.logo-right {
-        height: 26px;
-    }
-
-    .brand-text {
-        text-align: center;
-        min-width: 0;
-    }
-
-    .brand-text h1 {
-        font-size: 0.95rem;
-        line-height: 1.15;
-    }
-
-    .brand-text p {
-        font-size: 0.55rem;
-        letter-spacing: 1px;
-    }
-
-    /* Badge centered under brand row */
-    .verified-badge {
-        margin: 0 auto;
-        align-self: center;
-    }
-
-    /* Document viewer first, info panel below */
-    .viewer-panel {
-        order: 1;
-        min-height: 420px;
-    }
-
-    .info-panel {
-        order: 2;
-    }
-
-    .iframe-container {
-        min-height: 320px;
-    }
-}
-
-/* Extra small phones */
-@media (max-width: 400px) {
-    .brand-text h1 {
-        font-size: 0.8rem;
-    }
-    .brand-exact img.logo-left,
-    .brand-exact img.logo-right {
-        height: 22px;
-    }
-    .seal-icon {
-        width: 64px;
-        height: 64px;
-        font-size: 1.4rem;
-    }
-    .data-item {
-        padding: 8px 10px;
-    }
-    .data-item .val {
-        font-size: 0.7rem;
-        word-break: break-all;
-    }
+html, body { min-height: 100vh; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+body { background: #0B1B36; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; overflow: hidden; }
+.bg-gradient { position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(30,125,92,.35) 0%, transparent 45%), radial-gradient(circle at 80% 80%, rgba(205,170,85,.28) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(23,102,77,.2) 0%, transparent 60%), linear-gradient(135deg, #071326 0%, #0B1B36 50%, #0C3B2E 100%); background-size: cover, cover, cover, cover; background-position: center, center, center, center; background-repeat: no-repeat, no-repeat, no-repeat, no-repeat; opacity: 1; z-index: 0; }
+.particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.particle { position: absolute; background: #CDAA55; border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
+@keyframes floatUp { 0% { opacity: 0; transform: translateY(100vh) scale(0); } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateY(-100px) scale(1); } }
+.bg-grid { position: fixed; inset: 0; background-image: linear-gradient(rgba(205,170,85,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(205,170,85,.06) 1px, transparent 1px); background-size: 60px 60px; z-index: 1; pointer-events: none; -webkit-mask: radial-gradient(circle at center, black 40%, transparent 75%); mask: radial-gradient(circle at center, black 40%, transparent 75%); }
+.verify-card { position: relative; z-index: 10; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-radius: 28px; padding: 50px 45px 40px; max-width: 540px; width: 100%; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,.55), 0 0 0 1px rgba(205,170,85,.35), 0 0 80px rgba(205,170,85,.15); animation: cardIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); overflow: hidden; }
+.verify-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, transparent 0%, #CDAA55 20%, #F0D98F 50%, #CDAA55 80%, transparent 100%); background-size: 200% 100%; animation: shimmerLine 3s linear infinite; }
+@keyframes shimmerLine { to { background-position: 200% 0; } }
+@keyframes cardIn { 0% { opacity: 0; transform: scale(0.85) translateY(40px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+.verify-icon-wrap { position: relative; width: 130px; height: 130px; margin: 0 auto 26px; display: flex; align-items: center; justify-content: center; }
+.verify-icon-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px dashed rgba(30,125,92,.5); animation: rotateRing 25s linear infinite; }
+.verify-icon-ring::before { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #CDAA55; border-radius: 50%; box-shadow: 0 0 12px #CDAA55; }
+@keyframes rotateRing { to { transform: rotate(360deg); } }
+.verify-icon { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #1E7D5C, #17664D); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 3rem; box-shadow: 0 15px 40px rgba(30,125,92,.5), 0 0 0 8px rgba(30,125,92,.1), 0 0 0 16px rgba(30,125,92,.05); position: relative; z-index: 2; animation: iconPop 0.7s ease 0.3s both; }
+@keyframes iconPop { 0% { transform: scale(0) rotate(-180deg); } 60% { transform: scale(1.15) rotate(10deg); } 100% { transform: scale(1) rotate(0deg); } }
+.verify-icon.invalid { background: linear-gradient(135deg, #DC3545, #B02A37); box-shadow: 0 15px 40px rgba(220,53,69,.5), 0 0 0 8px rgba(220,53,69,.1), 0 0 0 16px rgba(220,53,69,.05); }
+.verify-card.invalid .verify-icon-ring { border-color: rgba(220,53,69,.5); }
+.verify-card.invalid .verify-icon-ring::before { background: #DC3545; box-shadow: 0 0 12px #DC3545; }
+.verify-card.invalid::before { background: linear-gradient(90deg, transparent 0%, #DC3545 20%, #FF6B6B 50%, #DC3545 80%, transparent 100%); background-size: 200% 100%; }
+.verify-title { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 2rem; color: #0B1B36; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.5px; }
+.verify-title em { font-style: italic; background: linear-gradient(135deg, #CDAA55, #B8943F); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.verify-subtitle { font-size: .82rem; color: #6B7280; line-height: 1.65; margin-bottom: 26px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.info-box { background: linear-gradient(135deg, #F9F7F2, #F5F0E5); border-radius: 16px; padding: 4px 20px; margin-bottom: 22px; border: 1px solid rgba(205,170,85,.25); text-align: left; position: relative; overflow: hidden; }
+.info-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #CDAA55, #B8943F); }
+.info-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 0 13px 12px; border-bottom: 1px dashed rgba(11,27,54,.1); font-size: .82rem; gap: 12px; }
+.info-row:last-child { border-bottom: none; }
+.info-row .label { color: #6B7280; font-weight: 600; font-size: .68rem; letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+.info-row .label i { color: #CDAA55; font-size: .75rem; }
+.info-row .value { color: #0B1B36; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: .75rem; text-align: right; word-break: break-all; display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.info-row .value.green { color: #1E7D5C; font-family: 'Space Grotesk', sans-serif; font-size: .82rem; }
+.info-row .value.green i { color: #1E7D5C; }
+.copy-btn { background: rgba(205,170,85,.15); border: 1px solid rgba(205,170,85,.35); color: #B8943F; width: 22px; height: 22px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: .6rem; transition: .25s; flex-shrink: 0; }
+.copy-btn:hover { background: #CDAA55; color: #fff; transform: scale(1.1); }
+.copy-btn.copied { background: #1E7D5C; border-color: #1E7D5C; color: #fff; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 32px; border: none; border-radius: 60px; font-family: 'Space Grotesk', sans-serif; font-size: .75rem; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all .35s cubic-bezier(0.34, 1.56, 0.64, 1); width: 100%; position: relative; overflow: hidden; }
+.btn-gold { background: linear-gradient(135deg, #CDAA55, #F0D98F 50%, #B8943F); background-size: 200% 100%; color: #0B1B36; box-shadow: 0 12px 30px rgba(205,170,85,.4); margin-bottom: 10px; }
+.btn-gold:hover { background-position: 100% 0; transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 40px rgba(205,170,85,.6); }
+.btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); transition: left 0.6s; }
+.btn-gold:hover::before { left: 100%; }
+.btn-ghost { background: transparent; color: #6B7280; border: 1.5px solid rgba(11,27,54,.15); font-size: .7rem; padding: 13px 24px; letter-spacing: 1.5px; }
+.btn-ghost:hover { background: #F9F7F2; color: #0B1B36; border-color: #CDAA55; transform: translateY(-2px); }
+.brand-divider { display: flex; align-items: center; gap: 12px; margin: 24px 0 14px; color: rgba(11,27,54,.2); }
+.brand-divider::before, .brand-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(205,170,85,.4), transparent); }
+.brand-divider i { color: #CDAA55; font-size: .7rem; }
+.brand-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #0B1B36; font-weight: 900; letter-spacing: 1px; }
+.brand-name em { font-style: italic; color: #CDAA55; }
+.brand-sub { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: 4px; color: #CDAA55; text-transform: uppercase; margin-top: 4px; font-weight: 700; }
+.brand-location { font-size: .65rem; color: #6B7280; margin-top: 8px; letter-spacing: 1px; }
+.brand-location i { color: #1E7D5C; margin-right: 4px; }
+.confetti { position: fixed; width: 10px; height: 10px; top: -20px; z-index: 100; pointer-events: none; animation: confettiFall linear forwards; }
+@keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0B1B36; color: #fff; padding: 14px 26px; border-radius: 50px; font-family: 'Space Grotesk', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: 1px; box-shadow: 0 15px 40px rgba(0,0,0,.4); border: 1px solid rgba(205,170,85,.4); z-index: 999; opacity: 0; transition: .4s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; align-items: center; gap: 10px; }
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast i { color: #CDAA55; }
+@media (max-width: 560px) {
+  body { padding: 14px; }
+  .verify-card { padding: 36px 24px 30px; border-radius: 22px; }
+  .verify-icon-wrap { width: 110px; height: 110px; margin-bottom: 22px; }
+  .verify-icon { width: 84px; height: 84px; font-size: 2.4rem; }
+  .verify-title { font-size: 1.5rem; }
+  .verify-subtitle { font-size: .75rem; margin-bottom: 22px; }
+  .info-box { padding: 2px 14px; }
+  .info-row { padding: 11px 0 11px 10px; font-size: .75rem; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .info-row .value { justify-content: flex-start; text-align: left; width: 100%; font-size: .7rem; }
+  .btn { padding: 14px 24px; font-size: .68rem; }
+  .brand-name { font-size: 1.1rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- SCENIC BACKGROUND -->
-<div class="scenery-bg"></div>
-<div class="scenery-overlay"></div>
+<div class="bg-gradient"></div>
+<div class="bg-grid"></div>
+<div class="particles" id="particles"></div>
 
-<!-- FLOATING PETALS -->
-<div class="petals-container" id="petalsContainer"></div>
-
-<!-- LOADER -->
-<div class="loader-screen" id="loader">
-    <div class="tick-loader">
-        <div class="tick-icon"><i class="fas fa-check"></i></div>
+<div class="verify-card" id="verifyCard">
+  <div class="verify-icon-wrap">
+    <div class="verify-icon-ring"></div>
+    <div class="verify-icon" id="icon"><i class="fas fa-check"></i></div>
+  </div>
+  <h1 class="verify-title" id="title">Document <em>Verified</em></h1>
+  <p class="verify-subtitle" id="subtitle">
+    This document is authentic and officially issued by<br>
+    <strong>Nusrat O Rehmat Traders</strong>.
+  </p>
+  <div class="info-box">
+    <div class="info-row">
+      <span class="label"><i class="fas fa-fingerprint"></i> Serial No</span>
+      <span class="value" id="serial">—</span>
     </div>
-    <div class="loader-text" id="loaderText">Verifying Authenticity</div>
-    <div class="loader-sub" id="loaderSub">Connecting to Pekin-Pak secure ledger</div>
+    <div class="info-row">
+      <span class="label"><i class="fas fa-file-signature"></i> Document Type</span>
+      <span class="value" style="font-family:'Space Grotesk';font-size:.78rem;" id="docTypeRow">—</span>
+    </div>
+    <div class="info-row">
+      <span class="label"><i class="fas fa-building"></i> Issued By</span>
+      <span class="value" style="font-family:'Space Grotesk';font-size:.78rem;">Nusrat O Rehmat Traders</span>
+    </div>
+    <div class="info-row">
+      <span class="label"><i class="fas fa-map-marker-alt"></i> Location</span>
+      <span class="value" style="font-family:'Space Grotesk';font-size:.78rem;">Chak Qazi, Sialkot</span>
+    </div>
+    <div class="info-row">
+      <span class="label"><i class="fas fa-shield-halved"></i> Status</span>
+      <span class="value green"><i class="fas fa-circle-check"></i> Verified & Active</span>
+    </div>
+  </div>
+  <a class="btn btn-gold" id="viewBtn" href="#">
+    <i class="fas fa-file-pdf"></i> View Original Document
+  </a>
+  <div class="brand-divider"><i class="fas fa-award"></i></div>
+  <div class="brand-name">Nusrat O <em>Rehmat</em></div>
+  <div class="brand-sub">Traders</div>
+  <div class="brand-location"><i class="fas fa-map-pin"></i> Chak Qazi, Sialkot · Pakistan</div>
 </div>
 
-<!-- MAIN UI -->
-<div class="main-container" id="mainUI">
-    
-    <!-- Header -->
-    <header class="glass-header">
-        <div class="brand-exact">
-            <img src="logo-main.png" alt="Truck Logo" class="logo-left">
-            <div class="brand-text">
-                <h1>PEKIN-PAK INTERNATIONAL LLC</h1>
-                <p>Beijing Representative Office</p>
-            </div>
-            <img src="logo-short.png" alt="Red/Blue Logo" class="logo-right">
-        </div>
-        <div class="verified-badge">
-            <span class="dot"></span> VERIFIED
-        </div>
-    </header>
-
-    <!-- Main Grid -->
-    <div class="main-grid">
-        
-        <!-- Left Info -->
-        <div class="glass-panel info-panel">
-            <div class="seal-area">
-                <div class="seal-icon"><i class="fas fa-star"></i></div>
-                <h2>Authentic Record</h2>
-                <p>This document is officially issued and verified by Pekin-Pak International.</p>
-            </div>
-
-            <div class="data-list">
-                <div class="data-item">
-                    <span class="key">Serial No.</span>
-                    <span class="val highlight" id="v-serial">—</span>
-                </div>
-                <div class="data-item">
-                    <span class="key">Document Type</span>
-                    <span class="val" id="v-type">—</span>
-                </div>
-                <div class="data-item">
-                    <span class="key">Issuer</span>
-                    <span class="val">Pekin-Pak LLC</span>
-                </div>
-                <div class="data-item">
-                    <span class="key">Verified On</span>
-                    <span class="val" id="v-time">—</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Viewer -->
-        <div class="glass-panel viewer-panel">
-            <div class="viewer-header">
-                <div class="file-name">
-                    <i class="fas fa-file-pdf"></i>
-                    <span id="v-file">document.pdf</span>
-                </div>
-                <div class="tag">SECURE VIEW</div>
-            </div>
-            <div class="iframe-container">
-                <iframe id="doc-frame" src="about:blank"></iframe>
-            </div>
-        </div>
-
-    </div>
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i>
+  <span id="toastMsg">Copied!</span>
 </div>
 
 <script>
-// ============================================
-// 1. WEB3FORMS SETUP (Auto Email System)
-// ============================================
-const WEB3FORMS_KEY = "a307a8be-ccbc-4d68-8280-b5d1ccf9da6d"; 
+/* ============================================
+   ⚙️ CONFIGURATION — AAPKI ACCESS KEY
+============================================ */
+const WEB3FORMS_KEY = "cc043be9-de17-4f98-ae7f-c4c12697b520";
 
-const urlParams = new URLSearchParams(window.location.search);
-let serial = urlParams.get('serial');
-let file = urlParams.get('file');
-let type = urlParams.get('type');
+/* ============================================
+   PARSE URL
+============================================ */
+const params = new URLSearchParams(window.location.search);
+const serial = params.get('serial');
+const file = params.get('file');
+const type = params.get('type');
 
-if (!serial) {
-    serial = 'PK-TEST-123';
-    file = 'letter-01.pdf';
-    type = 'company-profile';
+/* ============================================
+   DOCUMENT TYPE MAPPING
+============================================ */
+function getDocTypeLabel(typeParam) {
+  if (!typeParam) return 'Verified Document';
+  const map = {
+    'company-intro': 'Company Introduction',
+    'company-profile': 'Company Profile',
+    'business-proposal': 'Business Proposal',
+    'partnership-letter': 'Partnership Letter',
+    'company-merger': 'Company Merger Notice',
+    'new-branch': 'New Branch Announcement',
+    'product-launch': 'Product Launch Announcement',
+    'business-travel': 'Business Travel Notification',
+    'official-travel': 'Official Travel Notice',
+    'visit-invitation': 'Visit Invitation Letter',
+    'visa-letter': 'Visa Supporting Letter',
+    'medical-travel': 'Medical Travel Notification',
+    'family-visit': 'Family Visit Notification',
+    'conference-attendance': 'Conference Attendance',
+    'business-meeting': 'Business Meeting Notification',
+    'travel notification': 'Travel Notification',
+    'experience-letter': 'Experience Letter',
+    'salary-certificate': 'Salary Certificate',
+    'employment-letter': 'Employment Letter',
+    'recommendation-letter': 'Recommendation Letter',
+    'offer-letter': 'Offer Letter',
+    'appointment-letter': 'Appointment Letter',
+    'leave-notification': 'Leave Notification',
+    'promotion-letter': 'Promotion Letter',
+    'transfer-letter': 'Transfer Letter',
+    'resignation-acceptance': 'Resignation Acceptance',
+    'warning-letter': 'Warning Letter',
+    'termination-letter': 'Termination Letter',
+    'noc': 'No Objection Certificate (NOC)',
+    'authorization-letter': 'Authorization Letter',
+    'power-of-attorney': 'Power of Attorney',
+    'agreement': 'Agreement',
+    'contract': 'Contract',
+    'undertaking': 'Undertaking',
+    'affidavit': 'Affidavit',
+    'declaration': 'Declaration',
+    'invoice': 'Commercial Invoice',
+    'quotation': 'Business Quotation',
+    'purchase-order': 'Purchase Order',
+    'payment-reminder': 'Payment Reminder',
+    'order-confirmation': 'Order Confirmation',
+    'delivery-note': 'Delivery Note',
+    'shipping-notice': 'Shipping Notice',
+    'customs-declaration': 'Customs Declaration',
+    'export-document': 'Export Document',
+    'bank-letter': 'Bank Letter',
+    'financial-statement': 'Financial Statement',
+    'credit-reference': 'Credit Reference',
+    'payment-guarantee': 'Payment Guarantee',
+    'formal-apology': 'Formal Apology',
+    'formal-complaint': 'Formal Complaint',
+    'thank-you-letter': 'Thank You Letter',
+    'invitation-letter': 'Invitation Letter',
+    'other': 'Verified Document'
+  };
+  const key = String(typeParam).toLowerCase().trim();
+  if (map[key]) return map[key];
+  return key.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// ============================================
-// 2. AUTO EMAIL FUNCTION
-// ============================================
-async function sendAutoEmail() {
-    if (!serial) return;
-    try {
-        let ipInfo = {};
-        try {
-            const res = await fetch('https://ipapi.co/json/');
-            ipInfo = await res.json();
-        } catch(e) { console.log("IP fetch failed"); }
+/* ============================================
+   🌐 IP / LOCATION INFO
+============================================ */
+async function getVisitorInfo() {
+  try {
+    const res = await fetch('https://ipapi.co/json/');
+    return await res.json();
+  } catch(e) {
+    return {};
+  }
+}
 
-        const now = new Date();
-        const pkTime = now.toLocaleString('en-PK', { 
-            timeZone: 'Asia/Karachi', dateStyle: 'full', timeStyle: 'short' 
-        });
-        const isMobile = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent);
+/* ============================================
+   📧 SEND EMAIL NOTIFICATION (Web3Forms)
+============================================ */
+async function sendEmailNotification() {
+  if (!serial) return;
+  
+  try {
+    const ip = await getVisitorInfo();
+    const now = new Date();
 
-        const payload = {
-            access_key: WEB3FORMS_KEY,
-            subject: `🔔 Document Scanned — ${serial}`,
-            from_name: "Pekin-Pak QR Tracker",
-            "Serial Number": serial,
-            "Document Type": type || "N/A",
-            "File Name": file || "N/A",
-            "Time (PKT)": pkTime,
-            "IP Address": ipInfo.ip || "Unknown",
-            "City": ipInfo.city || "Unknown",
-            "Country": ipInfo.country_name || "Unknown",
-            "Device": isMobile ? "📱 Mobile" : "💻 Desktop",
-            "Browser": navigator.userAgent.substring(0, 100)
-        };
+    // Visitor ki local time (unke device/timezone ke mutabiq)
+    const localTime = now.toLocaleString(undefined, {
+      dateStyle: 'full',
+      timeStyle: 'short'
+    });
 
-        const response = await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        const result = await response.json();
-        console.log('📧 Notification Status:', result.success ? 'Sent ✅' : 'Failed ❌', result);
-    } catch (err) {
-        console.error('Mail Error:', err);
+    // Visitor ka detected timezone (e.g. "Asia/Karachi", "Europe/London")
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
+
+    // UTC offset (e.g. "UTC+05:00")
+    const offsetMin = -now.getTimezoneOffset();
+    const sign = offsetMin >= 0 ? "+" : "-";
+    const absMin = Math.abs(offsetMin);
+    const hh = String(Math.floor(absMin / 60)).padStart(2, "0");
+    const mm = String(absMin % 60).padStart(2, "0");
+    const utcOffset = `UTC${sign}${hh}:${mm}`;
+    
+    const isMobile = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent);
+    
+    const payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: `🔔 QR Scanned — ${serial}`,
+      from_name: "Nusrat O Rehmat QR Tracker",
+      
+      "Serial Number": serial,
+      "Document Type": getDocTypeLabel(type),
+      "File": file || "N/A",
+      "Scanned At": `${localTime} (${userTimeZone}, ${utcOffset})`,
+      "UTC Timestamp": now.toISOString(),
+      
+      "IP Address": ip.ip || "Unknown",
+      "City": ip.city || "Unknown",
+      "Region": ip.region || "Unknown",
+      "Country": ip.country_name || "Unknown",
+      "ISP": ip.org || "Unknown",
+      
+      "Device": isMobile ? "📱 Mobile" : "💻 Desktop",
+      "Browser": navigator.userAgent.substring(0, 120),
+      "Language": navigator.language,
+      "Screen": `${screen.width}x${screen.height}`,
+      "Referrer": document.referrer || "Direct QR Scan"
+    };
+    
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    const result = await response.json();
+    console.log('📧 Email notification:', result.success ? '✅ Sent' : '❌ Failed', result);
+  } catch (err) {
+    console.error('Email tracking error:', err);
+  }
+}
+
+/* ============================================
+   FLOATING PARTICLES
+============================================ */
+function createParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#CDAA55', '#F0D98F', '#1E7D5C', '#17664D'];
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = (Math.random() * 4 + 2) + 'px';
+    p.style.height = p.style.width;
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (Math.random() * 15 + 12) + 's';
+    p.style.animationDelay = (Math.random() * 8) + 's';
+    container.appendChild(p);
+  }
+}
+createParticles();
+
+/* ============================================
+   VERIFY LOGIC
+============================================ */
+if (serial) {
+  document.getElementById('serial').innerHTML =
+    `${serial}
+    <button class="copy-btn" id="copyBtn" onclick="copySerial()" title="Copy">
+      <i class="fas fa-copy"></i>
+    </button>`;
+
+  document.getElementById('docTypeRow').textContent = getDocTypeLabel(type);
+
+  if (file) {
+    document.getElementById('viewBtn').href = `letters/${file}`;
+    document.getElementById('viewBtn').setAttribute('target', '_blank');
+  } else {
+    document.getElementById('viewBtn').style.display = 'none';
+  }
+
+  setTimeout(createConfetti, 500);
+  
+  // 📧 Track scan + send email notification
+  sendEmailNotification();
+
+} else {
+  document.getElementById('verifyCard').classList.add('invalid');
+  document.getElementById('icon').classList.add('invalid');
+  document.getElementById('icon').innerHTML = '<i class="fas fa-times"></i>';
+  document.getElementById('title').innerHTML = 'Invalid <em>Document</em>';
+  document.getElementById('subtitle').innerHTML =
+    'No serial number found.<br>This document cannot be verified.';
+  document.getElementById('serial').textContent = '—';
+  document.getElementById('viewBtn').style.display = 'none';
+}
+
+/* ============================================
+   COPY SERIAL
+============================================ */
+function copySerial() {
+  if (!serial) return;
+  navigator.clipboard.writeText(serial).then(() => {
+    const btn = document.getElementById('copyBtn');
+    if (btn) {
+      btn.classList.add('copied');
+      btn.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<i class="fas fa-copy"></i>';
+      }, 2000);
     }
+    showToast('Serial number copied!');
+  });
 }
 
-// ============================================
-// 3. UI FUNCTIONS
-// ============================================
-function createPetals() {
-    const container = document.getElementById('petalsContainer');
-    for (let i = 0; i < 20; i++) {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-        const size = Math.random() * 10 + 5;
-        petal.style.width = `${size}px`;
-        petal.style.height = `${size}px`;
-        petal.style.left = `${Math.random() * 100}vw`;
-        petal.style.animationDuration = `${Math.random() * 10 + 10}s`;
-        petal.style.animationDelay = `${Math.random() * 10}s`;
-        container.appendChild(petal);
-    }
+/* ============================================
+   TOAST
+============================================ */
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-function formatType(t) {
-    if (!t) return 'Document';
-    return t.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+/* ============================================
+   CONFETTI
+============================================ */
+function createConfetti() {
+  const colors = ['#CDAA55', '#F0D98F', '#1E7D5C', '#17664D', '#B8943F', '#fff'];
+  const shapes = ['circle', 'square', 'rect'];
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const size = Math.random() * 8 + 6;
+    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = color;
+    c.style.width = (shape === 'rect' ? size * 1.8 : size) + 'px';
+    c.style.height = size + 'px';
+    c.style.borderRadius = shape === 'circle' ? '50%' : '2px';
+    c.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
+    c.style.animationDelay = (Math.random() * 0.6) + 's';
+    c.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
 }
-
-function getCurrentTime() {
-    const d = new Date();
-    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit'});
-}
-
-// ============================================
-// 4. INITIALIZATION
-// ============================================
-createPetals();
-
-const loader = document.getElementById('loader');
-const lText = document.getElementById('loaderText');
-const lSub = document.getElementById('loaderSub');
-const mainUI = document.getElementById('mainUI');
-
-const steps = [
-    { t: "Verifying Authenticity", s: "Connecting to Pekin-Pak secure ledger..." },
-    { t: "Decrypting Record", s: "Matching cryptographic signatures..." },
-    { t: "Access Granted", s: "Loading secure document viewer..." }
-];
-
-let step = 0;
-const interval = setInterval(() => {
-    if (step < steps.length) {
-        lText.innerText = steps[step].t;
-        lSub.innerText = steps[step].s;
-        step++;
-    } else {
-        clearInterval(interval);
-        loader.style.opacity = '0';
-        loader.style.visibility = 'hidden';
-        
-        setTimeout(() => {
-            mainUI.style.display = 'flex';
-            setTimeout(() => mainUI.style.opacity = '1', 100);
-
-            document.getElementById('v-serial').innerText = serial;
-            document.getElementById('v-type').innerText = formatType(type);
-            document.getElementById('v-time').innerText = getCurrentTime();
-            document.getElementById('v-file').innerText = file;
-
-            document.getElementById('doc-frame').src = `letters/${file}`;
-
-            sendAutoEmail();
-
-        }, 800);
-    }
-}, 1500);
 </script>
 
 </body>
