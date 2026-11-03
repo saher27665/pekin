@@ -1,0 +1,35 @@
+{
+  "PP0001": {
+    "name": "Mr. MS. RANA",
+    "employeeId": "PP0001",
+    "designation": "Chief Representative",
+    "department": "Beijing Representative Office",
+    "employmentIssue": "17 SEP 2026",
+    "photo": "img.png",
+    "email": "machines@pekinpak.com",
+    "phone": "+86-130-5190-9786",
+    "address": "Beijing · China"
+  },
+  "PP0002": {
+    "name": "Mr. FS. RANA-Sunny",
+    "employeeId": "PP0002",
+    "designation": "Marketing Manager",
+    "department": "Beijing Representative Office",
+    "employmentIssue": "17 SEP 2026",
+    "photo": "photos/sunny.jpg",
+    "email": "pekingroup.sunny.cn@live.com",
+    "phone": "+86-134-3987-2786",
+    "address": "Beijing · China"
+  },
+  "PP0003": {
+    "name": "Ms. AYESHA KHAN",
+    "employeeId": "PP0003",
+    "designation": "Trade Operations Officer",
+    "department": "Doha Head Office",
+    "employmentIssue": "17 SEP 2026",
+    "photo": "",
+    "email": "operations@pekinpak.com",
+    "phone": "+974-XXXX-XXXX",
+    "address": "Doha · Qatar"
+  }
+}
