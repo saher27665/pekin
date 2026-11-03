@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Profile | PEKIN-PAK-INTERNATIONAL LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+    --forest: #0B2B1B;
+    --forest-deep: #061A10;
+    --forest-mid: #14402A;
+    --gold: #C9A959;
+    --gold-bright: #E0C878;
+    --gold-deep: #B08C38;
+    --cream: #FAF7F2;
+    --ivory: #FFFDF8;
+    --ink: #1A1F1C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { 
+  height: 100vh; 
+  overflow: hidden;
+  font-family: 'Inter', sans-serif; 
+}
+
+body {
+  background-color: var(--forest-deep);
+  /* Background image completely clear */
+  background-image: url('need-back.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 20%, rgba(6,26,16,.8) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============ CARD WRAPPER ============ */
+.card-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cardEntry .6s ease;
+}
+
+@keyframes cardEntry {
+  from { opacity: 0; transform: scale(.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.employee-card {
+  /* Card has NO background so image shows through */
+  background: transparent;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1300px;
+  height: 100%;
+  max-height: calc(100vh - 28px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 
+    0 25px 70px rgba(0,0,0,.6),
+    0 0 0 1px rgba(201,169,89,.4),
+    0 0 50px rgba(201,169,89,.15);
+  position: relative;
+}
+
+/* ============ HEADER ============ */
+.emp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  /* Solid header to stand out */
+  background: linear-gradient(135deg, var(--forest-deep) 0%, var(--forest) 100%);
+  position: relative;
+  z-index: 2;
+  border-bottom: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+
+.emp-header-left { display: flex; align-items: center; gap: 12px; }
+
+.emp-header-logo {
+  width: 46px; height: 46px;
+  border-radius: 10px;
+  background: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  flex-shrink: 0;
+}
+
+.emp-header-logo img { width: 100%; height: 100%; object-fit: contain; }
+.emp-header-logo i { color: var(--forest); font-size: 1.4rem; }
+
+.emp-header-text .brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; letter-spacing: 1px;
+  color: var(--cream); line-height: 1;
+  font-weight: 700;
+}
+
+.emp-header-text .sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .55rem; letter-spacing: 3px;
+  color: var(--gold-bright);
+  margin-top: 4px;
+}
+
+.emp-header-badge {
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  color: var(--forest-deep);
+  padding: 7px 14px;
+  border-radius: 25px;
+  font-size: .65rem; font-weight: 800;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(201,169,89,.4);
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ============ BODY ============ */
+.emp-body {
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  flex: 1;
+  overflow: hidden;
+  background: transparent;
+  min-height: 0;
+}
+
+/* Sidebar */
+.emp-sidebar {
+  /* Light semi-transparent background for readability */
+  background: rgba(250, 247, 242, 0.88); 
+  padding: 20px 16px;
+  border-right: 1px solid rgba(11,43,27,.15);
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.emp-sidebar::-webkit-scrollbar { width: 4px; }
+.emp-sidebar::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 4px; }
+
+.emp-photo-frame { position: relative; margin-bottom: 12px; }
+
+.emp-photo-frame::before {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed rgba(201,169,89,.6);
+  animation: rotateRing 20s linear infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.emp-photo {
+  width: 140px; height: 140px;
+  border-radius: 50%; overflow: hidden;
+  background: linear-gradient(135deg, var(--forest), var(--forest-mid));
+  border: 3px solid var(--gold);
+  box-shadow: 0 10px 30px rgba(11,43,27,.25);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.emp-photo img { 
+  width: 100%; height: 100%; 
+  object-fit: cover; object-position: center 15%;
+  display: block;
+  background: #fff;
+}
+
+.emp-photo .initials {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem; color: var(--gold-bright); letter-spacing: 2px;
+}
+
+.emp-status {
+  position: absolute; bottom: 8px; right: 8px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #28A745; border: 3px solid var(--cream);
+  box-shadow: 0 0 10px rgba(40,167,69,.7);
+}
+
+.emp-sidebar-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--forest-deep); line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.emp-sidebar-designation {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .6rem; font-weight: 700;
+  color: var(--forest-deep); letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(201,169,89,.3);
+}
+
+.emp-sidebar-id {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .95rem; letter-spacing: 1px;
+  color: var(--forest); padding: 8px 16px;
+  background: var(--ivory);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(11,43,27,.08);
+  margin-bottom: 16px;
+}
+
+/* Permit Photo Section */
+.emp-permit-section {
+  width: 100%;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(11,43,27,.2);
+}
+
+.emp-permit-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.emp-permit-photo {
+  width: 100%;
+  height: 90px;
+  background: #fff;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(11,43,27,.08);
+}
+
+.emp-permit-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.emp-permit-placeholder {
+  font-size: 0.6rem;
+  color: #888;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Content Columns */
+.emp-content {
+  padding: 20px 24px;
+  /* Semi-transparent white background for text readability */
+  background: rgba(255, 253, 248, 0.88);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.emp-content::-webkit-scrollbar { width: 4px; }
+.emp-content::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+.emp-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; letter-spacing: .5px;
+  color: var(--forest-deep); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+  text-transform: uppercase; font-weight: 700;
+  padding-bottom: 6px;
+  border-bottom: 2px solid rgba(201,169,89,.4);
+}
+
+.emp-section-title i { color: var(--gold-deep); font-size: .85rem; }
+
+.emp-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin-bottom: 18px;
+}
+
+.emp-info-item {
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(11,43,27,.15);
+}
+
+.emp-info-item.full-width { grid-column: 1 / -1; }
+
+.emp-info-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .58rem; color: #4b5563;
+  letter-spacing: .5px; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 3px;
+  display: flex; align-items: center; gap: 4px;
+}
+
+.emp-info-label i { color: var(--gold-deep); font-size: .6rem; }
+
+.emp-info-value {
+  font-size: .8rem; color: var(--forest-deep);
+  font-weight: 700; line-height: 1.35;
+  word-break: break-word;
+}
+
+/* Collapsible Blocks */
+.emp-block-wrapper { margin-bottom: 10px; }
+
+.emp-block-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(250, 247, 242, 0.95); 
+  border-left: 4px solid var(--gold-deep);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .25s;
+  user-select: none;
+}
+
+.emp-block-header:hover {
+  background: rgba(235, 229, 218, 1);
+}
+
+.emp-block-header .title {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem; font-weight: 700;
+  color: var(--forest-deep); letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.emp-block-header .title i { color: var(--gold-deep); font-size: .75rem; }
+
+.emp-block-header .toggle-icon {
+  color: var(--forest);
+  font-size: .7rem;
+  transition: transform .3s;
+}
+
+.emp-block-wrapper.open .emp-block-header .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.emp-block-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .35s ease;
+  font-size: .78rem;
+  color: #3a4a42;
+  line-height: 1.6;
+  padding: 0 14px;
+  background: rgba(248, 250, 252, 0.98);
+  border-left: 4px solid rgba(201,169,89,.5);
+  border-radius: 0 0 6px 6px;
+  margin-top: -2px;
+}
+
+.emp-block-wrapper.open .emp-block-content {
+  max-height: 250px;
+  padding: 12px 14px;
+  overflow-y: auto;
+}
+
+/* ============ FOOTER ============ */
+.emp-footer {
+  background: linear-gradient(135deg, var(--forest-deep) 0%, var(--forest) 100%);
+  padding: 12px 24px;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 10px;
+  border-top: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+
+.emp-footer-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+
+.emp-footer-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem; color: rgba(250,247,242,.85);
+  font-weight: 500;
+}
+
+.emp-footer-item i { color: var(--gold-bright); font-size: .75rem; }
+.emp-footer-item a { color: var(--gold-bright); text-decoration: none; font-weight: 600; }
+
+.emp-footer-right {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .9rem; letter-spacing: 1px;
+  color: rgba(250,247,242,.5);
+  font-weight: 600;
+}
+
+/* ============ LOADING & NOT FOUND ============ */
+.loading-screen, .not-found-screen {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg, var(--forest-deep), var(--forest));
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 100; padding: 24px; text-align: center;
+}
+
+.loading-screen i {
+  font-size: 3rem; color: var(--gold);
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.loading-screen p { 
+  color: var(--cream); 
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem; letter-spacing: 2px; opacity: .7; 
+}
+
+.not-found-screen .icon-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: rgba(220,53,69,.15);
+  border: 2px solid rgba(220,53,69,.4);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+}
+
+.not-found-screen .icon-circle i { font-size: 2.5rem; color: #DC3545; }
+
+.not-found-screen h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; color: var(--cream);
+  letter-spacing: 1px; margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.not-found-screen p {
+  color: rgba(250,247,242,.6); font-size: .85rem;
+  max-width: 400px; line-height: 1.7;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1100px) {
+  .emp-body { grid-template-columns: 240px 1fr; }
+  .emp-content:nth-child(3) { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+  html, body { overflow: auto; height: auto; }
+  .card-wrapper { max-height: none; height: auto; }
+  .employee-card { max-height: none; height: auto; }
+  .emp-body { grid-template-columns: 1fr; }
+  .emp-sidebar { border-right: none; border-bottom: 1px solid rgba(11,43,27,.1); }
+  .emp-info-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="loading-screen" id="loading">
+  <i class="fas fa-spinner"></i>
+  <p>LOADING PROFILE</p>
+</div>
+
+<div class="not-found-screen" id="notFound" style="display: none;">
+  <div class="icon-circle"><i class="fas fa-user-slash"></i></div>
+  <h2>EMPLOYEE NOT FOUND</h2>
+  <p>This employee ID is either invalid or has been removed from our records.</p>
+  <p style="margin-top: 20px; font-size: .7rem; letter-spacing: 3px; color: var(--gold);">PEKIN-PAK-INTERNATIONAL LLC</p>
+</div>
+
+<div class="card-wrapper" id="profileCard" style="display: none;">
+  <div class="employee-card">
+    
+    <!-- Header -->
+    <div class="emp-header">
+      <div class="emp-header-left">
+        <div class="emp-header-logo">
+          <img src="logo-short.png" alt="PEKIN-PAK" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-globe\'></i>'">
+        </div>
+        <div class="emp-header-text">
+          <div class="brand">PEKIN-PAK-INTERNATIONAL LLC </div>
+          <div class="sub">Beijing Representative Office | SINCE 1993</div>
+        </div>
+      </div>
+      <div class="emp-header-badge">
+        <i class="fas fa-id-badge"></i> EMPLOYEE PROFILE
+      </div>
+    </div>
+
+    <!-- Body: 3 Columns -->
+    <div class="emp-body">
+      
+      <!-- Column 1: Sidebar -->
+      <div class="emp-sidebar">
+        <div class="emp-photo-frame">
+          <div class="emp-photo" id="photoBox">
+            <span class="initials" id="initials">--</span>
+          </div>
+          <div class="emp-status"></div>
+        </div>
+        <h1 class="emp-sidebar-name" id="empName">—</h1>
+        <div class="emp-sidebar-designation">
+          <i class="fas fa-briefcase"></i>
+          <span id="empDesig">—</span>
+        </div>
+        <div class="emp-sidebar-id" id="empId">—</div>
+
+        <!-- Permit Photo Section -->
+        <div class="emp-permit-section">
+          <div class="emp-permit-title"><i class="fas fa-id-card"></i> China Residence Permit</div>
+          <div class="emp-permit-photo" id="permitPhotoBox">
+            <div class="emp-permit-placeholder" id="permitPlaceholder">
+              <i class="fas fa-image" style="font-size: 1.2rem; margin-bottom: 4px; color: #ccc;"></i><br>
+              No Photo
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Column 2: Personal + Employment -->
+      <div class="emp-content">
+        
+        <div class="emp-section-title"><i class="fas fa-user"></i> Personal Information</div>
+        <div class="emp-info-grid">
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-user-tag"></i> Full Name</div>
+            <div class="emp-info-value" id="empFullName">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-user"></i> Surname</div>
+            <div class="emp-info-value" id="empSurname">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-birthday-cake"></i> Date of Birth</div>
+            <div class="emp-info-value" id="empDob">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-venus-mars"></i> Gender</div>
+            <div class="emp-info-value" id="empGender">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-tint"></i> Blood Group</div>
+            <div class="emp-info-value" id="empBlood">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-flag"></i> Nationality</div>
+            <div class="emp-info-value" id="empNationality">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-male"></i> Father's Name</div>
+            <div class="emp-info-value" id="empFather">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-female"></i> Mother's Name</div>
+            <div class="emp-info-value" id="empMother">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-id-card"></i> CNIC</div>
+            <div class="emp-info-value" id="empCnic">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-passport"></i> Passport No</div>
+            <div class="emp-info-value" id="empPassport">—</div>
+          </div>
+          <div class="emp-info-item full-width">
+            <div class="emp-info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
+            <div class="emp-info-value" id="empAddress">—</div>
+          </div>
+        </div>
+
+        <div class="emp-section-title"><i class="fas fa-briefcase"></i> Employment Details</div>
+        <div class="emp-info-grid">
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-building"></i> Company</div>
+            <div class="emp-info-value" id="empCompany">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-user-tie"></i> Designation</div>
+            <div class="emp-info-value" id="empDesignation2">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-id-badge"></i> Employee Card No</div>
+            <div class="emp-info-value" id="empCardNo">—</div>
+          </div>
+          
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-id-card"></i> China Residence Permit</div>
+            <div class="emp-info-value" id="empChinaPermit">—</div>
+          </div>
+
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-plus"></i> Employment Issue</div>
+            <div class="emp-info-value" id="empEmploymentIssue">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-times"></i> Employment Expiry</div>
+            <div class="emp-info-value" id="empEmploymentExpiry">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-passport"></i> Passport Issue</div>
+            <div class="emp-info-value" id="empPassportIssue">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-passport"></i> Passport Expiry</div>
+            <div class="emp-info-value" id="empPassportExpiry">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-check"></i> National ID Issue</div>
+            <div class="emp-info-value" id="empIssue">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-xmark"></i> National ID Expiry</div>
+            <div class="emp-info-value" id="empExpire">—</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Column 3: Contact + Job Details -->
+      <div class="emp-content">
+
+        <div class="emp-section-title"><i class="fas fa-address-book"></i> Contact Details</div>
+        <div class="emp-info-grid">
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-phone"></i> Mobile</div>
+            <div class="emp-info-value" id="empPhone">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-envelope"></i> Email</div>
+            <div class="emp-info-value" id="empEmail">—</div>
+          </div>
+        </div>
+
+        <!-- Collapsible: Job Description -->
+        <div class="emp-block-wrapper" onclick="toggleBlock(this)">
+          <div class="emp-block-header">
+            <div class="title"><i class="fas fa-tasks"></i> Job Description</div>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="emp-block-content" id="empJobDesc">—</div>
+        </div>
+
+        <!-- Collapsible: Responsibilities -->
+        <div class="emp-block-wrapper" onclick="toggleBlock(this)">
+          <div class="emp-block-header">
+            <div class="title"><i class="fas fa-list-check"></i> Responsibilities</div>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="emp-block-content" id="empResponsibilities">—</div>
+        </div>
+
+        <!-- Collapsible: Skills -->
+        <div class="emp-block-wrapper" onclick="toggleBlock(this)">
+          <div class="emp-block-header">
+            <div class="title"><i class="fas fa-star"></i> Skills</div>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="emp-block-content" id="empSkills">—</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="emp-footer">
+      <div class="emp-footer-left">
+        <div class="emp-footer-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Beijing Representative Office, China</span>
+        </div>
+        <div class="emp-footer-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+8613051909786">+86-130-5190-9786</a>
+        </div>
+        <div class="emp-footer-item">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:pipigroup.cn@hotmail.com">pipigroup.cn@hotmail.com</a>
+        </div>
+      </div>
+      <div class="emp-footer-right">PEKIN-PAK-INTERNATIONAL LLC</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Toggle collapsible blocks
+  function toggleBlock(el) {
+    el.classList.toggle('open');
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const empId = params.get('id');
+
+  setTimeout(() => {
+    if (!empId) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('notFound').style.display = 'flex';
+      return;
+    }
+
+    fetch('employees.json')
+      .then(res => res.json())
+      .then(data => {
+        const emp = data[empId];
+        if (!emp) {
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('notFound').style.display = 'flex';
+          return;
+        }
+
+        const set = (id, val) => document.getElementById(id).textContent = val || '—';
+        
+        set('empName', emp.name);
+        set('empFullName', emp.name);
+        set('empSurname', emp.surname);
+        set('empDesig', emp.designation);
+        set('empDesignation2', emp.designation);
+        set('empId', emp.employeeId || empId);
+        set('empCardNo', emp.employmentCardNo || emp.employeeId || empId);
+        set('empChinaPermit', emp.chinaResidencePermit); // New Field
+        set('empDob', emp.dob);
+        set('empGender', emp.gender);
+        set('empBlood', emp.bloodGroup);
+        set('empNationality', emp.nationality);
+        set('empFather', emp.fatherName);
+        set('empMother', emp.motherName);
+        set('empCnic', emp.cnic);
+        set('empPassport', emp.passport);
+        set('empAddress', emp.address);
+        set('empIssue', emp.issueDate);
+        set('empExpire', emp.expireDate);
+        set('empPassportIssue', emp.passportIssue);
+        set('empPassportExpiry', emp.passportExpiry);
+        set('empEmploymentIssue', emp.employmentIssue);
+        set('empEmploymentExpiry', emp.employmentExpiry);
+        set('empCompany', emp.company || 'PEKIN-PAK-INTERNATIONAL LLC');
+        set('empPhone', emp.phone);
+        set('empEmail', emp.email);
+        set('empJobDesc', emp.jobDescription);
+        set('empResponsibilities', emp.responsibilities);
+        set('empSkills', emp.skills);
+
+        // Main Employee Photo
+        const photoBox = document.getElementById('photoBox');
+        if (emp.photo) {
+          const img = new Image();
+          img.onload = () => {
+            photoBox.innerHTML = `<img src="${emp.photo}" alt="${emp.name}">`;
+          };
+          img.onerror = () => {
+            const initials = (emp.name || '--').split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
+            document.getElementById('initials').textContent = initials;
+          };
+          img.src = emp.photo;
+        } else {
+          const initials = (emp.name || '--').split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
+          document.getElementById('initials').textContent = initials;
+        }
+
+        // Permit Photo
+        const permitBox = document.getElementById('permitPhotoBox');
+        if (emp.permitPhoto) {
+          const pImg = new Image();
+          pImg.onload = () => {
+            permitBox.innerHTML = `<img src="${emp.permitPhoto}" alt="Residence Permit">`;
+          };
+          pImg.src = emp.permitPhoto;
+        }
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('profileCard').style.display = 'flex';
+      })
+      .catch(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('notFound').style.display = 'flex';
+      });
+  }, 300);
+</script>
+
+</body>
+</html>
