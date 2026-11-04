@@ -15,7 +15,7 @@
     "dob": "14 FEB 1985",
     "gender": "Male",
     "bloodGroup": "A+",
-    "nationality": "PAKISTANI",
+    "nationality": "PAKISTAN",
     "fatherName": "Muhammad siddiq rana",
     "motherName": "Zubaida Begum",
     "cnic": "34603-4315011-3",
@@ -29,13 +29,13 @@
     "employmentExpiry": "23 OCT 2027",
     
     "chinaResidencePermitNo": "105220696",
-    "chinaResidencePermitIssue": "02 nov 2026",
-    "chinaResidencePermitExpiry": "20 nov 2027",
+    "chinaResidencePermitIssue": "02 Nov 2026",
+    "chinaResidencePermitExpiry": "20 Nov 2027",
     "permitPhoto": "permit.jpg",
     
     "employmentCertificateNo": "392110019850214011",
-    "employmentCertificateIssue": "26 jul 2018",
-    "employmentCertificateExpiry": "24 nov 2027",
+    "employmentCertificateIssue": "26 Jul 2018",
+    "employmentCertificateExpiry": "24 Nov 2027",
     "employmentCertificateCompany": "PekinPak International LLC",
     "employmentCertificateEmail": "machines@pekinpak.com",
     
