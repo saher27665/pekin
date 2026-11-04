@@ -1,12 +1,12 @@
 {
   "PP0001": {
     "name": "Faisal Siddiq Rana",
-    "surname": "RANA",
+    "surname": "Rana",
     "employeeId": "PP0001",
     "designation": "Marketing Manager",
     "department": "Beijing Representative Office",
     "employmentCardNo": "PP0001",
-    "company": "PEKIN-PAK-INTERNATIONAL LLC",
+    "company": "PekinPak International LLC",
     "photo": "faisal.jpg",
     "email": "machines@pekinpak.com",
     "phone": "+86-130-5190-9786",
@@ -16,7 +16,7 @@
     "gender": "Male",
     "bloodGroup": "A+",
     "nationality": "PAKISTANI",
-    "fatherName": "MUHAMMAD SIDDIQ RANA",
+    "fatherName": "Muhammad siddiq rana",
     "motherName": "Zubaida Begum",
     "cnic": "34603-4315011-3",
     "passport": "BB9790113",
@@ -36,7 +36,7 @@
     "employmentCertificateNo": "",
     "employmentCertificateIssue": "",
     "employmentCertificateExpiry": "",
-    "employmentCertificateCompany": "PEKIN-PAK-INTERNATIONAL LLC",
+    "employmentCertificateCompany": "PekinPak International LLC",
     "employmentCertificateEmail": "",
     
     "jobDescription": "Developing and implementing marketing strategies to expand market share.",
