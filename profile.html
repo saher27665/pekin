@@ -312,10 +312,11 @@ body::before {
 
 /* Permit Photo Section */
 .emp-permit-section {
-  width: 100%;
-  margin-top: 10px;
-  padding-top: 20px;
-  border-top: 1px dashed rgba(201,169,89,.5);
+   width: 100%;
+  height: 100%;
+  object-fit: cover; /* Yeh white space khatam karega */
+  object-position: center;
+ 
 }
 
 .emp-permit-title {
@@ -334,7 +335,7 @@ body::before {
 
 .emp-permit-photo {
   width: 100%;
-  height: 110px;
+  height: 150px;
   background: #fff;
   border: 2px solid var(--gold);
   border-radius: 12px;
@@ -353,7 +354,7 @@ body::before {
 .emp-permit-photo img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .emp-permit-placeholder {
