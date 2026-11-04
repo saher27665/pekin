@@ -9,6 +9,32 @@
     /* ==================================================
        PRINT SETTINGS (ORIGINAL SLIP EXACT SAME)
     ================================================== */
+        @media print {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff !important; 
+        background-image: none !important; 
+        min-height: auto !important; /* Extra page height hatane ke liye */
+        display: block !important; /* Flexbox hatane ke liye taake slip top se shuru ho */
+      }
+
+      .salary-slip {
+        width: 95%;
+        max-width: 18cm;
+        margin: 0 auto; /* Horizontally center karne ke liye */
+        padding: 1cm;
+        font-size: 9pt;
+        page-break-inside: avoid;
+        border: none !important;
+        box-shadow: none !important;
+        display: block !important; /* Slip ko block display mein rakhne ke liye */
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
     @media print {
       html, body {
         margin: 0;
@@ -333,9 +359,9 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 6px;
       margin-top: 10px;
-      font-size: 9pt;
+      font-size: 8pt;
     }
 
     .print-btn-container {
@@ -423,11 +449,11 @@
     <div id="tab-scale" class="tab-content">
       <div class="form-grid">
         <div class="form-group">
-          <label>Std. Monthly Days</label>
+          <label>Standard Monthly Days</label>
           <input type="number" placeholder="e.g. 22" id="stdWorkDays" />
         </div>
         <div class="form-group">
-          <label>Std. Daily Hours</label>
+          <label>Standard Daily Hours</label>
           <input type="number" placeholder="e.g. 8" id="stdWorkHours" />
         </div>
         <div class="form-group">
