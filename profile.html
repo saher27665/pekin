@@ -312,11 +312,10 @@ body::before {
 
 /* Permit Photo Section */
 .emp-permit-section {
-   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Yeh white space khatam karega */
-  object-position: center;
- 
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(201,169,89,.5);
 }
 
 .emp-permit-title {
@@ -335,7 +334,7 @@ body::before {
 
 .emp-permit-photo {
   width: 100%;
-  height: 150px;
+  height: 150px; /* Height barha di hai taake image fit ho */
   background: #fff;
   border: 2px solid var(--gold);
   border-radius: 12px;
@@ -354,7 +353,7 @@ body::before {
 .emp-permit-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Ab image box ko poora fill karegi bina white space ke */
 }
 
 .emp-permit-placeholder {
@@ -889,14 +888,6 @@ body::before {
             <div class="emp-info-label"><i class="fas fa-female"></i> Mother's Name</div>
             <div class="emp-info-value" id="empMother">—</div>
           </div>
-          <div class="emp-info-item">
-            <div class="emp-info-label"><i class="fas fa-id-card"></i> CNIC</div>
-            <div class="emp-info-value" id="empCnic">—</div>
-          </div>
-          <div class="emp-info-item">
-            <div class="emp-info-label"><i class="fas fa-passport"></i> Passport No</div>
-            <div class="emp-info-value" id="empPassport">—</div>
-          </div>
           <div class="emp-info-item full-width">
             <div class="emp-info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
             <div class="emp-info-value" id="empAddress">—</div>
@@ -913,11 +904,40 @@ body::before {
             <div class="emp-info-label"><i class="fas fa-user-tie"></i> Designation</div>
             <div class="emp-info-value" id="empDesignation2">—</div>
           </div>
-          <div class="emp-info-item">
+          <div class="emp-info-item full-width">
             <div class="emp-info-label"><i class="fas fa-id-badge"></i> Employee Card No</div>
             <div class="emp-info-value" id="empCardNo">—</div>
           </div>
-          
+
+          <!-- PASSPORT GROUP (No, Issue, Expiry ek sath) -->
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-passport"></i> Passport No</div>
+            <div class="emp-info-value" id="empPassport">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-plus"></i> Passport Issue</div>
+            <div class="emp-info-value" id="empPassportIssue">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-times"></i> Passport Expiry</div>
+            <div class="emp-info-value" id="empPassportExpiry">—</div>
+          </div>
+
+          <!-- CNIC / NATIONAL ID GROUP (No, Issue, Expiry ek sath) -->
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-id-card"></i> CNIC / National ID</div>
+            <div class="emp-info-value" id="empCnic">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-check"></i> CNIC Issue</div>
+            <div class="emp-info-value" id="empIssue">—</div>
+          </div>
+          <div class="emp-info-item">
+            <div class="emp-info-label"><i class="fas fa-calendar-xmark"></i> CNIC Expiry</div>
+            <div class="emp-info-value" id="empExpire">—</div>
+          </div>
+
+          <!-- EMPLOYMENT CARD GROUP (Issue, Expiry ek sath) -->
           <div class="emp-info-item">
             <div class="emp-info-label"><i class="fas fa-calendar-plus"></i> Employment Issue</div>
             <div class="emp-info-value" id="empEmploymentIssue">—</div>
@@ -925,22 +945,6 @@ body::before {
           <div class="emp-info-item">
             <div class="emp-info-label"><i class="fas fa-calendar-times"></i> Employment Expiry</div>
             <div class="emp-info-value" id="empEmploymentExpiry">—</div>
-          </div>
-          <div class="emp-info-item">
-            <div class="emp-info-label"><i class="fas fa-passport"></i> Passport Issue</div>
-            <div class="emp-info-value" id="empPassportIssue">—</div>
-          </div>
-          <div class="emp-info-item">
-            <div class="emp-info-label"><i class="fas fa-passport"></i> Passport Expiry</div>
-            <div class="emp-info-value" id="empPassportExpiry">—</div>
-          </div>
-          <div class="emp-info-item">
-            <div class="emp-info-label"><i class="fas fa-calendar-check"></i> National ID Issue</div>
-            <div class="emp-info-value" id="empIssue">—</div>
-          </div>
-          <div class="emp-info-item">
-            <div class="emp-info-label"><i class="fas fa-calendar-xmark"></i> National ID Expiry</div>
-            <div class="emp-info-value" id="empExpire">—</div>
           </div>
         </div>
 
@@ -1135,18 +1139,24 @@ body::before {
         set('empNationality', emp.nationality);
         set('empFather', emp.fatherName);
         set('empMother', emp.motherName);
-        set('empCnic', emp.cnic);
-        set('empPassport', emp.passport);
         set('empAddress', emp.address);
-        set('empIssue', emp.issueDate);
-        set('empExpire', emp.expireDate);
+        
+        // Grouped ID Details
+        set('empPassport', emp.passport);
         set('empPassportIssue', emp.passportIssue);
         set('empPassportExpiry', emp.passportExpiry);
+        set('empCnic', emp.cnic);
+        set('empIssue', emp.issueDate);
+        set('empExpire', emp.expireDate);
         set('empEmploymentIssue', emp.employmentIssue);
         set('empEmploymentExpiry', emp.employmentExpiry);
+
+        // Company & Contact
         set('empCompany', emp.company || 'PEKIN-PAK-INTERNATIONAL LLC');
         set('empPhone', emp.phone);
         set('empEmail', emp.email);
+        
+        // Job Details
         set('empJobDesc', emp.jobDescription);
         set('empResponsibilities', emp.responsibilities);
         set('empSkills', emp.skills);
