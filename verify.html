@@ -289,12 +289,19 @@ body {
     overflow: hidden;
 }
 
-.info-panel { padding: 24px; }
+/* ==========================================
+   UPDATED: LEFT PANEL (DARK FOREST GREEN)
+   ========================================== */
+.info-panel { 
+    padding: 24px; 
+    background: #0B2B1B !important; /* Dark Forest Green */
+    border: 1px solid rgba(201, 169, 89, 0.3);
+}
 
 .seal-area {
     text-align: center;
     padding-bottom: 20px;
-    border-bottom: 1px dashed rgba(11, 43, 27, 0.2);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
     margin-bottom: 20px;
 }
 
@@ -334,41 +341,45 @@ body {
 .seal-area h2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
-    color: var(--green-dark);
+    color: #E0C878 !important; /* Gold Text */
     margin-bottom: 6px;
     margin-top: 15px; 
 }
-.seal-area p { font-size: 0.75rem; color: var(--text-muted); }
+.seal-area p { font-size: 0.75rem; color: rgba(255, 255, 255, 0.7) !important; }
 
 .data-list { display: flex; flex-direction: column; gap: 10px; }
 .data-item {
     display: flex; justify-content: space-between; align-items: center;
     padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05); /* Transparent white */
     border-radius: 8px;
-    border-left: 3px solid var(--green-light);
+    border-left: 3px solid #C9A959; /* Gold border */
 }
 .data-item .key {
-    font-size: 0.65rem; font-weight: 700; color: var(--text-muted);
+    font-size: 0.65rem; font-weight: 700; color: rgba(255, 255, 255, 0.6) !important;
     text-transform: uppercase; letter-spacing: 1px;
 }
 .data-item .val {
-    font-size: 0.8rem; font-weight: 800; color: var(--green-dark);
+    font-size: 0.8rem; font-weight: 800; color: #ffffff !important;
     font-family: monospace;
 }
-.val.highlight { color: var(--gold); }
+.val.highlight { color: #E0C878 !important; }
 
 /* Viewer Panel */
 .viewer-panel { display: flex; flex-direction: column; min-height: 400px; }
+
+/* ==========================================
+   UPDATED: PDF HEADER (DARK FOREST GREEN)
+   ========================================== */
 .viewer-header {
     padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.5);
-    border-bottom: 1px solid var(--glass-border);
+    background: #0B2B1B !important; /* Dark Forest Green */
+    border-bottom: 1px solid rgba(201, 169, 89, 0.3);
     display: flex; justify-content: space-between; align-items: center;
 }
-.file-name { font-size: 0.8rem; font-weight: 700; color: var(--green-dark); display: flex; align-items: center; gap: 8px; word-break: break-all; }
-.file-name i { color: #DC3545; font-size: 1rem; }
-.tag { font-size: 0.6rem; background: var(--green-dark); color: var(--gold); padding: 3px 10px; border-radius: 20px; font-weight: 700; }
+.file-name { font-size: 0.8rem; font-weight: 700; color: #ffffff !important; display: flex; align-items: center; gap: 8px; word-break: break-all; }
+.file-name i { color: #DC3545; font-size: 1rem; } /* PDF Icon Red */
+.tag { font-size: 0.6rem; background: #C9A959; color: #0B2B1B !important; padding: 3px 10px; border-radius: 20px; font-weight: 700; }
 
 /* PDF Container with Watermark */
 .iframe-container { 
@@ -404,7 +415,6 @@ iframe {
         grid-template-rows: auto auto;
     }
 
-    /* Header stacks: brand row on top, badge below */
     .glass-header {
         flex-direction: column;
         align-items: stretch;
@@ -412,7 +422,6 @@ iframe {
         gap: 10px;
     }
 
-    /* Keep logo + name + logo on ONE row */
     .brand-exact {
         flex-direction: row;
         align-items: center;
@@ -442,13 +451,11 @@ iframe {
         letter-spacing: 1px;
     }
 
-    /* Badge centered under brand row */
     .verified-badge {
         margin: 0 auto;
         align-self: center;
     }
 
-    /* Document viewer first, info panel below */
     .viewer-panel {
         order: 1;
         min-height: 420px;
@@ -463,7 +470,6 @@ iframe {
     }
 }
 
-/* Extra small phones */
 @media (max-width: 400px) {
     .brand-text h1 {
         font-size: 0.8rem;
@@ -526,7 +532,7 @@ iframe {
     <!-- Main Grid -->
     <div class="main-grid">
         
-        <!-- Left Info -->
+        <!-- Left Info (Now Dark Green) -->
         <div class="glass-panel info-panel">
             <div class="seal-area">
                 <div class="seal-icon"><i class="fas fa-star"></i></div>
@@ -556,6 +562,7 @@ iframe {
 
         <!-- Right Viewer -->
         <div class="glass-panel viewer-panel">
+            <!-- Header (Now Dark Green) -->
             <div class="viewer-header">
                 <div class="file-name">
                     <i class="fas fa-file-pdf"></i>
