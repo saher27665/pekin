@@ -1,35 +1,134 @@
 {
   "PP0001": {
-    "name": "Mr. MS. RANA",
+    "name": "Faisal Siddiq Rana",
+    "surname": "RANA",
     "employeeId": "PP0001",
-    "designation": "Chief Representative",
+    "designation": "Marketing Manager",
     "department": "Beijing Representative Office",
-    "employmentIssue": "17 SEP 2026",
-    "photo": "img.png",
+    "employmentCardNo": "PP0001",
+    "company": "PEKIN-PAK-INTERNATIONAL LLC",
+    "photo": "faisal.jpg",
     "email": "machines@pekinpak.com",
     "phone": "+86-130-5190-9786",
-    "address": "Beijing · China"
+    "address": "Beijing · China",
+    
+    "dob": "14 FEB 1985",
+    "gender": "Male",
+    "bloodGroup": "A+",
+    "nationality": "PAKISTANI",
+    "fatherName": "MUHAMMAD SIDDIQ RANA",
+    "motherName": "Zubaida Begum",
+    "cnic": "34603-4315011-3",
+    "passport": "BB9790113",
+    
+    "issueDate": "22.07.2026",
+    "expireDate": "22.07.2036",
+    "passportIssue": "03 JAN 2025",
+    "passportExpiry": "02 JAN 2035",
+    "employmentIssue": "23 OCT 2026",
+    "employmentExpiry": "23 OCT 2027",
+    
+    "chinaResidencePermitNo": "",
+    "chinaResidencePermitIssue": "",
+    "chinaResidencePermitExpiry": "",
+    "permitPhoto": "",
+    
+    "employmentCertificateNo": "",
+    "employmentCertificateIssue": "",
+    "employmentCertificateExpiry": "",
+    "employmentCertificateCompany": "PEKIN-PAK-INTERNATIONAL LLC",
+    "employmentCertificateEmail": "",
+    
+    "jobDescription": "Developing and implementing marketing strategies to expand market share.",
+    "responsibilities": "Market research, client acquisition, promotional campaigns, and sales support.",
+    "skills": "Marketing, Sales, Communication, Market Research, CRM"
   },
   "PP0002": {
     "name": "Mr. FS. RANA-Sunny",
+    "surname": "RANA",
     "employeeId": "PP0002",
     "designation": "Marketing Manager",
     "department": "Beijing Representative Office",
-    "employmentIssue": "17 SEP 2026",
+    "employmentCardNo": "PP0002",
+    "company": "PEKIN-PAK-INTERNATIONAL LLC",
     "photo": "photos/sunny.jpg",
     "email": "pekingroup.sunny.cn@live.com",
     "phone": "+86-134-3987-2786",
-    "address": "Beijing · China"
+    "address": "Beijing · China",
+    
+    "dob": "",
+    "gender": "Male",
+    "bloodGroup": "",
+    "nationality": "Pakistani",
+    "fatherName": "",
+    "motherName": "",
+    "cnic": "",
+    "passport": "",
+    
+    "issueDate": "",
+    "expireDate": "",
+    "passportIssue": "",
+    "passportExpiry": "",
+    "employmentIssue": "17 SEP 2026",
+    "employmentExpiry": "",
+    
+    "chinaResidencePermitNo": "",
+    "chinaResidencePermitIssue": "",
+    "chinaResidencePermitExpiry": "",
+    "permitPhoto": "",
+    
+    "employmentCertificateNo": "",
+    "employmentCertificateIssue": "",
+    "employmentCertificateExpiry": "",
+    "employmentCertificateCompany": "PEKIN-PAK-INTERNATIONAL LLC",
+    "employmentCertificateEmail": "",
+    
+    "jobDescription": "Developing and implementing marketing strategies to expand market share.",
+    "responsibilities": "Market research, client acquisition, promotional campaigns, and sales support.",
+    "skills": "Marketing, Sales, Communication, Market Research, CRM"
   },
   "PP0003": {
     "name": "Ms. AYESHA KHAN",
+    "surname": "KHAN",
     "employeeId": "PP0003",
     "designation": "Trade Operations Officer",
     "department": "Doha Head Office",
-    "employmentIssue": "17 SEP 2026",
+    "employmentCardNo": "PP0003",
+    "company": "PEKIN-PAK-INTERNATIONAL LLC",
     "photo": "",
     "email": "operations@pekinpak.com",
     "phone": "+974-XXXX-XXXX",
-    "address": "Doha · Qatar"
+    "address": "Doha · Qatar",
+    
+    "dob": "",
+    "gender": "Female",
+    "bloodGroup": "",
+    "nationality": "Pakistani",
+    "fatherName": "",
+    "motherName": "",
+    "cnic": "",
+    "passport": "",
+    
+    "issueDate": "",
+    "expireDate": "",
+    "passportIssue": "",
+    "passportExpiry": "",
+    "employmentIssue": "17 SEP 2026",
+    "employmentExpiry": "",
+    
+    "chinaResidencePermitNo": "",
+    "chinaResidencePermitIssue": "",
+    "chinaResidencePermitExpiry": "",
+    "permitPhoto": "",
+    
+    "employmentCertificateNo": "",
+    "employmentCertificateIssue": "",
+    "employmentCertificateExpiry": "",
+    "employmentCertificateCompany": "PEKIN-PAK-INTERNATIONAL LLC",
+    "employmentCertificateEmail": "",
+    
+    "jobDescription": "Managing international trade operations and logistics.",
+    "responsibilities": "Documentation, supply chain coordination, shipment tracking, and customs clearance.",
+    "skills": "Logistics, Supply Chain, Documentation, Operations, Trade Compliance"
   }
 }
