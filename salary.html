@@ -334,66 +334,44 @@
     }
 
     /* ==================================================
-       FOOTER & STAMP
+       STAMP & SIGNATURE AREA (NEWLY ADDED)
     ================================================== */
-    .footer-section {
-      margin-top: 15px;
-      font-family: "Times New Roman", serif;
-      font-size: 9pt; /* Font size thora chota kiya taake address ek line main aye */
-      white-space: nowrap; /* Text ko wrap hone se rokti hai */
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .footer-col {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    /* Columns ki width adjust ki hai taake gap na aaye */
-    .footer-col.left {
-      width: 33%;
-    }
-    
-    .footer-col.center {
-      width: 33%;
-    }
-
-    .footer-col.right {
-      width: 34%;
-    }
-
     .stamp-area {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-top: 30px; 
-      margin-left: 10px;
+      margin-top: 35px;
+      margin-bottom: 25px;
+      padding-left: 25px;
+      font-family: "Times New Roman", serif;
     }
 
     .stamp-area .stamp-title {
-      font-size: 11pt;
+      font-size: 12pt;
       font-weight: bold;
       text-decoration: underline;
-      margin-bottom: 2px;
+      margin-bottom: 8px;
     }
 
     .stamp-area .stamp-line {
-      width: 290px;
+      width: 280px;
       border-bottom: 1px solid #000;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
 
     .stamp-area .stamp-company {
-      font-size: 11pt;
-      margin: 1px 0;
+      font-size: 6pt;
+      margin: 2px 0;
       font-weight: normal;
-      letter-spacing: 0.5px;
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 8pt;
     }
 
     .print-btn-container {
@@ -422,9 +400,6 @@
       .form-grid { grid-template-columns: 1fr; }
       .form-wrapper, .salary-slip { padding: 20px; }
       .tab-btn { padding: 12px 15px; font-size: 12px; }
-      .footer-row { flex-direction: column; gap: 10px; white-space: normal; }
-      .footer-col { width: 100% !important; }
-      .stamp-area { margin-left: 0; }
     }
   </style>
 </head>
@@ -674,42 +649,25 @@
     </tr>
   </table>
 
-  <!-- FOOTER SECTION (No Gaps & Single Line Address) -->
-  <div class="footer-section">
-    <!-- Row 1: Tel, Email, Address -->
-    <div class="footer-row">
-      <div class="footer-col left">
-        <span><strong>Tel:</strong> (0086)-010(65910786)</span>
-      </div>
-      <div class="footer-col center">
-        <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
-      </div>
-      <div class="footer-col right">
-        <span>地址: 北京市朝阳区康家沟145一号锦裕写字楼A座一层A113号</span>
-      </div>
-    </div>
-    <!-- Row 2: Fax, Web, Mob -->
-    <div class="footer-row">
-      <div class="footer-col left">
-        <span><strong>Fax:</strong> (0086)-010(65910786)</span>
-      </div>
-      <div class="footer-col center">
-        <span><strong>Web:</strong> www.pekinpak.com</span>
-      </div>
-      <div class="footer-col right">
-        <span><strong>Mob:</strong> (0086)-13439872786</span>
-      </div>
-    </div>
+  <!-- NEWLY ADDED STAMP AREA -->
+  
+  <!-- END STAMP AREA -->
+
+  <div class="footer-line">
+    <span><strong>Tel:</strong> (0086)-010(65910786)</span>
+    <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
+    <span>地址: 北京市朝阳区康家沟145一号锦裕写字楼A座一层A113号</span>
+    <span><strong>Fax:</strong> (0086)-010(65910786)</span>
+    <span><strong>Web:</strong> www.pekinpak.com</span>
+    <span><strong>Mob:</strong> (0086)-13439872786</span>
   </div>
 
-  <!-- STAMP AREA -->
   <div class="stamp-area">
     <div class="stamp-title">Stamp</div>
     <div class="stamp-line"></div>
-    <div class="stamp-company">PEKI PAK INTERNATIONAL LLC</div>
-    <div class="stamp-company">Beijing Representative office</div>
+    <div class="stamp-company">PEKIN PAK INTERNATIONAL LLC</div>
+    <div class="stamp-company">Beijing Representative Office</div>
   </div>
-
 </div>
 
 <!-- PRINT BUTTON -->
