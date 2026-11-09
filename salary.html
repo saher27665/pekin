@@ -333,36 +333,60 @@
       margin-top: 15px;
     }
 
-    .footer-line {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-      font-size: 8pt;
+    /* ==================================================
+       FOOTER & STAMP (EXACT MATCH TO SAMPLE PHOTO)
+    ================================================== */
+    .footer-section {
+      margin-top: 15px;
+      font-family: "Times New Roman", serif;
+      font-size: 9pt;
     }
 
-    /* ==================================================
-       STAMP AREA (EXACTLY AS SAMPLE PHOTO)
-    ================================================== */
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* Left Column width */
+    .footer-col.left {
+      width: 30%;
+    }
+    
+    /* Center Column width */
+    .footer-col.center {
+      width: 35%;
+    }
+
+    /* Right Column width */
+    .footer-col.right {
+      width: 35%;
+      text-align: left;
+    }
+
     .stamp-area {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-top: 50px; /* Photo ki tarah neechay space */
-      margin-left: 30px; /* Left side se thora andar */
-      font-family: "Times New Roman", serif;
+      margin-top: 40px; /* Space for physical stamp */
+      margin-left: 15px;
     }
 
     .stamp-area .stamp-title {
-      font-size: 12pt;
+      font-size: 11pt;
       font-weight: bold;
       text-decoration: underline;
       margin-bottom: 2px;
     }
 
     .stamp-area .stamp-line {
-      width: 300px; /* Line ki lambai */
+      width: 280px;
       border-bottom: 1px solid #000;
       margin-bottom: 5px;
     }
@@ -400,7 +424,9 @@
       .form-grid { grid-template-columns: 1fr; }
       .form-wrapper, .salary-slip { padding: 20px; }
       .tab-btn { padding: 12px 15px; font-size: 12px; }
-      .stamp-area { margin-left: 10px; }
+      .footer-row { flex-direction: column; gap: 10px; }
+      .footer-col { width: 100% !important; }
+      .stamp-area { margin-left: 0; }
     }
   </style>
 </head>
@@ -650,24 +676,41 @@
     </tr>
   </table>
 
-  <!-- FOOTER LINE -->
-  <div class="footer-line">
-    <span><strong>Tel:</strong> (0086)-010(65910786)</span>
-    <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
-    <span>地址: 北京市朝阳区康家沟145一号锦裕写字楼A座一层A113号</span>
-    <span><strong>Fax:</strong> (0086)-010(65910786)</span>
-    <span><strong>Web:</strong> www.pekinpak.com</span>
-    <span><strong>Mob:</strong> (0086)-13439872786</span>
+  <!-- FOOTER SECTION (Matched with Photo) -->
+  <div class="footer-section">
+    <!-- Row 1: Tel, Email, Address -->
+    <div class="footer-row">
+      <div class="footer-col left">
+        <span><strong>Tel:</strong> (0086)-010(65910786)</span>
+      </div>
+      <div class="footer-col center">
+        <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
+      </div>
+      <div class="footer-col right">
+        <span>地址: 北京市朝阳区康家沟145一号锦裕写字楼A座一层A113号</span>
+      </div>
+    </div>
+    <!-- Row 2: Fax, Web, Mob -->
+    <div class="footer-row">
+      <div class="footer-col left">
+        <span><strong>Fax:</strong> (0086)-010(65910786)</span>
+      </div>
+      <div class="footer-col center">
+        <span><strong>Web:</strong> www.pekinpak.com</span>
+      </div>
+      <div class="footer-col right">
+        <span><strong>Mob:</strong> (0086)-13439872786</span>
+      </div>
+    </div>
   </div>
 
-  <!-- NEWLY ADDED STAMP AREA (EXACTLY AS SAMPLE) -->
+  <!-- STAMP AREA -->
   <div class="stamp-area">
     <div class="stamp-title">Stamp</div>
     <div class="stamp-line"></div>
     <div class="stamp-company">PEKI PAK INTERNATIONAL LLC</div>
     <div class="stamp-company">Beijing Representative office</div>
   </div>
-  <!-- END STAMP AREA -->
 
 </div>
 
