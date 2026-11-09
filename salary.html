@@ -333,16 +333,24 @@
       margin-top: 15px;
     }
 
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 8pt;
+    }
+
     /* ==================================================
-       STAMP & SIGNATURE AREA (NEWLY ADDED)
+       STAMP AREA (EXACTLY AS SAMPLE PHOTO)
     ================================================== */
     .stamp-area {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-top: 35px;
-      margin-bottom: 25px;
-      padding-left: 25px;
+      margin-top: 50px; /* Photo ki tarah neechay space */
+      margin-left: 30px; /* Left side se thora andar */
       font-family: "Times New Roman", serif;
     }
 
@@ -350,28 +358,20 @@
       font-size: 12pt;
       font-weight: bold;
       text-decoration: underline;
-      margin-bottom: 8px;
+      margin-bottom: 2px;
     }
 
     .stamp-area .stamp-line {
-      width: 280px;
+      width: 300px; /* Line ki lambai */
       border-bottom: 1px solid #000;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     .stamp-area .stamp-company {
-      font-size: 10pt;
-      margin: 2px 0;
+      font-size: 11pt;
+      margin: 1px 0;
       font-weight: normal;
-    }
-
-    .footer-line {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 10px;
-      font-size: 10pt;
+      letter-spacing: 0.5px;
     }
 
     .print-btn-container {
@@ -400,6 +400,7 @@
       .form-grid { grid-template-columns: 1fr; }
       .form-wrapper, .salary-slip { padding: 20px; }
       .tab-btn { padding: 12px 15px; font-size: 12px; }
+      .stamp-area { margin-left: 10px; }
     }
   </style>
 </head>
@@ -649,10 +650,7 @@
     </tr>
   </table>
 
-  <!-- NEWLY ADDED STAMP AREA -->
- 
-  <!-- END STAMP AREA -->
-
+  <!-- FOOTER LINE -->
   <div class="footer-line">
     <span><strong>Tel:</strong> (0086)-010(65910786)</span>
     <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
@@ -661,10 +659,16 @@
     <span><strong>Web:</strong> www.pekinpak.com</span>
     <span><strong>Mob:</strong> (0086)-13439872786</span>
   </div>
-   <div class="stamp-area">
+
+  <!-- NEWLY ADDED STAMP AREA (EXACTLY AS SAMPLE) -->
+  <div class="stamp-area">
     <div class="stamp-title">Stamp</div>
-   
+    <div class="stamp-line"></div>
+    <div class="stamp-company">PEKI PAK INTERNATIONAL LLC</div>
+    <div class="stamp-company">Beijing Representative office</div>
   </div>
+  <!-- END STAMP AREA -->
+
 </div>
 
 <!-- PRINT BUTTON -->
