@@ -334,48 +334,46 @@
     }
 
     /* ==================================================
-       FOOTER & STAMP (EXACT MATCH TO SAMPLE PHOTO)
+       FOOTER & STAMP
     ================================================== */
     .footer-section {
       margin-top: 15px;
       font-family: "Times New Roman", serif;
-      font-size: 9pt;
+      font-size: 9pt; /* Font size thora chota kiya taake address ek line main aye */
+      white-space: nowrap; /* Text ko wrap hone se rokti hai */
     }
 
     .footer-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
 
     .footer-col {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
     }
 
-    /* Left Column width */
+    /* Columns ki width adjust ki hai taake gap na aaye */
     .footer-col.left {
-      width: 30%;
+      width: 33%;
     }
     
-    /* Center Column width */
     .footer-col.center {
-      width: 35%;
+      width: 33%;
     }
 
-    /* Right Column width */
     .footer-col.right {
-      width: 35%;
-      text-align: left;
+      width: 34%;
     }
 
     .stamp-area {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-top: 40px; /* Space for physical stamp */
-      margin-left: 15px;
+      margin-top: 30px; 
+      margin-left: 10px;
     }
 
     .stamp-area .stamp-title {
@@ -386,7 +384,7 @@
     }
 
     .stamp-area .stamp-line {
-      width: 280px;
+      width: 290px;
       border-bottom: 1px solid #000;
       margin-bottom: 5px;
     }
@@ -424,7 +422,7 @@
       .form-grid { grid-template-columns: 1fr; }
       .form-wrapper, .salary-slip { padding: 20px; }
       .tab-btn { padding: 12px 15px; font-size: 12px; }
-      .footer-row { flex-direction: column; gap: 10px; }
+      .footer-row { flex-direction: column; gap: 10px; white-space: normal; }
       .footer-col { width: 100% !important; }
       .stamp-area { margin-left: 0; }
     }
@@ -676,7 +674,7 @@
     </tr>
   </table>
 
-  <!-- FOOTER SECTION (Matched with Photo) -->
+  <!-- FOOTER SECTION (No Gaps & Single Line Address) -->
   <div class="footer-section">
     <!-- Row 1: Tel, Email, Address -->
     <div class="footer-row">
@@ -707,7 +705,9 @@
   <!-- STAMP AREA -->
   <div class="stamp-area">
     <div class="stamp-title">Stamp</div>
-    
+    <div class="stamp-line"></div>
+    <div class="stamp-company">PEKI PAK INTERNATIONAL LLC</div>
+    <div class="stamp-company">Beijing Representative office</div>
   </div>
 
 </div>
