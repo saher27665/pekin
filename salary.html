@@ -7,49 +7,27 @@
   
   <style>
     /* ==================================================
-       PRINT SETTINGS (ORIGINAL SLIP EXACT SAME)
+       PRINT SETTINGS
     ================================================== */
-        @media print {
+    @media print {
       html, body {
         margin: 0;
         padding: 0;
         background: #ffffff !important; 
         background-image: none !important; 
-        min-height: auto !important; /* Extra page height hatane ke liye */
-        display: block !important; /* Flexbox hatane ke liye taake slip top se shuru ho */
+        min-height: auto !important;
+        display: block !important;
       }
 
       .salary-slip {
         width: 95%;
         max-width: 18cm;
-        margin: 0 auto; /* Horizontally center karne ke liye */
+        margin: 0 auto;
         padding: 1cm;
         font-size: 9pt;
-        page-break-inside: avoid;
         border: none !important;
         box-shadow: none !important;
-        display: block !important; /* Slip ko block display mein rakhne ke liye */
-      }
-
-      .no-print {
-        display: none !important;
-      }
-    }
-    @media print {
-      html, body {
-        margin: 0;
-        padding: 0;
-      }
-
-      .salary-slip {
-        width: 95%;
-        max-width: 18cm;
-        margin: auto;
-        padding: 1cm;
-        font-size: 9pt;
-        page-break-inside: avoid;
-        border: none !important;
-        box-shadow: none !important;
+        display: block !important; 
       }
 
       .no-print {
@@ -66,8 +44,8 @@
       margin: 0;
       padding: 40px 20px;
       font-family: "Times New Roman", serif;
-      background: #0f172a; /* Dark background */
-      background-image: radial-gradient(circle at top right, #064e3b, #0f172a); /* Dark Green Glow */
+      background: #0f172a;
+      background-image: radial-gradient(circle at top right, #064e3b, #0f172a);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -85,14 +63,14 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-radius: 20px;
-      border: 1px solid rgba(16, 185, 129, 0.2); /* Emerald glow border */
+      border: 1px solid rgba(16, 185, 129, 0.2);
       box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05);
       margin-bottom: 40px;
       overflow: hidden;
     }
 
     .form-header {
-      background: rgba(6, 78, 59, 0.4); /* Dark green header */
+      background: rgba(6, 78, 59, 0.4);
       padding: 25px 30px;
       border-bottom: 1px solid rgba(16, 185, 129, 0.15);
     }
@@ -111,7 +89,7 @@
 
     .form-header p {
       margin: 6px 0 0;
-      color: #6ee7b7; /* Light green text */
+      color: #6ee7b7;
       font-family: 'Inter', sans-serif;
       font-size: 13px;
       font-weight: 500;
@@ -147,7 +125,7 @@
     }
 
     .tab-btn.active {
-      color: #10b981; /* Emerald green active */
+      color: #10b981;
       border-bottom-color: #10b981;
       background: rgba(16, 185, 129, 0.1);
     }
@@ -184,7 +162,7 @@
       font-family: 'IBM Plex Mono', monospace;
       font-size: 10px;
       font-weight: 600;
-      color: #6ee7b7; /* Light green labels */
+      color: #6ee7b7;
       margin-bottom: 6px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -245,7 +223,7 @@
     .btn-clear:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
     .btn-generate {
-      background: linear-gradient(135deg, #10b981, #059669); /* Emerald gradient */
+      background: linear-gradient(135deg, #10b981, #059669);
       color: #fff;
       box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
     }
@@ -256,7 +234,7 @@
     }
 
     /* ==================================================
-       SALARY SLIP (EXACT SAME AS PROVIDED FILE)
+       SALARY SLIP
     ================================================== */
     .salary-slip {
       display: none;
@@ -276,7 +254,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SLIP INNER STYLES (Keep original design) */
+    /* SLIP INNER STYLES */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -355,13 +333,45 @@
       margin-top: 15px;
     }
 
+    /* ==================================================
+       STAMP & SIGNATURE AREA (NEWLY ADDED)
+    ================================================== */
+    .stamp-area {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 35px;
+      margin-bottom: 25px;
+      padding-left: 25px;
+      font-family: "Times New Roman", serif;
+    }
+
+    .stamp-area .stamp-title {
+      font-size: 12pt;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-bottom: 8px;
+    }
+
+    .stamp-area .stamp-line {
+      width: 280px;
+      border-bottom: 1px solid #000;
+      margin-bottom: 10px;
+    }
+
+    .stamp-area .stamp-company {
+      font-size: 10pt;
+      margin: 2px 0;
+      font-weight: normal;
+    }
+
     .footer-line {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 7px;
       margin-top: 10px;
-      font-size: 8pt;
+      font-size: 10pt;
     }
 
     .print-btn-container {
@@ -541,7 +551,7 @@
 </div>
 
 <!-- ==================================================
-     SALARY SLIP (EXACT SAME AS PROVIDED FILE)
+     SALARY SLIP
 ================================================== -->
 <div id="salarySlip" class="salary-slip">
   <div class="header">
@@ -639,6 +649,15 @@
     </tr>
   </table>
 
+  <!-- NEWLY ADDED STAMP AREA -->
+  <div class="stamp-area">
+    <div class="stamp-title">Stamp</div>
+    <div class="stamp-line"></div>
+    <div class="stamp-company">PEKIN PAK INTERNATIONAL LLC</div>
+    <div class="stamp-company">Beijing Representative Office</div>
+  </div>
+  <!-- END STAMP AREA -->
+
   <div class="footer-line">
     <span><strong>Tel:</strong> (0086)-010(65910786)</span>
     <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
@@ -646,8 +665,6 @@
     <span><strong>Fax:</strong> (0086)-010(65910786)</span>
     <span><strong>Web:</strong> www.pekinpak.com</span>
     <span><strong>Mob:</strong> (0086)-13439872786</span>
-    
-    
   </div>
 </div>
 
