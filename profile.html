@@ -240,7 +240,7 @@ body::before {
   object-fit: cover; object-position: center 15%;
   display: block;
   background: #fff;
-  mix-blend-mode: normal;
+  mix-blend-mode: normal; /* Photo background blend */
   filter: contrast(1.15) brightness(1.05); 
 }
 
@@ -1011,6 +1011,15 @@ body::before {
           <div class="emp-block-content" id="empJobDesc">—</div>
         </div>
 
+        <!-- Collapsible: Responsibilities -->
+        <div class="emp-block-wrapper" onclick="toggleBlock(this)">
+          <div class="emp-block-header">
+            <div class="title"><i class="fas fa-list-check"></i> Experience</div>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="emp-block-content" id="empResponsibilities">—</div>
+        </div>
+
         <!-- Collapsible: Skills -->
         <div class="emp-block-wrapper" onclick="toggleBlock(this)">
           <div class="emp-block-header">
@@ -1096,7 +1105,7 @@ body::before {
   const params = new URLSearchParams(window.location.search);
   const empId = params.get('id');
 
-  // Loading time set to 1.5 seconds for faster testing
+  // Loading time set to 3 seconds (3000ms)
   setTimeout(() => {
     if (!empId) {
       document.getElementById('loading').style.display = 'none';
@@ -1104,12 +1113,8 @@ body::before {
       return;
     }
 
-    // Fetching the JSON file
     fetch('employees.json')
-      .then(res => {
-        if (!res.ok) throw new Error('Network response was not ok');
-        return res.json();
-      })
+      .then(res => res.json())
       .then(data => {
         const emp = data[empId];
         if (!emp) {
@@ -1118,13 +1123,7 @@ body::before {
           return;
         }
 
-        // Function to set text safely (if empty, show blank)
-        const set = (id, val) => {
-          const el = document.getElementById(id);
-          if (el) {
-            el.textContent = val && val.trim() !== '' ? val : '—';
-          }
-        };
+        const set = (id, val) => document.getElementById(id).textContent = val || '—';
         
         // Basic Info
         set('empName', emp.name);
@@ -1142,7 +1141,7 @@ body::before {
         set('empMother', emp.motherName);
         set('empAddress', emp.address);
 
-        // Grouped ID Details
+        // Grouped ID Details (Moved to Personal Info)
         set('empCnic', emp.cnic);
         set('empIssue', emp.issueDate);
         set('empExpire', emp.expireDate);
@@ -1161,6 +1160,7 @@ body::before {
         
         // Job Details
         set('empJobDesc', emp.jobDescription);
+        set('empResponsibilities', emp.responsibilities);
         set('empSkills', emp.skills);
 
         // China Documents
@@ -1176,30 +1176,27 @@ body::before {
 
         // Main Employee Photo
         const photoBox = document.getElementById('photoBox');
-        if (emp.photo && emp.photo.trim() !== '') {
+        if (emp.photo) {
           const img = new Image();
           img.onload = () => {
             photoBox.innerHTML = `<img src="${emp.photo}" alt="${emp.name}">`;
           };
           img.onerror = () => {
             const initials = (emp.name || '--').split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
-            photoBox.innerHTML = `<span class="initials">${initials}</span>`;
+            document.getElementById('initials').textContent = initials;
           };
           img.src = emp.photo;
         } else {
           const initials = (emp.name || '--').split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
-          photoBox.innerHTML = `<span class="initials">${initials}</span>`;
+          document.getElementById('initials').textContent = initials;
         }
 
         // Permit Photo
         const permitBox = document.getElementById('permitPhotoBox');
-        if (emp.permitPhoto && emp.permitPhoto.trim() !== '') {
+        if (emp.permitPhoto) {
           const pImg = new Image();
           pImg.onload = () => {
             permitBox.innerHTML = `<img src="${emp.permitPhoto}" alt="Residence Permit">`;
-          };
-          pImg.onerror = () => {
-            // Keep placeholder if error
           };
           pImg.src = emp.permitPhoto;
         }
@@ -1207,12 +1204,11 @@ body::before {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('profileCard').style.display = 'flex';
       })
-      .catch((error) => {
-        console.error('Error loading JSON:', error);
+      .catch(() => {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('notFound').style.display = 'flex';
       });
-  }, 1500); // 1.5 seconds loading time
+  }, 3000); // 3000ms = 3 seconds
 </script>
 
 </body>
