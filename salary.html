@@ -334,44 +334,75 @@
     }
 
     /* ==================================================
-       STAMP & SIGNATURE AREA (NEWLY ADDED)
+       FOOTER & STAMP
     ================================================== */
+    .footer-section {
+      margin-top: 15px;
+      font-family: "Times New Roman", serif;
+      font-size: 7.5pt; 
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-col.left { width: 30%; }
+    .footer-col.center { width: 30%; }
+    .footer-col.right {
+      width: 40%;
+      white-space: nowrap;
+      letter-spacing: -0.2px;
+    }
+
+    /* STAMP AREA (UPDATED TO LOOK SMALL & ELEGANT) */
     .stamp-area {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-top: 35px;
-      margin-bottom: 25px;
-      padding-left: 25px;
-      font-family: "Times New Roman", serif;
+      margin-top: 35px; 
+      margin-left: 15px;
     }
 
     .stamp-area .stamp-title {
-      font-size: 12pt;
+      font-size: 10pt;
       font-weight: bold;
       text-decoration: underline;
-      margin-bottom: 8px;
+      margin-bottom: 3px;
+      letter-spacing: 0.5px;
     }
 
     .stamp-area .stamp-line {
-      width: 280px;
+      width: 250px; /* Line thori choti ki */
       border-bottom: 1px solid #000;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
+    /* COMPANY NAME STYLING */
     .stamp-area .stamp-company {
-      font-size: 6pt;
-      margin: 2px 0;
-      font-weight: normal;
+      font-size: 7.5pt; /* Size chota kiya */
+      font-weight: 600; /* Thora bold */
+      margin: 0 0 1px 0; 
+      line-height: 1.2;
+      letter-spacing: 0.8px; /* Harf ke darmiyan khoobsurat gap */
+      text-transform: uppercase; /* Capital letters */
+      color: #222; /* Thora soft black */
     }
 
-    .footer-line {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-      font-size: 8pt;
+    .stamp-area .stamp-office {
+      font-size: 7.5pt; /* Office name ka size mazeed chota kiya */
+      font-style: italic; /* Italic look */
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: 0.3px;
+      color: #444;
     }
 
     .print-btn-container {
@@ -400,6 +431,9 @@
       .form-grid { grid-template-columns: 1fr; }
       .form-wrapper, .salary-slip { padding: 20px; }
       .tab-btn { padding: 12px 15px; font-size: 12px; }
+      .footer-row { flex-direction: column; gap: 10px; }
+      .footer-col { width: 100% !important; white-space: normal; }
+      .stamp-area { margin-left: 0; }
     }
   </style>
 </head>
@@ -649,25 +683,40 @@
     </tr>
   </table>
 
-  <!-- NEWLY ADDED STAMP AREA -->
-  
-  <!-- END STAMP AREA -->
-
-  <div class="footer-line">
-    <span><strong>Tel:</strong> (0086)-010(65910786)</span>
-    <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
-    <span>地址: 北京市朝阳区康家沟145一号锦裕写字楼A座一层A113号</span>
-    <span><strong>Fax:</strong> (0086)-010(65910786)</span>
-    <span><strong>Web:</strong> www.pekinpak.com</span>
-    <span><strong>Mob:</strong> (0086)-13439872786</span>
+  <!-- FOOTER SECTION -->
+  <div class="footer-section">
+    <div class="footer-row">
+      <div class="footer-col left">
+        <span><strong>Tel:</strong> (0086)-010(65910786)</span>
+      </div>
+      <div class="footer-col center">
+        <span><strong>E-mail:</strong> pipigroup.cn@hotmail.com</span>
+      </div>
+      <div class="footer-col right">
+        <span><strong>地址:</strong> 北京市朝阳区康家沟145一号锦裕写字楼A座一层A113号</span>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="footer-col left">
+        <span><strong>Fax:</strong> (0086)-010(65910786)</span>
+      </div>
+      <div class="footer-col center">
+        <span><strong>Web:</strong> www.pekinpak.com</span>
+      </div>
+      <div class="footer-col right">
+        <span><strong>Mob:</strong> (0086)-13439872786</span>
+      </div>
+    </div>
   </div>
 
+  <!-- STAMP AREA (Beautiful Small Size) -->
   <div class="stamp-area">
     <div class="stamp-title">Stamp</div>
     <div class="stamp-line"></div>
     <div class="stamp-company">PEKIN PAK INTERNATIONAL LLC</div>
-    <div class="stamp-company">Beijing Representative Office</div>
+    <div class="stamp-office">Beijing Representative Office</div>
   </div>
+
 </div>
 
 <!-- PRINT BUTTON -->
