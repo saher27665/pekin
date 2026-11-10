@@ -240,7 +240,7 @@ body::before {
   object-fit: cover; object-position: center 15%;
   display: block;
   background: #fff;
-  mix-blend-mode: normal; /* Photo background blend */
+  mix-blend-mode: normal;
   filter: contrast(1.15) brightness(1.05); 
 }
 
@@ -1011,9 +1011,6 @@ body::before {
           <div class="emp-block-content" id="empJobDesc">—</div>
         </div>
 
-        <!-- Collapsible: Responsibilities -->
-       
-
         <!-- Collapsible: Skills -->
         <div class="emp-block-wrapper" onclick="toggleBlock(this)">
           <div class="emp-block-header">
@@ -1099,7 +1096,7 @@ body::before {
   const params = new URLSearchParams(window.location.search);
   const empId = params.get('id');
 
-  // Loading time set to 3 seconds (3000ms)
+  // Loading time set to 1.5 seconds for faster testing
   setTimeout(() => {
     if (!empId) {
       document.getElementById('loading').style.display = 'none';
@@ -1107,8 +1104,12 @@ body::before {
       return;
     }
 
+    // Fetching the JSON file
     fetch('employees.json')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
       .then(data => {
         const emp = data[empId];
         if (!emp) {
@@ -1117,7 +1118,13 @@ body::before {
           return;
         }
 
-        const set = (id, val) => document.getElementById(id).textContent = val || '—';
+        // Function to set text safely (if empty, show blank)
+        const set = (id, val) => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.textContent = val && val.trim() !== '' ? val : '—';
+          }
+        };
         
         // Basic Info
         set('empName', emp.name);
@@ -1135,7 +1142,7 @@ body::before {
         set('empMother', emp.motherName);
         set('empAddress', emp.address);
 
-        // Grouped ID Details (Moved to Personal Info)
+        // Grouped ID Details
         set('empCnic', emp.cnic);
         set('empIssue', emp.issueDate);
         set('empExpire', emp.expireDate);
@@ -1154,7 +1161,6 @@ body::before {
         
         // Job Details
         set('empJobDesc', emp.jobDescription);
-        set('empResponsibilities', emp.responsibilities);
         set('empSkills', emp.skills);
 
         // China Documents
@@ -1170,27 +1176,30 @@ body::before {
 
         // Main Employee Photo
         const photoBox = document.getElementById('photoBox');
-        if (emp.photo) {
+        if (emp.photo && emp.photo.trim() !== '') {
           const img = new Image();
           img.onload = () => {
             photoBox.innerHTML = `<img src="${emp.photo}" alt="${emp.name}">`;
           };
           img.onerror = () => {
             const initials = (emp.name || '--').split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
-            document.getElementById('initials').textContent = initials;
+            photoBox.innerHTML = `<span class="initials">${initials}</span>`;
           };
           img.src = emp.photo;
         } else {
           const initials = (emp.name || '--').split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
-          document.getElementById('initials').textContent = initials;
+          photoBox.innerHTML = `<span class="initials">${initials}</span>`;
         }
 
         // Permit Photo
         const permitBox = document.getElementById('permitPhotoBox');
-        if (emp.permitPhoto) {
+        if (emp.permitPhoto && emp.permitPhoto.trim() !== '') {
           const pImg = new Image();
           pImg.onload = () => {
             permitBox.innerHTML = `<img src="${emp.permitPhoto}" alt="Residence Permit">`;
+          };
+          pImg.onerror = () => {
+            // Keep placeholder if error
           };
           pImg.src = emp.permitPhoto;
         }
@@ -1198,11 +1207,12 @@ body::before {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('profileCard').style.display = 'flex';
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('Error loading JSON:', error);
         document.getElementById('loading').style.display = 'none';
         document.getElementById('notFound').style.display = 'flex';
       });
-  }, 3000); // 3000ms = 3 seconds
+  }, 1500); // 1.5 seconds loading time
 </script>
 
 </body>
