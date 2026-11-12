@@ -14,317 +14,431 @@
   --green-dark: #0B2B1B;
   --green-mid: #1A4D32;
   --bg-light: #F9F7F2;
-  --text-muted: #6B7280;
+  --text-dark: #1A1F1C;
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.5);
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Space Grotesk', sans-serif;
-  background: linear-gradient(135deg, #0B2B1B, #023020);
+  background-color: var(--green-dark);
   min-height: 100vh;
-  padding: 30px 20px;
-  color: var(--green-dark);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ================= SEARCH CARD ================= */
-.search-wrapper {
-  max-width: 560px;
-  margin: 0 auto;
-  transition: all .5s ease;
+/* ================= BACKGROUND & PETALS ================= */
+.scenery-bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #0B2B1B, #023020);
+  z-index: -3;
 }
 
-.search-card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.4);
-  border-top: 6px solid var(--gold);
+.petals-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
 }
 
-h1 {
+.petal {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(201,169,89,0.3));
+  border-radius: 50% 50% 50% 0;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  animation: floatPetal linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatPetal {
+  0% { transform: translateY(-100px) rotate(0deg) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(105vh) rotate(720deg) translateX(100px); opacity: 0; }
+}
+
+/* ================= HEADER ================= */
+.glass-header {
+  background: #E5C566;
+  border-bottom: 2px solid var(--gold-dark);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 10;
+}
+
+.brand-exact {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand-exact img {
+  height: 35px;
+  object-fit: contain;
+}
+
+.brand-text h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: var(--green-dark);
-  margin-bottom: 8px;
-  text-align: center;
+  line-height: 1.1;
 }
 
-.sub {
-  text-align: center;
-  font-size: .72rem;
+.brand-text p {
+  font-size: 0.6rem;
+  color: var(--green-dark);
   letter-spacing: 2px;
-  color: var(--gold);
   text-transform: uppercase;
-  margin-bottom: 30px;
   font-weight: 700;
+  opacity: 0.8;
 }
 
-.form-group { margin-bottom: 16px; }
-
-.form-group label {
-  display: block;
-  font-size: .68rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--green-dark);
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 14px 16px;
-  background: var(--bg-light);
-  border: 1.5px solid rgba(11,43,27,.15);
-  border-radius: 10px;
-  font-family: 'Courier New', monospace;
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  outline: none;
-  transition: .3s;
-  color: var(--green-dark);
-  text-transform: uppercase;
-}
-
-.form-group input:focus {
-  border-color: var(--gold);
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(201,169,89,.15);
-}
-
-.btn {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .8rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: .3s;
+/* ================= MAIN CONTAINER ================= */
+.main-container {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 10px;
+  padding: 30px 20px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.5s ease;
+}
+
+/* ================= SEARCH CARD ================= */
+.search-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 45px 40px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.5);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.search-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold));
+}
+
+/* Seal Icon */
+.seal-icon {
+  width: 70px; height: 70px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, rgba(11,43,27,1), rgba(26,77,50,1));
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; color: var(--gold);
+  position: relative;
+  box-shadow: 0 10px 20px rgba(11,43,27,0.3);
+}
+.seal-icon::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed var(--gold);
+  animation: spin 15s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.search-card h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+}
+
+.search-card .subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Input Group */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold-dark);
+  font-size: 1.1rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 18px 18px 18px 50px;
+  background: #fff;
+  border: 2px solid rgba(11,43,27,0.1);
+  border-radius: 12px;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
+  outline: none;
+  transition: 0.3s;
+  color: var(--green-dark);
+  text-transform: uppercase;
+}
+
+.input-group input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(201,169,89,0.15);
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .btn-gold {
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
   color: var(--green-dark);
+  box-shadow: 0 10px 20px rgba(201,169,89,0.3);
 }
 .btn-gold:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(201,169,89,.5);
+  box-shadow: 0 15px 25px rgba(201,169,89,0.5);
 }
-.btn-gold:disabled { opacity: .6; cursor: not-allowed; }
+.btn-gold:disabled { opacity: 0.7; cursor: not-allowed; }
 
-.btn-ghost {
-  background: var(--bg-light);
+.btn-outline {
+  background: transparent;
   color: var(--green-dark);
-  border: 1.5px solid rgba(11,43,27,.15);
-  margin-top: 14px;
+  border: 2px solid rgba(11,43,27,0.2);
+  margin-top: 15px;
 }
-.btn-ghost:hover { background: #EAE0CC; }
+.btn-outline:hover { background: rgba(11,43,27,0.05); }
 
-/* ================= RESULT BOX ================= */
-.result {
-  margin-top: 20px;
-  padding: 16px;
+/* Error/Success Messages */
+.message-box {
+  display: none;
+  padding: 14px;
   border-radius: 10px;
-  display: none;
-  font-size: .85rem;
-  line-height: 1.7;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: left;
 }
-.result.success {
-  display: block;
-  background: rgba(40,167,69,.1);
-  border: 1px solid rgba(40,167,69,.3);
-  color: #155724;
-}
-.result.error {
-  display: block;
-  background: rgba(220,53,69,.1);
-  border: 1px solid rgba(220,53,69,.3);
-  color: #721c24;
-}
-.result.loading {
-  display: block;
-  background: rgba(201,169,89,.1);
-  border: 1px solid rgba(201,169,89,.3);
-  color: #856404;
-}
-.result .icon { font-size: 1.5rem; margin-bottom: 8px; }
+.message-box.error { background: rgba(220,53,69,0.1); color: #721c24; border: 1px solid rgba(220,53,69,0.3); }
 
-/* ================= DOCUMENT VIEWER ================= */
-.viewer {
+/* ================= RESULT VIEWER ================= */
+.viewer-container {
   display: none;
-  margin-top: 24px;
-  animation: slideUp .5s ease;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+.viewer-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Viewer Header */
 .viewer-header {
   background: var(--green-dark);
-  border-radius: 14px 14px 0 0;
-  padding: 16px 20px;
+  padding: 16px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  border: 1px solid rgba(201,169,89,.3);
-  border-bottom: none;
+  border-bottom: 2px solid var(--gold);
 }
 
-.viewer-title {
+.file-title {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #fff;
-  font-size: .85rem;
-  font-weight: 600;
-  word-break: break-all;
 }
-.viewer-title i { color: #DC3545; font-size: 1.1rem; }
+.file-title i { color: #DC3545; font-size: 1.2rem; }
 
-.viewer-tag {
-  font-size: .6rem;
-  background: var(--gold);
-  color: var(--green-dark);
+.status-badge {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28A745;
+  border: 1px solid #28A745;
   padding: 4px 12px;
   border-radius: 20px;
-  font-weight: 700;
+  font-size: 0.65rem;
+  font-weight: 800;
   letter-spacing: 1px;
-  white-space: nowrap;
-}
-
-.viewer-body {
-  background: #fff;
-  border: 1px solid rgba(201,169,89,.3);
-  border-top: none;
-  border-radius: 0 0 14px 14px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,.3);
-}
-
-.verify-strip {
-  background: linear-gradient(90deg, rgba(40,167,69,.12), rgba(40,167,69,.05));
-  border-bottom: 1px solid rgba(40,167,69,.25);
-  padding: 12px 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: .75rem;
-  color: #155724;
-  font-weight: 600;
+  gap: 6px;
 }
-.verify-strip i { color: #28A745; font-size: 1rem; }
+.status-badge .dot { width: 6px; height: 6px; background: #28A745; border-radius: 50%; animation: blink 1.5s infinite; }
+@keyframes blink { 50% { opacity: 0.4; } }
 
-.verify-strip .meta {
-  margin-left: auto;
+/* Verification Strip */
+.verify-strip {
+  background: #F9F7F2;
+  padding: 12px 24px;
   display: flex;
-  gap: 16px;
+  gap: 20px;
+  border-bottom: 1px solid rgba(11,43,27,0.1);
   flex-wrap: wrap;
-  font-family: 'Courier New', monospace;
-  font-size: .7rem;
+}
+.verify-item {
+  font-size: 0.75rem;
   color: var(--text-muted);
-}
-.verify-strip .meta strong { color: var(--green-dark); }
-
-.iframe-wrap {
-  width: 100%;
-  height: 75vh;
-  min-height: 500px;
-  background: #f4f4f4;
-  position: relative;
-}
-.iframe-wrap iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-.viewer-actions {
   display: flex;
-  gap: 10px;
-  padding: 16px 20px;
-  background: var(--bg-light);
-  border-top: 1px solid rgba(11,43,27,.08);
-  flex-wrap: wrap;
+  gap: 6px;
 }
-.viewer-actions .btn { margin-top: 0; flex: 1; min-width: 140px; }
+.verify-item strong { color: var(--green-dark); font-family: monospace; font-size: 0.8rem; }
 
-/* ================= MOBILE ================= */
-@media (max-width: 600px) {
-  .search-card { padding: 28px 20px; }
-  h1 { font-size: 1.3rem; }
-  .iframe-wrap { height: 60vh; min-height: 380px; }
-  .verify-strip { flex-direction: column; align-items: flex-start; }
-  .verify-strip .meta { margin-left: 0; }
+/* PDF Iframe */
+.pdf-frame {
+  width: 100%;
+  height: 70vh;
+  min-height: 500px;
+  border: none;
+  background: #e0e0e0;
+}
+
+.viewer-footer {
+  padding: 16px 24px;
+  background: #fff;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.viewer-footer .btn { width: auto; padding: 12px 24px; margin: 0; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .glass-header { flex-direction: column; gap: 10px; text-align: center; }
+  .search-card { padding: 30px 20px; }
+  .search-card h1 { font-size: 1.5rem; }
+  .viewer-footer { flex-direction: column; }
+  .viewer-footer .btn { width: 100%; }
+  .pdf-frame { height: 60vh; min-height: 400px; }
 }
 </style>
 </head>
 <body>
 
-<div class="search-wrapper" id="searchWrapper">
+<div class="scenery-bg"></div>
+<div class="petals-container" id="petalsContainer"></div>
 
-  <!-- ============ SEARCH CARD ============ -->
-  <div class="search-card">
-    <h1>Document Search</h1>
-    <div class="sub">PEKIN-PAK-INTERNATIONAL LLC</div>
+<!-- HEADER -->
+<header class="glass-header">
+  <div class="brand-exact">
+    <img src="logo-main.png" alt="Logo Left">
+    <div class="brand-text">
+      <h1>PEKIN-PAK INTERNATIONAL</h1>
+      <p>Document Verification Portal</p>
+    </div>
+  </div>
+  <!-- Agar aap chahti hain ke right logo bhi yahan aaye toh isko uncomment karein -->
+  <!-- <img src="logo-short.png" alt="Logo Right" style="height: 35px;"> -->
+</header>
 
-    <div class="form-group">
-      <label>Enter Serial Number</label>
+<!-- MAIN CONTENT -->
+<div class="main-container" id="mainContainer">
+  
+  <!-- SEARCH CARD (Initially Visible) -->
+  <div class="search-card" id="searchCard">
+    <div class="seal-icon"><i class="fas fa-fingerprint"></i></div>
+    <h1>Verify Document</h1>
+    <div class="subtitle">Enter Serial Number to Access</div>
+
+    <div class="message-box error" id="errorMsg"></div>
+
+    <div class="input-group">
+      <i class="fas fa-barcode"></i>
       <input type="text" id="serialInput" placeholder="e.g. 7893094" autocomplete="off">
     </div>
 
     <button class="btn btn-gold" id="searchBtn" onclick="searchDocument()">
-      <i class="fas fa-search"></i> Search Document
+      <i class="fas fa-search"></i> Find Document
     </button>
+  </div>
 
-    <div class="result" id="resultBox"></div>
-
-    <!-- ============ DOCUMENT VIEWER (hidden initially) ============ -->
-    <div class="viewer" id="viewer">
+  <!-- DOCUMENT VIEWER (Hidden Initially) -->
+  <div class="viewer-container" id="viewerContainer">
+    <div class="viewer-panel">
+      
       <div class="viewer-header">
-        <div class="viewer-title">
+        <div class="file-title">
           <i class="fas fa-file-pdf"></i>
           <span id="v-file">document.pdf</span>
         </div>
-        <div class="viewer-tag">SECURE VIEW</div>
-      </div>
-
-      <div class="viewer-body">
-        <div class="verify-strip">
-          <i class="fas fa-check-circle"></i>
-          <span>Authentic document · Verified by Pekin-Pak</span>
-          <div class="meta">
-            <span>Serial: <strong id="v-serial">—</strong></span>
-            <span>Type: <strong id="v-type">—</strong></span>
-          </div>
-        </div>
-
-        <div class="iframe-wrap">
-          <iframe id="docFrame" src="about:blank"></iframe>
-        </div>
-
-        <div class="viewer-actions">
-          <button class="btn btn-gold" onclick="downloadDoc()">
-            <i class="fas fa-download"></i> Download
-          </button>
-          <button class="btn btn-ghost" onclick="resetSearch()">
-            <i class="fas fa-redo"></i> New Search
-          </button>
+        <div class="status-badge">
+          <span class="dot"></span> AUTHENTIC
         </div>
       </div>
+
+      <div class="verify-strip">
+        <div class="verify-item">Serial: <strong id="v-serial">—</strong></div>
+        <div class="verify-item">Type: <strong id="v-type">—</strong></div>
+        <div class="verify-item">Verified: <strong id="v-time">—</strong></div>
+      </div>
+
+      <iframe class="pdf-frame" id="docFrame" src="about:blank"></iframe>
+
+      <div class="viewer-footer">
+        <button class="btn btn-outline" onclick="resetSearch()">
+          <i class="fas fa-redo"></i> New Search
+        </button>
+        <button class="btn btn-gold" onclick="downloadDoc()">
+          <i class="fas fa-download"></i> Download File
+        </button>
+      </div>
+
     </div>
   </div>
 
@@ -332,87 +446,101 @@ h1 {
 
 <script>
 // ============================================================
-// 🔴 AAP KA APPS SCRIPT URL YAHAN HAI
+// 🔴 AAPKA GOOGLE APPS SCRIPT URL YAHAN HAI
 // ============================================================
 const API_URL = "https://script.google.com/macros/s/AKfycbwL-DeivRSjmLMM5gpvGJ5DKuwyVRdCM0sE_NQ95VhuZMlxbHRrrT2532iDw4RN7wry1Q/exec";
 
+// File base path (Agar files 'letters' folder mein hain)
+const FILE_BASE = "letters/";
+
 // ============================================================
-// 🔴 FILE KAHAN SE LOAD HOGI (Aapki website ka folder)
+// PETALS ANIMATION (Background)
 // ============================================================
-const FILE_BASE = "letters/"; 
-// Agar aapki PDF files 'letters' folder mein nahi hain, toh yahan path change karein.
+const container = document.getElementById('petalsContainer');
+for (let i = 0; i < 20; i++) {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    const size = Math.random() * 12 + 6;
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size}px`;
+    petal.style.left = `${Math.random() * 100}vw`;
+    petal.style.animationDuration = `${Math.random() * 10 + 10}s`;
+    petal.style.animationDelay = `${Math.random() * 10}s`;
+    container.appendChild(petal);
+}
 
 // ============================================================
 // SEARCH FUNCTION
 // ============================================================
 async function searchDocument() {
   const input = document.getElementById('serialInput').value.trim();
-  const resultBox = document.getElementById('resultBox');
   const btn = document.getElementById('searchBtn');
-  const viewer = document.getElementById('viewer');
+  const errorMsg = document.getElementById('errorMsg');
+  const searchCard = document.getElementById('searchCard');
+  const viewerContainer = document.getElementById('viewerContainer');
 
   if (!input) {
-    showResult('error', '⚠️', 'Please enter a serial number.');
+    errorMsg.innerText = "⚠️ Please enter a serial number.";
+    errorMsg.style.display = 'block';
     return;
   }
 
-  // Reset viewer
-  viewer.style.display = 'none';
-
-  // Loading state
+  // Reset UI
+  errorMsg.style.display = 'none';
   btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
-  showResult('loading', '⏳', 'Searching secure ledger...');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to Secure Ledger...';
+  searchCard.style.opacity = '0.5';
 
   try {
-    // Google Sheet se data fetch kar rahe hain
+    // Fetch data from Google Sheet
     const res = await fetch(`${API_URL}?serial=${encodeURIComponent(input)}`);
     const data = await res.json();
 
     if (data.success) {
-      // Hide result box, show viewer
-      resultBox.className = 'result';
-      resultBox.innerHTML = '';
+      // Hide Search Card, Show Viewer
+      searchCard.style.display = 'none';
+      viewerContainer.style.display = 'block';
 
-      // Fill viewer data
+      // Fill Data
       document.getElementById('v-file').innerText = data.file;
       document.getElementById('v-serial').innerText = data.serial;
       document.getElementById('v-type').innerText = formatType(data.type);
+      document.getElementById('v-time').innerText = getCurrentTime();
 
-      // Load PDF inside iframe
-      const fileUrl = FILE_BASE + data.file;
-      document.getElementById('docFrame').src = fileUrl;
+      // Load PDF
+      document.getElementById('docFrame').src = FILE_BASE + data.file;
 
-      // Show viewer
-      viewer.style.display = 'block';
-      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Scroll to top of viewer
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } else {
-      showResult('error', '❌',
-        `No document found for serial: <strong>${input}</strong><br>
-         Please check the number and try again.`);
+      // Error handling
+      errorMsg.innerText = `❌ No document found for serial: "${input}". Please check and try again.`;
+      errorMsg.style.display = 'block';
+      searchCard.style.opacity = '1';
     }
   } catch (err) {
     console.error(err);
-    showResult('error', '⚠️', 'Connection error. Please check your internet and try again.');
+    errorMsg.innerText = "⚠️ Connection error. Please check internet and try again.";
+    errorMsg.style.display = 'block';
+    searchCard.style.opacity = '1';
   } finally {
     btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-search"></i> Search Document';
+    btn.innerHTML = '<i class="fas fa-search"></i> Find Document';
   }
 }
 
 // ============================================================
-// HELPERS
+// HELPER FUNCTIONS
 // ============================================================
 function formatType(t) {
   if (!t) return 'Document';
   return t.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 }
 
-function showResult(type, icon, msg) {
-  const box = document.getElementById('resultBox');
-  box.className = 'result ' + type;
-  box.innerHTML = `<div class="icon">${icon}</div><div>${msg}</div>`;
+function getCurrentTime() {
+  const d = new Date();
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit'});
 }
 
 function downloadDoc() {
@@ -425,16 +553,15 @@ function downloadDoc() {
 }
 
 function resetSearch() {
-  document.getElementById('viewer').style.display = 'none';
+  document.getElementById('viewerContainer').style.display = 'none';
+  document.getElementById('searchCard').style.display = 'block';
+  document.getElementById('searchCard').style.opacity = '1';
   document.getElementById('docFrame').src = 'about:blank';
   document.getElementById('serialInput').value = '';
-  document.getElementById('serialInput').focus();
-  document.getElementById('resultBox').className = 'result';
-  document.getElementById('resultBox').innerHTML = '';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('errorMsg').style.display = 'none';
 }
 
-// Enter key support
+// Enter Key Support
 document.getElementById('serialInput').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') searchDocument();
 });
