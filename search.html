@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Search | PEKIN-PAK</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --gold: #C9A959;
+  --gold-dark: #B08C38;
+  --gold-bright: #E0C878;
+  --green-dark: #0B2B1B;
+  --green-mid: #1A4D32;
+  --bg-light: #F9F7F2;
+  --text-muted: #6B7280;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #0B2B1B, #023020);
+  min-height: 100vh;
+  padding: 30px 20px;
+  color: var(--green-dark);
+}
+
+/* ================= SEARCH CARD ================= */
+.search-wrapper {
+  max-width: 560px;
+  margin: 0 auto;
+  transition: all .5s ease;
+}
+
+.search-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.4);
+  border-top: 6px solid var(--gold);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.sub {
+  text-align: center;
+  font-size: .72rem;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+  display: block;
+  font-size: .68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-light);
+  border: 1.5px solid rgba(11,43,27,.15);
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  outline: none;
+  transition: .3s;
+  color: var(--green-dark);
+  text-transform: uppercase;
+}
+
+.form-group input:focus {
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(201,169,89,.15);
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--green-dark);
+}
+.btn-gold:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(201,169,89,.5);
+}
+.btn-gold:disabled { opacity: .6; cursor: not-allowed; }
+
+.btn-ghost {
+  background: var(--bg-light);
+  color: var(--green-dark);
+  border: 1.5px solid rgba(11,43,27,.15);
+  margin-top: 14px;
+}
+.btn-ghost:hover { background: #EAE0CC; }
+
+/* ================= RESULT BOX ================= */
+.result {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  display: none;
+  font-size: .85rem;
+  line-height: 1.7;
+}
+.result.success {
+  display: block;
+  background: rgba(40,167,69,.1);
+  border: 1px solid rgba(40,167,69,.3);
+  color: #155724;
+}
+.result.error {
+  display: block;
+  background: rgba(220,53,69,.1);
+  border: 1px solid rgba(220,53,69,.3);
+  color: #721c24;
+}
+.result.loading {
+  display: block;
+  background: rgba(201,169,89,.1);
+  border: 1px solid rgba(201,169,89,.3);
+  color: #856404;
+}
+.result .icon { font-size: 1.5rem; margin-bottom: 8px; }
+
+/* ================= DOCUMENT VIEWER ================= */
+.viewer {
+  display: none;
+  margin-top: 24px;
+  animation: slideUp .5s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.viewer-header {
+  background: var(--green-dark);
+  border-radius: 14px 14px 0 0;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid rgba(201,169,89,.3);
+  border-bottom: none;
+}
+
+.viewer-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 600;
+  word-break: break-all;
+}
+.viewer-title i { color: #DC3545; font-size: 1.1rem; }
+
+.viewer-tag {
+  font-size: .6rem;
+  background: var(--gold);
+  color: var(--green-dark);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.viewer-body {
+  background: #fff;
+  border: 1px solid rgba(201,169,89,.3);
+  border-top: none;
+  border-radius: 0 0 14px 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,.3);
+}
+
+.verify-strip {
+  background: linear-gradient(90deg, rgba(40,167,69,.12), rgba(40,167,69,.05));
+  border-bottom: 1px solid rgba(40,167,69,.25);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .75rem;
+  color: #155724;
+  font-weight: 600;
+}
+.verify-strip i { color: #28A745; font-size: 1rem; }
+
+.verify-strip .meta {
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: 'Courier New', monospace;
+  font-size: .7rem;
+  color: var(--text-muted);
+}
+.verify-strip .meta strong { color: var(--green-dark); }
+
+.iframe-wrap {
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+  background: #f4f4f4;
+  position: relative;
+}
+.iframe-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.viewer-actions {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px;
+  background: var(--bg-light);
+  border-top: 1px solid rgba(11,43,27,.08);
+  flex-wrap: wrap;
+}
+.viewer-actions .btn { margin-top: 0; flex: 1; min-width: 140px; }
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .search-card { padding: 28px 20px; }
+  h1 { font-size: 1.3rem; }
+  .iframe-wrap { height: 60vh; min-height: 380px; }
+  .verify-strip { flex-direction: column; align-items: flex-start; }
+  .verify-strip .meta { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="search-wrapper" id="searchWrapper">
+
+  <!-- ============ SEARCH CARD ============ -->
+  <div class="search-card">
+    <h1>Document Search</h1>
+    <div class="sub">PEKIN-PAK-INTERNATIONAL LLC</div>
+
+    <div class="form-group">
+      <label>Enter Serial Number</label>
+      <input type="text" id="serialInput" placeholder="e.g. 7893094" autocomplete="off">
+    </div>
+
+    <button class="btn btn-gold" id="searchBtn" onclick="searchDocument()">
+      <i class="fas fa-search"></i> Search Document
+    </button>
+
+    <div class="result" id="resultBox"></div>
+
+    <!-- ============ DOCUMENT VIEWER (hidden initially) ============ -->
+    <div class="viewer" id="viewer">
+      <div class="viewer-header">
+        <div class="viewer-title">
+          <i class="fas fa-file-pdf"></i>
+          <span id="v-file">document.pdf</span>
+        </div>
+        <div class="viewer-tag">SECURE VIEW</div>
+      </div>
+
+      <div class="viewer-body">
+        <div class="verify-strip">
+          <i class="fas fa-check-circle"></i>
+          <span>Authentic document · Verified by Pekin-Pak</span>
+          <div class="meta">
+            <span>Serial: <strong id="v-serial">—</strong></span>
+            <span>Type: <strong id="v-type">—</strong></span>
+          </div>
+        </div>
+
+        <div class="iframe-wrap">
+          <iframe id="docFrame" src="about:blank"></iframe>
+        </div>
+
+        <div class="viewer-actions">
+          <button class="btn btn-gold" onclick="downloadDoc()">
+            <i class="fas fa-download"></i> Download
+          </button>
+          <button class="btn btn-ghost" onclick="resetSearch()">
+            <i class="fas fa-redo"></i> New Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// 🔴 AAP KA APPS SCRIPT URL YAHAN HAI
+// ============================================================
+const API_URL = "https://script.google.com/macros/s/AKfycbwL-DeivRSjmLMM5gpvGJ5DKuwyVRdCM0sE_NQ95VhuZMlxbHRrrT2532iDw4RN7wry1Q/exec";
+
+// ============================================================
+// 🔴 FILE KAHAN SE LOAD HOGI (Aapki website ka folder)
+// ============================================================
+const FILE_BASE = "letters/"; 
+// Agar aapki PDF files 'letters' folder mein nahi hain, toh yahan path change karein.
+
+// ============================================================
+// SEARCH FUNCTION
+// ============================================================
+async function searchDocument() {
+  const input = document.getElementById('serialInput').value.trim();
+  const resultBox = document.getElementById('resultBox');
+  const btn = document.getElementById('searchBtn');
+  const viewer = document.getElementById('viewer');
+
+  if (!input) {
+    showResult('error', '⚠️', 'Please enter a serial number.');
+    return;
+  }
+
+  // Reset viewer
+  viewer.style.display = 'none';
+
+  // Loading state
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+  showResult('loading', '⏳', 'Searching secure ledger...');
+
+  try {
+    // Google Sheet se data fetch kar rahe hain
+    const res = await fetch(`${API_URL}?serial=${encodeURIComponent(input)}`);
+    const data = await res.json();
+
+    if (data.success) {
+      // Hide result box, show viewer
+      resultBox.className = 'result';
+      resultBox.innerHTML = '';
+
+      // Fill viewer data
+      document.getElementById('v-file').innerText = data.file;
+      document.getElementById('v-serial').innerText = data.serial;
+      document.getElementById('v-type').innerText = formatType(data.type);
+
+      // Load PDF inside iframe
+      const fileUrl = FILE_BASE + data.file;
+      document.getElementById('docFrame').src = fileUrl;
+
+      // Show viewer
+      viewer.style.display = 'block';
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } else {
+      showResult('error', '❌',
+        `No document found for serial: <strong>${input}</strong><br>
+         Please check the number and try again.`);
+    }
+  } catch (err) {
+    console.error(err);
+    showResult('error', '⚠️', 'Connection error. Please check your internet and try again.');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-search"></i> Search Document';
+  }
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
+function formatType(t) {
+  if (!t) return 'Document';
+  return t.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function showResult(type, icon, msg) {
+  const box = document.getElementById('resultBox');
+  box.className = 'result ' + type;
+  box.innerHTML = `<div class="icon">${icon}</div><div>${msg}</div>`;
+}
+
+function downloadDoc() {
+  const file = document.getElementById('v-file').innerText;
+  if (!file) return;
+  const link = document.createElement('a');
+  link.href = FILE_BASE + file;
+  link.download = file;
+  link.click();
+}
+
+function resetSearch() {
+  document.getElementById('viewer').style.display = 'none';
+  document.getElementById('docFrame').src = 'about:blank';
+  document.getElementById('serialInput').value = '';
+  document.getElementById('serialInput').focus();
+  document.getElementById('resultBox').className = 'result';
+  document.getElementById('resultBox').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Enter key support
+document.getElementById('serialInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') searchDocument();
+});
+</script>
+
+</body>
+</html>
