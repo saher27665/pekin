@@ -9,8 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/png" href="logo-short.png">
 <style>
-/* ===== YOUR EXISTING CSS (unchanged) ===== */
+/* ... [ALL YOUR EXISTING CSS REMAINS EXACTLY THE SAME] ... */
 :root {
   --forest: #0B2B1B;
   --forest-deep: #061A10;
@@ -336,240 +337,432 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     0 0 24px rgba(224, 200, 120, 0.5);
 }
 
-/* ===== NEW SEARCH BUTTON ===== */
-.nav-search-wrap {
-  position: relative;
-  display: inline-flex;
+/* ===== NEW: SEARCH BUTTON IN NAVBAR ===== */
+.nav-search-link {
+  display: inline-flex !important;
   align-items: center;
-  margin-left: 4px;
+  gap: 7px;
+  background: linear-gradient(135deg, rgba(201, 169, 89, 0.18), rgba(201, 169, 89, 0.06)) !important;
+  border: 1.5px solid rgba(201, 169, 89, 0.5) !important;
+  color: var(--forest-deep) !important;
+  font-weight: 700 !important;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(201, 169, 89, 0.15);
 }
-.nav-search-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: transparent;
-  border: 1.5px solid rgba(201, 169, 89, 0.45);
-  color: var(--forest-deep);
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.45s var(--ease);
+.nav-search-link i {
+  font-size: 0.72rem;
+  color: var(--gold-deep);
+  transition: all 0.4s var(--ease);
+}
+.nav-search-link::after {
+  background: linear-gradient(90deg, transparent, rgba(224, 200, 120, 0.5), transparent) !important;
+}
+.nav-search-link:hover {
+  background: var(--forest-deep) !important;
+  color: var(--gold-bright) !important;
+  border-color: var(--forest-deep) !important;
+  box-shadow:
+    0 6px 22px rgba(11, 43, 27, 0.4),
+    0 0 28px rgba(224, 200, 120, 0.45) !important;
+}
+.nav-search-link:hover i {
+  color: var(--gold-bright);
+  transform: rotate(-12deg) scale(1.15);
+}
+.nav-search-link.active {
+  background: var(--forest-deep) !important;
+  color: var(--gold-bright) !important;
+  border-color: var(--forest-deep) !important;
+}
+.nav-search-link.active i { color: var(--gold-bright); }
+
+/* ===== SEARCH PAGE STYLES ===== */
+.search-hero {
   position: relative;
+  padding: 150px 60px 60px;
+  background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid));
   overflow: hidden;
   isolation: isolate;
 }
-.nav-search-btn::before {
+.search-hero::before {
   content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(201, 169, 89, 0.3) 0%, transparent 70%);
-  opacity: 0;
-  transform: scale(0.6);
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
-  z-index: -1;
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201, 169, 89, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 169, 89, 0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
 }
-.nav-search-btn:hover {
-  border-color: var(--gold);
-  background: rgba(11, 43, 27, 0.08);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow:
-    0 6px 22px rgba(201, 169, 89, 0.28),
-    0 0 24px rgba(224, 200, 120, 0.35);
-  color: var(--forest-deep);
+.search-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(201, 169, 89, 0.15), transparent 65%);
+  pointer-events: none;
 }
-.nav-search-btn:hover::before { opacity: 1; transform: scale(1); }
-.nav-search-btn i { pointer-events: none; font-size: 0.8rem; }
+.search-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.search-hero .crumbs {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 242, 0.7);
+  margin-bottom: 18px;
+}
+.search-hero .crumbs span { color: var(--gold-bright); }
+.search-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 10px;
+  line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+.search-hero h1 em {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+.search-hero p {
+  color: rgba(250, 247, 242, 0.85);
+  font-size: 0.95rem;
+  max-width: 520px;
+  margin: 0 auto 30px;
+  line-height: 1.7;
+}
 
-/* Search overlay */
-.nav-search-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(6, 26, 16, 0.65);
-  backdrop-filter: blur(6px);
-  z-index: 9998;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease);
-}
-.nav-search-overlay.open {
-  opacity: 1;
-  visibility: visible;
-}
-.nav-search-panel {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.94);
-  width: 92%;
-  max-width: 680px;
-  background: var(--ivory);
-  border-radius: 20px;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(201, 169, 89, 0.4);
-  z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease), transform 0.4s var(--ease);
-  overflow: hidden;
-}
-.nav-search-panel.open {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
-}
-.nav-search-header {
+/* Search bar in hero */
+.search-bar-wrap {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 22px;
-  border-bottom: 1px solid rgba(201, 169, 89, 0.2);
-  background: linear-gradient(180deg, var(--cream-2), var(--cream));
+  background: var(--ivory);
+  border-radius: 60px;
+  padding: 6px 6px 6px 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(201, 169, 89, 0.4);
+  transition: all 0.4s var(--ease);
 }
-.nav-search-header i.fa-magnifying-glass {
+.search-bar-wrap:focus-within {
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 0 0 2px var(--gold), 0 0 30px rgba(224, 200, 120, 0.4);
+  transform: translateY(-2px);
+}
+.search-bar-wrap i.fa-magnifying-glass {
   color: var(--gold);
   font-size: 1rem;
   flex-shrink: 0;
+  margin-right: 12px;
 }
-.nav-search-input {
+.search-bar-input {
   flex: 1;
   border: none;
   outline: none;
   background: transparent;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--ink);
-  padding: 4px 0;
+  padding: 10px 0;
+  min-width: 0;
 }
-.nav-search-input::placeholder {
+.search-bar-input::placeholder {
   color: var(--ink-muted);
-  font-size: 0.9rem;
 }
-.nav-search-close {
+.search-bar-btn {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color: var(--forest-deep);
+  border-radius: 60px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.4s var(--ease);
+  box-shadow: 0 6px 18px rgba(201, 169, 89, 0.4);
   display: flex;
   align-items: center;
+  gap: 6px;
+}
+.search-bar-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 28px rgba(201, 169, 89, 0.6), 0 0 24px rgba(224, 200, 120, 0.5);
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+}
+
+/* Search page body */
+.search-body {
+  background: var(--cream);
+  padding: 60px;
+  min-height: 50vh;
+}
+.search-body-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.search-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
-  color: var(--ink-soft);
-  transition: all 0.3s var(--ease);
-  font-size: 0.9rem;
+  margin-bottom: 40px;
 }
-.nav-search-close:hover {
-  background: rgba(11, 43, 27, 0.08);
+.search-tab {
+  padding: 10px 22px;
+  background: var(--ivory);
+  border: 1.5px solid rgba(201, 169, 89, 0.3);
+  border-radius: 60px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--forest);
-  transform: rotate(90deg);
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
-.nav-search-results {
-  max-height: 340px;
-  overflow-y: auto;
-  padding: 8px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gold) var(--cream-2);
+.search-tab i {
+  color: var(--gold);
+  font-size: 0.72rem;
+  transition: all 0.3s var(--ease);
 }
-.nav-search-results::-webkit-scrollbar { width: 6px; }
-.nav-search-results::-webkit-scrollbar-track { background: var(--cream-2); }
-.nav-search-results::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-.nav-search-item {
+.search-tab:hover {
+  background: var(--forest);
+  color: var(--gold-bright);
+  border-color: var(--forest);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(11, 43, 27, 0.3), 0 0 26px rgba(224, 200, 120, 0.4);
+}
+.search-tab:hover i { color: var(--gold-bright); }
+.search-tab.active {
+  background: var(--forest-deep);
+  color: var(--gold-bright);
+  border-color: var(--forest-deep);
+  box-shadow: 0 10px 26px rgba(11, 43, 27, 0.35);
+}
+.search-tab.active i { color: var(--gold-bright); }
+.search-tab .search-tab-count {
+  font-size: 0.55rem;
+  padding: 2px 7px;
+  background: rgba(201, 169, 89, 0.2);
+  color: var(--gold-deep);
+  border-radius: 30px;
+  font-weight: 700;
+}
+.search-tab.active .search-tab-count,
+.search-tab:hover .search-tab-count {
+  background: rgba(224, 200, 120, 0.25);
+  color: var(--gold-bright);
+}
+
+.search-meta {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 24px;
+  text-align: center;
+}
+.search-meta strong { color: var(--gold-deep); }
+
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.search-result-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  border-radius: 12px;
+  gap: 20px;
+  padding: 22px 26px;
+  background: var(--ivory);
+  border: 1px solid rgba(201, 169, 89, 0.2);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s var(--ease);
   cursor: pointer;
-  transition: all 0.3s var(--ease);
-  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
-.nav-search-item:hover {
-  background: var(--cream-2);
-  border-color: rgba(201, 169, 89, 0.25);
-  transform: translateX(4px);
+.search-result-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--gold), var(--forest));
+  opacity: 0;
+  transition: opacity 0.3s;
 }
-.nav-search-item-icon {
-  width: 36px;
-  height: 36px;
+.search-result-item:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(201, 169, 89, 0.25);
+  border-color: var(--gold);
+}
+.search-result-item:hover::before { opacity: 1; }
+.search-result-icon {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--forest), var(--forest-mid));
   color: var(--gold-bright);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 1.05rem;
   flex-shrink: 0;
+  border: 1px solid rgba(201, 169, 89, 0.4);
+  transition: all 0.4s var(--ease);
 }
-.nav-search-item-text {
+.search-result-item:hover .search-result-icon {
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color: var(--forest-deep);
+  transform: rotate(-6deg) scale(1.08);
+  box-shadow: 0 8px 20px rgba(201, 169, 89, 0.4);
+}
+.search-result-text {
   flex: 1;
   min-width: 0;
 }
-.nav-search-item-title {
+.search-result-title {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--forest);
   line-height: 1.2;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
-.nav-search-item-desc {
-  font-size: 0.75rem;
-  color: var(--ink-muted);
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.search-result-desc {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
 }
-.nav-search-item-badge {
+.search-result-badge {
   font-family: var(--font-mono);
   font-size: 0.55rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold-deep);
   background: rgba(201, 169, 89, 0.12);
-  padding: 3px 10px;
+  padding: 5px 12px;
   border-radius: 30px;
+  border: 1px solid rgba(201, 169, 89, 0.25);
   flex-shrink: 0;
-  border: 1px solid rgba(201, 169, 89, 0.2);
+  font-weight: 700;
 }
-.nav-search-empty {
-  padding: 40px 20px;
-  text-align: center;
-  color: var(--ink-muted);
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-style: italic;
-}
-.nav-search-empty i {
-  display: block;
-  font-size: 1.8rem;
+.search-result-arrow {
   color: var(--gold);
-  margin-bottom: 10px;
-  opacity: 0.5;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  transition: all 0.3s var(--ease);
+  opacity: 0.6;
 }
-.nav-search-footer {
-  padding: 10px 22px;
-  border-top: 1px solid rgba(201, 169, 89, 0.15);
+.search-result-item:hover .search-result-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+  color: var(--gold-deep);
+}
+
+.search-no-results {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--ink-soft);
+}
+.search-no-results i {
+  font-size: 3rem;
+  color: var(--gold);
+  margin-bottom: 18px;
+  display: block;
+  opacity: 0.6;
+}
+.search-no-results h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--forest);
+  margin-bottom: 8px;
+}
+.search-no-results p {
+  font-size: 0.88rem;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Search suggestions when empty */
+.search-suggestions {
+  text-align: center;
+}
+.search-suggestions-label {
   font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--ink-muted);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--cream-2);
+  margin-bottom: 18px;
 }
-.nav-search-footer kbd {
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
+.search-suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.search-chip {
+  padding: 9px 20px;
   background: var(--ivory);
-  border: 1px solid rgba(201, 169, 89, 0.3);
-  border-radius: 4px;
-  padding: 2px 6px;
-  color: var(--ink-soft);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  border: 1.5px solid rgba(201, 169, 89, 0.3);
+  border-radius: 60px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--forest);
+  cursor: pointer;
+  transition: all 0.35s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.search-chip i { color: var(--gold); font-size: 0.65rem; }
+.search-chip:hover {
+  background: var(--forest);
+  color: var(--gold-bright);
+  border-color: var(--forest);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 43, 27, 0.25);
+}
+.search-chip:hover i { color: var(--gold-bright); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .search-hero { padding: 120px 20px 50px; }
+  .search-body { padding: 40px 20px; }
+  .search-bar-wrap { padding: 5px 5px 5px 18px; }
+  .search-bar-btn { padding: 10px 18px; font-size: 0.58rem; }
+  .search-result-item { padding: 18px 18px; gap: 14px; }
+  .search-result-icon { width: 44px; height: 44px; font-size: 0.9rem; }
+  .search-result-title { font-size: 1.1rem; }
+  .search-result-badge { display: none; }
+}
+@media (max-width: 560px) {
+  .search-hero h1 { font-size: 1.7rem; }
+  .search-hero p { font-size: 0.85rem; }
+  .search-bar-wrap { flex-wrap: wrap; border-radius: 18px; padding: 14px; gap: 10px; }
+  .search-bar-wrap i.fa-magnifying-glass { margin-right: 0; }
+  .search-bar-input { width: 100%; flex-basis: 100%; padding: 6px 0; order: 2; }
+  .search-bar-btn { order: 3; width: 100%; justify-content: center; }
+  .search-bar-wrap > i { order: 1; }
+  .search-result-item { flex-wrap: wrap; }
+  .search-result-arrow { display: none; }
+  .search-tab { padding: 8px 16px; font-size: 0.58rem; }
 }
 
 .header-tools { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
@@ -2836,6 +3029,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     border-left: 2px solid var(--gold);
     align-items: stretch;
     box-shadow: -20px 0 40px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
   }
   .nav-main.open { right: 0; }
   .nav-main a {
@@ -2843,6 +3037,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     font-size: 0.9rem;
     padding: 16px 20px;
     text-align: left; border-radius: 10px;
+  }
+  .nav-search-link {
+    background: rgba(201, 169, 89, 0.12) !important;
+    border: 1.5px solid rgba(201, 169, 89, 0.5) !important;
+    color: var(--gold-bright) !important;
   }
   .header-tools { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
   .header-tools .lang-btn { padding: 6px 10px; font-size: 0.5rem; letter-spacing: 0.1em; }
@@ -2946,28 +3145,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     width: 44px; height: 44px;
     font-size: 0.95rem;
   }
-
-  /* Mobile search adjustments */
-  .nav-search-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.7rem;
-  }
-  .nav-search-panel {
-    width: 96%;
-  }
-  .nav-search-header {
-    padding: 14px 16px;
-  }
-  .nav-search-item {
-    padding: 10px 12px;
-  }
-  .nav-search-item-title {
-    font-size: 0.9rem;
-  }
-  .nav-search-item-desc {
-    font-size: 0.7rem;
-  }
 }
 
 @media (max-width: 560px) {
@@ -3012,16 +3189,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .back-top {
     width: 40px; height: 40px;
     bottom: 20px; right: 12px;
-  }
-
-  .nav-search-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 0.65rem;
-  }
-  .nav-search-footer {
-    font-size: 0.5rem;
-    padding: 8px 16px;
   }
 }
 </style>
@@ -3088,12 +3255,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       <a data-page="staff" data-en="Our Staff" data-zh="团队" onclick="go('staff')">Staff</a>
       <a data-page="contact" data-en="Contact" data-zh="联系" onclick="go('contact')">Contact</a>
 
-      <!-- NEW SEARCH BUTTON -->
-      <div class="nav-search-wrap">
-        <button class="nav-search-btn" id="navSearchBtn" aria-label="Search">
-          <i class="fas fa-magnifying-glass"></i>
-        </button>
-      </div>
+      <!-- SEARCH BUTTON (unique style) -->
+      <a data-page="search" data-en="Search" data-zh="搜索" onclick="go('search')" class="nav-search-link">
+        <i class="fas fa-magnifying-glass"></i>
+        <span data-en="Search" data-zh="搜索">Search</span>
+      </a>
     </nav>
 
     <div class="header-tools">
@@ -3109,27 +3275,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </div>
 </header>
 
-<!-- SEARCH OVERLAY -->
-<div class="nav-search-overlay" id="navSearchOverlay"></div>
-<div class="nav-search-panel" id="navSearchPanel">
-  <div class="nav-search-header">
-    <i class="fas fa-magnifying-glass"></i>
-    <input type="text" class="nav-search-input" id="navSearchInput" placeholder="Search pages, machines, services..." autocomplete="off">
-    <button class="nav-search-close" id="navSearchClose" aria-label="Close search">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-  <div class="nav-search-results" id="navSearchResults">
-    <!-- results injected by JS -->
-  </div>
-  <div class="nav-search-footer">
-    <span><kbd>ESC</kbd> to close</span>
-    <span>Navigate with <i class="fas fa-arrow-up"></i> <i class="fas fa-arrow-down"></i></span>
-  </div>
-</div>
-
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
+
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid-lines"></div>
@@ -3477,9 +3625,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </div>
   <section class="section">
     <div class="section-inner">
-      <div class="needed-grid reveal" id="neededGrid">
-        <!-- Needed cards rendered by JS -->
-      </div>
+      <div class="needed-grid reveal" id="neededGrid"></div>
       <div class="needed-cta reveal">
         <h3 data-en="Can't Find What You're Looking For? <em>We Can Help.</em>" data-zh="找不到您想要的？<em>我们可以帮忙。</em>">Can't Find What You're Looking For? <em>We Can Help.</em></h3>
         <p data-en="Our global network of manufacturers and suppliers means we can source almost any machine. Just tell us what you need." data-zh="我们的全球制造商和供应商网络意味着我们几乎可以采购任何设备。只需告诉我们您的需求。">Our global network of manufacturers and suppliers means we can source almost any machine. Just tell us what you need.</p>
@@ -3611,6 +3757,67 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </section>
 </div>
 
+<!-- SEARCH PAGE (NEW) -->
+<div class="page" id="page-search">
+  <div class="search-hero">
+    <div class="search-hero-inner">
+      <div class="crumbs"><span>Home</span> / Search</div>
+      <h1 data-en="Search Our <em>World</em>" data-zh="搜索我们的<em>世界</em>">Search Our <em>World</em></h1>
+      <p data-en="Find machines, pages, and services across PEKIN-PAK-INTERNATIONAL LLC. Start typing to explore." data-zh="在 PEKIN-PAK-INTERNATIONAL LLC 中查找设备、页面和服务。开始输入以探索。">Find machines, pages, and services across PEKIN-PAK-INTERNATIONAL LLC. Start typing to explore.</p>
+      <div class="search-bar-wrap">
+        <i class="fas fa-magnifying-glass"></i>
+        <input type="text" class="search-bar-input" id="pageSearchInput" placeholder="Search machines, pages, services..." autocomplete="off" autofocus>
+        <button class="search-bar-btn" onclick="runPageSearch()">
+          <span data-en="Search" data-zh="搜索">Search</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-body">
+    <div class="search-body-inner">
+      <div class="search-tabs" id="searchTabs">
+        <button class="search-tab active" data-stype="all">
+          <i class="fas fa-layer-group"></i>
+          <span data-en="All" data-zh="全部">All</span>
+          <span class="search-tab-count" id="countAll">0</span>
+        </button>
+        <button class="search-tab" data-stype="page">
+          <i class="fas fa-file-lines"></i>
+          <span data-en="Pages" data-zh="页面">Pages</span>
+          <span class="search-tab-count" id="countPage">0</span>
+        </button>
+        <button class="search-tab" data-stype="machine">
+          <i class="fas fa-tractor"></i>
+          <span data-en="Machines" data-zh="设备">Machines</span>
+          <span class="search-tab-count" id="countMachine">0</span>
+        </button>
+        <button class="search-tab" data-stype="needed">
+          <i class="fas fa-clipboard-list"></i>
+          <span data-en="Needed" data-zh="需求">Needed</span>
+          <span class="search-tab-count" id="countNeeded">0</span>
+        </button>
+      </div>
+
+      <div class="search-meta" id="searchMeta"></div>
+      <div class="search-results-list" id="pageSearchResults"></div>
+
+      <div class="search-suggestions" id="searchSuggestions">
+        <div class="search-suggestions-label" data-en="Popular Searches" data-zh="热门搜索">Popular Searches</div>
+        <div class="search-suggestion-chips">
+          <button class="search-chip" onclick="quickSearch('excavator')"><i class="fas fa-tractor"></i> <span data-en="Excavators" data-zh="挖掘机">Excavators</span></button>
+          <button class="search-chip" onclick="quickSearch('loader')"><i class="fas fa-truck"></i> <span data-en="Loaders" data-zh="装载机">Loaders</span></button>
+          <button class="search-chip" onclick="quickSearch('dozer')"><i class="fas fa-road"></i> <span data-en="Dozers" data-zh="推土机">Dozers</span></button>
+          <button class="search-chip" onclick="quickSearch('crane')"><i class="fas fa-arrow-up"></i> <span data-en="Cranes" data-zh="起重机">Cranes</span></button>
+          <button class="search-chip" onclick="quickSearch('contact')"><i class="fas fa-envelope"></i> <span data-en="Contact" data-zh="联系">Contact</span></button>
+          <button class="search-chip" onclick="quickSearch('about')"><i class="fas fa-info-circle"></i> <span data-en="About" data-zh="关于">About</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
@@ -3631,6 +3838,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
         <h4 data-en="Pages" data-zh="页面">Pages</h4>
         <a onclick="go('staff')" data-en="Our Staff" data-zh="团队">Our Staff</a>
         <a onclick="go('contact')" data-en="Contact" data-zh="联系">Contact</a>
+        <a onclick="go('search')" data-en="Search" data-zh="搜索">Search</a>
       </div>
       <div class="footer-col">
         <h4 data-en="Contact" data-zh="联系">Contact</h4>
@@ -3743,7 +3951,6 @@ function renderMachines(filter = 'all') {
 function showMachine(id) {
   const m = machines.find(x => x.id === id);
   if (!m) return;
-  // Simple detail alert / toast for now
   showToast(`${m.name} — ${m.price} (${m.status})`);
 }
 
@@ -3846,100 +4053,180 @@ window.addEventListener('scroll', animateCounters);
 const savedLang = localStorage.getItem('pekLang');
 if (savedLang) { langOverlay.classList.add('hidden'); applyLang(savedLang); }
 
-// ========== NEW SEARCH FUNCTIONALITY ==========
-const searchBtn = document.getElementById('navSearchBtn');
-const searchOverlay = document.getElementById('navSearchOverlay');
-const searchPanel = document.getElementById('navSearchPanel');
-const searchInput = document.getElementById('navSearchInput');
-const searchResults = document.getElementById('navSearchResults');
-const searchClose = document.getElementById('navSearchClose');
+/* ============================================================ */
+/* ========== SEARCH PAGE FUNCTIONALITY (NEW) ================= */
+/* ============================================================ */
 
-// Searchable data
-const searchData = [
-  { type: 'page', title: 'Home', desc: 'Main page with overview', page: 'home', icon: 'fa-home' },
-  { type: 'page', title: 'About Us', desc: 'Our story, timeline, values', page: 'about', icon: 'fa-info-circle' },
-  { type: 'page', title: 'Machines', desc: 'Browse all available machinery', page: 'machines', icon: 'fa-tractor' },
-  { type: 'page', title: 'Needed Machines', desc: 'Machines we are looking for', page: 'needed', icon: 'fa-clipboard-list' },
-  { type: 'page', title: 'Our Staff', desc: 'Meet the team', page: 'staff', icon: 'fa-users' },
-  { type: 'page', title: 'Contact', desc: 'Get in touch with us', page: 'contact', icon: 'fa-envelope' },
+// Build the search index from existing data
+const searchIndex = [
+  // Pages
+  { type: 'page', title: 'Home', desc: 'Main landing page with hero, story timeline and machine range', page: 'home', icon: 'fa-home', keywords: 'home start main landing' },
+  { type: 'page', title: 'About Us', desc: 'Our story, timeline, values and global offices', page: 'about', icon: 'fa-info-circle', keywords: 'about story values history company' },
+  { type: 'page', title: 'Machines', desc: 'Browse all available construction & mining machinery', page: 'machines', icon: 'fa-tractor', keywords: 'machines equipment catalogue excavator loader dozer crane' },
+  { type: 'page', title: 'Needed Machines', desc: 'Machines we are actively looking to source', page: 'needed', icon: 'fa-clipboard-list', keywords: 'needed wanted looking for request' },
+  { type: 'page', title: 'Our Staff', desc: 'Meet the team behind PEKIN-PAK-INTERNATIONAL LLC', page: 'staff', icon: 'fa-users', keywords: 'staff team people employees contact' },
+  { type: 'page', title: 'Contact', desc: 'Get in touch with our global offices', page: 'contact', icon: 'fa-envelope', keywords: 'contact email phone whatsapp doha beijing dubai' },
+  { type: 'page', title: 'Search', desc: 'Search across machines, pages and services', page: 'search', icon: 'fa-magnifying-glass', keywords: 'search find look up' },
+  // Machines
   ...machines.map(m => ({
     type: 'machine',
     title: m.name,
-    desc: `${m.cat} · ${m.price} · ${m.status}`,
+    desc: `${m.cat.toUpperCase()} · ${m.price} · ${m.status}`,
     page: 'machines',
     icon: 'fa-truck',
-    id: m.id
+    id: m.id,
+    keywords: `${m.name} ${m.cat} ${m.desc} ${m.status}`
   })),
+  // Needed
   ...needed.map(n => ({
     type: 'needed',
     title: n.title,
     desc: n.desc,
     page: 'needed',
-    icon: 'fa-search-plus'
+    icon: 'fa-search-plus',
+    keywords: `${n.title} ${n.cat} ${n.desc} ${n.specs.join(' ')}`
   }))
 ];
 
-function openSearch() {
-  searchOverlay.classList.add('open');
-  searchPanel.classList.add('open');
-  setTimeout(() => searchInput.focus(), 150);
-  renderSearchResults('');
-}
+let activeSearchType = 'all';
+let activeSearchQuery = '';
 
-function closeSearch() {
-  searchOverlay.classList.remove('open');
-  searchPanel.classList.remove('open');
-  searchInput.value = '';
-  searchResults.innerHTML = '';
-}
-
-function renderSearchResults(query) {
-  const q = query.toLowerCase().trim();
-  let results = searchData;
+function getFilteredResults(query, type) {
+  const q = (query || '').toLowerCase().trim();
+  let results = searchIndex;
+  if (type && type !== 'all') {
+    results = results.filter(r => r.type === type);
+  }
   if (q) {
-    results = searchData.filter(item =>
-      item.title.toLowerCase().includes(q) ||
-      item.desc.toLowerCase().includes(q) ||
-      item.type.toLowerCase().includes(q)
+    results = results.filter(r =>
+      r.title.toLowerCase().includes(q) ||
+      (r.desc || '').toLowerCase().includes(q) ||
+      (r.keywords || '').toLowerCase().includes(q) ||
+      r.type.toLowerCase().includes(q)
     );
   }
-  if (results.length === 0) {
-    searchResults.innerHTML = `<div class="nav-search-empty"><i class="fas fa-search-minus"></i>No results found for "${query}"</div>`;
-    return;
-  }
-  const typeBadge = { page: 'Page', machine: 'Machine', needed: 'Needed' };
-  searchResults.innerHTML = results.map(item => `
-    <div class="nav-search-item" onclick="closeSearch(); go('${item.page}'); ${item.type === 'machine' && item.id ? 'setTimeout(() => showMachine(' + item.id + '), 300);' : ''}">
-      <div class="nav-search-item-icon"><i class="fas ${item.icon}"></i></div>
-      <div class="nav-search-item-text">
-        <div class="nav-search-item-title">${item.title}</div>
-        <div class="nav-search-item-desc">${item.desc}</div>
-      </div>
-      <span class="nav-search-item-badge">${typeBadge[item.type] || item.type}</span>
-    </div>
-  `).join('');
+  return results;
 }
 
-// Event listeners
-searchBtn.addEventListener('click', openSearch);
-searchOverlay.addEventListener('click', closeSearch);
-searchClose.addEventListener('click', closeSearch);
-searchInput.addEventListener('input', e => renderSearchResults(e.target.value));
+function updateCounts(query) {
+  const all = getFilteredResults(query, 'all');
+  const page = getFilteredResults(query, 'page');
+  const machine = getFilteredResults(query, 'machine');
+  const neededC = getFilteredResults(query, 'needed');
+  document.getElementById('countAll').textContent = all.length;
+  document.getElementById('countPage').textContent = page.length;
+  document.getElementById('countMachine').textContent = machine.length;
+  document.getElementById('countNeeded').textContent = neededC.length;
+}
 
-// Keyboard shortcuts
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeSearch();
-  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-    e.preventDefault();
-    openSearch();
+function renderPageSearchResults(query, type) {
+  activeSearchQuery = query;
+  activeSearchType = type || 'all';
+  updateCounts(query);
+
+  const results = getFilteredResults(query, activeSearchType);
+  const list = document.getElementById('pageSearchResults');
+  const meta = document.getElementById('searchMeta');
+  const suggestions = document.getElementById('searchSuggestions');
+
+  // Show/hide suggestions
+  if (!query.trim()) {
+    suggestions.style.display = 'block';
+  } else {
+    suggestions.style.display = 'none';
   }
+
+  // Meta
+  if (query.trim()) {
+    meta.innerHTML = `<span data-en="Showing" data-zh="显示">Showing</span> <strong>${results.length}</strong> <span data-en="result(s) for" data-zh="个结果，关键词">result(s) for</span> "<strong>${query}</strong>"`;
+  } else {
+    meta.innerHTML = `<span data-en="Showing" data-zh="显示">Showing</span> <strong>${results.length}</strong> <span data-en="item(s) total" data-zh="个项目（总计）">item(s) total</span>`;
+  }
+
+  if (results.length === 0) {
+    list.innerHTML = `
+      <div class="search-no-results">
+        <i class="fas fa-search-minus"></i>
+        <h3 data-en="No Results Found" data-zh="未找到结果">No Results Found</h3>
+        <p data-en="We couldn't find anything matching your search. Try different keywords or browse our machines." data-zh="我们找不到与您搜索匹配的内容。请尝试不同的关键词或浏览我们的设备。">We couldn't find anything matching your search. Try different keywords or browse our machines.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const typeLabel = { page: 'Page', machine: 'Machine', needed: 'Needed' };
+  const typeIcon = { page: 'fa-file-lines', machine: 'fa-tractor', needed: 'fa-clipboard-list' };
+
+  list.innerHTML = results.map(item => {
+    const badge = typeLabel[item.type] || item.type;
+    const onClickAction = item.type === 'machine' && item.id
+      ? `go('machines'); setTimeout(() => showMachine(${item.id}), 400);`
+      : `go('${item.page}');`;
+    return `
+      <div class="search-result-item" onclick="${onClickAction}">
+        <div class="search-result-icon"><i class="fas ${item.icon}"></i></div>
+        <div class="search-result-text">
+          <div class="search-result-title">${item.title}</div>
+          <div class="search-result-desc">${item.desc || ''}</div>
+        </div>
+        <span class="search-result-badge">${badge}</span>
+        <i class="fas fa-arrow-right search-result-arrow"></i>
+      </div>
+    `;
+  }).join('');
+}
+
+function runPageSearch() {
+  const input = document.getElementById('pageSearchInput');
+  renderPageSearchResults(input.value, activeSearchType);
+}
+
+function quickSearch(term) {
+  const input = document.getElementById('pageSearchInput');
+  input.value = term;
+  renderPageSearchResults(term, activeSearchType);
+  document.querySelector('.search-body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Bind search input
+document.getElementById('pageSearchInput').addEventListener('input', function() {
+  renderPageSearchResults(this.value, activeSearchType);
+});
+document.getElementById('pageSearchInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); runPageSearch(); }
 });
 
-// Close mobile menu when search opens
-searchBtn.addEventListener('click', () => {
-  document.getElementById('navMain').classList.remove('open');
-  document.getElementById('menuBtn').classList.remove('open');
+// Bind tabs
+document.querySelectorAll('.search-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    activeSearchType = this.dataset.stype;
+    renderPageSearchResults(document.getElementById('pageSearchInput').value, activeSearchType);
+  });
 });
+
+// Initial render of the search page (empty state)
+renderPageSearchResults('', 'all');
+
+// Re-render search results whenever the user navigates to the search page
+const originalGo = go;
+go = function(page) {
+  originalGo(page);
+  if (page === 'search') {
+    setTimeout(() => {
+      const input = document.getElementById('pageSearchInput');
+      if (input) {
+        renderPageSearchResults(input.value, activeSearchType);
+        // Focus input on larger screens only
+        if (window.innerWidth > 900) input.focus();
+      }
+    }, 200);
+  }
+};
+
+// Ensure search results render when navigating via language switch / footer etc.
+// (already handled above)
 </script>
 </body>
 </html>
