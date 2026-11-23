@@ -341,34 +341,46 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .nav-search-link {
   display: inline-flex !important;
   align-items: center;
-  gap: 7px;
-  background: linear-gradient(135deg, rgba(201, 169, 89, 0.18), rgba(201, 169, 89, 0.06)) !important;
-  border: 1.5px solid rgba(201, 169, 89, 0.5) !important;
-  color: var(--forest-deep) !important;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 19px !important;
+  background: linear-gradient(135deg, var(--forest-deep), var(--forest-mid)) !important;
+  border: 1.5px solid var(--gold-bright) !important;
+  color: var(--gold-bright) !important;
   font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(201, 169, 89, 0.15);
+  box-shadow: 0 5px 18px rgba(6, 26, 16, 0.25), 0 0 0 3px rgba(201, 169, 89, 0.12);
+  isolation: isolate;
+}
+.nav-search-link::before {
+  background: linear-gradient(135deg, rgba(224, 200, 120, 0.22), rgba(201, 169, 89, 0.04)) !important;
+  opacity: 1;
+  transform: scale(1);
 }
 .nav-search-link i {
-  font-size: 0.72rem;
-  color: var(--gold-deep);
+  font-size: 0.78rem;
+  color: var(--gold-bright);
   transition: all 0.4s var(--ease);
 }
 .nav-search-link::after {
-  background: linear-gradient(90deg, transparent, rgba(224, 200, 120, 0.5), transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent) !important;
 }
 .nav-search-link:hover {
-  background: var(--forest-deep) !important;
-  color: var(--gold-bright) !important;
-  border-color: var(--forest-deep) !important;
-  box-shadow:
-    0 6px 22px rgba(11, 43, 27, 0.4),
-    0 0 28px rgba(224, 200, 120, 0.45) !important;
+  background: linear-gradient(135deg, var(--forest-mid), var(--forest-deep)) !important;
+  color: #FFFFFF !important;
+  border-color: #FFF0B8 !important;
+  box-shadow: 0 8px 24px rgba(11, 43, 27, 0.38), 0 0 25px rgba(224, 200, 120, 0.5) !important;
+  transform: translateY(-3px) scale(1.035);
 }
 .nav-search-link:hover i {
-  color: var(--gold-bright);
-  transform: rotate(-12deg) scale(1.15);
+  color: #FFF0B8;
+  transform: rotate(-15deg) scale(1.18);
+}
+.nav-search-link:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 4px;
 }
 .nav-search-link.active {
   background: var(--forest-deep) !important;
@@ -3039,10 +3051,14 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     text-align: left; border-radius: 10px;
   }
   .nav-search-link {
-    background: rgba(201, 169, 89, 0.12) !important;
-    border: 1.5px solid rgba(201, 169, 89, 0.5) !important;
+    background: linear-gradient(135deg, rgba(201, 169, 89, 0.2), rgba(201, 169, 89, 0.08)) !important;
+    border: 1.5px solid var(--gold-bright) !important;
     color: var(--gold-bright) !important;
+    margin-top: 10px;
+    justify-content: flex-start;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2), 0 0 18px rgba(201, 169, 89, 0.12);
   }
+  .nav-search-link i { color: var(--gold-bright) !important; }
   .header-tools { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
   .header-tools .lang-btn { padding: 6px 10px; font-size: 0.5rem; letter-spacing: 0.1em; }
   .header-tools .cta-quote { padding: 8px 12px; font-size: 0.5rem; gap: 4px; }
@@ -3255,10 +3271,10 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       <a data-page="staff" data-en="Our Staff" data-zh="团队" onclick="go('staff')">Staff</a>
       <a data-page="contact" data-en="Contact" data-zh="联系" onclick="go('contact')">Contact</a>
 
-      <!-- SEARCH BUTTON (unique style) -->
-      <a data-page="search" data-en="Search" data-zh="搜索" onclick="go('search')" class="nav-search-link">
+      <!-- DISTINCT DOCUMENT SEARCH NAVIGATION -->
+      <a href="search.html" class="nav-search-link" aria-label="Search Document" title="Search Document">
         <i class="fas fa-magnifying-glass"></i>
-        <span data-en="Search" data-zh="搜索">Search</span>
+        <span>Search Document</span>
       </a>
     </nav>
 
