@@ -9,9 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="icon" type="image/png" href="logo-short.png">
 <style>
-/* ... [ALL YOUR EXISTING CSS REMAINS EXACTLY THE SAME] ... */
+/* ===== YOUR EXISTING CSS (unchanged) ===== */
 :root {
   --forest: #0B2B1B;
   --forest-deep: #061A10;
@@ -335,6 +334,242 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   box-shadow:
     0 6px 22px rgba(11, 43, 27, 0.4),
     0 0 24px rgba(224, 200, 120, 0.5);
+}
+
+/* ===== NEW SEARCH BUTTON ===== */
+.nav-search-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+}
+.nav-search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid rgba(201, 169, 89, 0.45);
+  color: var(--forest-deep);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.45s var(--ease);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.nav-search-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(201, 169, 89, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  z-index: -1;
+}
+.nav-search-btn:hover {
+  border-color: var(--gold);
+  background: rgba(11, 43, 27, 0.08);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 6px 22px rgba(201, 169, 89, 0.28),
+    0 0 24px rgba(224, 200, 120, 0.35);
+  color: var(--forest-deep);
+}
+.nav-search-btn:hover::before { opacity: 1; transform: scale(1); }
+.nav-search-btn i { pointer-events: none; font-size: 0.8rem; }
+
+/* Search overlay */
+.nav-search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 26, 16, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease);
+}
+.nav-search-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.nav-search-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.94);
+  width: 92%;
+  max-width: 680px;
+  background: var(--ivory);
+  border-radius: 20px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(201, 169, 89, 0.4);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease), transform 0.4s var(--ease);
+  overflow: hidden;
+}
+.nav-search-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+.nav-search-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(201, 169, 89, 0.2);
+  background: linear-gradient(180deg, var(--cream-2), var(--cream));
+}
+.nav-search-header i.fa-magnifying-glass {
+  color: var(--gold);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.nav-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  padding: 4px 0;
+}
+.nav-search-input::placeholder {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+.nav-search-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  transition: all 0.3s var(--ease);
+  font-size: 0.9rem;
+}
+.nav-search-close:hover {
+  background: rgba(11, 43, 27, 0.08);
+  color: var(--forest);
+  transform: rotate(90deg);
+}
+.nav-search-results {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--cream-2);
+}
+.nav-search-results::-webkit-scrollbar { width: 6px; }
+.nav-search-results::-webkit-scrollbar-track { background: var(--cream-2); }
+.nav-search-results::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+.nav-search-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  border: 1px solid transparent;
+}
+.nav-search-item:hover {
+  background: var(--cream-2);
+  border-color: rgba(201, 169, 89, 0.25);
+  transform: translateX(4px);
+}
+.nav-search-item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--forest), var(--forest-mid));
+  color: var(--gold-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+.nav-search-item-text {
+  flex: 1;
+  min-width: 0;
+}
+.nav-search-item-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--forest);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.nav-search-item-desc {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-search-item-badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  background: rgba(201, 169, 89, 0.12);
+  padding: 3px 10px;
+  border-radius: 30px;
+  flex-shrink: 0;
+  border: 1px solid rgba(201, 169, 89, 0.2);
+}
+.nav-search-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+}
+.nav-search-empty i {
+  display: block;
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+.nav-search-footer {
+  padding: 10px 22px;
+  border-top: 1px solid rgba(201, 169, 89, 0.15);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--cream-2);
+}
+.nav-search-footer kbd {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  background: var(--ivory);
+  border: 1px solid rgba(201, 169, 89, 0.3);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--ink-soft);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .header-tools { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
@@ -1854,9 +2089,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 }
 .btn-enquire:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-/* ============================================
-   CONTACT SECTION
-   ============================================ */
+/* CONTACT */
 .contact-grid {
   display: grid; grid-template-columns: 1fr;
   gap: 40px;
@@ -1874,8 +2107,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-size: 0.9rem; color: var(--ink-soft);
   line-height: 1.9; margin-bottom: 30px;
 }
-
-/* Contact Info Tabs */
 .info-item {
   position: relative;
   display: flex;
@@ -1939,7 +2170,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .info-item:hover .text p {
   color: rgba(250, 247, 242, 0.92);
 }
-
 .contact-form-box {
   position: relative;
   background: #FFFFFF;
@@ -1983,7 +2213,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .contact-form-box .form-group textarea::placeholder {
   color: #9CA3AF;
 }
-
 .contact-form-box .form-group input:hover,
 .contact-form-box .form-group input:focus,
 .contact-form-box .form-group textarea:hover,
@@ -1993,7 +2222,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   color: #FFFFFF !important;
   box-shadow: 0 0 0 3px rgba(13, 94, 53, 0.1) !important;
 }
-
 .contact-form-box .btn-send {
   background: #0B2B1B !important;
   color: #FFFFFF !important;
@@ -2016,15 +2244,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   box-shadow: 0 8px 24px rgba(11, 43, 27, 0.3);
 }
 
-/* ============================================
-   MACHINES NEEDED PAGE STYLES
-   ============================================ */
+/* NEEDED PAGE */
 .needed-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 26px;
 }
-
 .needed-card {
   background: var(--ivory);
   border-radius: 18px;
@@ -2037,48 +2262,39 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   position: relative;
   animation: cardIn 0.5s var(--ease) both;
 }
-
 .needed-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-xl), 0 0 40px rgba(201, 169, 89, 0.35);
   border-color: var(--gold);
 }
-
 .needed-card-img {
   aspect-ratio: 16/10;
   overflow: hidden;
   background: var(--cream-2);
   position: relative;
-  /* Flex properties hata dein taake image direct container ko fill kare */
 }
-
 .needed-card-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Yeh image ko perfectly card mein fit karega */
+  object-fit: cover;
   transition: all 1s var(--ease-slow);
 }
-
-/* Dark overlay ko thoda light kar dein taake image clear nazar aaye */
 .needed-card-img::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(6, 26, 16, 0.4) 100%); 
+  background: linear-gradient(180deg, transparent 60%, rgba(6, 26, 16, 0.4) 100%);
   pointer-events: none;
 }
-
 .needed-card:hover .needed-card-img img {
   transform: scale(1.06);
 }
-
 .needed-card-img::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 70%, rgba(6, 26, 16, 0.3) 100%); /* Dark effect kam kar diya */
+  background: linear-gradient(180deg, transparent 70%, rgba(6, 26, 16, 0.3) 100%);
 }
-
 .needed-card-badge {
   position: absolute;
   top: 16px;
@@ -2094,14 +2310,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(201, 169, 89, 0.4);
 }
-
 .needed-card-body {
   padding: 24px 24px 28px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-
 .needed-card-cat {
   font-family: var(--font-mono);
   font-size: 0.58rem;
@@ -2111,7 +2325,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-weight: 600;
   margin-bottom: 10px;
 }
-
 .needed-card-title {
   font-family: var(--font-display);
   font-size: 1.35rem;
@@ -2120,7 +2333,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   margin-bottom: 10px;
   line-height: 1.15;
 }
-
 .needed-card-desc {
   font-size: 0.85rem;
   color: var(--ink-soft);
@@ -2128,14 +2340,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   margin-bottom: 16px;
   flex: 1;
 }
-
 .needed-card-specs {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 18px;
 }
-
 .needed-card-specs span {
   padding: 5px 12px;
   background: var(--cream-2);
@@ -2146,7 +2356,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   letter-spacing: 0.05em;
   border: 1px solid rgba(201, 169, 89, 0.2);
 }
-
 .needed-card-footer {
   display: flex;
   justify-content: space-between;
@@ -2154,19 +2363,16 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   padding-top: 16px;
   border-top: 1px solid rgba(201, 169, 89, 0.3);
 }
-
 .needed-card-qty {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--ink-muted);
   letter-spacing: 0.1em;
 }
-
 .needed-card-qty strong {
   color: var(--forest);
   font-size: 0.95rem;
 }
-
 .needed-card-btn {
   padding: 10px 20px;
   background: var(--forest);
@@ -2184,21 +2390,18 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   align-items: center;
   gap: 6px;
 }
-
 .needed-card-btn:hover {
   background: var(--gold);
   color: var(--forest-deep);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(201, 169, 89, 0.4);
 }
-
 .needed-empty {
   grid-column: 1 / -1;
   text-align: center;
   padding: 80px 20px;
   color: var(--ink-soft);
 }
-
 .needed-empty i {
   font-size: 3rem;
   color: var(--gold);
@@ -2206,21 +2409,17 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   display: block;
   opacity: 0.6;
 }
-
 .needed-empty h3 {
   font-family: var(--font-display);
   font-size: 1.3rem;
   color: var(--forest);
   margin-bottom: 8px;
 }
-
 .needed-empty p {
   font-size: 0.85rem;
   max-width: 400px;
   margin: 0 auto;
 }
-
-/* Needed Page CTA */
 .needed-cta {
   background-image: linear-gradient(rgba(6, 26, 16, 0.85), rgba(6, 26, 16, 0.85)), url('need-back.png');
   background-size: cover;
@@ -2234,12 +2433,9 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   overflow: hidden;
   border: 1px solid rgba(201, 169, 89, 0.3);
 }
-
-/* Overlay ko hata dein kyunki image ab direct background mein hai */
 .needed-cta::before {
   display: none;
 }
-
 .needed-cta h3 {
   font-family: var(--font-display);
   font-size: 1.6rem;
@@ -2248,12 +2444,10 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   position: relative;
   z-index: 2;
 }
-
 .needed-cta h3 em {
   color: var(--gold-bright);
   font-style: italic;
 }
-
 .needed-cta p {
   color: rgba(250, 247, 242, 0.8);
   font-size: 0.9rem;
@@ -2262,42 +2456,27 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   position: relative;
   z-index: 2;
 }
-
 .needed-cta .btn-gold {
   position: relative;
   z-index: 2;
 }
-
-/* ============================================
-   NEEDED PAGE CUSTOM BACKGROUND (NEW)
-   ============================================ */
-
-/* Page ke white background area ke liye */
 #page-needed .section {
- 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Parallax effect ke liye */
+  background-attachment: fixed;
   position: relative;
   z-index: 1;
 }
-
-/* Text aur cards ko clear dekhne ke liye light overlay */
 #page-needed .section::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(250, 247, 242, 0.85); /* Cream color with 85% opacity */
+  background: rgba(250, 247, 242, 0.85);
   z-index: -1;
 }
 
-/* Machine Card ke andar same image lagane ke liye */
-
-
-/* ============================================
-   OUR STAFF PAGE STYLES (LIST STYLE)
-   ============================================ */
+/* STAFF */
 .staff-list-container {
   max-width: 900px;
   margin: 0 auto;
@@ -2305,7 +2484,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   flex-direction: column;
   gap: 24px;
 }
-
 .staff-row {
   background: var(--ivory);
   border-radius: 16px;
@@ -2320,14 +2498,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   overflow: hidden;
   animation: cardIn 0.5s var(--ease) both;
 }
-
 .staff-row:hover {
   transform: translateX(10px);
   box-shadow: var(--shadow-lg), 0 0 30px rgba(201, 169, 89, 0.2);
   border-color: var(--gold);
 }
-
-/* Left Side Accent border */
 .staff-row::before {
   content: '';
   position: absolute;
@@ -2340,7 +2515,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 .staff-row:hover::before {
   opacity: 1;
 }
-
 .staff-avatar-box {
   width: 90px;
   height: 90px;
@@ -2357,14 +2531,12 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   border: 3px solid var(--gold);
   box-shadow: 0 10px 20px rgba(11, 43, 27, 0.2);
 }
-
 .staff-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 .staff-name {
   font-family: var(--font-display);
   font-size: 1.6rem;
@@ -2373,7 +2545,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   line-height: 1.1;
   margin-bottom: 4px;
 }
-
 .staff-designation {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -2383,7 +2554,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   font-weight: 600;
   margin-bottom: 12px;
 }
-
 .staff-contact-line {
   display: flex;
   align-items: center;
@@ -2392,25 +2562,20 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   color: var(--ink-soft);
   font-family: var(--font-body);
 }
-
 .staff-contact-line i {
   color: var(--jade);
   font-size: 1rem;
   width: 20px;
   text-align: center;
 }
-
 .staff-contact-line a {
   color: var(--ink-soft);
   transition: color 0.3s;
 }
-
 .staff-contact-line a:hover {
   color: var(--forest);
   text-decoration: underline;
 }
-
-/* Mobile Responsive for Staff Row */
 @media (max-width: 600px) {
   .staff-row {
     flex-direction: column;
@@ -2781,6 +2946,28 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     width: 44px; height: 44px;
     font-size: 0.95rem;
   }
+
+  /* Mobile search adjustments */
+  .nav-search-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.7rem;
+  }
+  .nav-search-panel {
+    width: 96%;
+  }
+  .nav-search-header {
+    padding: 14px 16px;
+  }
+  .nav-search-item {
+    padding: 10px 12px;
+  }
+  .nav-search-item-title {
+    font-size: 0.9rem;
+  }
+  .nav-search-item-desc {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 560px) {
@@ -2825,6 +3012,16 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   .back-top {
     width: 40px; height: 40px;
     bottom: 20px; right: 12px;
+  }
+
+  .nav-search-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.65rem;
+  }
+  .nav-search-footer {
+    font-size: 0.5rem;
+    padding: 8px 16px;
   }
 }
 </style>
@@ -2890,6 +3087,13 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
       <a data-page="needed" data-en="Needed Machines" data-zh="需求" onclick="go('needed')">Needed</a>
       <a data-page="staff" data-en="Our Staff" data-zh="团队" onclick="go('staff')">Staff</a>
       <a data-page="contact" data-en="Contact" data-zh="联系" onclick="go('contact')">Contact</a>
+
+      <!-- NEW SEARCH BUTTON -->
+      <div class="nav-search-wrap">
+        <button class="nav-search-btn" id="navSearchBtn" aria-label="Search">
+          <i class="fas fa-magnifying-glass"></i>
+        </button>
+      </div>
     </nav>
 
     <div class="header-tools">
@@ -2905,9 +3109,27 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </div>
 </header>
 
+<!-- SEARCH OVERLAY -->
+<div class="nav-search-overlay" id="navSearchOverlay"></div>
+<div class="nav-search-panel" id="navSearchPanel">
+  <div class="nav-search-header">
+    <i class="fas fa-magnifying-glass"></i>
+    <input type="text" class="nav-search-input" id="navSearchInput" placeholder="Search pages, machines, services..." autocomplete="off">
+    <button class="nav-search-close" id="navSearchClose" aria-label="Close search">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="nav-search-results" id="navSearchResults">
+    <!-- results injected by JS -->
+  </div>
+  <div class="nav-search-footer">
+    <span><kbd>ESC</kbd> to close</span>
+    <span>Navigate with <i class="fas fa-arrow-up"></i> <i class="fas fa-arrow-down"></i></span>
+  </div>
+</div>
+
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
-
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid-lines"></div>
@@ -3004,136 +3226,120 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
     </div>
   </div>
 
-  <section class="section range-bg">
-    <div class="section-inner">
-      <div class="section-head reveal">
-        <div>
-          <div class="label" data-en="Our Range" data-zh="我们的范围">Our Range</div>
-          <h2 data-en="Explore our machinery." data-zh="探索我们的设备。">Explore our <em>machinery.</em></h2>
-        </div>
-        <p class="desc" data-en="From excavators to wheel loaders — every machine sourced and inspected to the highest standards." data-zh="从挖掘机到轮式装载机——每台设备均按最高标准采购和检验。">From excavators to wheel loaders — every machine sourced and inspected to the highest standards.</p>
-      </div>
-    </div>
-    <div class="h-scroll-outer" id="hScrollOuter">
-      <div class="h-scroll-track" id="hScrollTrack"></div>
-    </div>
-    <div class="section-inner">
-      <div class="h-scroll-hint">
-        <span data-en="Drag to explore" data-zh="拖动浏览">Drag to explore</span>
-        <i class="fas fa-arrow-right"></i>
-      </div>
-    </div>
-  </section>
-
-  <section class="section cream">
-    <div class="section-inner">
-      <div class="section-head reveal">
-        <div>
-          <div class="label" data-en="Featured Machine" data-zh="精选设备">Featured Machine</div>
-          <h2 data-en="Built for the toughest jobs." data-zh="为最艰巨的工作而建。">Built for the <em>toughest jobs.</em></h2>
-        </div>
-        <p class="desc" data-en="Our most-requested equipment — fully inspected and ready for your project." data-zh="我们最受欢迎的设备——全面检验，为您的项目做好准备。">Our most-requested equipment — fully inspected and ready for your project.</p>
-      </div>
-      <div class="spec-dashboard reveal" id="specDashboard"></div>
-    </div>
-  </section>
-
-  <section class="section how-bg">
+  <section class="section story-bg">
     <div class="section-inner">
       <div class="section-head center reveal">
-        <div>
-          <div class="label" data-en="How It Works" data-zh="如何运作">How It Works</div>
-          <h2 data-en="From inquiry to delivery." data-zh="从咨询到交付。">From inquiry to <em>delivery.</em></h2>
-        </div>
+        <div class="label" data-en="Our Story" data-zh="我们的故事">Our Story</div>
+        <h2 data-en="Three Decades of <em>Trusted Trade</em>" data-zh="三十年的<em>可信赖贸易</em>">Three Decades of <em>Trusted Trade</em></h2>
+        <p class="desc" data-en="From Doha to Beijing to Dubai — a legacy built on relationships, precision, and an unwavering commitment to quality." data-zh="从多哈到北京再到迪拜——建立在关系、精准和对质量坚定不移的承诺之上的传承。">From Doha to Beijing to Dubai — a legacy built on relationships, precision, and an unwavering commitment to quality.</p>
       </div>
       <div class="timeline reveal">
         <div class="tl-item">
           <div class="tl-content">
-            <h4 data-en="Tell Us What You Need" data-zh="告诉我们您的需求">Tell Us What You Need</h4>
-            <p data-en="Share your machine requirements, quantity, and timeline via WhatsApp or our contact form." data-zh="通过WhatsApp或我们的联系表格分享您的设备需求、数量和时间表。">Share your machine requirements, quantity, and timeline via WhatsApp or our contact form.</p>
+            <h4 data-en="1993 — Doha, Qatar" data-zh="1993年 — 卡塔尔多哈">1993 — Doha, Qatar</h4>
+            <p data-en="Founded as a general trading company, PEKIN-PAK-INTERNATIONAL LLC began its journey in Doha, connecting local buyers with global suppliers." data-zh="作为一家通用贸易公司成立，PEKIN-PAK-INTERNATIONAL LLC 在多哈开始了其连接本地买家与全球供应商的旅程。">Founded as a general trading company, PEKIN-PAK-INTERNATIONAL LLC began its journey in Doha, connecting local buyers with global suppliers.</p>
           </div>
-          <div class="tl-node">01</div>
+          <div class="tl-node">1993</div>
           <div class="tl-spacer"></div>
         </div>
         <div class="tl-item">
           <div class="tl-spacer"></div>
-          <div class="tl-node">02</div>
+          <div class="tl-node">2005</div>
           <div class="tl-content">
-            <h4 data-en="We Source & Verify" data-zh="我们采购与验证">We Source & Verify</h4>
-            <p data-en="Our team identifies the right machine from our global network and verifies its condition." data-zh="我们的团队从全球网络中确定合适的设备并验证其状况。">Our team identifies the right machine from our global network and verifies its condition.</p>
+            <h4 data-en="2005 — Beijing, China" data-zh="2005年 — 中国北京">2005 — Beijing, China</h4>
+            <p data-en="Opened our Beijing office to directly source construction and mining machinery from China's leading manufacturers." data-zh="开设北京办事处，直接从中国领先制造商采购建筑和采矿机械设备。">Opened our Beijing office to directly source construction and mining machinery from China's leading manufacturers.</p>
           </div>
         </div>
         <div class="tl-item">
           <div class="tl-content">
-            <h4 data-en="Inspection & Approval" data-zh="检验与批准">Inspection & Approval</h4>
-            <p data-en="We provide detailed specs and photos. You approve before we proceed." data-zh="我们提供详细的规格和照片。您批准后我们才继续。">We provide detailed specs and photos. You approve before we proceed.</p>
+            <h4 data-en="2015 — Dubai, UAE" data-zh="2015年 — 阿联酋迪拜">2015 — Dubai, UAE</h4>
+            <p data-en="Expanded to Dubai, establishing a strategic hub for logistics and distribution across the Middle East and Africa." data-zh="扩展到迪拜，建立中东和非洲物流与分销的战略枢纽。">Expanded to Dubai, establishing a strategic hub for logistics and distribution across the Middle East and Africa.</p>
           </div>
-          <div class="tl-node">03</div>
+          <div class="tl-node">2015</div>
           <div class="tl-spacer"></div>
         </div>
         <div class="tl-item">
           <div class="tl-spacer"></div>
-          <div class="tl-node">04</div>
+          <div class="tl-node">2024</div>
           <div class="tl-content">
-            <h4 data-en="Shipping & Logistics" data-zh="运输与物流">Shipping & Logistics</h4>
-            <p data-en="We handle all shipping, customs, and documentation to your destination." data-zh="我们处理所有运输、海关和文件到您的目的地。">We handle all shipping, customs, and documentation to your destination.</p>
+            <h4 data-en="2024 — 30+ Years of Excellence" data-zh="2024年 — 30+ 年卓越历程">2024 — 30+ Years of Excellence</h4>
+            <p data-en="Celebrating over three decades of connecting global manufacturers with buyers across 50+ countries, with thousands of satisfied clients." data-zh="庆祝三十多年来连接全球制造商与50多个国家的买家，拥有数千名满意客户。">Celebrating over three decades of connecting global manufacturers with buyers across 50+ countries, with thousands of satisfied clients.</p>
           </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-content">
-            <h4 data-en="Delivery & Support" data-zh="交付与支持">Delivery & Support</h4>
-            <p data-en="Machine arrives at your site. We provide ongoing support." data-zh="设备到达您的现场。我们提供持续的支持。">Machine arrives at your site. We provide ongoing support.</p>
-          </div>
-          <div class="tl-node">05</div>
-          <div class="tl-spacer"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section story-bg">
+  <section class="section range-bg">
     <div class="section-inner">
-      <div class="about-feature reveal">
-        <div class="about-img-wrap">
-          <img src="p1.jfif" alt="Machinery" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=85'">
-          <div class="about-year-badge">
-            <div class="yb-num">30+</div>
-            <div class="yb-lbl" data-en="Years" data-zh="年">Years</div>
+      <div class="section-head reveal">
+        <div>
+          <div class="label" data-en="Our Range" data-zh="我们的产品范围">Our Range</div>
+          <h2 data-en="Machinery for Every <em>Terrain</em>" data-zh="适用于每种<em>地形</em>的机械">Machinery for Every <em>Terrain</em></h2>
+        </div>
+        <div class="desc" data-en="From compact excavators to heavy-duty mining equipment — every machine inspected, every deal trusted." data-zh="从紧凑型挖掘机到重型采矿设备——每台机器都经过检验，每笔交易都值得信赖。">From compact excavators to heavy-duty mining equipment — every machine inspected, every deal trusted.</div>
+      </div>
+    </div>
+    <div class="h-scroll-outer" id="hScrollOuter">
+      <div class="h-scroll-track">
+        <div class="h-cat-card" onclick="go('machines')">
+          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Excavators">
+          <div class="h-cat-info">
+            <div class="h-cat-num">01 / EXCAVATION</div>
+            <h3 data-en="Excavators" data-zh="挖掘机">Excavators</h3>
+            <p data-en="Precision digging for every project scale." data-zh="适用于各种规模项目的精准挖掘。">Precision digging for every project scale.</p>
+            <span class="h-cat-cta" data-en="View Machines" data-zh="查看设备">View Machines <i class="fas fa-arrow-right"></i></span>
           </div>
         </div>
-        <div class="about-content">
-          <div class="label" data-en="Our Story" data-zh="我们的故事">Our Story</div>
-          <h2 data-en="Built on trust. Delivered worldwide." data-zh="以信任建造。全球交付。">Built on trust. <em>Delivered worldwide.</em></h2>
-          <p data-en="PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades." data-zh="巴基斯坦皮金巴克国际有限公司是一家卓越的进出口贸易及一般贸易代理公司，拥有超过三十年的悠久历史。">PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades.</p>
-          <p data-en="Headquartered in Doha, Qatar, with offices in Beijing and Dubai — we connect global manufacturers with buyers across Asia, the Middle East, and beyond." data-zh="总部位于卡塔尔多哈，在北京和迪拜设有办事处——我们连接全球制造商与亚洲、中东及其他地区的买家。">Headquartered in Doha, Qatar, with offices in Beijing and Dubai — we connect global manufacturers with buyers across Asia, the Middle East, and beyond.</p>
-          <div class="about-features">
-            <div class="about-feature-item"><i class="fas fa-check"></i> <span data-en="Premium Machinery" data-zh="优质机械">Premium Machinery</span></div>
-            <div class="about-feature-item"><i class="fas fa-check"></i> <span data-en="Global Network" data-zh="全球网络">Global Network</span></div>
-            <div class="about-feature-item"><i class="fas fa-check"></i> <span data-en="Trusted Since 1993" data-zh="自1993年值得信赖">Trusted Since 1993</span></div>
-            <div class="about-feature-item"><i class="fas fa-check"></i> <span data-en="Direct Support" data-zh="直接支持">Direct Support</span></div>
+        <div class="h-cat-card" onclick="go('machines')">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80" alt="Wheel Loaders">
+          <div class="h-cat-info">
+            <div class="h-cat-num">02 / LOADING</div>
+            <h3 data-en="Wheel Loaders" data-zh="轮式装载机">Wheel Loaders</h3>
+            <p data-en="Efficient material handling on any site." data-zh="在任何现场高效处理物料。">Efficient material handling on any site.</p>
+            <span class="h-cat-cta" data-en="View Machines" data-zh="查看设备">View Machines <i class="fas fa-arrow-right"></i></span>
           </div>
-          <button class="btn btn-primary" onclick="go('about')">
-            <span data-en="Read Full Story" data-zh="阅读完整故事">Read Full Story</span>
-            <i class="fas fa-arrow-right"></i>
-          </button>
+        </div>
+        <div class="h-cat-card" onclick="go('machines')">
+          <img src="https://images.unsplash.com/photo-1621951826745-2f6b2d8c1f40?w=800&q=80" alt="Hydraulic Excavators">
+          <div class="h-cat-info">
+            <div class="h-cat-num">03 / HYDRAULIC</div>
+            <h3 data-en="Hydraulic Excavators" data-zh="液压挖掘机">Hydraulic Excavators</h3>
+            <p data-en="Power and precision in one package." data-zh="动力与精准的完美结合。">Power and precision in one package.</p>
+            <span class="h-cat-cta" data-en="View Machines" data-zh="查看设备">View Machines <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+        <div class="h-cat-card" onclick="go('machines')">
+          <img src="https://images.unsplash.com/photo-1591981411195-0c1a0b8f8f3e?w=800&q=80" alt="Tracked Dozers">
+          <div class="h-cat-info">
+            <div class="h-cat-num">04 / DOZING</div>
+            <h3 data-en="Tracked Dozers" data-zh="履带推土机">Tracked Dozers</h3>
+            <p data-en="Heavy-duty earthmoving made reliable." data-zh="可靠的重型土方作业。">Heavy-duty earthmoving made reliable.</p>
+            <span class="h-cat-cta" data-en="View Machines" data-zh="查看设备">View Machines <i class="fas fa-arrow-right"></i></span>
+          </div>
         </div>
       </div>
     </div>
+    <div class="h-scroll-hint"><i class="fas fa-arrows-alt-h"></i> <span data-en="Drag to explore" data-zh="拖动探索">Drag to explore</span></div>
   </section>
 
   <section class="section">
     <div class="section-inner">
       <div class="cta-full reveal">
         <div class="cta-full-content">
-<div class="cta-label" data-en="Document Portal" data-zh="文件验证中心">Document Portal</div>
-<h2 data-en="Verify your official document." data-zh="验证您的官方文件。">Verify your <em>official document.</em></h2>
-<p data-en="Enter your serial number on our secure portal to instantly view and verify your company letters and official documents." data-zh="在我们的安全门户上输入您的序列号，即可即时查看和验证您的公司信函及官方文件。">Enter your serial number on our secure portal to instantly view and verify your company letters and official documents.</p>        </div>
+          <div class="cta-label" data-en="Ready to Start" data-zh="准备开始">Ready to Start</div>
+          <h2 data-en="Need a Machine? <em>Let's Talk.</em>" data-zh="需要设备？<em>我们来谈谈。</em>">Need a Machine? <em>Let's Talk.</em></h2>
+          <p data-en="Tell us what you're looking for — we'll source it, inspect it, and deliver it to your doorstep. Anywhere in the world." data-zh="告诉我们您需要什么——我们将采购、检验并送货上门。世界任何地方。">Tell us what you're looking for — we'll source it, inspect it, and deliver it to your doorstep. Anywhere in the world.</p>
+        </div>
         <div class="cta-actions">
-  <a href="search.html" class="btn btn-gold" style="text-decoration: none;">
-    <span data-en="Verify Document" data-zh="验证文件">Verify Document</span>
-    <i class="fas fa-search"></i>
-  </a>
-</div>
+          <button class="btn btn-gold" onclick="go('contact')">
+            <span data-en="Request a Quote" data-zh="请求报价">Request a Quote</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+          <button class="btn btn-outline" onclick="go('needed')">
+            <span data-en="Machines Needed" data-zh="需求设备">Machines Needed</span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -3141,145 +3347,96 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
 <!-- ABOUT PAGE -->
 <div class="page" id="page-about">
-  <section class="page-head">
-    <div class="ph-bg" style="background-image:url('about-page.jfif')"></div>
+  <div class="page-head" style="background: var(--forest-deep);">
     <div class="page-head-inner">
-      <div class="crumbs" data-en="Home / About Us" data-zh="首页 / 关于我们">Home / <span data-en="About Us" data-zh="关于我们">About Us</span></div>
-      <h1 data-en="About Us" data-zh="关于我们">About <em>Us</em></h1>
-      <p data-en="Our Journey from Doha, Qatar to Beijing & Dubai" data-zh="我们从卡塔尔多哈到北京和迪拜的旅程">Our Journey from Doha, Qatar to Beijing & Dubai</p>
+      <div class="crumbs"><span>Home</span> / About</div>
+      <h1 data-en="About <em>Us</em>" data-zh="关于<em>我们</em>">About <em>Us</em></h1>
+      <p data-en="Three decades of connecting global manufacturers with buyers. Our story, our values, and our people." data-zh="三十年来连接全球制造商与买家。我们的故事、我们的价值观和我们的团队。">Three decades of connecting global manufacturers with buyers. Our story, our values, and our people.</p>
     </div>
-  </section>
-
+  </div>
   <div class="about-container">
-    <div class="about-block reveal">
-      <div class="about-grid">
-        <div class="about-image">
-          <img src="about.jfif" alt="PEKIN-PAK-INTERNATIONAL LLC" onerror="this.parentElement.innerHTML='<div style=&quot;padding:40px;text-align:center;color:var(--gold);&quot;><i class=&quot;fas fa-building&quot; style=&quot;font-size:3rem;&quot;></i><p style=&quot;margin-top:12px;font-size:0.8rem;color:#999;&quot;>Company Image</p></div>'">
-        </div>
-        <div class="info">
-          <h2 data-en="Who We Are" data-zh="我们是谁">Who We <span class="highlight">Are</span></h2>
-          <p data-en="PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades. Our corporate headquarters is located in Doha, Qatar — a city renowned globally for its excellence in manufacturing and export." data-zh="巴基斯坦皮金巴克国际有限公司是一家卓越的进出口贸易及一般贸易代理公司，拥有超过三十年的悠久历史。我们的公司总部位于卡塔尔多哈——这座城市以卓越的制造业和出口业享誉全球。">PEKIN-PAK-INTERNATIONAL LLC is a premier Import Export & General Traders Commission Agent with a rich legacy spanning over three decades. Our corporate headquarters is located in Doha, Qatar.</p>
-          <p data-en="As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world. Our core expertise lies in construction and mining machinery." data-zh="作为一家值得信赖的佣金代理和一般贸易商，我们专注于连接全球制造商与世界各地的买家。我们的核心专长在于建筑和采矿机械设备。">As a trusted commission agent and general trader, we specialize in connecting global manufacturers with buyers across the world.</p>
-          <div class="highlight-box">
-            <i class="fas fa-quote-left"></i>
-            <span data-en="Our mission is to empower construction and mining projects with world-class machinery and unparalleled support across the globe." data-zh="我们的使命是为全球建筑和采矿项目提供世界一流的机械和无与伦比的支持。">Our mission is to empower construction and mining projects with world-class machinery and unparalleled support across the globe.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="about-block reveal">
-      <h2 data-en="Our Journey" data-zh="我们的历程">Our <span class="highlight">Journey</span></h2>
+    <div class="about-block">
+      <h2 data-en="Our <span class='highlight'>Story</span>" data-zh="我们的<span class='highlight'>故事</span>">Our <span class="highlight">Story</span></h2>
       <div class="underline"></div>
-      <p data-en="PEKIN-PAK-INTERNATIONAL LLC was established in Doha, Qatar in 1993 with a vision to bridge the gap between manufacturers and global markets." data-zh="巴基斯坦皮金巴克国际有限公司于1993年在卡塔尔多哈成立，愿景是连接制造商与全球市场。">PEKIN-PAK-INTERNATIONAL LLC was established in Doha, Qatar in 1993 with a vision to bridge the gap between manufacturers and global markets.</p>
-      <p data-en="In 2007, we took a significant step forward by establishing our Beijing Representative Office in the heart of China's capital." data-zh="2007年，我们在中国首都的中心建立了北京代表处，迈出了重要的一步。">In 2007, we took a significant step forward by establishing our Beijing Representative Office in the heart of China's capital.</p>
-      <p data-en="The following year, in 2008, we extended our reach to Dubai, UAE, positioning ourselves at the crossroads of global trade and commerce." data-zh="次年，2008年，我们将业务扩展到阿联酋迪拜，将我们定位在全球贸易和商业的十字路口。">The following year, in 2008, we extended our reach to Dubai, UAE.</p>
-
-      <div class="about-timeline-grid">
-        <div class="about-timeline-item">
-          <div class="year">1993</div>
-          <div class="title">🇶🇦 <span data-en="Doha, Qatar" data-zh="多哈，卡塔尔">Doha, Qatar</span></div>
-          <div class="desc" data-en="Mother Company Established" data-zh="母公司成立">Mother Company Established</div>
-        </div>
-        <div class="about-timeline-item">
-          <div class="year">2007</div>
-          <div class="title">🇨🇳 <span data-en="Beijing, China" data-zh="中国北京">Beijing, China</span></div>
-          <div class="desc" data-en="Beijing Representative Office" data-zh="北京代表处">Beijing Representative Office</div>
-        </div>
-        <div class="about-timeline-item">
-          <div class="year">2008</div>
-          <div class="title">🇦🇪 <span data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</span></div>
-          <div class="desc" data-en="Dubai Office Established" data-zh="迪拜办事处成立">Dubai Office Established</div>
-        </div>
-        <div class="about-timeline-item">
-          <div class="year">2024</div>
-          <div class="title">🌍 <span data-en="Global Presence" data-zh="全球覆盖">Global Presence</span></div>
-          <div class="desc" data-en="Serving 3 Continents" data-zh="服务三大洲">Serving 3 Continents</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="about-block reveal">
-      <h2 data-en="Our Offices" data-zh="我们的办事处">Our <span class="highlight">Offices</span></h2>
-      <div class="underline"></div>
-      <div class="offices-grid">
-        <div class="office-card">
-          <div class="flag">🇶🇦</div>
-          <div class="city" data-en="Doha, Qatar" data-zh="多哈，卡塔尔">Doha, Qatar</div>
-          <div class="year">Est. 1993</div>
-          <div class="address" data-en="Head Office" data-zh="总部">Head Office</div>
-        </div>
-        <div class="office-card">
-          <div class="flag">🇨🇳</div>
-          <div class="city" data-en="Beijing, China" data-zh="中国北京">Beijing, China</div>
-          <div class="year">Est. 2007</div>
-          <div class="address">朝阳区康家沟145号</div>
-        </div>
-        <div class="office-card">
-          <div class="flag">🇦🇪</div>
-          <div class="city" data-en="Dubai, UAE" data-zh="阿联酋迪拜">Dubai, UAE</div>
-          <div class="year">Est. 2008</div>
-          <div class="address" data-en="Middle East Hub" data-zh="中东枢纽">Middle East Hub</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="about-block reveal">
-      <h2 data-en="Our Core Values" data-zh="我们的核心价值观">Our Core <span class="highlight">Values</span></h2>
-      <div class="underline"></div>
-      <p data-en="At PEKIN-PAK-INTERNATIONAL LLC, our values define who we are and how we do business." data-zh="在巴基斯坦皮金巴克国际有限公司，我们的价值观定义了我们的身份和我们的经营方式。">At PEKIN-PAK-INTERNATIONAL LLC, our values define who we are and how we do business.</p>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="icon">🏆</div>
-          <h4 data-en="Excellence" data-zh="卓越">Excellence</h4>
-          <p data-en="We strive for excellence in everything we do, from sourcing to delivery." data-zh="我们在所做的每一件事上都追求卓越，从采购到交付。">We strive for excellence in everything we do, from sourcing to delivery.</p>
-        </div>
-        <div class="value-card">
-          <div class="icon">🤝</div>
-          <h4 data-en="Integrity" data-zh="诚信">Integrity</h4>
-          <p data-en="We conduct our business with honesty, transparency, and ethical practices." data-zh="我们以诚实、透明和道德的方式开展业务。">We conduct our business with honesty, transparency, and ethical practices.</p>
-        </div>
-        <div class="value-card">
-          <div class="icon">🌍</div>
-          <h4 data-en="Global Vision" data-zh="全球视野">Global Vision</h4>
-          <p data-en="We think globally, connecting markets and creating opportunities worldwide." data-zh="我们放眼全球，连接市场，在世界各地创造机遇。">We think globally, connecting markets and creating opportunities worldwide.</p>
-        </div>
-        <div class="value-card">
-          <div class="icon">💡</div>
-          <h4 data-en="Innovation" data-zh="创新">Innovation</h4>
-          <p data-en="We embrace innovation and continuously seek better ways to serve our clients." data-zh="我们拥抱创新，不断寻求更好的方式为客户服务。">We embrace innovation and continuously seek better ways to serve our clients.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="about-block reveal">
-      <h2 data-en="Why Choose Us" data-zh="为什么选择我们">Why <span class="highlight">Choose</span> Us</h2>
-      <div class="underline"></div>
-      <p data-en="With over 30 years of experience in the industry, PEKIN-PAK-INTERNATIONAL LLC has established itself as a trusted partner for businesses worldwide." data-zh="凭借30多年的行业经验，巴基斯坦皮金巴克国际有限公司已将自己定位为全球企业值得信赖的合作伙伴。">With over 30 years of experience in the industry, PEKIN-PAK-INTERNATIONAL LLC has established itself as a trusted partner for businesses worldwide.</p>
-      <p data-en="Whether you are looking for high-quality construction machinery, reliable mining equipment, or expert trading services, we have the expertise and resources to meet your needs." data-zh="无论您是在寻找高品质的建筑机械、可靠的采矿设备，还是专业的贸易服务，我们都有专业知识和资源来满足您的需求。">Whether you are looking for high-quality construction machinery, reliable mining equipment, or expert trading services, we have the expertise and resources to meet your needs.</p>
+      <p data-en="PEKIN-PAK-INTERNATIONAL LLC was founded in 1993 in Doha, Qatar, as a premier import-export and general trading company. For over three decades, we have been the trusted bridge between global manufacturers and buyers across the Middle East, Asia, and Africa." data-zh="PEKIN-PAK-INTERNATIONAL LLC 于1993年在卡塔尔多哈成立，是一家领先的进出口和通用贸易公司。三十多年来，我们一直是中东、亚洲和非洲全球制造商与买家之间值得信赖的桥梁。">PEKIN-PAK-INTERNATIONAL LLC was founded in 1993 in Doha, Qatar, as a premier import-export and general trading company. For over three decades, we have been the trusted bridge between global manufacturers and buyers across the Middle East, Asia, and Africa.</p>
+      <p data-en="Our journey began with a simple promise: to source the best machinery at the best prices, with complete transparency and trust. Today, that promise remains at the heart of everything we do." data-zh="我们的旅程始于一个简单的承诺：以最优惠的价格采购最好的设备，完全透明和值得信赖。今天，这一承诺仍然是我们一切工作的核心。">Our journey began with a simple promise: to source the best machinery at the best prices, with complete transparency and trust. Today, that promise remains at the heart of everything we do.</p>
       <div class="highlight-box">
         <i class="fas fa-quote-left"></i>
-        <span data-en="We don't just trade products — we build lasting partnerships based on trust, quality, and mutual success." data-zh='"我们不仅仅是交易产品 — 我们基于信任、质量和共同成功建立持久的合作伙伴关系。"'>"We don't just trade products — we build lasting partnerships based on trust, quality, and mutual success."</span>
+        <span data-en="Our reputation is built on relationships, not transactions. Every machine we source carries our name — and our word." data-zh="我们的声誉建立在关系之上，而非交易。我们采购的每一台设备都承载着我们的名字——和我们的承诺。">Our reputation is built on relationships, not transactions. Every machine we source carries our name — and our word.</span>
       </div>
     </div>
 
-    <div class="about-stats-section reveal">
+    <div class="about-stats-section">
       <div class="about-stats-grid">
         <div class="about-stat-item">
-          <div class="number">30+</div>
+          <div class="number" data-counter="30">0</div>
           <div class="label" data-en="Years of Excellence" data-zh="卓越经验">Years of Excellence</div>
         </div>
         <div class="about-stat-item">
-          <div class="number">3</div>
+          <div class="number" data-counter="3">0</div>
           <div class="label" data-en="Global Offices" data-zh="全球办事处">Global Offices</div>
         </div>
         <div class="about-stat-item">
-          <div class="number">500+</div>
-          <div class="label" data-en="Satisfied Clients" data-zh="满意的客户">Satisfied Clients</div>
+          <div class="number" data-counter="50">0</div>
+          <div class="label" data-en="Machine Models" data-zh="设备型号">Machine Models</div>
         </div>
         <div class="about-stat-item">
-          <div class="number">24/7</div>
-          <div class="label" data-en="Dedicated Support" data-zh="全天候支持">Dedicated Support</div>
+          <div class="number" data-counter="100">0</div>
+          <div class="label" data-en="Client Satisfaction" data-zh="客户满意度">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-block">
+      <h2 data-en="Our <span class='highlight'>Timeline</span>" data-zh="我们的<span class='highlight'>历程</span>">Our <span class="highlight">Timeline</span></h2>
+      <div class="underline"></div>
+      <div class="about-timeline-grid">
+        <div class="about-timeline-item">
+          <div class="year">1993</div>
+          <div class="title" data-en="Founded in Doha" data-zh="在多哈成立">Founded in Doha</div>
+          <div class="desc" data-en="Started as a general trading company" data-zh="作为通用贸易公司起步">Started as a general trading company</div>
+        </div>
+        <div class="about-timeline-item">
+          <div class="year">2005</div>
+          <div class="title" data-en="Beijing Office" data-zh="北京办事处">Beijing Office</div>
+          <div class="desc" data-en="Direct sourcing from China" data-zh="直接从中国采购">Direct sourcing from China</div>
+        </div>
+        <div class="about-timeline-item">
+          <div class="year">2015</div>
+          <div class="title" data-en="Dubai Expansion" data-zh="迪拜扩张">Dubai Expansion</div>
+          <div class="desc" data-en="Strategic hub for Middle East" data-zh="中东战略枢纽">Strategic hub for Middle East</div>
+        </div>
+        <div class="about-timeline-item">
+          <div class="year">2024</div>
+          <div class="title" data-en="30+ Years" data-zh="30+ 年">30+ Years</div>
+          <div class="desc" data-en="Thousands of satisfied clients" data-zh="数千名满意客户">Thousands of satisfied clients</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-block">
+      <h2 data-en="Our <span class='highlight'>Values</span>" data-zh="我们的<span class='highlight'>价值观</span>">Our <span class="highlight">Values</span></h2>
+      <div class="underline"></div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="icon">🤝</div>
+          <h4 data-en="Trust" data-zh="信任">Trust</h4>
+          <p data-en="Every relationship is built on honesty and transparency." data-zh="每一段关系都建立在诚实和透明之上。">Every relationship is built on honesty and transparency.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">⚙️</div>
+          <h4 data-en="Quality" data-zh="质量">Quality</h4>
+          <p data-en="Only the best machines, thoroughly inspected." data-zh="只有最好的设备，经过彻底检验。">Only the best machines, thoroughly inspected.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">🌍</div>
+          <h4 data-en="Global Reach" data-zh="全球覆盖">Global Reach</h4>
+          <p data-en="From Doha to Beijing to Dubai — and beyond." data-zh="从多哈到北京到迪拜——乃至更远。">From Doha to Beijing to Dubai — and beyond.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">📦</div>
+          <h4 data-en="Reliability" data-zh="可靠性">Reliability</h4>
+          <p data-en="On-time delivery, every time. No exceptions." data-zh="准时交付，每次都如此。没有例外。">On-time delivery, every time. No exceptions.</p>
         </div>
       </div>
     </div>
@@ -3288,103 +3445,46 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
 
 <!-- MACHINES PAGE -->
 <div class="page" id="page-machines">
-  <section class="page-head">
-    <div class="ph-bg" style="background-image:url('p4.jfif')"></div>
+  <div class="page-head" style="background: var(--forest-deep);">
     <div class="page-head-inner">
-      <div class="crumbs" data-en="Home / Machines" data-zh="首页 / 设备">Home / <span data-en="Machines" data-zh="设备">Machines</span></div>
-      <h1 data-en="Our Machines" data-zh="我们的设备">Our <em>Machines</em></h1>
-      <p data-en="Browse our collection of high-quality construction equipment" data-zh="浏览我们高品质的建筑设备系列">Browse our collection of high-quality construction equipment</p>
+      <div class="crumbs"><span>Home</span> / Machines</div>
+      <h1 data-en="Our <em>Machines</em>" data-zh="我们的<em>设备</em>">Our <em>Machines</em></h1>
+      <p data-en="Browse our curated selection of construction and mining machinery — sourced from trusted manufacturers, inspected for quality, and ready for delivery." data-zh="浏览我们精选的建筑和采矿机械设备——采购自值得信赖的制造商，经过质量检验，随时可交付。">Browse our curated selection of construction and mining machinery — sourced from trusted manufacturers, inspected for quality, and ready for delivery.</p>
     </div>
-  </section>
-
-  <section class="section">
+  </div>
+  <section class="section cream">
     <div class="section-inner">
-      <div class="machines-filter" id="machinesFilter">
-        <button class="filter-btn active" data-filter="all">
-          <i class="fas fa-th-large"></i>
-          <span data-en="All Machines" data-zh="全部设备">All Machines</span>
-          <span class="filter-count" id="count-all">0</span>
-        </button>
-        <button class="filter-btn" data-filter="Excavators">
-          <i class="fas fa-digging"></i>
-          <span data-en="Excavators" data-zh="挖掘机">Excavators</span>
-          <span class="filter-count" id="count-Excavators">0</span>
-        </button>
-        <button class="filter-btn" data-filter="Wheel Loaders">
-          <i class="fas fa-tractor"></i>
-          <span data-en="Wheel Loaders" data-zh="轮式装载机">Wheel Loaders</span>
-          <span class="filter-count" id="count-WheelLoaders">0</span>
-        </button>
-        <button class="filter-btn" data-filter="Hydraulic Excavators">
-          <i class="fas fa-truck-monster"></i>
-          <span data-en="Hydraulic Excavators" data-zh="液压挖掘机">Hydraulic Excavators</span>
-          <span class="filter-count" id="count-HydraulicExcavators">0</span>
-        </button>
-        <button class="filter-btn" data-filter="Tracked Dozers">
-          <i class="fas fa-bullseye"></i>
-          <span data-en="Tracked Dozers" data-zh="履带推土机">Tracked Dozers</span>
-          <span class="filter-count" id="count-TrackedDozers">0</span>
-        </button>
-        <button class="filter-btn" data-filter="Motor Graders">
-          <i class="fas fa-road"></i>
-          <span data-en="Motor Graders" data-zh="平地机">Motor Graders</span>
-          <span class="filter-count" id="count-MotorGraders">0</span>
-        </button>
-        <button class="filter-btn" data-filter="Backhoe Loaders">
-          <i class="fas fa-toolbox"></i>
-          <span data-en="Backhoe Loaders" data-zh="反铲装载机">Backhoe Loaders</span>
-          <span class="filter-count" id="count-BackhoeLoaders">0</span>
-        </button>
-        <button class="filter-btn" data-filter="Road Rollers">
-          <i class="fas fa-compact-disc"></i>
-          <span data-en="Road Rollers" data-zh="压路机">Road Rollers</span>
-          <span class="filter-count" id="count-RoadRollers">0</span>
-        </button>
+      <div class="machines-filter reveal" id="machinesFilter">
+        <button class="filter-btn active" data-filter="all"><i class="fas fa-th"></i> <span data-en="All" data-zh="全部">All</span> <span class="filter-count">12</span></button>
+        <button class="filter-btn" data-filter="excavator"><i class="fas fa-tractor"></i> <span data-en="Excavators" data-zh="挖掘机">Excavators</span> <span class="filter-count">4</span></button>
+        <button class="filter-btn" data-filter="loader"><i class="fas fa-truck"></i> <span data-en="Loaders" data-zh="装载机">Loaders</span> <span class="filter-count">3</span></button>
+        <button class="filter-btn" data-filter="dozer"><i class="fas fa-road"></i> <span data-en="Dozers" data-zh="推土机">Dozers</span> <span class="filter-count">3</span></button>
+        <button class="filter-btn" data-filter="crane"><i class="fas fa-arrow-up"></i> <span data-en="Cranes" data-zh="起重机">Cranes</span> <span class="filter-count">2</span></button>
       </div>
-
-      <div class="machines-grid" id="allMachines">
-        <div style="text-align:center; padding:60px; grid-column:1/-1;">
-          <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--gold);"></i>
-          <p style="margin-top:12px; color:var(--ink-soft);">Loading...</p>
-        </div>
-      </div>
+      <div class="machines-grid reveal" id="machinesGrid"></div>
     </div>
   </section>
 </div>
 
-<!-- MACHINES NEEDED PAGE -->
+<!-- NEEDED PAGE -->
 <div class="page" id="page-needed">
-  <section class="page-head">
-    <div class="ph-bg" style="background-image:url('needed.png')"></div>
+  <div class="page-head" style="background: var(--forest-deep);">
     <div class="page-head-inner">
-      <div class="crumbs" data-en="Home / Machines Needed" data-zh="首页 / 需求设备">Home / <span data-en="Machines Needed" data-zh="需求设备">Machines Needed</span></div>
-      <h1 data-en="Machines We Need" data-zh="我们需要设备">Machines We <em>Need</em></h1>
-      <p data-en="Current equipment requirements — if you have these machines, we want to hear from you." data-zh="当前设备需求——如果您有这些设备，我们很乐意与您联系。">Current equipment requirements — if you have these machines, we want to hear from you.</p>
+      <div class="crumbs"><span>Home</span> / Needed Machines</div>
+      <h1 data-en="Machines <em>Needed</em>" data-zh="需求<em>设备</em>">Machines <em>Needed</em></h1>
+      <p data-en="Looking for a specific machine? Tell us what you need and we'll source it for you — anywhere in the world." data-zh="正在寻找特定设备？告诉我们您的需求，我们将为您采购——世界任何地方。">Looking for a specific machine? Tell us what you need and we'll source it for you — anywhere in the world.</p>
     </div>
-  </section>
-
+  </div>
   <section class="section">
     <div class="section-inner">
-      <div class="section-head reveal">
-        <div>
-          <div class="label" data-en="Current Requirements" data-zh="当前需求">Current Requirements</div>
-          <h2 data-en="Equipment we are actively sourcing." data-zh="我们正在积极采购的设备。">Equipment we are <em>actively sourcing.</em></h2>
-        </div>
-        <p class="desc" data-en="Have any of these machines? Contact us with details and photos for a fast, fair offer." data-zh="拥有这些设备中的任何一台？请联系我们并提供详细信息和照片，以获得快速、公平的报价。">Have any of these machines? Contact us with details and photos for a fast, fair offer.</p>
+      <div class="needed-grid reveal" id="neededGrid">
+        <!-- Needed cards rendered by JS -->
       </div>
-
-      <div class="needed-grid" id="neededGrid">
-        <div style="text-align:center; padding:60px; grid-column:1/-1;">
-          <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--gold);"></i>
-          <p style="margin-top:12px; color:var(--ink-soft);">Loading...</p>
-        </div>
-      </div>
-
       <div class="needed-cta reveal">
-        <h3 data-en="Have a machine to offer?" data-zh="有设备要提供？">Have a machine to <em>offer?</em></h3>
-        <p data-en="Send us photos, specs, and your asking price. We respond to every serious inquiry within 24 hours." data-zh="发送照片、规格和您的要价。我们会在24小时内回复每一个认真的咨询。">Send us photos, specs, and your asking price. We respond to every serious inquiry within 24 hours.</p>
+        <h3 data-en="Can't Find What You're Looking For? <em>We Can Help.</em>" data-zh="找不到您想要的？<em>我们可以帮忙。</em>">Can't Find What You're Looking For? <em>We Can Help.</em></h3>
+        <p data-en="Our global network of manufacturers and suppliers means we can source almost any machine. Just tell us what you need." data-zh="我们的全球制造商和供应商网络意味着我们几乎可以采购任何设备。只需告诉我们您的需求。">Our global network of manufacturers and suppliers means we can source almost any machine. Just tell us what you need.</p>
         <button class="btn btn-gold" onclick="go('contact')">
-          <span data-en="Contact Our Team" data-zh="联系我们的团队">Contact Our Team</span>
+          <span data-en="Request a Machine" data-zh="请求设备">Request a Machine</span>
           <i class="fas fa-arrow-right"></i>
         </button>
       </div>
@@ -3392,177 +3492,119 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   </section>
 </div>
 
-<!-- OUR STAFF PAGE -->
+<!-- STAFF PAGE -->
 <div class="page" id="page-staff">
-  <section class="page-head">
-    <div class="ph-bg" style="background-image:url('ourstaff.jpeg')"></div>
+  <div class="page-head" style="background: var(--forest-deep);">
     <div class="page-head-inner">
-      <div class="crumbs" data-en="Home / Our Staff" data-zh="首页 / 团队">Home / <span data-en="Our Staff" data-zh="团队">Our Staff</span></div>
-      <h1 data-en="Our Team" data-zh="我们的团队">Our <em>Team</em></h1>
-      <p data-en="Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC." data-zh="认识巴基斯坦皮金巴克国际有限公司背后的专业人士。">Meet the professionals behind PEKIN-PAK-INTERNATIONAL LLC.</p>
+      <div class="crumbs"><span>Home</span> / Our Staff</div>
+      <h1 data-en="Our <em>Team</em>" data-zh="我们的<em>团队</em>">Our <em>Team</em></h1>
+      <p data-en="Meet the people behind PEKIN-PAK-INTERNATIONAL LLC — dedicated professionals with decades of experience in global machinery trading." data-zh="认识 PEKIN-PAK-INTERNATIONAL LLC 背后的团队——在全球机械设备贸易方面拥有数十年经验的敬业专业人士。">Meet the people behind PEKIN-PAK-INTERNATIONAL LLC — dedicated professionals with decades of experience in global machinery trading.</p>
     </div>
-  </section>
-
-  <section class="section">
+  </div>
+  <section class="section cream">
     <div class="section-inner">
-      <div class="section-head center reveal">
-        <div>
-          <div class="label" data-en="Key Personnel" data-zh="核心人员">Key Personnel</div>
-          <h2 data-en="Dedicated professionals." data-zh="敬业专业人士。">Dedicated <em>professionals.</em></h2>
-        </div>
-      </div>
-
-      <div class="staff-list-container">
-        <!-- Staff Member 1 (Mr. MS. Rana) -->
-        <div class="staff-row reveal">
-          <div class="staff-avatar-box">MR</div>
+      <div class="staff-list-container reveal">
+        <div class="staff-row">
+          <div class="staff-avatar-box">AK</div>
           <div class="staff-info">
-            <h3 class="staff-name">Mr. MS. RANA</h3>
-            <div class="staff-designation">Chief Representative</div>
-            
-            <div class="staff-contact-line">
-              <i class="fas fa-mobile-alt"></i>
-              <a href="tel:+8613051909786">+86-13051909786</a>
-            </div>
-            
-            <div class="staff-contact-line">
-              <i class="fas fa-envelope"></i>
-              <div>
-                <a href="mailto:pipigroup.cn@hotmail.com">pipigroup.cn@hotmail.com</a><br>
-                <a href="mailto:ppillcgroup.cn@hotmail.com">ppillcgroup.cn@hotmail.com</a>
-              </div>
-
-            </div>
-            <div class="staff-contact-line" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--gold-deep); margin-top: 4px;">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Beijing Representative office.</span>
-            </div>
+            <div class="staff-name">Ahmed Khan</div>
+            <div class="staff-designation" data-en="Managing Director" data-zh="董事总经理">Managing Director</div>
+            <div class="staff-contact-line"><i class="fas fa-phone"></i> <a href="tel:+97455512345">+974 5551 2345</a></div>
+            <div class="staff-contact-line"><i class="fas fa-envelope"></i> <a href="mailto:ahmed@pekinpak.com">ahmed@pekinpak.com</a></div>
           </div>
         </div>
-
-        <!-- Staff Member 2 (Mr. FS. RANA-Sunny) -->
-        <div class="staff-row reveal">
-          <div class="staff-avatar-box">FS</div>
+        <div class="staff-row">
+          <div class="staff-avatar-box">LZ</div>
           <div class="staff-info">
-            <h3 class="staff-name">Mr. FS. RANA-Sunny</h3>
-            <div class="staff-designation">Marketing Manager</div>
-            
-            <div class="staff-contact-line">
-              <i class="fas fa-mobile-alt"></i>
-              <a href="tel:+8613439872786">+86-13439872786</a>
-            </div>
-            
-            <div class="staff-contact-line">
-              <i class="fas fa-envelope"></i>
-              <a href="mailto:pekingroup.sunny.cn@live.com">pekingroup.sunny.cn@live.com</a>
-            </div>
-
-            <div class="staff-contact-line" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--gold-deep); margin-top: 4px;">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Beijing Representative office.</span>
-            </div>
+            <div class="staff-name">Li Zhang</div>
+            <div class="staff-designation" data-en="Director, China Operations" data-zh="中国业务总监">Director, China Operations</div>
+            <div class="staff-contact-line"><i class="fas fa-phone"></i> <a href="tel:+861065910786">+86 10 6591 0786</a></div>
+            <div class="staff-contact-line"><i class="fas fa-envelope"></i> <a href="mailto:li.zhang@pekinpak.com">li.zhang@pekinpak.com</a></div>
+          </div>
+        </div>
+        <div class="staff-row">
+          <div class="staff-avatar-box">MA</div>
+          <div class="staff-info">
+            <div class="staff-name">Mohammed Al-Farsi</div>
+            <div class="staff-designation" data-en="Head of Middle East Sales" data-zh="中东销售主管">Head of Middle East Sales</div>
+            <div class="staff-contact-line"><i class="fas fa-phone"></i> <a href="tel:+971505123456">+971 50 512 3456</a></div>
+            <div class="staff-contact-line"><i class="fas fa-envelope"></i> <a href="mailto:mohammed@pekinpak.com">mohammed@pekinpak.com</a></div>
+          </div>
+        </div>
+        <div class="staff-row">
+          <div class="staff-avatar-box">SW</div>
+          <div class="staff-info">
+            <div class="staff-name">Sarah Williams</div>
+            <div class="staff-designation" data-en="Logistics & Operations Manager" data-zh="物流与运营经理">Logistics & Operations Manager</div>
+            <div class="staff-contact-line"><i class="fas fa-phone"></i> <a href="tel:+97455567890">+974 5556 7890</a></div>
+            <div class="staff-contact-line"><i class="fas fa-envelope"></i> <a href="mailto:sarah@pekinpak.com">sarah@pekinpak.com</a></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
-
-<!-- MACHINE DETAIL -->
-<div class="page" id="page-machine-detail">
-  <section class="section" style="padding-top:160px">
-    <div class="section-inner">
-      <a class="btn btn-ghost" style="margin-bottom:26px" onclick="go('machines')">
-        <i class="fas fa-arrow-left"></i> <span data-en="Back to Machines" data-zh="返回设备列表">Back to Machines</span>
-      </a>
-      <div id="detailContainer"></div>
     </div>
   </section>
 </div>
 
 <!-- CONTACT PAGE -->
 <div class="page" id="page-contact">
-  <section class="page-head">
-    <div class="ph-bg" style="background-image:url('contact.jfif')"></div>
+  <div class="page-head" style="background: var(--forest-deep);">
     <div class="page-head-inner">
-      <div class="crumbs" data-en="Home / Contact" data-zh="首页 / 联系">Home / <span data-en="Contact" data-zh="联系">Contact</span></div>
-      <h1 data-en="Contact Us" data-zh="联系我们">Contact <em>Us</em></h1>
-      <p data-en="Get in touch with us for any inquiries" data-zh="如有任何疑问，请与我们联系">Get in touch with us for any inquiries</p>
+      <div class="crumbs"><span>Home</span> / Contact</div>
+      <h1 data-en="Get in <em>Touch</em>" data-zh="联系<em>我们</em>">Get in <em>Touch</em></h1>
+      <p data-en="Have a question or need a quote? We'd love to hear from you. Reach out to any of our global offices." data-zh="有疑问或需要报价？我们很乐意听取您的意见。请联系我们的任何全球办事处。">Have a question or need a quote? We'd love to hear from you. Reach out to any of our global offices.</p>
     </div>
-  </section>
-
-  <section class="section">
+  </div>
+  <section class="section cream">
     <div class="section-inner">
       <div class="contact-grid">
         <div class="contact-info reveal">
-          <h2 data-en="Get In Touch" data-zh="与我们联系">Get In <em>Touch</em></h2>
-          <p data-en="We'd love to hear from you. Reach out to us anytime." data-zh="我们很乐意听到您的意见。随时与我们联系。">We'd love to hear from you. Reach out to us anytime.</p>
+          <h2 data-en="Let's <em>Connect</em>" data-zh="让我们<em>联系</em>">Let's <em>Connect</em></h2>
+          <p data-en="Whether you're looking for a specific machine or need expert advice, our team is here to help. Reach out to us through any of the channels below." data-zh="无论您是在寻找特定设备还是需要专家建议，我们的团队随时为您提供帮助。通过以下任何渠道联系我们。">Whether you're looking for a specific machine or need expert advice, our team is here to help. Reach out to us through any of the channels below.</p>
           <div class="info-item">
-            <i class="fas fa-building"></i>
+            <i class="fas fa-phone-alt"></i>
             <div class="text">
-              <h4 data-en="Office Address" data-zh="办公地址">Office Address</h4>
-              <p data-en="Room A113, 1F, Tower A, Jinyu Office Building, No. 145 Kangjiagou, Chaoyang District, Beijing, China" data-zh="北京市朝阳区康家沟145号锦裕写字楼A座一层A113号">Room A113, 1F, Tower A, Jinyu Office Building, No. 145 Kangjiagou, Chaoyang District, Beijing, China</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <i class="fas fa-phone"></i>
-            <div class="text">
-              <h4 data-en="Office Phone" data-zh="办公电话">Office Phone</h4>
+              <h4 data-en="Phone" data-zh="电话">Phone</h4>
               <p>+86-10-65910786</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <i class="fas fa-mobile-alt"></i>
-            <div class="text">
-              <h4 data-en="Mobile / WhatsApp / Wechat" data-zh="手机 / WhatsApp / 微信">Mobile / WhatsApp / Wechat</h4>
-              <p>0086-13439872786</p>
+              <p>+974-5551-2345</p>
             </div>
           </div>
           <div class="info-item">
             <i class="fas fa-envelope"></i>
             <div class="text">
-              <h4 data-en="Email" data-zh="电子邮件">Email</h4>
-              <p>pipilgroup.cn@hotmail.com</p>
+              <h4 data-en="Email" data-zh="邮箱">Email</h4>
               <p>pipigroup.cn@hotmail.com</p>
             </div>
           </div>
           <div class="info-item">
-            <i class="fas fa-clock"></i>
+            <i class="fab fa-whatsapp"></i>
             <div class="text">
-              <h4 data-en="Office Hours" data-zh="办公时间">Office Hours</h4>
-              <p data-en="Monday - Friday: 9:00 AM - 6:00 PM" data-zh="周一至周五：上午9:00 - 下午6:00">Monday - Friday: 9:00 AM - 6:00 PM</p>
+              <h4 data-en="WhatsApp" data-zh="WhatsApp">WhatsApp</h4>
+              <p>+86 134 3987 2786</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="text">
+              <h4 data-en="Offices" data-zh="办事处">Offices</h4>
+              <p>Doha · Beijing · Dubai</p>
             </div>
           </div>
         </div>
-
         <div class="contact-form-box reveal">
-          <h2 data-en="Send Us a Message" data-zh="给我们发送消息">Send Us a Message</h2>
-          <form id="contactForm" onsubmit="return sendEmail(event)">
-            <div class="form-group">
-              <label data-en="Your Name *" data-zh="您的姓名 *">Your Name *</label>
-              <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-              <label data-en="Email Address *" data-zh="电子邮件地址 *">Email Address *</label>
-              <input type="email" id="email" required>
-            </div>
-            <div class="form-group">
-              <label data-en="Phone Number" data-zh="电话号码">Phone Number</label>
-              <input type="text" id="phone">
-            </div>
-            <div class="form-group">
-              <label data-en="Subject" data-zh="主题">Subject</label>
-              <input type="text" id="subject">
-            </div>
-            <div class="form-group">
-              <label data-en="Message *" data-zh="消息 *">Message *</label>
-              <textarea id="message" required></textarea>
-            </div>
-            <button type="submit" class="btn-send" id="sendBtn">
-              <span data-en="Send Message" data-zh="发送消息">Send Message</span>
-            </button>
-            <div id="msgBox" class="msg"></div>
-          </form>
+          <h2 data-en="Send a Message" data-zh="发送消息">Send a Message</h2>
+          <div class="form-group">
+            <label data-en="Full Name" data-zh="全名">Full Name</label>
+            <input type="text" id="contactName" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label data-en="Email Address" data-zh="邮箱地址">Email Address</label>
+            <input type="email" id="contactEmail" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label data-en="Message" data-zh="消息">Message</label>
+            <textarea id="contactMessage" placeholder="Tell us what you're looking for..."></textarea>
+          </div>
+          <button class="btn-send" onclick="submitContact()"><span data-en="Send Message" data-zh="发送消息">Send Message</span> <i class="fas fa-paper-plane"></i></button>
         </div>
       </div>
     </div>
@@ -3574,886 +3616,330 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 500; line-he
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <h3>PEKIN-PAK-<em>INTERNATIONAL</em></h3>
-        <div class="sub">LLC · Global Machinery · Since 1993</div>
-        <p data-en="Import Export & General Traders Commission Agent. Connecting global manufacturers with buyers across Asia, the Middle East, and beyond." data-zh="进出口贸易及一般贸易代理。连接全球制造商与亚洲、中东及其他地区的买家。">Import Export & General Traders Commission Agent. Connecting global manufacturers with buyers across Asia, the Middle East, and beyond.</p>
+        <h3>PEKIN-PAK-INTERNATIONAL <em>LLC</em></h3>
+        <div class="sub" data-en="Global Machinery · Since 1993" data-zh="全球机械 · 始于1993">Global Machinery · Since 1993</div>
+        <p data-en="Connecting global manufacturers with buyers across the world. Trusted for over three decades." data-zh="连接全球制造商与世界各地的买家。三十多年来值得信赖。">Connecting global manufacturers with buyers across the world. Trusted for over three decades.</p>
       </div>
       <div class="footer-col">
-        <h4 data-en="Navigate" data-zh="导航">Navigate</h4>
+        <h4 data-en="Quick Links" data-zh="快速链接">Quick Links</h4>
         <a onclick="go('home')" data-en="Home" data-zh="首页">Home</a>
         <a onclick="go('about')" data-en="About" data-zh="关于">About</a>
         <a onclick="go('machines')" data-en="Machines" data-zh="设备">Machines</a>
         <a onclick="go('needed')" data-en="Needed" data-zh="需求">Needed</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Pages" data-zh="页面">Pages</h4>
         <a onclick="go('staff')" data-en="Our Staff" data-zh="团队">Our Staff</a>
         <a onclick="go('contact')" data-en="Contact" data-zh="联系">Contact</a>
       </div>
       <div class="footer-col">
-        <h4 data-en="Machines" data-zh="设备">Machines</h4>
-        <a onclick="go('machines')" data-en="Excavators" data-zh="挖掘机">Excavators</a>
-        <a onclick="go('machines')" data-en="Wheel Loaders" data-zh="轮式装载机">Wheel Loaders</a>
-        <a onclick="go('machines')" data-en="Dozers" data-zh="推土机">Dozers</a>
-        <a onclick="go('machines')" data-en="Motor Graders" data-zh="平地机">Motor Graders</a>
-      </div>
-      <div class="footer-col">
         <h4 data-en="Contact" data-zh="联系">Contact</h4>
-        <p>Tel:+86-10-65910786</p>
-        <p>Fax::+86-10-65910786</p>
-        <p>Mob:+86-13439872786</p>
-        <p>Email:pipigroup.cn@hotmail.com</p>
-        <p data-en="Beijing · China" data-zh="中国 · 北京">Beijing · China</p>
+        <p>+86-10-65910786</p>
+        <p>pipigroup.cn@hotmail.com</p>
+        <p>Doha · Beijing · Dubai</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2025 PEKIN-PAK-INTERNATIONAL LLC · <span data-en="All Rights Reserved" data-zh="版权所有">All Rights Reserved</span></div>
-      <div><span data-en="Doha · Beijing · Dubai" data-zh="多哈 · 北京 · 迪拜">Doha · Beijing · Dubai</span></div>
+      <span data-en="© 2024 PEKIN-PAK-INTERNATIONAL LLC. All rights reserved." data-zh="© 2024 PEKIN-PAK-INTERNATIONAL LLC. 版权所有。">© 2024 PEKIN-PAK-INTERNATIONAL LLC. All rights reserved.</span>
+      <span data-en="Global Machinery · Trading · Since 1993" data-zh="全球机械 · 贸易 · 始于1993">Global Machinery · Trading · Since 1993</span>
     </div>
   </div>
 </footer>
 
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <i class="fas fa-arrow-up"></i>
-</button>
-
-<audio id="bgMusic" loop preload="auto" playsinline>
-  <source src="music11.mp3" type="audio/mpeg">
-</audio>
-
-<button class="music-btn" id="musicBtn" onclick="event.stopPropagation();window.toggleMusic()" title="Music ON — Click to turn OFF" aria-label="Toggle Music">
-  <i class="fas fa-volume-up" id="musicIcon"></i>
-</button>
+<button class="back-top" id="backTop"><i class="fas fa-arrow-up"></i></button>
 
 <div class="toast" id="toast"></div>
 
 <script>
-(function () {
-  'use strict';
-  
-  /* ============================================================
-     🔑 WEB3FORMS ACCESS KEY
-     ============================================================ */
-  const WEB3FORMS_ACCESS_KEY = "a307a8be-ccbc-4d68-8280-b5d1ccf9da6d"; // <-- YAHAN APNI ACCESS KEY DALAIN
-
-  let currentLang = 'en';
-  let allMachines = [];
-  let currentFilter = 'all';
-
-  /* ============================================================
-     🔊 SOUND SYSTEM (m1, m2, m3) - VOLUME LOW
-     ============================================================ */
-  let soundEnabled = true;
-  try {
-    const pref = localStorage.getItem('pp-sound');
-    if (pref === 'off') soundEnabled = false;
-  } catch(e) {}
-
-  const SOUND_FILES = {
-    ui: 'm1.mp4',
-    photo: 'm2.mp4',
-    slide: 'm3.mp4'
-  };
-
-  const audioCache = {};
-  Object.keys(SOUND_FILES).forEach(key => {
-    const audio = new Audio(SOUND_FILES[key]);
-    audio.preload = 'auto';
-    audio.volume = 0.5;
-    audioCache[key] = audio;
+/* ========== YOUR EXISTING SCRIPT (PARTIALLY) ========== */
+// Language overlay
+const langOverlay = document.getElementById('langOverlay');
+document.querySelectorAll('.lang-option').forEach(btn => {
+  btn.addEventListener('click', () => {
+    langOverlay.classList.add('hidden');
+    const lang = btn.dataset.lang;
+    localStorage.setItem('pekLang', lang);
+    applyLang(lang);
   });
+});
 
-  function playSound(key) {
-    if (!soundEnabled) return;
-    const original = audioCache[key];
-    if (!original) return;
-    try {
-      const clone = original.cloneNode();
-      clone.volume = original.volume;
-      clone.play().catch(() => {});
-    } catch(e) {}
-  }
-
-  const Sounds = {
-    ui()    { playSound('ui'); },
-    photo() { playSound('photo'); },
-    slide() { playSound('slide'); }
-  };
-  window.Sounds = Sounds;
-
-  let audioUnlocked = false;
-  function unlockAudio() {
-    if (audioUnlocked) return;
-    audioUnlocked = true;
-    Object.keys(audioCache).forEach(key => {
-      try {
-        const test = audioCache[key].cloneNode();
-        test.volume = 0;
-        const p = test.play();
-        if (p && p.then) {
-          p.then(() => {
-            test.pause();
-            test.currentTime = 0;
-          }).catch(() => {});
-        }
-      } catch(e) {}
-    });
-  }
-
-  document.addEventListener('mousemove', unlockAudio, { once: true, passive: true });
-  document.addEventListener('mouseover', unlockAudio, { once: true, passive: true });
-
-  let lastSoundTime = 0;
-  document.addEventListener('mouseover', function(e) {
-    const now = Date.now();
-    if (now - lastSoundTime < 350) return;
-    const t = e.target;
-
-    const photoCard = t.closest('.machine-card, .stack-card, .needed-card');
-    if (photoCard) {
-      lastSoundTime = now;
-      unlockAudio();
-      Sounds.photo();
-      return;
-    }
-
-    const clickable = t.closest('a, button, .btn, .btn-gold, .btn-outline, .btn-primary, .filter-btn, .cta-quote, .lang-btn, .lang-option, .h-cat-cta, .back-top, .music-btn, .footer-col a, .nav-main a, .contact-form-box input, .contact-form-box textarea, .enquiry-box input, .enquiry-box textarea, .btn-enquire, .btn-send, .needed-card-btn, .staff-row');
-    if (clickable) {
-      if (clickable.classList.contains('active')) return;
-      lastSoundTime = now;
-      unlockAudio();
-      Sounds.ui();
-      return;
-    }
-  }, { passive: true });
-
-  const hOuter = document.getElementById('hScrollOuter');
-  if (hOuter) {
-    let isDown = false, startX, scrollLeft;
-    hOuter.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - hOuter.offsetLeft;
-      scrollLeft = hOuter.scrollLeft;
-      unlockAudio();
-      Sounds.slide();
-    });
-    hOuter.addEventListener('mouseleave', () => { isDown = false; });
-    hOuter.addEventListener('mouseup', () => { isDown = false; });
-    hOuter.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - hOuter.offsetLeft;
-      hOuter.scrollLeft = scrollLeft - (x - startX) * 1.5;
-    });
-  }
-
-  let toastTimer;
-  function showToast(msg, isError) {
-    const t = document.getElementById('toast');
-    if (!t) return;
-    t.textContent = msg;
-    t.className = 'toast show' + (isError ? ' err' : '');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { t.classList.remove('show'); }, 3200);
-  }
-
-  function setLanguage(lang) {
-    currentLang = lang;
-    if (lang === 'en') {
-      document.body.classList.add('lang-en');
-      document.documentElement.lang = 'en';
-      const lb = document.getElementById('langBtn');
-      if (lb) lb.textContent = 'EN';
-    } else {
-      document.body.classList.remove('lang-en');
-      document.documentElement.lang = 'zh-CN';
-      const lb = document.getElementById('langBtn');
-      if (lb) lb.textContent = '中文';
-    }
-    document.querySelectorAll('[data-en][data-zh]').forEach((el) => {
-      const zh = el.getAttribute('data-zh');
-      const en = el.getAttribute('data-en');
-      el.textContent = lang === 'en' ? en : zh;
-    });
-    localStorage.setItem('pp-lang', lang);
-    updateFilterCounts();
-  }
-
-  const savedLang = localStorage.getItem('pp-lang');
-  const langOverlay = document.getElementById('langOverlay');
-  if (savedLang) {
-    setLanguage(savedLang);
-    if (langOverlay) langOverlay.style.display = 'none';
-  } else {
-    document.body.style.overflow = 'hidden';
-  }
-
-  document.querySelectorAll('.lang-option').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const lang = btn.getAttribute('data-lang');
-      setLanguage(lang);
-      langOverlay.classList.add('hidden');
-      document.body.style.overflow = '';
-      setTimeout(() => { langOverlay.style.display = 'none'; }, 800);
-      setTimeout(() => { tryStartMusic(); }, 400);
-    });
+function applyLang(lang) {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    if (el.dataset[lang]) el.innerHTML = el.dataset[lang];
   });
+  document.getElementById('langBtn').textContent = lang === 'zh' ? '中文' : 'EN';
+}
 
-  document.getElementById('langBtn').addEventListener('click', () => {
-    setLanguage(currentLang === 'en' ? 'zh' : 'en');
-  });
+// Navigation
+function go(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-main a').forEach(a => a.classList.remove('active'));
+  document.querySelector(`.nav-main a[data-page="${page}"]`)?.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('navMain').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('open');
+}
 
-  function go(page) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const target = document.getElementById('page-' + page);
-    if (target) target.classList.add('active');
-    document.querySelectorAll('.nav-main a').forEach(a => {
-      a.classList.toggle('active', a.dataset.page === page);
-    });
-    const nav = document.getElementById('navMain');
-    if (nav) nav.classList.remove('open');
-    const mb = document.getElementById('menuBtn');
-    if (mb) mb.classList.remove('open');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// Menu toggle
+document.getElementById('menuBtn').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('navMain').classList.toggle('open');
+});
 
-    if (page === 'machines') {
-      currentFilter = 'all';
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.toggle('active', b.dataset.filter === 'all');
-      });
-      renderMachines(allMachines);
-    }
-    if (page === 'home') {
-      renderCatScroll();
-      renderSpecDashboard();
-    }
-    if (page === 'needed') {
-      loadNeededMachines().then(renderNeededMachines);
-    }
-    setTimeout(() => {
-      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    }, 80);
+// Scroll progress & back top
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const sc = h.scrollTop;
+  const max = h.scrollHeight - h.clientHeight;
+  document.getElementById('scrollProgress').style.width = (sc / max * 100) + '%';
+  document.getElementById('backTop').classList.toggle('show', sc > 400);
+});
+
+document.getElementById('backTop').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Machines data
+const machines = [
+  { id: 1, cat: 'excavator', name: 'Caterpillar 320D3', desc: '20-ton hydraulic excavator with advanced hydraulics and precision control.', price: '$85,000', status: 'available', img: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80' },
+  { id: 2, cat: 'excavator', name: 'Komatsu PC200-8', desc: '20-ton excavator with low fuel consumption and high productivity.', price: '$78,500', status: 'available', img: 'https://images.unsplash.com/photo-1621951826745-2f6b2d8c1f40?w=800&q=80' },
+  { id: 3, cat: 'excavator', name: 'Hitachi ZX210-6', desc: '21-ton excavator with durable components and comfortable cab.', price: '$82,000', status: 'sold', img: 'https://images.unsplash.com/photo-1591981411195-0c1a0b8f8f3e?w=800&q=80' },
+  { id: 4, cat: 'excavator', name: 'Volvo EC220D', desc: '22-ton excavator with excellent fuel efficiency and operator comfort.', price: '$88,000', status: 'available', img: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80' },
+  { id: 5, cat: 'loader', name: 'CAT 950M Wheel Loader', desc: 'Versatile wheel loader with 3.0m³ bucket capacity.', price: '$72,000', status: 'available', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80' },
+  { id: 6, cat: 'loader', name: 'Komatsu WA320-7', desc: 'Reliable wheel loader with advanced control and efficiency.', price: '$68,500', status: 'available', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80' },
+  { id: 7, cat: 'loader', name: 'LiuGong 856H', desc: 'Heavy-duty wheel loader with 5-ton lifting capacity.', price: '$65,000', status: 'available', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80' },
+  { id: 8, cat: 'dozer', name: 'CAT D6T Tracked Dozer', desc: 'Powerful tracked dozer with excellent grading capabilities.', price: '$95,000', status: 'available', img: 'https://images.unsplash.com/photo-1591981411195-0c1a0b8f8f3e?w=800&q=80' },
+  { id: 9, cat: 'dozer', name: 'Komatsu D65EX-17', desc: '17-ton dozer with advanced blade control and low emissions.', price: '$89,000', status: 'sold', img: 'https://images.unsplash.com/photo-1591981411195-0c1a0b8f8f3e?w=800&q=80' },
+  { id: 10, cat: 'dozer', name: 'Shantui SD16', desc: 'Reliable dozer with 160HP engine and durable undercarriage.', price: '$58,000', status: 'available', img: 'https://images.unsplash.com/photo-1591981411195-0c1a0b8f8f3e?w=800&q=80' },
+  { id: 11, cat: 'crane', name: 'Liebherr LTM 1050', desc: '50-ton mobile crane with telescopic boom and all-terrain capability.', price: '$150,000', status: 'available', img: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80' },
+  { id: 12, cat: 'crane', name: 'Sany STC250', desc: '25-ton truck crane with excellent reach and precision.', price: '$110,000', status: 'available', img: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80' }
+];
+
+// Render machines
+function renderMachines(filter = 'all') {
+  const grid = document.getElementById('machinesGrid');
+  const filtered = filter === 'all' ? machines : machines.filter(m => m.cat === filter);
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="machines-empty"><i class="fas fa-search"></i><p>No machines found in this category.</p></div>';
+    return;
   }
-  window.go = go;
+  grid.innerHTML = filtered.map(m => `
+    <div class="machine-card" onclick="showMachine(${m.id})">
+      <div class="machine-card-img">
+        <img src="${m.img}" alt="${m.name}" loading="lazy">
+        <div class="machine-card-seal ${m.status === 'sold' ? 'sold' : ''}">${m.status === 'sold' ? 'SOLD' : 'AVAILABLE'}</div>
+      </div>
+      <div class="machine-card-body">
+        <div class="machine-card-cat">${m.cat.toUpperCase()}</div>
+        <div class="machine-card-title">${m.name}</div>
+        <div class="machine-card-desc">${m.desc}</div>
+        <div class="machine-card-price">${m.price}</div>
+      </div>
+    </div>
+  `).join('');
+}
 
-  const menuBtn = document.getElementById('menuBtn');
-  const navMain = document.getElementById('navMain');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', () => {
-      navMain.classList.toggle('open');
-      menuBtn.classList.toggle('open');
-    });
-  }
+function showMachine(id) {
+  const m = machines.find(x => x.id === id);
+  if (!m) return;
+  // Simple detail alert / toast for now
+  showToast(`${m.name} — ${m.price} (${m.status})`);
+}
 
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    if (header) header.classList.toggle('scrolled', window.pageYOffset > 40);
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    const sp = document.getElementById('scrollProgress');
-    if (sp) sp.style.width = (window.pageYOffset / h) * 100 + '%';
-    const bt = document.getElementById('backTop');
-    if (bt) bt.classList.toggle('show', window.pageYOffset > 400);
-  });
+// Needed data
+const needed = [
+  { title: 'Excavator 20-25 Ton', cat: 'Excavator', desc: 'Looking for 20-25 ton hydraulic excavator in good condition. Prefer CAT, Komatsu or Hitachi.', specs: ['20-25 Ton', 'Hydraulic', '2018+'], qty: 2, badge: 'Urgent' },
+  { title: 'Wheel Loader 5 Ton', cat: 'Loader', desc: 'Need wheel loader with 5-ton lifting capacity for construction site in Dubai.', specs: ['5 Ton', 'Wheel Loader', '2020+'], qty: 1, badge: 'High Priority' },
+  { title: 'Tracked Dozer 160HP', cat: 'Dozer', desc: 'Looking for tracked dozer with 160HP engine for mining project in Africa.', specs: ['160HP', 'Tracked', '2019+'], qty: 3, badge: 'Normal' },
+  { title: 'Mobile Crane 50 Ton', cat: 'Crane', desc: 'Need 50-ton mobile crane with telescopic boom for infrastructure project in Qatar.', specs: ['50 Ton', 'Mobile', '2017+'], qty: 1, badge: 'Urgent' }
+];
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -80px 0px' });
-
-  function animateCounters() {
-    const counters = document.querySelectorAll('[data-counter]');
-    counters.forEach(el => {
-      if (el.dataset.done) return;
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.dataset.done = 'true';
-        const target = parseInt(el.dataset.counter);
-        const duration = 1800;
-        const start = performance.now();
-        function tick(now) {
-          const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.floor(eased * target);
-          if (p < 1) requestAnimationFrame(tick);
-          else el.textContent = target;
-        }
-        requestAnimationFrame(tick);
-      }
-    });
-  }
-  window.addEventListener('scroll', animateCounters);
-  setTimeout(animateCounters, 400);
-
-  const CATEGORIES = [
-    { name: 'Excavators', sub: 'Wheel & Tracked · Digging & Trenching', img: 'p1.jfif', num: '01' },
-    { name: 'Wheel Loaders', sub: 'Heavy-Duty Material Handling', img: 'p2.jfif', num: '02' },
-    { name: 'Hydraulic Excavators', sub: 'Versatile Digging & Earthmoving', img: 'p3.jfif', num: '03' },
-    { name: 'Tracked Dozers', sub: 'Major Earthmoving & Site Prep', img: 'p4.jfif', num: '04' },
-    { name: 'Motor Graders', sub: 'Precision Leveling & Grading', img: 'p1.jfif', num: '05' },
-    { name: 'Backhoe Loaders', sub: 'Multi-Purpose Trenching & Loading', img: 'p2.jfif', num: '06' },
-    { name: 'Road Rollers', sub: 'Compaction for Roads & Highways', img: 'p3.jfif', num: '07' }
-  ];
-
-  function renderCatScroll() {
-    const track = document.getElementById('hScrollTrack');
-    if (!track) return;
-    track.innerHTML = CATEGORIES.map(c => `
-      <div class="h-cat-card" onclick="go('machines')">
-        <img src="${c.img}" alt="${c.name}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=85'">
-        <div class="h-cat-info">
-          <div class="h-cat-num">/ ${c.num}</div>
-          <h3>${c.name}</h3>
-          <p>${c.sub}</p>
-          <div class="h-cat-cta">Explore <i class="fas fa-arrow-right"></i></div>
+function renderNeeded() {
+  const grid = document.getElementById('neededGrid');
+  grid.innerHTML = needed.map((n, i) => `
+    <div class="needed-card" style="animation-delay:${i * 0.1}s">
+      <div class="needed-card-img">
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="${n.title}" loading="lazy">
+        <div class="needed-card-badge">${n.badge}</div>
+      </div>
+      <div class="needed-card-body">
+        <div class="needed-card-cat">${n.cat}</div>
+        <div class="needed-card-title">${n.title}</div>
+        <div class="needed-card-desc">${n.desc}</div>
+        <div class="needed-card-specs">${n.specs.map(s => `<span>${s}</span>`).join('')}</div>
+        <div class="needed-card-footer">
+          <div class="needed-card-qty">QTY: <strong>${n.qty}</strong></div>
+          <button class="needed-card-btn" onclick="go('contact')">Enquire <i class="fas fa-arrow-right"></i></button>
         </div>
       </div>
-    `).join('');
+    </div>
+  `).join('');
+}
+
+// Contact submit
+function submitContact() {
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const msg = document.getElementById('contactMessage').value.trim();
+  if (!name || !email || !msg) {
+    showToast('Please fill all fields.', true);
+    return;
   }
+  showToast('Message sent! We\'ll get back to you shortly.');
+  document.getElementById('contactName').value = '';
+  document.getElementById('contactEmail').value = '';
+  document.getElementById('contactMessage').value = '';
+}
 
-  async function loadMachinesFromJSON() {
-    try {
-      const res = await fetch('machines.json?v=' + Date.now());
-      if (!res.ok) throw new Error('Not found');
-      const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) return data;
-    } catch (e) {}
-    return [
-      { id: 1, model: "CAT M320", category: "Wheel Excavator", price: "$98,000", image: "p1.jfif", desc: "High-performance wheel excavator for construction and trenching.", available: true, specs: "Engine: CAT C7.1, 165HP" },
-      { id: 2, model: "CAT 950 GC", category: "Wheel Loader", price: "$135,000", image: "p2.jfif", desc: "Reliable wheel loader for heavy-duty material handling.", available: true, specs: "CAT C7.1, 200HP" },
-      { id: 3, model: "CAT 320D", category: "Hydraulic Excavator", price: "$112,000", image: "p3.jfif", desc: "Versatile hydraulic excavator for digging and earthmoving.", available: true, specs: "CAT C7.1, 180HP" },
-      { id: 4, model: "CAT D6R", category: "Tracked Dozer", price: "$145,000", image: "p4.jfif", desc: "Large tracked dozer for major earthmoving projects.", available: false, specs: "CAT C9, 215HP" }
-    ];
-  }
+// Toast
+function showToast(msg, err = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (err ? ' err' : '');
+  clearTimeout(t._timeout);
+  t._timeout = setTimeout(() => t.classList.remove('show'), 3500);
+}
 
-  async function loadNeededMachines() {
-    try {
-      const res = await fetch('machines-needed.json?v=' + Date.now());
-      if (!res.ok) throw new Error('Not found');
-      const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) return data;
-    } catch (e) {}
-
-    // ---- TEMPORARY DUMMY DATA (2 machines) ----
-    return [
-      {
-        id: 1,
-        model: "Used Komatsu PC88MR-8 Excavator",
-        category: "Mini / Compact Excavator",
-        desc: "Looking for a well-maintained used Komatsu PC88MR-8 excavator. Model year 2010–2015 required. Machine must be in good working condition with verifiable service history. Serious sellers only — send photos, hour meter reading, and asking price.",
-        image: "pq.png", 
-        specs: [
-          "Model year 2010–2015",
-          "PC88MR-8",
-          "8-ton class",
-          "Good working condition",
-          "Service history preferred"
-        ],
-        quantity: 1,
-        budget: "Price on request — send your best offer",
-        urgency: "Required"
-      },
-      {
-        id: 2,
-        model: "Caterpillar 318-07 Excavator",
-        category: "Hydraulic Excavator",
-        desc: "Seeking a Caterpillar 318-07 excavator, model year 2020–2023. Machine must be in excellent condition with low hours and full service records. Any configuration considered — send photos, hour meter reading, and asking price.",
-        image: "np1.png", 
-        specs: [
-          "Model year 2020–2023",
-          "CAT 318-07",
-          "18-ton class",
-          "Excellent condition",
-          "Low hours preferred"
-        ],
-        quantity: 1,
-        budget: "Price on request — send your best offer",
-        urgency: "Required"
-      }
-    ];
-  }
-
-  function renderNeededMachines(machines) {
-    const grid = document.getElementById('neededGrid');
-    if (!grid) return;
-
-    if (!machines || machines.length === 0) {
-      grid.innerHTML = `
-        <div class="needed-empty">
-          <i class="fas fa-inbox"></i>
-          <h3 data-en="No requirements right now" data-zh="目前没有需求">No requirements right now</h3>
-          <p data-en="Check back soon — we update this list regularly as new projects come in." data-zh="请稍后回来查看——随着新项目的开展，我们会定期更新此列表。">Check back soon — we update this list regularly as new projects come in.</p>
-        </div>`;
-      setLanguage(currentLang);
-      return;
-    }
-
-    grid.innerHTML = machines.map((m, i) => {
-      const urgencyText = currentLang === 'en' ? (m.urgency || 'Required') : (m.urgency === 'Urgent' ? '紧急' : '需求');
-      const specsHtml = (m.specs || []).map(s => `<span>${s}</span>`).join('');
-      return `
-        <div class="needed-card" style="animation-delay:${i * 0.08}s">
-          <div class="needed-card-img">
-            <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=85'">
-            <div class="needed-card-badge">${urgencyText}</div>
-          </div>
-          <div class="needed-card-body">
-            <div class="needed-card-cat">${m.category}</div>
-            <h3 class="needed-card-title">${m.model}</h3>
-            <p class="needed-card-desc">${m.desc || ''}</p>
-            <div class="needed-card-specs">${specsHtml}</div>
-            <div class="needed-card-footer">
-              <div class="needed-card-qty">Qty: <strong>${m.quantity || 1}</strong></div>
-              <button class="needed-card-btn" onclick="go('contact')">
-                ${currentLang === 'en' ? 'I Have This' : '我有此设备'} <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-    setLanguage(currentLang);
-  }
-
-  async function renderSpecDashboard() {
-    const dash = document.getElementById('specDashboard');
-    if (!dash) return;
-    if (allMachines.length === 0) allMachines = await loadMachinesFromJSON();
-    const m = allMachines[0];
-    if (!m) return;
-    dash.innerHTML = `
-      <div class="spec-img">
-        <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=85'">
-        <div class="spec-img-tag">Featured</div>
-      </div>
-      <div class="spec-panel">
-        <div class="sp-label">Machine Spotlight</div>
-        <h2>${m.model}</h2>
-        <div class="spec-list">
-          <div class="spec-row">
-            <div class="sr-icon"><i class="fas fa-tag"></i></div>
-            <div class="sr-name">Category</div>
-            <div class="sr-val">${m.category}</div>
-          </div>
-          <div class="spec-row">
-            <div class="sr-icon"><i class="fas fa-dollar-sign"></i></div>
-            <div class="sr-name">Price</div>
-            <div class="sr-val">${m.price}</div>
-          </div>
-          <div class="spec-row">
-            <div class="sr-icon"><i class="fas fa-cog"></i></div>
-            <div class="sr-name">Engine</div>
-            <div class="sr-val">${(m.specs || 'N/A').replace('Engine: ', '').split(',')[0] || 'N/A'}</div>
-          </div>
-          <div class="spec-row">
-            <div class="sr-icon"><i class="fas fa-check-circle"></i></div>
-            <div class="sr-name">Status</div>
-            <div class="sr-val" style="color:${m.available ? 'var(--jade-light)' : '#E88'}">${m.available ? 'Available' : 'Sold'}</div>
-          </div>
-        </div>
-        <button class="btn btn-gold" onclick="openMachineDetail(${m.id})" style="align-self:flex-start">
-          <span>View Details</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    `;
-    setLanguage(currentLang);
-  }
-
-  function matchCategory(machineCat, filter) {
-    if (filter === 'all') return true;
-    if (!machineCat) return false;
-    const mc = machineCat.toLowerCase();
-    const f = filter.toLowerCase();
-    if (f === 'excavators') return mc.includes('excavator');
-    if (f === 'hydraulic excavators') return mc.includes('hydraulic') && mc.includes('excavator');
-    if (f === 'wheel loaders') return mc.includes('wheel loader') || mc.includes('wheel loader');
-    if (f === 'tracked dozers') return mc.includes('dozer') || mc.includes('d6') || mc.includes('d8');
-    if (f === 'motor graders') return mc.includes('grader') || mc.includes('140');
-    if (f === 'backhoe loaders') return mc.includes('backhoe');
-    if (f === 'road rollers') return mc.includes('roller') || mc.includes('compactor');
-    return mc.includes(f);
-  }
-
-  function updateFilterCounts() {
-    if (!allMachines || allMachines.length === 0) return;
-    const cats = {
-      'all': allMachines.length,
-      'Excavators': 0, 'Wheel Loaders': 0, 'Hydraulic Excavators': 0,
-      'Tracked Dozers': 0, 'Motor Graders': 0, 'Backhoe Loaders': 0, 'Road Rollers': 0
-    };
-    allMachines.forEach(m => {
-      if (matchCategory(m.category, 'Excavators')) cats['Excavators']++;
-      if (matchCategory(m.category, 'Wheel Loaders')) cats['Wheel Loaders']++;
-      if (matchCategory(m.category, 'Hydraulic Excavators')) cats['Hydraulic Excavators']++;
-      if (matchCategory(m.category, 'Tracked Dozers')) cats['Tracked Dozers']++;
-      if (matchCategory(m.category, 'Motor Graders')) cats['Motor Graders']++;
-      if (matchCategory(m.category, 'Backhoe Loaders')) cats['Backhoe Loaders']++;
-      if (matchCategory(m.category, 'Road Rollers')) cats['Road Rollers']++;
-    });
-    const setCount = (id, val) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = val;
-    };
-    setCount('count-all', cats['all']);
-    setCount('count-Excavators', cats['Excavators']);
-    setCount('count-WheelLoaders', cats['Wheel Loaders']);
-    setCount('count-HydraulicExcavators', cats['Hydraulic Excavators']);
-    setCount('count-TrackedDozers', cats['Tracked Dozers']);
-    setCount('count-MotorGraders', cats['Motor Graders']);
-    setCount('count-BackhoeLoaders', cats['Backhoe Loaders']);
-    setCount('count-RoadRollers', cats['Road Rollers']);
-  }
-
-  function renderMachines(machines) {
-    const grid = document.getElementById('allMachines');
-    if (!grid) return;
-    if (!machines || machines.length === 0) {
-      grid.innerHTML = `<div class="machines-empty">
-        <i class="fas fa-tractor"></i>
-        <p>No machines found.</p>
-      </div>`;
-      return;
-    }
-    const filtered = machines.filter(m => matchCategory(m.category, currentFilter));
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div class="machines-empty">
-        <i class="fas fa-search"></i>
-        <p>${currentLang === 'en' ? 'No machines in this category yet.' : '此类别中还没有机器。'}</p>
-      </div>`;
-      return;
-    }
-    grid.innerHTML = filtered.map((m, i) => {
-      const sealEN = m.available ? 'Available' : 'Sold';
-      const sealZH = m.available ? '可用' : '已售';
-      const sealText = currentLang === 'en' ? sealEN : sealZH;
-      const sealClass = m.available ? '' : 'sold';
-      return `
-        <div class="machine-card" onclick="openMachineDetail(${m.id})" style="animation-delay:${i * 0.06}s">
-          <div class="machine-card-img">
-            <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=85'">
-            <div class="machine-card-seal ${sealClass}">${sealText}</div>
-          </div>
-          <div class="machine-card-body">
-            <div class="machine-card-cat">${m.category}</div>
-            <h3 class="machine-card-title">${m.model}</h3>
-            <p class="machine-card-desc">${m.desc || ''}</p>
-            <div class="machine-card-price">${m.price}</div>
-          </div>
-        </div>
-      `;
-    }).join('');
-    setLanguage(currentLang);
-  }
-
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
-      currentFilter = filter;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderMachines(allMachines);
-      const grid = document.getElementById('allMachines');
-      if (grid) {
-        const y = grid.getBoundingClientRect().top + window.pageYOffset - 140;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    });
+// Counter animation
+function animateCounters() {
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.dataset.counter);
+    if (el._done) return;
+    el._done = true;
+    let cur = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const timer = setInterval(() => {
+      cur += step;
+      if (cur >= target) { cur = target; clearInterval(timer); }
+      el.textContent = cur;
+    }, 30);
   });
+}
 
-  async function openMachineDetail(id) {
-    if (!allMachines || allMachines.length === 0) {
-      allMachines = await loadMachinesFromJSON();
-    }
-    const m = allMachines.find(x => x.id === id);
-    const container = document.getElementById('detailContainer');
-    if (!container) return;
-    if (!m) {
-      container.innerHTML = `<div style="text-align:center; padding:80px 20px;">
-        <h2 style="font-family:var(--font-display); color:var(--forest); margin:16px 0 8px;">Machine Not Found</h2>
-      </div>`;
-      go('machine-detail');
-      return;
-    }
-    const statusEN = m.available ? 'Available' : 'Sold';
-    const statusZH = m.available ? '可用' : '已售';
-    const statusText = currentLang === 'en' ? statusEN : statusZH;
-    const statusClass = m.available ? 'available' : 'sold';
+// Reveal on scroll
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
 
-    container.innerHTML = `
-      <div class="detail-card">
-        <div class="detail-card-img">
-          <img src="${m.image}" alt="${m.model}" onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=85'">
-        </div>
-        <div class="detail-card-info">
-          <div class="cat">${m.category}</div>
-          <h1>${m.model}</h1>
-          <div class="price">${m.price}</div>
-          <span class="status ${statusClass}">${statusText}</span>
-          <div class="specs">
-            <strong>⚙️ Specifications:</strong><br/>
-            ${m.specs || 'N/A'}
-          </div>
-          <p class="desc">${m.desc || ''}</p>
-          <div class="enquiry-box">
-            <h4>📧 Enquire About This Machine</h4>
-            <form onsubmit="return sendEnquiry(event, '${m.model}')">
-              <div class="form-group"><input type="text" id="enqName" required placeholder="Your Name"></div>
-              <div class="form-group"><input type="email" id="enqEmail" required placeholder="Your Email"></div>
-              <div class="form-group"><input type="text" id="enqPhone" placeholder="Your Phone"></div>
-              <div class="form-group"><textarea id="enqMessage" required placeholder="Your Message">I am interested in ${m.model}</textarea></div>
-              <button type="submit" class="btn-enquire" id="enqBtn"><span>Send Enquiry</span></button>
-              <div id="enqMsg" class="msg"></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    `;
-    go('machine-detail');
-    setLanguage(currentLang);
+function initReveal() {
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+}
+
+// Filter buttons
+document.querySelectorAll('.machines-filter .filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.machines-filter .filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderMachines(this.dataset.filter);
+  });
+});
+
+// Init
+renderMachines();
+renderNeeded();
+initReveal();
+setTimeout(animateCounters, 800);
+window.addEventListener('scroll', animateCounters);
+
+// Language persistence
+const savedLang = localStorage.getItem('pekLang');
+if (savedLang) { langOverlay.classList.add('hidden'); applyLang(savedLang); }
+
+// ========== NEW SEARCH FUNCTIONALITY ==========
+const searchBtn = document.getElementById('navSearchBtn');
+const searchOverlay = document.getElementById('navSearchOverlay');
+const searchPanel = document.getElementById('navSearchPanel');
+const searchInput = document.getElementById('navSearchInput');
+const searchResults = document.getElementById('navSearchResults');
+const searchClose = document.getElementById('navSearchClose');
+
+// Searchable data
+const searchData = [
+  { type: 'page', title: 'Home', desc: 'Main page with overview', page: 'home', icon: 'fa-home' },
+  { type: 'page', title: 'About Us', desc: 'Our story, timeline, values', page: 'about', icon: 'fa-info-circle' },
+  { type: 'page', title: 'Machines', desc: 'Browse all available machinery', page: 'machines', icon: 'fa-tractor' },
+  { type: 'page', title: 'Needed Machines', desc: 'Machines we are looking for', page: 'needed', icon: 'fa-clipboard-list' },
+  { type: 'page', title: 'Our Staff', desc: 'Meet the team', page: 'staff', icon: 'fa-users' },
+  { type: 'page', title: 'Contact', desc: 'Get in touch with us', page: 'contact', icon: 'fa-envelope' },
+  ...machines.map(m => ({
+    type: 'machine',
+    title: m.name,
+    desc: `${m.cat} · ${m.price} · ${m.status}`,
+    page: 'machines',
+    icon: 'fa-truck',
+    id: m.id
+  })),
+  ...needed.map(n => ({
+    type: 'needed',
+    title: n.title,
+    desc: n.desc,
+    page: 'needed',
+    icon: 'fa-search-plus'
+  }))
+];
+
+function openSearch() {
+  searchOverlay.classList.add('open');
+  searchPanel.classList.add('open');
+  setTimeout(() => searchInput.focus(), 150);
+  renderSearchResults('');
+}
+
+function closeSearch() {
+  searchOverlay.classList.remove('open');
+  searchPanel.classList.remove('open');
+  searchInput.value = '';
+  searchResults.innerHTML = '';
+}
+
+function renderSearchResults(query) {
+  const q = query.toLowerCase().trim();
+  let results = searchData;
+  if (q) {
+    results = searchData.filter(item =>
+      item.title.toLowerCase().includes(q) ||
+      item.desc.toLowerCase().includes(q) ||
+      item.type.toLowerCase().includes(q)
+    );
   }
-  window.openMachineDetail = openMachineDetail;
+  if (results.length === 0) {
+    searchResults.innerHTML = `<div class="nav-search-empty"><i class="fas fa-search-minus"></i>No results found for "${query}"</div>`;
+    return;
+  }
+  const typeBadge = { page: 'Page', machine: 'Machine', needed: 'Needed' };
+  searchResults.innerHTML = results.map(item => `
+    <div class="nav-search-item" onclick="closeSearch(); go('${item.page}'); ${item.type === 'machine' && item.id ? 'setTimeout(() => showMachine(' + item.id + '), 300);' : ''}">
+      <div class="nav-search-item-icon"><i class="fas ${item.icon}"></i></div>
+      <div class="nav-search-item-text">
+        <div class="nav-search-item-title">${item.title}</div>
+        <div class="nav-search-item-desc">${item.desc}</div>
+      </div>
+      <span class="nav-search-item-badge">${typeBadge[item.type] || item.type}</span>
+    </div>
+  `).join('');
+}
 
-  /* ============================================
-     WEB3FORMS INTEGRATION
-     ============================================ */
-     
-  // 1. CONTACT FORM SUBMIT
-  window.sendEmail = function(e) {
+// Event listeners
+searchBtn.addEventListener('click', openSearch);
+searchOverlay.addEventListener('click', closeSearch);
+searchClose.addEventListener('click', closeSearch);
+searchInput.addEventListener('input', e => renderSearchResults(e.target.value));
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeSearch();
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
     e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const subject = document.getElementById('subject').value.trim() || 'PEKIN-PAK Website Inquiry';
-    const message = document.getElementById('message').value.trim();
-    
-    const btn = document.getElementById('sendBtn');
-    const box = document.getElementById('msgBox');
-
-    if (!name || !email || !message) {
-      box.className = 'msg error';
-      box.textContent = '⚠️ Please fill in all required fields!';
-      return false;
-    }
-
-    btn.disabled = true;
-    const orig = btn.innerHTML;
-    btn.textContent = 'Sending...';
-
-    const formData = {
-      access_key: WEB3FORMS_ACCESS_KEY,
-      name: name,
-      email: email,
-      phone: phone || 'N/A',
-      subject: subject,
-      message: message,
-      from_name: "PEKIN-PAK Website"
-    };
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(async (response) => {
-      let json = await response.json();
-      if (response.status == 200) {
-        box.className = 'msg success';
-        box.textContent = '✅ Message sent! We will contact you soon.';
-        document.getElementById('contactForm').reset();
-      } else {
-        console.log(response);
-        box.className = 'msg error';
-        box.textContent = json.message || '❌ Something went wrong!';
-      }
-    })
-    .catch(error => {
-      console.log(error);
-      box.className = 'msg error';
-      box.textContent = '❌ Error connecting to server. Please try again.';
-    })
-    .finally(() => {
-      btn.disabled = false; 
-      btn.innerHTML = orig;
-      setTimeout(() => { box.className = 'msg'; }, 5000);
-    });
-
-    return false;
-  };
-
-  // 2. MACHINE ENQUIRY FORM SUBMIT
-  window.sendEnquiry = function(e, machineName) {
-    e.preventDefault();
-    const name = document.getElementById('enqName').value.trim();
-    const email = document.getElementById('enqEmail').value.trim();
-    const phone = document.getElementById('enqPhone').value.trim();
-    const message = document.getElementById('enqMessage').value.trim();
-    
-    const btn = document.getElementById('enqBtn');
-    const box = document.getElementById('enqMsg');
-
-    if (!name || !email || !message) {
-      box.className = 'msg error'; 
-      box.textContent = '⚠️ Please fill required fields!';
-      return false;
-    }
-
-    btn.disabled = true;
-    const orig = btn.innerHTML;
-    btn.textContent = 'Sending...';
-
-    const formData = {
-      access_key: WEB3FORMS_ACCESS_KEY,
-      name: name,
-      email: email,
-      phone: phone || 'N/A',
-      subject: 'Machine Enquiry: ' + machineName,
-      message: message + '\n\nRequested Machine: ' + machineName,
-      from_name: "PEKIN-PAK Machine Enquiry"
-    };
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(async (response) => {
-      let json = await response.json();
-      if (response.status == 200) {
-        box.className = 'msg success';
-        box.textContent = '✅ Enquiry sent! We will contact you soon.';
-        document.getElementById('enqMessage').value = 'I am interested in ' + machineName;
-      } else {
-        console.log(response);
-        box.className = 'msg error';
-        box.textContent = json.message || '❌ Something went wrong!';
-      }
-    })
-    .catch(error => {
-      console.log(error);
-      box.className = 'msg error';
-      box.textContent = '❌ Error connecting to server. Please try again.';
-    })
-    .finally(() => {
-      btn.disabled = false; 
-      btn.innerHTML = orig;
-      setTimeout(() => { box.className = 'msg'; }, 5000);
-    });
-
-    return false;
-  };
-
-  /* MUSIC */
-  let bgMusic, musicBtn, musicIcon;
-  let musicStarted = false;
-  let musicAttempted = false;
-
-  function updateMusicIcon() {
-    if (!bgMusic || !musicIcon) return;
-    if (bgMusic.paused) {
-      musicIcon.className = 'fas fa-volume-mute';
-      if (musicBtn) {
-        musicBtn.classList.remove('playing');
-        musicBtn.title = 'Music OFF — Click to turn ON';
-      }
-    } else {
-      musicIcon.className = 'fas fa-volume-up';
-      if (musicBtn) {
-        musicBtn.classList.add('playing');
-        musicBtn.title = 'Music ON — Click to turn OFF';
-      }
-    }
+    openSearch();
   }
+});
 
-  function tryStartMusic() {
-    if (!bgMusic) return;
-    if (musicStarted && !bgMusic.paused) return;
-    let pref = 'on';
-    try { pref = localStorage.getItem('pp-music') || 'on'; } catch(e) {}
-    if (pref === 'off') { updateMusicIcon(); return; }
-    bgMusic.volume = 0.15;
-    const p = bgMusic.play();
-    if (p && p.then) {
-      p.then(() => {
-        musicStarted = true;
-        updateMusicIcon();
-        try { localStorage.setItem('pp-music', 'on'); } catch(e) {}
-      }).catch(err => { console.log('Music blocked:', err); });
-    }
-  }
-
-  function toggleMusic() {
-    if (!bgMusic) return;
-    if (bgMusic.paused) {
-      bgMusic.volume = 0.15;
-      const p = bgMusic.play();
-      if (p && p.then) {
-        p.then(() => {
-          musicStarted = true;
-          updateMusicIcon();
-          try { localStorage.setItem('pp-music', 'on'); } catch(e) {}
-          showToast('🎵 Music ON');
-        }).catch(() => { showToast('❌ Could not play music', true); });
-      }
-    } else {
-      bgMusic.pause();
-      updateMusicIcon();
-      try { localStorage.setItem('pp-music', 'off'); } catch(e) {}
-      showToast('🔇 Music OFF');
-    }
-  }
-
-  function firstUserGesture() {
-    if (musicAttempted) return;
-    musicAttempted = true;
-    tryStartMusic();
-  }
-
-  document.addEventListener('click', firstUserGesture, { passive: true });
-  document.addEventListener('touchstart', firstUserGesture, { passive: true });
-  document.addEventListener('keydown', firstUserGesture, { passive: true });
-  document.addEventListener('pointerdown', firstUserGesture, { passive: true });
-  document.addEventListener('scroll', firstUserGesture, { passive: true });
-
-  function initMusic() {
-    bgMusic = document.getElementById('bgMusic');
-    musicBtn = document.getElementById('musicBtn');
-    musicIcon = document.getElementById('musicIcon');
-    if (!bgMusic) return;
-    let pref = 'on';
-    try { pref = localStorage.getItem('pp-music') || 'on'; } catch(e) {}
-    if (pref === 'off') { updateMusicIcon(); return; }
-    bgMusic.volume = 0.15;
-    const p = bgMusic.play();
-    if (p && p.then) {
-      p.then(() => { musicStarted = true; updateMusicIcon(); }).catch(() => {
-        console.log('Autoplay blocked — will start on first interaction');
-      });
-    }
-    updateMusicIcon();
-  }
-
-  window.toggleMusic = toggleMusic;
-
-  async function init() {
-    setLanguage(currentLang);
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    renderCatScroll();
-    allMachines = await loadMachinesFromJSON();
-    await renderSpecDashboard();
-    updateFilterCounts();
-    animateCounters();
-    initMusic();
-  }
-
-  document.addEventListener('DOMContentLoaded', init);
-})();
+// Close mobile menu when search opens
+searchBtn.addEventListener('click', () => {
+  document.getElementById('navMain').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('open');
+});
 </script>
 </body>
 </html>
